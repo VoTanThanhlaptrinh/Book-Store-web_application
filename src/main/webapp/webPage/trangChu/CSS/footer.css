@@ -1,0 +1,71 @@
+@charset "UTF-8";
+body {
+    margin: 0;
+}
+
+/* Footer Styles */
+.footer {
+    background-color: rgb(62, 106, 189); /* Thay thế bằng đường dẫn tới ảnh */
+    background-size: cover; /* Để ảnh phủ kín div */
+    background-position: center; /* Canh giữa ảnh trong div */
+    color: #ffffff;
+    padding: 2rem 0;
+    font-family: Arial, sans-serif;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.footer-section {
+    flex: 1;
+    padding: 0 1rem;
+}
+
+.footer-section h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-section ul li a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.footer-section ul li a:hover {
+    color: #ff7f50; /* Màu cam nhẹ cho hiệu ứng hover */
+}
+
+.footer-section p {
+    font-size: 0.9rem;
+}
+
+.socials a {
+    margin-right: 10px;
+}
+
+.socials img {
+    width: 24px;
+    height: 24px;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 1rem;
+    font-size: 0.8rem;
+    border-top: 1px solid #ccc;
+    color: #ffffff;
+}
