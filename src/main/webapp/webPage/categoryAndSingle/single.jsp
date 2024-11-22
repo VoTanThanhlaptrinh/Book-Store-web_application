@@ -14,11 +14,15 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-<link href="style.css" rel="stylesheet">
+<link rel="stylesheet" href="webPage/trangChu/CSS/header.css">
+<link rel="stylesheet" href="webPage/trangChu/CSS/footer.css">
+<link href="webPage/categoryAndSingle/style.css" rel="stylesheet">
 <title>Document</title>
 </head>
 
 <body>
+	<div id="header-placeholder"><jsp:include
+			page="/webPage/trangChu/header.jsp"></jsp:include></div>
 	<main
 		class="d-flex d-inline-block container align-items-center justify-content-center">
 		<section class="container-sm mt-3 card shadow-0 border ">
