@@ -52,8 +52,37 @@ public class UserDaoImp implements IUserDao {
 
 	@Override
 	public User findByUserId(int userId) {
-		List<User> users = getUsers();
-		return users.stream().filter(t -> t.hasSameId(userId)).findAny().get();
+		User user = null;
+		Connection con = null;
+		try {
+			con = DatabaseConnection.getConnection();
+			Statement statement = con.createStatement();
+			ResultSet resultSet = statement.executeQuery("select * from User_1 where user_id =" + userId);
+			while (resultSet.next()) {
+				int id = resultSet.getInt(1);
+				String userName = resultSet.getNString(2);
+				String password = resultSet.getNString(3);
+				Date date = resultSet.getDate(4);
+				int infoId = resultSet.getInt(5);
+				if (infoId != 0) {
+					user = new User(id, userName, password, date, infoId);
+				} else {
+					user = new User(id, userName, password, date);
+				}
+
+			}
+			resultSet.close();
+			statement.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			try {
+				con.close();
+			} catch (SQLException e2) {
+				e.printStackTrace();
+			}
+		}
+		return user;
 	}
 
 	@Override

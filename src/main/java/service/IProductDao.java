@@ -2,17 +2,18 @@ package service;
 
 import java.util.List;
 
+import models.Admin;
+import models.Image;
 import models.Product;
 
-
 public interface IProductDao {
-	List<Product> getUsers();
+	List<Product> getProducts();
 
 	Product findByProductId(int productId);
 
-	void saveProduct(Product product);
+	void saveProduct(Product product, Admin admin, Image img);
 
-	void updateProduct(Product product);
-	
-	
+	void updateProduct(Product product, Admin admin, Image img);
+
+	void deleteProduct(Product product);
 }

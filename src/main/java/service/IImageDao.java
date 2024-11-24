@@ -1,17 +1,14 @@
 package service;
 
-import java.awt.Image;
-import java.util.List;
-
-import models.User;
+import models.Image;
 
 public interface IImageDao {
-	List<Image> getUsers();
 
-	User findByImageId(int imageId);
+	Image findByImageId(int imageId);
 
 	void saveImage(Image image);
 
 	void updateImage(Image image);
 	
+	void deleteImage(Image image);
 }

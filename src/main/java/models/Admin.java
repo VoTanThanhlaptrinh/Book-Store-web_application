@@ -23,5 +23,48 @@ public class Admin {
 	}
 	public Admin() {
 	}
+	public int getAdminId() {
+		return adminId;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public int getInfoId() {
+		return infoId;
+	}
+	public void setInfoId(int infoId) {
+		this.infoId = infoId;
+	}
+	public Date getCreateDate() {
+		return createDate;
+	}
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+	public Date getUpdateDate() {
+		return updateDate;
+	}
+	public void setUpdateDate(Date updateDate) {
+		this.updateDate = updateDate;
+	}
+	public void setAdminId(int adminId) {
+		this.adminId = adminId;
+	}
+	
 	
 }
