@@ -6,7 +6,6 @@ CREATE TABLE Image (
                 file_name NVARCHAR(100) NOT NULL,
 				url NVARCHAR(MAX) NOT NULL,
                 file_type NVARCHAR(20) NOT NULL,
-                uploaded_date DATETIME NOT NULL,
                 description NVARCHAR(50) NOT NULL,
                 create_date datetime NOT NULL,
                 update_date datetime,
@@ -265,52 +264,55 @@ FOREIGN KEY (evaluate_id)
 REFERENCES Evaluate (evaluate_id)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
-delete from Image where img_id > 0;
-INSERT INTO Image (img_id, file_name, url, file_type, uploaded_date, description, create_date, update_date)  
+SET IDENTITY_INSERT Image ON;
+INSERT INTO Image (img_id, file_name, url, file_type, description, create_date, update_date)  
 VALUES  
-(1, '2030_nhung_xu_huong_lon_dinh_hinh_tuong_lai.jpg', 'img/2030_nhung_xu_huong_lon_dinh_hinh_tuong_lai.jpg', 'image/jpeg', GETDATE(), N'Ảnh bìa sách 2030', GETDATE(), NULL),  
-(2, '33_chien_luoc_cua_chien_tranh.jpg', 'img/33_chien_luoc_cua_chien_tranh.jpg', 'image/jpeg', GETDATE(), N'Ảnh bìa sách chiến lược', GETDATE(), NULL),  
-(3, '38_buc_thu_rockefeller_viet_cho_con_trai.jpg', 'img/38_buc_thu_rockefeller_viet_cho_con_trai.jpg', 'image/jpeg', GETDATE(), N'Ảnh bìa sách Rockefeller', GETDATE(), NULL),  
-(4, '48_nguyen_tac_chu_chot_cua_quyen_luc.jpg', 'img/48_nguyen_tac_chu_chot_cua_quyen_luc.jpg', 'image/jpeg', GETDATE(), N'Ảnh bìa sách quyền lực', GETDATE(), NULL),  
-(5, '7_buoc_de_thay_doi_cuoc_doi.jpg', 'img/7_buoc_de_thay_doi_cuoc_doi.jpg', 'image/jpeg', GETDATE(), N'Ảnh bìa sách thay đổi', GETDATE(), NULL),  
-(6, 'chia_se_tu_trai_tim.jpg', 'img/chia_se_tu_trai_tim.jpg', 'image/jpeg', GETDATE(), N'Ảnh bìa sách chia sẻ', GETDATE(), NULL),  
-(7, 'con_duong_chang_may_ai_di.jpg', 'img/con_duong_chang_may_ai_di.jpg', 'image/jpeg', GETDATE(), N'Ảnh bìa sách tâm lý', GETDATE(), NULL),  
-(8, 'cai_chet_cua_nen_dan_chu.jpg', 'img/cai_chet_cua_nen_dan_chu.jpg', 'image/jpeg', GETDATE(), N'Ảnh bìa sách lịch sử', GETDATE(), NULL),  
-(9, 'cay_cam_ngot_cua_toi.jpg', 'img/cay_cam_ngot_cua_toi.jpg', 'image/jpeg', GETDATE(), N'Ảnh bìa sách cảm động', GETDATE(), NULL),  
-(10, 'hieu_ve_trai_tim.jpg', 'img/hieu_ve_trai_tim.jpg', 'image/jpeg', GETDATE(), N'Ảnh bìa sách cảm xúc', GETDATE(), NULL),  
-(11, 'how_psychology_works.jpg', 'img/how_psychology_works.jpg', 'image/jpeg', GETDATE(), N'Ảnh bìa sách tâm lý học', GETDATE(), NULL),  
-(12, 'khong_bao_gio_that_bai.jpg', 'img/khong_bao_gio_that_bai.jpg', 'image/jpeg', GETDATE(), N'Ảnh bìa sách nghị lực', GETDATE(), NULL),  
-(13, 'kiep_nao_ta_cung_tim_thay_nhau.jpg', 'img/kiep_nao_ta_cung_tim_thay_nhau.jpg', 'image/jpeg', GETDATE(), N'Ảnh bìa sách nhân duyên', GETDATE(), NULL),  
-(14, 'lam_chu_business_analytics.jpg', 'img/lam_chu_business_analytics.jpg', 'image/jpeg', GETDATE(), N'Ảnh bìa sách phân tích dữ liệu', GETDATE(), NULL),  
-(15, 'len_nhat_chuyen_doi.jpg', 'img/len_nhat_chuyen_doi.jpg', 'image/jpeg', GETDATE(), N'Ảnh bìa tập truyện', GETDATE(), NULL),  
-(16, 'mot_thoang_ta_ruc_ro.jpg', 'img/mot_thoang_ta_ruc_ro.jpg', 'image/jpeg', GETDATE(), N'Ảnh bìa văn học', GETDATE(), NULL),  
-(17, 'nghi_giau_lam_giau.jpg', 'img/nghi_giau_lam_giau.jpg', 'image/jpeg', GETDATE(), N'Ảnh bìa sách tư duy', GETDATE(), NULL),  
-(18, 'nguoi_ba_tai_gioi_vung_saga.jpg', 'img/nguoi_ba_tai_gioi_vung_saga.jpg', 'image/jpeg', GETDATE(), N'Ảnh bìa câu chuyện gia đình', GETDATE(), NULL),  
-(19, 'nguoi_dan_ong_mang_ten_ove.jpg', 'img/nguoi_dan_ong_mang_ten_ove.jpg', 'image/jpeg', GETDATE(), N'Ảnh bìa tiểu thuyết', GETDATE(), NULL),  
-(20, 'nha_gia_kim.jpg', 'img/nha_gia_kim.jpg', 'image/jpeg', GETDATE(), N'Ảnh bìa sách triết học', GETDATE(), NULL),  
-(21, 'noi_chuyen_giu_mieng_im_lang.jpg', 'img/noi_chuyen_giu_mieng_im_lang.jpg', 'image/jpeg', GETDATE(), N'Ảnh bìa sách giao tiếp', GETDATE(), NULL),  
-(22, 'nuoc_my_trong_mat_trump.jpg', 'img/nuoc_my_trong_mat_trump.jpg', 'image/jpeg', GETDATE(), N'Ảnh bìa sách chính trị', GETDATE(), NULL),  
-(23, 'suoi_am_mat_troi.jpg', 'img/suoi_am_mat_troi.jpg', 'image/jpeg', GETDATE(), N'Ảnh bìa sách tiếp nối', GETDATE(), NULL),  
-(24, 'thuat_thao_tung.jpg', 'img/thuat_thao_tung.jpg', 'image/jpeg', GETDATE(), N'Ảnh bìa sách tâm lý', GETDATE(), NULL),  
-(25, 'tham_tu_lung_danh_conan.jpg', 'img/tham_tu_lung_danh_conan.jpg', 'image/jpeg', GETDATE(), N'Ảnh bìa sách trinh thám', GETDATE(), NULL),  
-(26, 'thoi_dai_ai.jpg', 'img/thoi_dai_ai.jpg', 'image/jpeg', GETDATE(), N'Ảnh bìa sách trí tuệ nhân tạo', GETDATE(), NULL),  
-(27, 'truong_ca_achilles.jpg', 'img/truong_ca_achilles.jpg', 'image/jpeg', GETDATE(), N'Ảnh bìa văn học cổ điển', GETDATE(), NULL),  
-(28, 'trang.jpg', 'img/trang.jpg', 'image/jpeg', GETDATE(), N'Ảnh bìa sách văn học', GETDATE(), NULL),  
-(29, 'tam_ly_hoc_toi_pham.jpg', 'img/tam_ly_hoc_toi_pham.jpg', 'image/jpeg', GETDATE(), N'Ảnh bìa sách khoa học pháp luật', GETDATE(), NULL),  
-(30, 'tam_ly_hoc_ve_tien.jpg', 'img/tam_ly_hoc_ve_tien.jpg', 'image/jpeg', GETDATE(), N'Ảnh bìa tâm lý tài chính', GETDATE(), NULL),  
-(31, 'toi_noi_gi_khi_chay_bo.jpg', 'img/toi_noi_gi_khi_chay_bo.jpg', 'image/jpeg', GETDATE(), N'Ảnh bìa sách tự truyện', GETDATE(), NULL),  
-(32, 'tu_duy_mo.jpg', 'img/tu_duy_mo.jpg', 'image/jpeg', GETDATE(), N'Ảnh bìa sách phát triển bản thân', GETDATE(), NULL),  
-(33, 'tu_duy_nguoc.jpg', 'img/tu_duy_nguoc.jpg', 'image/jpeg', GETDATE(), N'Ảnh bìa sách đổi mới', GETDATE(), NULL),  
-(34, 'tu_tot_den_vi_dai.jpg', 'img/tu_tot_den_vi_dai.jpg', 'image/jpeg', GETDATE(), N'Ảnh bìa sách quản trị', GETDATE(), NULL),  
-(35, 'dac_nhan_tam.jpg', 'img/dac_nhan_tam.jpg', 'image/jpeg', GETDATE(), N'Ảnh bìa sách giao tiếp nghệ thuật', GETDATE(), NULL),  
-(36, 'dua_tre_hieu_chuyen.jpg', 'img/dua_tre_hieu_chuyen.jpg', 'image/jpeg', GETDATE(), N'Ảnh bìa truyện ý nghĩa', GETDATE(), NULL);  
+(1, '2030_nhung_xu_huong_lon_dinh_hinh_tuong_lai.jpg', 'img/2030_nhung_xu_huong_lon_dinh_hinh_tuong_lai.jpg', 'image/jpeg', N'Ảnh bìa sách 2030', GETDATE(), NULL),  
+(2, '33_chien_luoc_cua_chien_tranh.jpg', 'img/33_chien_luoc_cua_chien_tranh.jpg', 'image/jpeg', N'Ảnh bìa sách chiến lược', GETDATE(), NULL),  
+(3, '38_buc_thu_rockefeller_viet_cho_con_trai.jpg', 'img/38_buc_thu_rockefeller_viet_cho_con_trai.jpg', 'image/jpeg', N'Ảnh bìa sách Rockefeller', GETDATE(), NULL),  
+(4, '48_nguyen_tac_chu_chot_cua_quyen_luc.jpg', 'img/48_nguyen_tac_chu_chot_cua_quyen_luc.jpg', 'image/jpeg',  N'Ảnh bìa sách quyền lực', GETDATE(), NULL),  
+(5, '7_buoc_de_thay_doi_cuoc_doi.jpg', 'img/7_buoc_de_thay_doi_cuoc_doi.jpg', 'image/jpeg',  N'Ảnh bìa sách thay đổi', GETDATE(), NULL),  
+(6, 'chia_se_tu_trai_tim.jpg', 'img/chia_se_tu_trai_tim.jpg', 'image/jpeg',  N'Ảnh bìa sách chia sẻ', GETDATE(), NULL),  
+(7, 'con_duong_chang_may_ai_di.jpg', 'img/con_duong_chang_may_ai_di.jpg', 'image/jpeg',  N'Ảnh bìa sách tâm lý', GETDATE(), NULL),  
+(8, 'cai_chet_cua_nen_dan_chu.jpg', 'img/cai_chet_cua_nen_dan_chu.jpg', 'image/jpeg',  N'Ảnh bìa sách lịch sử', GETDATE(), NULL),  
+(9, 'cay_cam_ngot_cua_toi.jpg', 'img/cay_cam_ngot_cua_toi.jpg', 'image/jpeg',  N'Ảnh bìa sách cảm động', GETDATE(), NULL),  
+(10, 'hieu_ve_trai_tim.jpg', 'img/hieu_ve_trai_tim.jpg', 'image/jpeg',  N'Ảnh bìa sách cảm xúc', GETDATE(), NULL),  
+(11, 'how_psychology_works.jpg', 'img/how_psychology_works.jpg', 'image/jpeg',  N'Ảnh bìa sách tâm lý học', GETDATE(), NULL),  
+(12, 'khong_bao_gio_that_bai.jpg', 'img/khong_bao_gio_that_bai.jpg', 'image/jpeg',  N'Ảnh bìa sách nghị lực', GETDATE(), NULL),  
+(13, 'kiep_nao_ta_cung_tim_thay_nhau.jpg', 'img/kiep_nao_ta_cung_tim_thay_nhau.jpg', 'image/jpeg', N'Ảnh bìa sách nhân duyên', GETDATE(), NULL),  
+(14, 'lam_chu_business_analytics.jpg', 'img/lam_chu_business_analytics.jpg', 'image/jpeg', N'Ảnh bìa sách phân tích dữ liệu', GETDATE(), NULL),  
+(15, 'len_nhat_chuyen_doi.jpg', 'img/len_nhat_chuyen_doi.jpg', 'image/jpeg', N'Ảnh bìa tập truyện', GETDATE(), NULL),  
+(16, 'mot_thoang_ta_ruc_ro.jpg', 'img/mot_thoang_ta_ruc_ro.jpg', 'image/jpeg',  N'Ảnh bìa văn học', GETDATE(), NULL),  
+(17, 'nghi_giau_lam_giau.jpg', 'img/nghi_giau_lam_giau.jpg', 'image/jpeg',  N'Ảnh bìa sách tư duy', GETDATE(), NULL),  
+(18, 'nguoi_ba_tai_gioi_vung_saga.jpg', 'img/nguoi_ba_tai_gioi_vung_saga.jpg', 'image/jpeg',  N'Ảnh bìa câu chuyện gia đình', GETDATE(), NULL),  
+(19, 'nguoi_dan_ong_mang_ten_ove.jpg', 'img/nguoi_dan_ong_mang_ten_ove.jpg', 'image/jpeg',  N'Ảnh bìa tiểu thuyết', GETDATE(), NULL),  
+(20, 'nha_gia_kim.jpg', 'img/nha_gia_kim.jpg', 'image/jpeg',  N'Ảnh bìa sách triết học', GETDATE(), NULL),  
+(21, 'noi_chuyen_giu_mieng_im_lang.jpg', 'img/noi_chuyen_giu_mieng_im_lang.jpg', 'image/jpeg', N'Ảnh bìa sách giao tiếp', GETDATE(), NULL),  
+(22, 'nuoc_my_trong_mat_trump.jpg', 'img/nuoc_my_trong_mat_trump.jpg', 'image/jpeg', N'Ảnh bìa sách chính trị', GETDATE(), NULL),  
+(23, 'suoi_am_mat_troi.jpg', 'img/suoi_am_mat_troi.jpg', 'image/jpeg', N'Ảnh bìa sách tiếp nối', GETDATE(), NULL),  
+(24, 'thuat_thao_tung.jpg', 'img/thuat_thao_tung.jpg', 'image/jpeg',  N'Ảnh bìa sách tâm lý', GETDATE(), NULL),  
+(25, 'tham_tu_lung_danh_conan.jpg', 'img/tham_tu_lung_danh_conan.jpg', 'image/jpeg',  N'Ảnh bìa sách trinh thám', GETDATE(), NULL),  
+(26, 'thoi_dai_ai.jpg', 'img/thoi_dai_ai.jpg', 'image/jpeg', N'Ảnh bìa sách trí tuệ nhân tạo', GETDATE(), NULL),  
+(27, 'truong_ca_achilles.jpg', 'img/truong_ca_achilles.jpg', 'image/jpeg', N'Ảnh bìa văn học cổ điển', GETDATE(), NULL),  
+(28, 'trang.jpg', 'img/trang.jpg', 'image/jpeg',  N'Ảnh bìa sách văn học', GETDATE(), NULL),  
+(29, 'tam_ly_hoc_toi_pham.jpg', 'img/tam_ly_hoc_toi_pham.jpg', 'image/jpeg',  N'Ảnh bìa sách khoa học pháp luật', GETDATE(), NULL),  
+(30, 'tam_ly_hoc_ve_tien.jpg', 'img/tam_ly_hoc_ve_tien.jpg', 'image/jpeg',  N'Ảnh bìa tâm lý tài chính', GETDATE(), NULL),  
+(31, 'toi_noi_gi_khi_chay_bo.jpg', 'img/toi_noi_gi_khi_chay_bo.jpg', 'image/jpeg',  N'Ảnh bìa sách tự truyện', GETDATE(), NULL),  
+(32, 'tu_duy_mo.jpg', 'img/tu_duy_mo.jpg', 'image/jpeg', N'Ảnh bìa sách phát triển bản thân', GETDATE(), NULL),  
+(33, 'tu_duy_nguoc.jpg', 'img/tu_duy_nguoc.jpg', 'image/jpeg',  N'Ảnh bìa sách đổi mới', GETDATE(), NULL),  
+(34, 'tu_tot_den_vi_dai.jpg', 'img/tu_tot_den_vi_dai.jpg', 'image/jpeg',  N'Ảnh bìa sách quản trị', GETDATE(), NULL),  
+(35, 'dac_nhan_tam.jpg', 'img/dac_nhan_tam.jpg', 'image/jpeg',  N'Ảnh bìa sách giao tiếp nghệ thuật', GETDATE(), NULL),  
+(36, 'dua_tre_hieu_chuyen.jpg', 'img/dua_tre_hieu_chuyen.jpg', 'image/jpeg', N'Ảnh bìa truyện ý nghĩa', GETDATE(), NULL);  
 
+SET IDENTITY_INSERT Image off;
 
-
+SET IDENTITY_INSERT Admin on;
 INSERT INTO Admin (admin_id ,username, password, status, create_date, update_date)
 VALUES
 (1,'admin1', 'password1', 'Active',  GETDATE(), NULL),
 (2,'admin2', 'password2', 'Active', GETDATE(), NULL);
+SET IDENTITY_INSERT Admin off;
+
 
 INSERT INTO Product_1 (added_by_admin, title, price, description, type, img_id, create_date, update_date)
 VALUES
@@ -350,5 +352,4 @@ VALUES
 (1, N'Từ tốt đến vĩ đại', 300000, N'Tư duy quản trị kinh doanh', N'Quản trị - Kinh doanh', 34, GETDATE(), NULL),
 (1, N'Đắc nhân tâm', 200000, N'Sách nghệ thuật giao tiếp', N'Kỹ năng giao tiếp', 35, GETDATE(), NULL),
 (1, N'Đứa trẻ hiểu chuyện thường không có kẹo ăn', 180000, N'Truyện ngắn ý nghĩa', N'Truyện ngắn', 36, GETDATE(), NULL);
-
 
