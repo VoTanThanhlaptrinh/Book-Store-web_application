@@ -1,4 +1,4 @@
-package service;
+package daoInterface;
 
 import java.util.List;
 
@@ -10,9 +10,8 @@ public interface IUserDao {
 	User findByUserId(int userId);
 
 	void saveUser(User user);
-
-	void changePassword(User user, String password);
 	
 	void deleteUser(User user);
 	
+	void updateUser(User user);
 }

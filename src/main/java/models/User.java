@@ -7,15 +7,15 @@ public class User {
 	private String username;
 	private String password;
 	private Date createDate;
-	private int infoId;
-	
-	public User(int userId, String username, String password, Date createDate, int infoId) {
+	private Infomation info;
+
+	public User(int userId, String username, String password, Date createDate, Infomation info) {
 		super();
 		this.userId = userId;
 		this.username = username;
 		this.password = password;
 		this.createDate = createDate;
-		this.infoId = infoId;
+		this.info = info;
 	}
 
 	public User(int userId, String username, String password, Date createDate) {
@@ -46,18 +46,11 @@ public class User {
 		return createDate;
 	}
 
-	public int getInfoId() {
-		return infoId;
+	public Infomation getInfo() {
+		return info;
 	}
 
 	public boolean hasSameId(int id) {
 		return Integer.compare(userId, id) == 0;
 	}
-
-	@Override
-	public String toString() {
-		return "User [userId=" + userId + ", username=" + username + ", password=" + password + ", createDate="
-				+ createDate + ", infoId=" + infoId + "]";
-	}
-	
 }

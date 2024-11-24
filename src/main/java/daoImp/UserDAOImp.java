@@ -1,19 +1,26 @@
-package dao;
+package daoImp;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
+import models.Infomation;
 import models.User;
 import service.DatabaseConnection;
-import service.IUserDao;
+import daoInterface.IInfoDao;
+import daoInterface.IUserDao;
 
-public class UserDaoImp implements IUserDao {
+public class UserDAOImp implements IUserDao {
+	private IInfoDao iInfoDao;
+
+	public UserDAOImp() {
+		iInfoDao = new InfoDAOImp();
+	}
 
 	@Override
 	public List<User> getUsers() {
@@ -29,12 +36,8 @@ public class UserDaoImp implements IUserDao {
 				String password = resultSet.getNString(3);
 				Date date = resultSet.getDate(4);
 				int infoId = resultSet.getInt(5);
-				if (infoId != 0) {
-					users.add(new User(id, userName, password, date, infoId));
-				} else {
-					users.add(new User(id, userName, password, date));
-				}
-
+				Infomation infomation = iInfoDao.findInfoByInfoId(infoId);
+				users.add(new User(id, userName, password, date, infomation));
 			}
 			resultSet.close();
 			statement.close();
@@ -64,12 +67,8 @@ public class UserDaoImp implements IUserDao {
 				String password = resultSet.getNString(3);
 				Date date = resultSet.getDate(4);
 				int infoId = resultSet.getInt(5);
-				if (infoId != 0) {
-					user = new User(id, userName, password, date, infoId);
-				} else {
-					user = new User(id, userName, password, date);
-				}
-
+				Infomation infomation = iInfoDao.findInfoByInfoId(infoId);
+				user = new User(id, userName, password, date, infomation);
 			}
 			resultSet.close();
 			statement.close();
@@ -92,32 +91,11 @@ public class UserDaoImp implements IUserDao {
 		try {
 			con = DatabaseConnection.getConnection();
 			PreparedStatement preparedStatement = con
-					.prepareStatement("insert into User_1 (username,password,create_date) values(?,?,?)");
+					.prepareStatement("insert into User_1 (username,password,create_date,update_date) values(?,?,?)");
 			preparedStatement.setString(1, user.getUsername());
 			preparedStatement.setString(2, user.getPassword());
-			preparedStatement.setDate(3, new java.sql.Date(System.currentTimeMillis()));
-			preparedStatement.executeUpdate();
-			preparedStatement.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			try {
-				con.close();
-			} catch (SQLException e2) {
-				e.printStackTrace();
-			}
-		}
-	}
-
-	@Override
-	public void changePassword(User user, String password) {
-		// TODO Auto-generated method stub
-		Connection con = null;
-		try {
-			con = DatabaseConnection.getConnection();
-			PreparedStatement preparedStatement = con
-					.prepareStatement("update User_1 set password = ? where user_id =" + user.getUserId());
-			preparedStatement.setNString(1, password);
+			preparedStatement.setDate(3, new Date(System.currentTimeMillis()));
+			preparedStatement.setDate(4, new Date(System.currentTimeMillis()));
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
 		} catch (SQLException e) {
@@ -138,6 +116,30 @@ public class UserDaoImp implements IUserDao {
 			con = DatabaseConnection.getConnection();
 			PreparedStatement preparedStatement = con
 					.prepareStatement("delete from User_1 where user_id = " + user.getUserId());
+			preparedStatement.executeUpdate();
+			preparedStatement.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			try {
+				con.close();
+			} catch (SQLException e2) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	@Override
+	public void updateUser(User user) {
+		// TODO Auto-generated method stub
+		Connection con = null;
+		try {
+			con = DatabaseConnection.getConnection();
+			PreparedStatement preparedStatement = con.prepareStatement(
+					"update User_1 set password = ?, update_date = ?,info_id = ? where user_id =" + user.getUserId());
+			preparedStatement.setNString(1, user.getPassword());
+			preparedStatement.setDate(2, new Date(System.currentTimeMillis()));
+			preparedStatement.setInt(3, user.getInfo().getInfoId());
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
 		} catch (SQLException e) {

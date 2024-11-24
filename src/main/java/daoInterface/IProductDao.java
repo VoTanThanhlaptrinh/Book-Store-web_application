@@ -1,4 +1,4 @@
-package service;
+package daoInterface;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ public interface IProductDao {
 
 	Product findByProductId(int productId);
 
-	void saveProduct(Product product, Admin admin, Image img);
+	int saveProduct(Product product, Admin admin);
 
 	void updateProduct(Product product, Admin admin, Image img);
 
