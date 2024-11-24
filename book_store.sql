@@ -353,3 +353,10 @@ VALUES
 (1, N'Đắc nhân tâm', 200000, N'Sách nghệ thuật giao tiếp', N'Kỹ năng giao tiếp', 35, GETDATE(), NULL),
 (1, N'Đứa trẻ hiểu chuyện thường không có kẹo ăn', 180000, N'Truyện ngắn ý nghĩa', N'Truyện ngắn', 36, GETDATE(), NULL);
 
+alter table Image add object_type varchar(20);
+
+update Image set object_type = 'product';
+
+alter table User_1 add update_date datetime;
+
+alter table Infomation alter column img_id int null
