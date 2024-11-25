@@ -2,7 +2,7 @@ package models;
 
 import java.sql.Date;
 
-public class Infomation {
+public class Information {
 	private int infoId;
 	private String name;
 	private String address;
@@ -12,10 +12,10 @@ public class Infomation {
 	private String email;
 	private Date createDate;
 	private Date updateDate;
-	private Image img;
+	private int imgId;
 
-	public Infomation(int infoId, String name, String address, String phoneNumber, String cccd, Date birth,
-			String email, Date createDate, Date updateDate, Image img) {
+	public Information(int infoId, String name, String address, String phoneNumber, String cccd, Date birth,
+			String email, Date createDate, Date updateDate, int imgId) {
 		super();
 		this.infoId = infoId;
 		this.name = name;
@@ -26,11 +26,11 @@ public class Infomation {
 		this.email = email;
 		this.createDate = createDate;
 		this.setUpdateDate(updateDate);
-		this.img = img;
+		this.imgId = imgId;
 	}
 
-	public Infomation(String name, String address, String phoneNumber, String cccd, Date birth, String email,
-			Date createDate, Date updateDate, Image img) {
+	public Information(String name, String address, String phoneNumber, String cccd, Date birth, String email,
+			Date createDate, Date updateDate, int imgId) {
 		super();
 		this.name = name;
 		this.address = address;
@@ -40,10 +40,10 @@ public class Infomation {
 		this.email = email;
 		this.createDate = createDate;
 		this.updateDate = updateDate;
-		this.img = img;
+		this.imgId = imgId;
 	}
 
-	public Infomation() {
+	public Information() {
 		super();
 	}
 
@@ -111,12 +111,8 @@ public class Infomation {
 		this.createDate = createDate;
 	}
 
-	public Image getImg() {
-		return img;
-	}
-
-	public void setImg(Image img) {
-		this.img = img;
+	public int getImgId() {
+		return imgId;
 	}
 
 	public Date getUpdateDate() {

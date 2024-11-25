@@ -1,14 +1,14 @@
 package daoInterface;
 
-import models.Infomation;
+import models.Information;
 
 public interface IInfoDao {
 	
-	int saveInfor(Infomation info);
+	int saveInfor(Information info);
 	
-	void deleteInfor(Infomation info);
+	void deleteInfor(Information info);
 	
-	void updateInfor(Infomation info);
+	void updateInfor(Information info);
 	
-	Infomation findInfoByInfoId(int infoId);
+	Information findInfoByInfoId(int infoId);
 }

@@ -9,19 +9,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import daoInterface.IProductDao;
 import models.Admin;
 import models.Image;
 import models.Product;
 import service.DatabaseConnection;
-import daoInterface.IImageDao;
-import daoInterface.IProductDao;
 
 public class ProductDAOImp implements IProductDao {
-	private IImageDao iImageDao;
-
-	public ProductDAOImp() {
-		iImageDao = new ImageDAOImp();
-	}
 
 	@Override
 	public List<Product> getProducts() {
@@ -42,8 +36,7 @@ public class ProductDAOImp implements IProductDao {
 				int imgId = resultSet.getInt(7);
 				Date createDate = resultSet.getDate(8);
 				Date updateDate = resultSet.getDate(9);
-				Image img = iImageDao.findByImageId(imgId);
-				products.add(new Product(id, adminId, title, price, description, type, img, createDate, updateDate));
+				products.add(new Product(id, adminId, title, price, description, type, imgId, createDate, updateDate));
 			}
 			resultSet.close();
 			statement.close();
@@ -77,7 +70,7 @@ public class ProductDAOImp implements IProductDao {
 				int imgId = resultSet.getInt(7);
 				Date createDate = resultSet.getDate(8);
 				Date updateDate = resultSet.getDate(9);
-				product = new Product(id, adminId, title, price, description, type, iImageDao.findByImageId(imgId),
+				product = new Product(id, adminId, title, price, description, type, imgId,
 						createDate, updateDate);
 			}
 			resultSet.close();
@@ -108,7 +101,7 @@ public class ProductDAOImp implements IProductDao {
 			preparedStatement.setDouble(3, product.getPrice());
 			preparedStatement.setNString(4, product.getDescription());
 			preparedStatement.setNString(5, product.getDescription());
-			preparedStatement.setInt(6, product.getImg().getImgId());
+			preparedStatement.setInt(6, product.getImgId());
 			preparedStatement.setDate(7, new java.sql.Date(System.currentTimeMillis()));
 			preparedStatement.setDate(8, new java.sql.Date(System.currentTimeMillis()));
 			preparedStatement.executeUpdate();

@@ -10,17 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import daoInterface.IAdminDao;
-import daoInterface.IInfoDao;
 import models.Admin;
-import models.Infomation;
 import service.DatabaseConnection;
 
 public class AdminDAOImp implements IAdminDao {
-	private IInfoDao iInfoDao;
-
-	public AdminDAOImp() {
-		iInfoDao = new InfoDAOImp();
-	}
 
 	@Override
 	public List<Admin> getAdmins() {
@@ -38,9 +31,7 @@ public class AdminDAOImp implements IAdminDao {
 				int infoId = resultSet.getInt(5);
 				Date create_date = resultSet.getDate(6);
 				Date update_date = resultSet.getDate(7);
-
-				Infomation infomation = iInfoDao.findInfoByInfoId(infoId);
-				admins.add(new Admin(id, userName, password, status, infomation, update_date, create_date));
+				admins.add(new Admin(id, userName, password, status, infoId, update_date, create_date));
 			}
 			resultSet.close();
 			statement.close();
@@ -72,8 +63,8 @@ public class AdminDAOImp implements IAdminDao {
 				int infoId = resultSet.getInt(5);
 				Date create_date = resultSet.getDate(6);
 				Date update_date = resultSet.getDate(7);
-				Infomation infomation = iInfoDao.findInfoByInfoId(infoId);
-				admin = new Admin(id, userName, password, status, infomation, create_date, update_date);
+
+				admin = new Admin(id, userName, password, status, infoId, create_date, update_date);
 			}
 			resultSet.close();
 			statement.close();
@@ -126,7 +117,7 @@ public class AdminDAOImp implements IAdminDao {
 							+ admin.getAdminId());
 			preparedStatement.setNString(1, admin.getPassword());
 			preparedStatement.setNString(2, admin.getStatus());
-			preparedStatement.setInt(3, admin.getInfo().getInfoId());
+			preparedStatement.setInt(3, admin.getInfoId());
 			preparedStatement.setDate(4, new Date(System.currentTimeMillis()));
 			preparedStatement.executeUpdate();
 			preparedStatement.close();

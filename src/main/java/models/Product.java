@@ -9,12 +9,12 @@ public class Product {
 	private double price;
 	private String description;
 	private String type;
-	private Image img;
+	private int imgId;
 	private Date createDate;
 	private Date updateDate;
 
 	public Product(int productId, int addedByAdmin, String title, double price, String description, String type,
-			Image img, Date createDate, Date updateDate) {
+			int imgId, Date createDate, Date updateDate) {
 		super();
 		this.productId = productId;
 		this.addedByAdmin = addedByAdmin;
@@ -22,10 +22,25 @@ public class Product {
 		this.price = price;
 		this.description = description;
 		this.type = type;
-		this.img = img;
+		this.imgId = imgId;
 		this.createDate = createDate;
 		this.updateDate = updateDate;
 	}
+	
+
+	public Product(int addedByAdmin, String title, double price, String description, String type, int imgId,
+			Date createDate, Date updateDate) {
+		super();
+		this.addedByAdmin = addedByAdmin;
+		this.title = title;
+		this.price = price;
+		this.description = description;
+		this.type = type;
+		this.imgId = imgId;
+		this.createDate = createDate;
+		this.updateDate = updateDate;
+	}
+
 
 	public Product() {
 
@@ -59,9 +74,10 @@ public class Product {
 		return type;
 	}
 
-	public Image getImg() {
-		return img;
+	public int getImgId() {
+		return imgId;
 	}
+
 
 	public Date getCreateDate() {
 		return createDate;

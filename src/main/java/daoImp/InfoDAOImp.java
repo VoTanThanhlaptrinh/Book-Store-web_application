@@ -7,28 +7,20 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import daoInterface.IImageDao;
 import daoInterface.IInfoDao;
-import models.Image;
-import models.Infomation;
+import models.Information;
 import service.DatabaseConnection;
 
 public class InfoDAOImp implements IInfoDao {
-	private IImageDao iImageDao;
-
-	public InfoDAOImp() {
-		iImageDao = new ImageDAOImp();
-	}
-
 	@Override
-	public int saveInfor(Infomation info) {
+	public int saveInfor(Information info) {
 		// TODO Auto-generated method stub
 		Connection con = null;
 		int infoId = 0;
 		try {
 			con = DatabaseConnection.getConnection();
 			PreparedStatement preparedStatement = con.prepareStatement(
-					"insert into Infomation (name,address,phone_number,cccd,birth,email,create_date, update_date) values(?,?,?,?,?,?,?,?)",
+					"insert into Information (name,address,phone_number,cccd,birth,email,create_date, update_date) values(?,?,?,?,?,?,?,?)",
 					Statement.RETURN_GENERATED_KEYS);
 			preparedStatement.setNString(1, info.getName());
 			preparedStatement.setNString(2, info.getAddress());
@@ -59,19 +51,19 @@ public class InfoDAOImp implements IInfoDao {
 	}
 
 	@Override
-	public void deleteInfor(Infomation info) {
+	public void deleteInfor(Information info) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void updateInfor(Infomation info) {
+	public void updateInfor(Information info) {
 		// TODO Auto-generated method stub
 		Connection con = null;
 		try {
 			con = DatabaseConnection.getConnection();
 			PreparedStatement preparedStatement = con.prepareStatement(
-					"update Infomation set name = ?,address = ?,phone_number = ?,cccd = ?,birth = ?,email = ?, update_date = ? where info_id = "
+					"update Information set name = ?,address = ?,phone_number = ?,cccd = ?,birth = ?,email = ?, update_date = ? where info_id = "
 							+ info.getInfoId());
 			preparedStatement.setNString(1, info.getName());
 			preparedStatement.setNString(2, info.getAddress());
@@ -94,13 +86,13 @@ public class InfoDAOImp implements IInfoDao {
 	}
 
 	@Override
-	public Infomation findInfoByInfoId(int infoId) {
+	public Information findInfoByInfoId(int infoId) {
 		Connection con = null;
-		Infomation infomation = null;
+		Information information = null;
 		try {
 			con = DatabaseConnection.getConnection();
 			Statement statement = con.createStatement();
-			ResultSet resultSet = statement.executeQuery("select * from Infomation where info_id = " + infoId);
+			ResultSet resultSet = statement.executeQuery("select * from Information where info_id = " + infoId);
 			while (resultSet.next()) {
 				int id = resultSet.getInt(1);
 				String name = resultSet.getNString(2);
@@ -112,9 +104,9 @@ public class InfoDAOImp implements IInfoDao {
 				Date createDate = resultSet.getDate(8);
 				Date updateDate = resultSet.getDate(9);
 				int imgId = resultSet.getInt(10);
-				Image img = iImageDao.findByImageId(imgId);
-				infomation = new Infomation(id, name, address, phoneNumber, cccd, birthDay, email, createDate,
-						updateDate, img);
+
+				information = new Information(id, name, address, phoneNumber, cccd, birthDay, email, createDate,
+						updateDate, imgId);
 			}
 			resultSet.close();
 			statement.close();
@@ -127,7 +119,7 @@ public class InfoDAOImp implements IInfoDao {
 				e.printStackTrace();
 			}
 		}
-		return infomation;
+		return information;
 	}
 
 }

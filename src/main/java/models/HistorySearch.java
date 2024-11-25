@@ -1,6 +1,6 @@
 package models;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class HistorySearch {
 	private int hisId;
@@ -17,6 +17,22 @@ public class HistorySearch {
 	}
 
 	public HistorySearch() {
+	}
+
+	public int getHisId() {
+		return hisId;
+	}
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public Date getCreateDate() {
+		return createDate;
 	}
 
 }

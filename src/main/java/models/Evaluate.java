@@ -1,6 +1,6 @@
 package models;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Evaluate {
 	private int evaluateId;
@@ -18,8 +18,36 @@ public class Evaluate {
 		this.createDate = createDate;
 		this.updateDate = updateDate;
 	}
+	
+	public Evaluate(int userId, int productId, int rating, Date createDate, Date updateDate) {
+		super();
+		this.userId = userId;
+		this.productId = productId;
+		this.rating = rating;
+		this.createDate = createDate;
+		this.updateDate = updateDate;
+	}
+
 	public Evaluate() {
 		super();
+	}
+	public int getEvaluateId() {
+		return evaluateId;
+	}
+	public int getUserId() {
+		return userId;
+	}
+	public int getProductId() {
+		return productId;
+	}
+	public int getRating() {
+		return rating;
+	}
+	public Date getCreateDate() {
+		return createDate;
+	}
+	public Date getUpdateDate() {
+		return updateDate;
 	}
     
 }

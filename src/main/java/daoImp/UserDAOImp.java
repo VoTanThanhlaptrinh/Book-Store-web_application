@@ -9,18 +9,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import models.Infomation;
+import daoInterface.IUserDao;
 import models.User;
 import service.DatabaseConnection;
-import daoInterface.IInfoDao;
-import daoInterface.IUserDao;
 
 public class UserDAOImp implements IUserDao {
-	private IInfoDao iInfoDao;
-
-	public UserDAOImp() {
-		iInfoDao = new InfoDAOImp();
-	}
 
 	@Override
 	public List<User> getUsers() {
@@ -36,8 +29,7 @@ public class UserDAOImp implements IUserDao {
 				String password = resultSet.getNString(3);
 				Date date = resultSet.getDate(4);
 				int infoId = resultSet.getInt(5);
-				Infomation infomation = iInfoDao.findInfoByInfoId(infoId);
-				users.add(new User(id, userName, password, date, infomation));
+				users.add(new User(id, userName, password, date, infoId));
 			}
 			resultSet.close();
 			statement.close();
@@ -67,8 +59,8 @@ public class UserDAOImp implements IUserDao {
 				String password = resultSet.getNString(3);
 				Date date = resultSet.getDate(4);
 				int infoId = resultSet.getInt(5);
-				Infomation infomation = iInfoDao.findInfoByInfoId(infoId);
-				user = new User(id, userName, password, date, infomation);
+
+				user = new User(id, userName, password, date, infoId);
 			}
 			resultSet.close();
 			statement.close();
@@ -85,18 +77,24 @@ public class UserDAOImp implements IUserDao {
 	}
 
 	@Override
-	public void saveUser(User user) {
+	public int saveUser(User user) {
 		// TODO Auto-generated method stub
 		Connection con = null;
+		int userId = 0;
 		try {
 			con = DatabaseConnection.getConnection();
-			PreparedStatement preparedStatement = con
-					.prepareStatement("insert into User_1 (username,password,create_date,update_date) values(?,?,?)");
+			PreparedStatement preparedStatement = con.prepareStatement(
+					"insert into User_1 (username,password,create_date,update_date) values(?,?,?,?) ",
+					Statement.RETURN_GENERATED_KEYS);
 			preparedStatement.setString(1, user.getUsername());
 			preparedStatement.setString(2, user.getPassword());
 			preparedStatement.setDate(3, new Date(System.currentTimeMillis()));
 			preparedStatement.setDate(4, new Date(System.currentTimeMillis()));
 			preparedStatement.executeUpdate();
+
+			ResultSet resultSet = preparedStatement.getGeneratedKeys();
+			if (resultSet.next())
+				userId = resultSet.getInt(1);
 			preparedStatement.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -107,6 +105,7 @@ public class UserDAOImp implements IUserDao {
 				e.printStackTrace();
 			}
 		}
+		return userId;
 	}
 
 	@Override
@@ -139,7 +138,7 @@ public class UserDAOImp implements IUserDao {
 					"update User_1 set password = ?, update_date = ?,info_id = ? where user_id =" + user.getUserId());
 			preparedStatement.setNString(1, user.getPassword());
 			preparedStatement.setDate(2, new Date(System.currentTimeMillis()));
-			preparedStatement.setInt(3, user.getInfo().getInfoId());
+			preparedStatement.setInt(3, user.getInfoId());
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
 		} catch (SQLException e) {

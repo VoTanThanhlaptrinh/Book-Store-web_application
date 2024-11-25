@@ -5,19 +5,17 @@ import java.util.Date;
 public class Image {
 	private int imgId;
 	private String fileName;
-	private String url;
 	private String fileType;
 	private String description;
 	private Date createDate;
 	private Date updateDate;
 	private String objectType;
 
-	public Image(int imgId, String fileName, String url, String fileType, String description, Date createDate,
-			Date updateDate, String objectType) {
+	public Image(int imgId, String fileName, String fileType, String description, Date createDate, Date updateDate,
+			String objectType) {
 		super();
 		this.imgId = imgId;
 		this.fileName = fileName;
-		this.url = url;
 		this.fileType = fileType;
 		this.description = description;
 		this.createDate = createDate;
@@ -27,17 +25,13 @@ public class Image {
 
 	public Image() {
 	}
-	
+
 	public int getImgId() {
 		return imgId;
 	}
 
 	public String getFileName() {
 		return fileName;
-	}
-
-	public String getUrl() {
-		return url;
 	}
 
 	public String getFileType() {
@@ -57,11 +51,11 @@ public class Image {
 	}
 
 	public String getAsoluteUrl() {
-		return "webPage/" + url;
+		return "webPage/" + fileName;
 	}
 
 	public String getObjectType() {
 		return objectType;
 	}
-	
+
 }

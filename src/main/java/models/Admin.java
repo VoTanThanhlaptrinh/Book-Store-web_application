@@ -7,18 +7,18 @@ public class Admin {
 	private String username;
 	private String password;
 	private String status;
-	private Infomation info;
+	private int infoId;
 	private Date createDate;
 	private Date updateDate;
 
-	public Admin(int adminId, String username, String password, String status, Infomation info, Date createDate,
+	public Admin(int adminId, String username, String password, String status, int infoId, Date createDate,
 			Date updateDate) {
 		super();
 		this.adminId = adminId;
 		this.username = username;
 		this.password = password;
 		this.status = status;
-		this.info = info;
+		this.infoId = infoId;
 		this.createDate = createDate;
 		this.updateDate = updateDate;
 	}
@@ -54,14 +54,8 @@ public class Admin {
 		this.status = status;
 	}
 
-	public Infomation getInfo() {
-		if (info == null)
-			info = new Infomation();
-		return info;
-	}
-
-	public void setInfo(Infomation info) {
-		this.info = info;
+	public int getInfoId() {
+		return infoId;
 	}
 
 	public Date getCreateDate() {
@@ -83,11 +77,4 @@ public class Admin {
 	public void setAdminId(int adminId) {
 		this.adminId = adminId;
 	}
-
-	@Override
-	public String toString() {
-		return "Admin [adminId=" + adminId + ", username=" + username + ", password=" + password + ", status=" + status
-				+ ", info=" + info + ", createDate=" + createDate + ", updateDate=" + updateDate + "]";
-	}
-
 }

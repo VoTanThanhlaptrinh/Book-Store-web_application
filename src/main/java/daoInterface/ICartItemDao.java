@@ -7,7 +7,7 @@ import models.CartItem;
 public interface ICartItemDao {
 	List<CartItem> getCartItemsByCartId(int cartId);
 	
-	void saveCartItem(CartItem cart);
+	void saveCartItem(CartItem cartItem);
 	
-	void updateCartItem(CartItem cart);
+	void updateCartItem(CartItem cartItem);
 }
