@@ -135,7 +135,7 @@ CREATE TABLE Evaluate (
                 evaluate_id INT IDENTITY NOT NULL,
                 user_id INT NOT NULL,
                 product_id INT NOT NULL,
-                rating TINYINT,
+                comment_id int not null,
                 create_date datetime NOT NULL,
                 update_date datetime,
                 CONSTRAINT Evaluate_pk PRIMARY KEY (evaluate_id)
@@ -143,7 +143,7 @@ CREATE TABLE Evaluate (
 
 CREATE TABLE Comment (
                 comment_id INT IDENTITY NOT NULL,
-                evaluate_id INT NOT NULL,
+                rating TINYINT,
                 content NVARCHAR(255) NOT NULL,
                 create_date datetime NOT NULL,
                 update_date datetime,
@@ -258,11 +258,12 @@ REFERENCES Order_item (order_item_id)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 
-ALTER TABLE Comment ADD CONSTRAINT Evaluate_Comment_fk
-FOREIGN KEY (evaluate_id)
-REFERENCES Evaluate (evaluate_id)
+ALTER TABLE Evaluate ADD CONSTRAINT Evaluate_Comment_fk
+FOREIGN KEY (comment_id)
+REFERENCES Comment (comment_id)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
+
 SET IDENTITY_INSERT Image ON;
 INSERT INTO Image (img_id, file_name, file_type, description, create_date, update_date)  
 VALUES  
@@ -363,3 +364,9 @@ alter table Infomation alter column img_id int null;
 alter table Product_1 add quantity int null;
 
 update Product_1 set quantity = 1000
+
+alter table User_1 add email nvarchar(255);
+
+alter table Admin add email nvarchar(255);
+
+alter table User_1 add unique (username)
