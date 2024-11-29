@@ -4,10 +4,10 @@
 
         $(this).toggleClass("zmdi-eye zmdi-eye-off");
         var input = $($(this).attr("toggle"));
-        if (input.attr("type") == "password") {
-          input.attr("type", "text");
-        } else {
+        if (input.attr("type") == "text") {
           input.attr("type", "password");
+        } else {
+          input.attr("type", "text");
         }
       });
 

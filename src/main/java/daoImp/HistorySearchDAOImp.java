@@ -5,7 +5,6 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,8 +21,10 @@ public class HistorySearchDAOImp implements IHistorySearchDAO {
 		List<HistorySearch> hisList = new ArrayList<HistorySearch>();
 		try {
 			con = DatabaseConnection.getConnection();
-			Statement statement = con.createStatement();
-			ResultSet resultSet = statement.executeQuery("select * from History_search where user_id =" + userId);
+			PreparedStatement statement = con
+					.prepareStatement("select 10 from History_search where user_id = ? order by create_date desc");
+			statement.setInt(1, userId);
+			ResultSet resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 				int id = resultSet.getInt(1);
 				String content = resultSet.getNString(3);
@@ -73,10 +74,11 @@ public class HistorySearchDAOImp implements IHistorySearchDAO {
 		Connection con = null;
 		try {
 			con = DatabaseConnection.getConnection();
-			PreparedStatement preStatement = con.prepareStatement(
-					"update History_search set user_id = ?,content = ? where his_id =" + historySearch.getHisId());
+			PreparedStatement preStatement = con
+					.prepareStatement("update History_search set user_id = ?,content = ? where his_id = ?");
 			preStatement.setInt(1, historySearch.getHisId());
 			preStatement.setNString(2, historySearch.getContent());
+			preStatement.setInt(3, historySearch.getHisId());
 			preStatement.executeUpdate();
 			preStatement.close();
 		} catch (Exception e) {

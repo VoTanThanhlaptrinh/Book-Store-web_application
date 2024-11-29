@@ -14,8 +14,8 @@
 				<li><a href="#history">lịch sử</a></li>
 			</ul>
 		</div>
-		<a href="#contact">Liên hệ</a> <a href="#about">Tài khoản</a> <a
-			href="#cart" class="cart-button">Giỏ hàng</a>
+		<a href="#contact">Liên hệ</a> <a href="login">Tài khoản</a>
+		<!-- <a href="#cart" class="cart-button">Giỏ hàng</a> -->
 	</nav>
 </header>
 <!-- Footer sẽ được chèn ở đây -->

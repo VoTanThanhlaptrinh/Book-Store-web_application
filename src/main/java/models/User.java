@@ -1,33 +1,46 @@
 package models;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class User {
 	private int userId;
 	private String username;
 	private String password;
+	private String email;
 	private Date createDate;
+	private Date updateDate;
 	private int infoId;
 
-	public User(int userId, String username, String password, Date createDate, int infoId) {
+	public User(int userId, String username, String password, String email, Date createDate, int infoId,
+			Date updaDate) {
 		super();
 		this.userId = userId;
 		this.username = username;
 		this.password = password;
+		this.email = email;
 		this.createDate = createDate;
 		this.infoId = infoId;
+		this.updateDate = updaDate;
 	}
 
-	public User(int userId, String username, String password, Date createDate) {
+	public User(int userId, String username, String password, String email, Date createDate) {
 		super();
 		this.userId = userId;
 		this.username = username;
 		this.password = password;
+		this.email = email;
 		this.createDate = createDate;
+	}
+
+	public User(String username, String password, String email, Date createDate, Date updateDate) {
+		this.username = username;
+		this.password = password;
+		this.email = email;
+		this.createDate = createDate;
+		this.updateDate = updateDate;
 	}
 
 	public User() {
-		super();
 	}
 
 	public int getInfoId() {
@@ -65,4 +78,18 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	public boolean hasSamePass(String password) {
+		// TODO Auto-generated method stub
+		return this.password.equals(password);
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public Date getUpdateDate() {
+		return updateDate;
+	}
+
 }

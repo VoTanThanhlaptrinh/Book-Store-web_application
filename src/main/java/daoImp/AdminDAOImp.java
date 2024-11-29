@@ -5,7 +5,6 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,8 +20,8 @@ public class AdminDAOImp implements IAdminDao {
 		List<Admin> admins = new ArrayList<>();
 		try {
 			con = DatabaseConnection.getConnection();
-			Statement statement = con.createStatement();
-			ResultSet resultSet = statement.executeQuery("select * from Admin ");
+			PreparedStatement statement = con.prepareStatement("select * from Admin ");
+			ResultSet resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 				int id = resultSet.getInt(1);
 				String userName = resultSet.getNString(2);
@@ -53,8 +52,9 @@ public class AdminDAOImp implements IAdminDao {
 		Connection con = null;
 		try {
 			con = DatabaseConnection.getConnection();
-			Statement statement = con.createStatement();
-			ResultSet resultSet = statement.executeQuery("select * from Admin where admin_id =" + adminId);
+			PreparedStatement statement = con.prepareStatement("select * from Admin where admin_id = ?");
+			statement.setInt(1, adminId);
+			ResultSet resultSet = statement.executeQuery();
 			if (resultSet.next()) {
 				int id = resultSet.getInt(1);
 				String userName = resultSet.getNString(2);
@@ -91,8 +91,8 @@ public class AdminDAOImp implements IAdminDao {
 			preparedStatement.setString(1, admin.getUsername());
 			preparedStatement.setString(2, admin.getPassword());
 			preparedStatement.setNString(3, "Active");
-			preparedStatement.setDate(4, new Date(System.currentTimeMillis()));
-			preparedStatement.setDate(5, new Date(System.currentTimeMillis()));
+			preparedStatement.setDate(4, admin.getCreateDate());
+			preparedStatement.setDate(5, admin.getUpdateDate());
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
 		} catch (SQLException e) {
@@ -113,12 +113,12 @@ public class AdminDAOImp implements IAdminDao {
 		try {
 			con = DatabaseConnection.getConnection();
 			PreparedStatement preparedStatement = con.prepareStatement(
-					"update Admin set password = ?, status = ?, info_id = ?, update_date = ? where admin_id = "
-							+ admin.getAdminId());
-			preparedStatement.setNString(1, admin.getPassword());
-			preparedStatement.setNString(2, admin.getStatus());
-			preparedStatement.setInt(3, admin.getInfoId());
-			preparedStatement.setDate(4, new Date(System.currentTimeMillis()));
+					"update Admin set password = ?, status = ?, info_id = ?, update_date = ? where admin_id = ?");
+			preparedStatement.setInt(1, admin.getAdminId());
+			preparedStatement.setNString(2, admin.getPassword());
+			preparedStatement.setNString(3, admin.getStatus());
+			preparedStatement.setInt(4, admin.getInfoId());
+			preparedStatement.setDate(5, new Date(System.currentTimeMillis()));
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
 		} catch (Exception e) {

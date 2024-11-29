@@ -19,18 +19,14 @@
 					</ul>
 				</div>
 				<a href="#contact">Liên hệ</a>
-				<div class="porpo">
-					<a href="#user"><img src="images/facebook-icon.jpg" alt="user"></a>
-					<h6>thien pham</h6>
-				</div>
 				<a href="#cart" class="cart-button">Giỏ hàng</a>
+				<div class="dropdown">
+					<a href="#categories">${user.getUsername()}</a>
+					<ul class="dropdown-menu">
+						<li><a href="#info">Thông tin</a></li>
+						<li><a href="logout">Đăng xuất</a></li>
+					</ul>
+				</div>
 			</nav>
 		</header>
-
 	</div>
-	<div style="height: 1500px; padding-top: 60px;">
-		<!-- Nội dung trang giả lập -->
-	</div>
-
-	
-

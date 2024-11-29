@@ -1,15 +1,14 @@
 package daoImp;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.Date;
 
+import daoInterface.IImageDao;
 import models.Image;
 import service.DatabaseConnection;
-import daoInterface.IImageDao;
 
 public class ImageDAOImp implements IImageDao {
 
@@ -20,8 +19,9 @@ public class ImageDAOImp implements IImageDao {
 		Image img = null;
 		try {
 			con = DatabaseConnection.getConnection();
-			Statement statement = con.createStatement();
-			ResultSet resultSet = statement.executeQuery("select * from Image where img_id = " + imageId);
+			PreparedStatement statement = con.prepareStatement("select * from Image where img_id = ?");
+			statement.setInt(1, imageId);
+			ResultSet resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 				int id = resultSet.getInt(1);
 				String fileName = resultSet.getNString(2);
@@ -57,7 +57,7 @@ public class ImageDAOImp implements IImageDao {
 			preparedStatement.setNString(1, image.getFileName());
 			preparedStatement.setNString(2, image.getFileType());
 			preparedStatement.setNString(3, image.getDescription());
-			preparedStatement.setDate(4, new java.sql.Date(System.currentTimeMillis()));
+			preparedStatement.setDate(4, new Date(System.currentTimeMillis()));
 			preparedStatement.setNString(5, image.getObjectType());
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
@@ -78,8 +78,8 @@ public class ImageDAOImp implements IImageDao {
 		Connection con = null;
 		try {
 			con = DatabaseConnection.getConnection();
-			PreparedStatement preparedStatement = con
-					.prepareStatement("delete Image where img_id =" + image.getImgId());
+			PreparedStatement preparedStatement = con.prepareStatement("delete Image where img_id = ?");
+			preparedStatement.setInt(1, image.getImgId());
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
 		} catch (SQLException e) {
@@ -100,7 +100,8 @@ public class ImageDAOImp implements IImageDao {
 		try {
 			con = DatabaseConnection.getConnection();
 			PreparedStatement preparedStatement = con.prepareStatement(
-					"insert into Image (file_name,file_type,description,create_date,update_date,object_type) values(?,?,?,?,?,?)");
+					"insert into Image (file_name,file_type,description,create_date,update_date,object_type) values(?,?,?,?,?,?)",
+					PreparedStatement.RETURN_GENERATED_KEYS);
 			preparedStatement.setNString(1, image.getFileName());
 			preparedStatement.setNString(2, image.getFileType());
 			preparedStatement.setNString(3, image.getDescription());
@@ -138,8 +139,8 @@ public class ImageDAOImp implements IImageDao {
 			preparedStatement.setNString(1, image.getFileName());
 			preparedStatement.setNString(2, image.getFileType());
 			preparedStatement.setNString(3, image.getDescription());
-			preparedStatement.setDate(4, new java.sql.Date(System.currentTimeMillis()));
-			preparedStatement.setDate(5, new java.sql.Date(System.currentTimeMillis()));
+			preparedStatement.setDate(4, new Date(System.currentTimeMillis()));
+			preparedStatement.setDate(5, new Date(System.currentTimeMillis()));
 			preparedStatement.setNString(6, "information");
 			preparedStatement.executeUpdate();
 

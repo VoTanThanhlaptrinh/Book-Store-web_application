@@ -5,7 +5,6 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,8 +21,9 @@ public class CartItemDAOImp implements ICartItemDao {
 		List<CartItem> items = new ArrayList<CartItem>();
 		try {
 			con = DatabaseConnection.getConnection();
-			Statement statement = con.createStatement();
-			ResultSet resultSet = statement.executeQuery("select * from Cart_item where cart_id =" + cartId);
+			PreparedStatement statement = con.prepareStatement("select * from Cart_item where cart_id = ?");
+			statement.setInt(1, cartId);
+			ResultSet resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 				int cartItemId = resultSet.getInt(1);
 				int quantity = resultSet.getInt(3);
@@ -79,12 +79,12 @@ public class CartItemDAOImp implements ICartItemDao {
 		try {
 			con = DatabaseConnection.getConnection();
 			PreparedStatement preparedStatement = con.prepareStatement(
-					"update Cart_item set cart_id = ?,quantity = ?,product_id = ?,update_date = ? where cart_item_id ="
-							+ cartItem.getCartItemId());
+					"update Cart_item set cart_id = ?,quantity = ?,product_id = ?,update_date = ? where cart_item_id = ?");
 			preparedStatement.setInt(1, cartItem.getCartId());
 			preparedStatement.setInt(2, cartItem.getQuantity());
 			preparedStatement.setInt(3, cartItem.getProductId());
 			preparedStatement.setDate(4, cartItem.getUpdateDate());
+			preparedStatement.setInt(5, cartItem.getCartItemId());
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
 		} catch (Exception e) {

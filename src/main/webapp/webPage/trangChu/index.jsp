@@ -12,8 +12,14 @@
 <title>Trang chủ</title>
 </head>
 <body>
-	<div id="header-placeholder"><jsp:include
-			page="/webPage/trangChu/header.jsp"></jsp:include></div>
+	<c:if test="${user != null}">
+		<div id="header-placeholder"><jsp:include
+				page="/webPage/trangChu/re-header.jsp"></jsp:include></div>
+	</c:if>
+	<c:if test="${user == null}">
+		<div id="header-placeholder"><jsp:include
+				page="/webPage/trangChu/header.jsp"></jsp:include></div>
+	</c:if>
 
 	<div
 		style="background-image: url(webPage/trangChu/images/banner.png); background-repeat: no-repeat; height: 500px; padding-top: 60px;">

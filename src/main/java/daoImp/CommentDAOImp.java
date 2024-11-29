@@ -5,9 +5,6 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 
 import daoInterface.ICommentDAO;
 import models.Comment;
@@ -16,19 +13,20 @@ import service.DatabaseConnection;
 public class CommentDAOImp implements ICommentDAO {
 
 	@Override
-	public List<Comment> getComments(int evaluateId) {
+	public Comment getCommentByCommentId(int commentId) {
 		Connection con = null;
-		List<Comment> comments = new ArrayList<Comment>();
+		Comment comment = null;
 		try {
 			con = DatabaseConnection.getConnection();
-			Statement statement = con.createStatement();
-			ResultSet resultSet = statement.executeQuery("select * from Comment where evaluate_id =" + evaluateId);
-			while (resultSet.next()) {
-				int commentId = resultSet.getInt(1);
+			PreparedStatement statement = con.prepareStatement("select * from Comment where comment_id = ?");
+			statement.setInt(1, commentId);
+			ResultSet resultSet = statement.executeQuery();
+			if (resultSet.next()) {
+				int rating = resultSet.getInt(2);
 				String content = resultSet.getNString(3);
 				Date createDate = resultSet.getDate(4);
 				Date updateDate = resultSet.getDate(5);
-				comments.add(new Comment(commentId, evaluateId, content, createDate, updateDate));
+				comment = new Comment(commentId, rating, content, createDate, updateDate);
 			}
 			resultSet.close();
 			statement.close();
@@ -41,22 +39,27 @@ public class CommentDAOImp implements ICommentDAO {
 				e1.printStackTrace();
 			}
 		}
-		return comments;
+		return comment;
 	}
 
 	@Override
-	public void saveComment(Comment comment) {
+	public int saveComment(Comment comment) {
 		// TODO Auto-generated method stub
 		Connection con = null;
+		int commentId = 0;
 		try {
 			con = DatabaseConnection.getConnection();
 			PreparedStatement preparedStatement = con.prepareStatement(
-					"insert into Comment (evaluate_id,content,create_date,update_date) values(?,?,?,?)");
-			preparedStatement.setInt(1, comment.getEvaluateId());
+					"insert into Comment (rating,content,create_date,update_date) values(?,?,?,?)",
+					PreparedStatement.RETURN_GENERATED_KEYS);
+			preparedStatement.setInt(1, comment.getRating());
 			preparedStatement.setNString(2, comment.getContent());
 			preparedStatement.setDate(3, comment.getCreateDate());
 			preparedStatement.setDate(4, comment.getUpdateDate());
 			preparedStatement.executeUpdate();
+			ResultSet resultSet = preparedStatement.getGeneratedKeys();
+			if (resultSet.next())
+				commentId = resultSet.getInt(1);
 			preparedStatement.close();
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -67,6 +70,7 @@ public class CommentDAOImp implements ICommentDAO {
 				e1.printStackTrace();
 			}
 		}
+		return commentId;
 	}
 
 	@Override
@@ -75,10 +79,12 @@ public class CommentDAOImp implements ICommentDAO {
 		Connection con = null;
 		try {
 			con = DatabaseConnection.getConnection();
-			PreparedStatement preparedStatement = con.prepareStatement(
-					"update Comment content = ?,update_date = ? where comment_id =" + comment.getCommentId());
-			preparedStatement.setNString(1, comment.getContent());
-			preparedStatement.setDate(2, comment.getUpdateDate());
+			PreparedStatement preparedStatement = con
+					.prepareStatement("update Comment rating = ?, content = ?,update_date = ? where comment_id = ?");
+			preparedStatement.setInt(1, comment.getRating());
+			preparedStatement.setNString(2, comment.getContent());
+			preparedStatement.setDate(3, comment.getUpdateDate());
+			preparedStatement.setInt(4, comment.getCommentId());
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
 		} catch (Exception e) {

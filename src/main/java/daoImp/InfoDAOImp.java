@@ -5,7 +5,6 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import daoInterface.IInfoDao;
 import models.Information;
@@ -21,15 +20,15 @@ public class InfoDAOImp implements IInfoDao {
 			con = DatabaseConnection.getConnection();
 			PreparedStatement preparedStatement = con.prepareStatement(
 					"insert into Information (name,address,phone_number,cccd,birth,email,create_date, update_date) values(?,?,?,?,?,?,?,?)",
-					Statement.RETURN_GENERATED_KEYS);
+					PreparedStatement.RETURN_GENERATED_KEYS);
 			preparedStatement.setNString(1, info.getName());
 			preparedStatement.setNString(2, info.getAddress());
 			preparedStatement.setNString(3, info.getPhoneNumber());
 			preparedStatement.setNString(4, info.getCccd());
 			preparedStatement.setDate(5, info.getBirth());
 			preparedStatement.setNString(6, info.getEmail());
-			preparedStatement.setDate(7, new Date(System.currentTimeMillis()));
-			preparedStatement.setDate(8, new Date(System.currentTimeMillis()));
+			preparedStatement.setDate(7, info.getCreateDate());
+			preparedStatement.setDate(8, info.getUpdateDate());
 			preparedStatement.executeUpdate();
 
 			ResultSet re = preparedStatement.getGeneratedKeys();
@@ -63,15 +62,15 @@ public class InfoDAOImp implements IInfoDao {
 		try {
 			con = DatabaseConnection.getConnection();
 			PreparedStatement preparedStatement = con.prepareStatement(
-					"update Information set name = ?,address = ?,phone_number = ?,cccd = ?,birth = ?,email = ?, update_date = ? where info_id = "
-							+ info.getInfoId());
+					"update Information set name = ?,address = ?,phone_number = ?,cccd = ?,birth = ?,email = ?, update_date = ? where info_id = ?");
 			preparedStatement.setNString(1, info.getName());
 			preparedStatement.setNString(2, info.getAddress());
 			preparedStatement.setNString(3, info.getPhoneNumber());
 			preparedStatement.setNString(4, info.getCccd());
-			preparedStatement.setDate(5, (java.sql.Date) info.getBirth());
+			preparedStatement.setDate(5, info.getBirth());
 			preparedStatement.setNString(6, info.getEmail());
 			preparedStatement.setDate(7, new Date(System.currentTimeMillis()));
+			preparedStatement.setInt(8, info.getInfoId());
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
 		} catch (SQLException e) {
@@ -91,9 +90,10 @@ public class InfoDAOImp implements IInfoDao {
 		Information information = null;
 		try {
 			con = DatabaseConnection.getConnection();
-			Statement statement = con.createStatement();
-			ResultSet resultSet = statement.executeQuery("select * from Information where info_id = " + infoId);
-			while (resultSet.next()) {
+			PreparedStatement statement = con.prepareStatement("select * from Information where info_id = ?");
+			statement.setInt(1, infoId);
+			ResultSet resultSet = statement.executeQuery();
+			if (resultSet.next()) {
 				int id = resultSet.getInt(1);
 				String name = resultSet.getNString(2);
 				String address = resultSet.getNString(3);

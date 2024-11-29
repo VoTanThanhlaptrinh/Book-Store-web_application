@@ -24,36 +24,48 @@
 <body>
 	<div id="header-placeholder"><jsp:include
 			page="/webPage/trangChu/header.jsp"></jsp:include></div>
+	<c:if test="${mess != null}">
+		<div class="alert alert-danger text-center alert-css" role="alert">${mess}</div>
+	</c:if>
 	<div class="main">
 		<section class="signup">
 			<div class="container">
 				<div class="signup-content border">
-					<form method="POST" id="signin" class="signup-form">
+					<form method="POST" id="signin" class="signup-form" action="login">
 						<h2 class="form-title">Đăng nhập</h2>
 						<div class="form-group">
-							<input type="text" class="form-input" name="name" id="name"
+							<input type="text" class="form-input" name="username" id="name"
 								placeholder="Tên tài khoản" />
 						</div>
 						<div class="form-group">
-							<input type="text" class="form-input" name="password"
+							<input type="password" class="form-input" name="password"
 								id="password" placeholder="Mật khẩu" /> <span
 								toggle="#password"
-								class="zmdi zmdi-eye field-icon toggle-password"></span>
+								class="zmdi zmdi-eye-off field-icon toggle-password"></span>
 						</div>
 						<div class="form-group">
 							<input type="submit" name="submit" id="submit"
 								class="form-submit" value="Đăng nhập" />
 						</div>
 					</form>
+					<div class="row">
+						<div class="col">
+							<a href="#">Quên mật khẩu</a>
+						</div>
+						<div class="col text-end">
+							<a href="register">Đăng ký tài khoản</a>
+						</div>
+					</div>
+
 				</div>
 			</div>
 		</section>
 
 	</div>
-
 	<!-- JS -->
 	<script src="webPage/login/vendor/jquery/jquery.min.js"></script>
 	<script src="webPage/login/js/main.js"></script>
+
 </body>
 <!-- This templates was made by Colorlib (https://colorlib.com) -->
 

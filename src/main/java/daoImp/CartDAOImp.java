@@ -5,7 +5,6 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import daoInterface.ICartDao;
 import models.Cart;
@@ -19,8 +18,9 @@ public class CartDAOImp implements ICartDao {
 		Cart cart = null;
 		try {
 			con = DatabaseConnection.getConnection();
-			Statement statement = con.createStatement();
-			ResultSet resultSet = statement.executeQuery("select * from Cart where user_id =" + userId);
+			PreparedStatement statement = con.prepareStatement("select * from Cart where user_id = ?");
+			statement.setInt(1, userId);
+			ResultSet resultSet = statement.executeQuery();
 			if (resultSet.next()) {
 				int cartId = resultSet.getInt(1);
 				String status = resultSet.getNString(3);
@@ -75,9 +75,10 @@ public class CartDAOImp implements ICartDao {
 		try {
 			con = DatabaseConnection.getConnection();
 			PreparedStatement statement = con
-					.prepareStatement("update Cart set status = ?,update_date = ? where cart_id =" + cart.getCartId());
+					.prepareStatement("update Cart set status = ?,update_date = ? where cart_id = ?");
 			statement.setNString(1, cart.getStatus());
 			statement.setDate(2, cart.getUpdateDate());
+			statement.setInt(3, cart.getCartId());
 			statement.executeUpdate();
 			statement.close();
 		} catch (Exception e) {
