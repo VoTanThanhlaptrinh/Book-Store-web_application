@@ -23,7 +23,7 @@
 				<div class="dropdown">
 					<a href="#categories">${user.getUsername()}</a>
 					<ul class="dropdown-menu">
-						<li><a href="#info">Thông tin</a></li>
+						<li><a href="infor">Thông tin</a></li>
 						<li><a href="logout">Đăng xuất</a></li>
 					</ul>
 				</div>

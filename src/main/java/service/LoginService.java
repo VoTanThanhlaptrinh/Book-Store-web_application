@@ -2,15 +2,21 @@ package service;
 
 import java.sql.Date;
 
+import daoImp.InfoDAOImp;
 import daoImp.UserDAOImp;
+import daoInterface.IInfoDao;
+import daoInterface.IUserDao;
 import exeption.SqlException;
+import models.Information;
 import models.User;
 
 public class LoginService implements ILoginService {
-	private UserDAOImp daoImp;
+	private IUserDao daoImp;
+	private IInfoDao infoDao;
 
 	public LoginService() {
 		daoImp = new UserDAOImp();
+		infoDao = new InfoDAOImp();
 	}
 
 	@Override
@@ -35,5 +41,23 @@ public class LoginService implements ILoginService {
 			throw new SqlException("user đã tồn tại");
 		}
 		return i > 0;
+	}
+
+	@Override
+	public Information getInforOfUser(int infoId) {
+		return infoDao.findInfoByInfoId(infoId);
+	}
+
+	@Override
+	public void updateInfor(Information infor) {
+		// TODO Auto-generated method stub
+		infoDao.updateInfor(infor);
+	}
+
+	public void saveInfor(Information infor, User user) {
+		// TODO Auto-generated method stub
+		int inforId = infoDao.saveInfor(infor);
+		user.setInfoId(inforId);
+		daoImp.updateUser(user);
 	}
 }
