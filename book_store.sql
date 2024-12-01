@@ -370,3 +370,5 @@ alter table User_1 add email nvarchar(255);
 alter table Admin add email nvarchar(255);
 
 alter table User_1 add unique (username)
+
+alter table Information alter column img_id int null
