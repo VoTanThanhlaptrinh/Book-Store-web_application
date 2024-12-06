@@ -25,7 +25,7 @@
 	<div id="header-placeholder"><jsp:include
 			page="/webPage/trangChu/header.jsp"></jsp:include></div>
 	<main class="container">
-		<form class="container d-flex align-items-center gap-2 mt-5  mb-5">
+		<form class="container d-flex align-items-center gap-2 mt-5  mb-5 pd-top">
 			<select class="form-select" style="width: auto;">
 				<option>Option A Option A</option>
 			</select> <input class="form-control" placeholder="search">

@@ -26,7 +26,6 @@ public class Product {
 		this.createDate = createDate;
 		this.updateDate = updateDate;
 	}
-	
 
 	public Product(int addedByAdmin, String title, double price, String description, String type, int imgId,
 			Date createDate, Date updateDate) {
@@ -40,7 +39,6 @@ public class Product {
 		this.createDate = createDate;
 		this.updateDate = updateDate;
 	}
-
 
 	public Product() {
 
@@ -78,7 +76,6 @@ public class Product {
 		return imgId;
 	}
 
-
 	public Date getCreateDate() {
 		return createDate;
 	}
@@ -87,4 +84,10 @@ public class Product {
 		return updateDate;
 	}
 
+	@Override
+	public String toString() {
+		return "Product [productId=" + productId + ", addedByAdmin=" + addedByAdmin + ", title=" + title + ", price="
+				+ price + ", description=" + description + ", type=" + type + ", imgId=" + imgId + ", createDate="
+				+ createDate + ", updateDate=" + updateDate + "]";
+	}
 }

@@ -15,4 +15,8 @@ public interface IProductDao {
 	void updateProduct(Product product);
 
 	void deleteProduct(Product product);
+
+	List<Product> getProductFollowPage(int pageNumber, int quantity);
+	
+	int getQuantityOfProduct();
 }

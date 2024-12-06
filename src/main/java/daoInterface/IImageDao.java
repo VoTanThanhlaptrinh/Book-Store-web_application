@@ -10,7 +10,5 @@ public interface IImageDao {
 
 	void deleteImage(Image image);
 
-	int saveImageForProduct(Image image);
-
-	int saveImageForInfomation(Image image);
+	int saveImage(Image image);
 }

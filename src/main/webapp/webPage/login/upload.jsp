@@ -21,7 +21,7 @@
 	<section class="signup">
 		<div class="container">
 			<div class="signup-content border">
-				<form method="POST" id="" class="signup-form" action="">
+				<form method="POST" id="" class="signup-form" action="upload" enctype="multipart/form-data">
 					<h2 class="form-title">Cập nhật thông tin</h2>
 					<div class="form-group">
 						<input type="text" class="form-input" name="name" id=""

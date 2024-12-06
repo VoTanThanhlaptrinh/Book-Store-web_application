@@ -1,22 +1,29 @@
 package service;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.Date;
 
+import daoImp.ImageDAOImp;
 import daoImp.InfoDAOImp;
 import daoImp.UserDAOImp;
+import daoInterface.IImageDao;
 import daoInterface.IInfoDao;
 import daoInterface.IUserDao;
 import exeption.SqlException;
+import models.Image;
 import models.Information;
 import models.User;
 
 public class LoginService implements ILoginService {
 	private IUserDao daoImp;
 	private IInfoDao infoDao;
+	private IImageDao imageDao;
 
 	public LoginService() {
 		daoImp = new UserDAOImp();
 		infoDao = new InfoDAOImp();
+		imageDao = new ImageDAOImp();
 	}
 
 	@Override
@@ -59,5 +66,32 @@ public class LoginService implements ILoginService {
 		int inforId = infoDao.saveInfor(infor);
 		user.setInfoId(inforId);
 		daoImp.updateUser(user);
+	}
+
+	@Override
+	public Image getImageByImgId(int imgId) {
+		Image img = imageDao.findByImageId(imgId);
+		return img;
+	}
+
+	@Override
+	public int saveImage(Image img) {
+		return imageDao.saveImage(img);
+	}
+
+	@Override
+	public void updateImage(Image img) {
+		// TODO Auto-generated method stub
+		imageDao.updateImage(img);
+	}
+
+	@Override
+	public void loadImage(Image img, String path) throws IOException {
+		byte[] bytes = img.getData();
+		FileOutputStream fos = new FileOutputStream(path);
+		fos.write(bytes);
+		fos.flush();
+		fos.close();
+
 	}
 }

@@ -19,7 +19,7 @@ public class InfoDAOImp implements IInfoDao {
 		try {
 			con = DatabaseConnection.getConnection();
 			PreparedStatement preparedStatement = con.prepareStatement(
-					"insert into Information (name,address,phone_number,cccd,birth,email,create_date, update_date) values(?,?,?,?,?,?,?,?)",
+					"insert into Information (name,address,phone_number,cccd,birth,email,create_date, update_date,img_id) values(?,?,?,?,?,?,?,?,?)",
 					PreparedStatement.RETURN_GENERATED_KEYS);
 			preparedStatement.setNString(1, info.getName());
 			preparedStatement.setNString(2, info.getAddress());
@@ -29,6 +29,7 @@ public class InfoDAOImp implements IInfoDao {
 			preparedStatement.setNString(6, info.getEmail());
 			preparedStatement.setDate(7, info.getCreateDate());
 			preparedStatement.setDate(8, info.getUpdateDate());
+			preparedStatement.setInt(9, info.getImgId());
 			preparedStatement.executeUpdate();
 
 			ResultSet re = preparedStatement.getGeneratedKeys();
@@ -62,7 +63,7 @@ public class InfoDAOImp implements IInfoDao {
 		try {
 			con = DatabaseConnection.getConnection();
 			PreparedStatement preparedStatement = con.prepareStatement(
-					"update Information set name = ?,address = ?,phone_number = ?,cccd = ?,birth = ?,email = ?, update_date = ? where info_id = ?");
+					"update Information set name = ?,address = ?,phone_number = ?,cccd = ?,birth = ?,email = ?, update_date = ?, img_id = ? where info_id = ?");
 			preparedStatement.setNString(1, info.getName());
 			preparedStatement.setNString(2, info.getAddress());
 			preparedStatement.setNString(3, info.getPhoneNumber());
@@ -70,7 +71,8 @@ public class InfoDAOImp implements IInfoDao {
 			preparedStatement.setDate(5, info.getBirth());
 			preparedStatement.setNString(6, info.getEmail());
 			preparedStatement.setDate(7, new Date(System.currentTimeMillis()));
-			preparedStatement.setInt(8, info.getInfoId());
+			preparedStatement.setInt(8, info.getImgId());
+			preparedStatement.setInt(9, info.getInfoId());	
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
 		} catch (SQLException e) {

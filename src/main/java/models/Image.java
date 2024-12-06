@@ -9,10 +9,10 @@ public class Image {
 	private String description;
 	private Date createDate;
 	private Date updateDate;
-	private String objectType;
+	private byte[] data;
 
 	public Image(int imgId, String fileName, String fileType, String description, Date createDate, Date updateDate,
-			String objectType) {
+			byte[] data) {
 		super();
 		this.imgId = imgId;
 		this.fileName = fileName;
@@ -20,7 +20,17 @@ public class Image {
 		this.description = description;
 		this.createDate = createDate;
 		this.updateDate = updateDate;
-		this.objectType = objectType;
+		this.data = data;
+	}
+
+	public Image(String fileName, String fileType, String description, Date createDate, Date updateDate, byte[] data) {
+		super();
+		this.fileName = fileName;
+		this.fileType = fileType;
+		this.description = description;
+		this.createDate = createDate;
+		this.updateDate = updateDate;
+		this.data = data;
 	}
 
 	public Image() {
@@ -50,12 +60,38 @@ public class Image {
 		return updateDate;
 	}
 
-	public String getAsoluteUrl() {
-		return "webPage/" + fileName;
+
+	public void setImgId(int imgId) {
+		this.imgId = imgId;
 	}
 
-	public String getObjectType() {
-		return objectType;
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
+
+	public void setFileType(String fileType) {
+		this.fileType = fileType;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+
+	public void setUpdateDate(Date updateDate) {
+		this.updateDate = updateDate;
+	}
+
+	public void setData(byte[] data) {
+		this.data = data;
+	}
+
+	public byte[] getData() {
+		return data;
+	}
+	
 
 }

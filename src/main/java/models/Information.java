@@ -123,4 +123,8 @@ public class Information {
 		this.updateDate = updateDate;
 	}
 
+	public void setImgId(int imgId) {
+		this.imgId = imgId;
+	}
+	
 }

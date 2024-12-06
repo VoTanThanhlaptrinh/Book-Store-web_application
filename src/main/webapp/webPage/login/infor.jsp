@@ -21,7 +21,7 @@
 	<div class="container border">
 		<div class="row">
 			<div class="col-3">
-				<img src="webPage/login/images/avatar.jpg" alt="" class="img">
+				<img src="${accountImg}" alt="" class="img">
 			</div>
 			<div class="col-9">
 				<div>
@@ -41,12 +41,12 @@
 				</div>
 				<div>
 					<p>
-						<strong>Số Điện thoại: </strong>  ${infor.getPhoneNumber() }
+						<strong>Số Điện thoại: </strong> ${infor.getPhoneNumber() }
 					</p>
 				</div>
 				<div>
 					<p>
-						<strong>Căn cước công dân: </strong>  ${infor.getCccd() }
+						<strong>Căn cước công dân: </strong> ${infor.getCccd() }
 					</p>
 				</div>
 				<div>

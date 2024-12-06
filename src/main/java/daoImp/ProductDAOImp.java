@@ -173,4 +173,75 @@ public class ProductDAOImp implements IProductDao {
 			}
 		}
 	}
+
+	@Override
+	public List<Product> getProductFollowPage(int pageNumber, int quantity) {
+		List<Product> products = new ArrayList<Product>();
+		int pos = quantity * (pageNumber - 1);
+		Connection con = null;
+		try {
+			con = DatabaseConnection.getConnection();
+			PreparedStatement statement = con.prepareStatement("select * from Product_1 ",
+					ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			ResultSet resultSet = statement.executeQuery();
+			resultSet.absolute(pos);
+			for (int i = 1; i <= quantity; i++) {
+				if (resultSet.next()) {
+					int id = resultSet.getInt(1);
+					int adminId = resultSet.getInt(2);
+					String title = resultSet.getNString(3);
+					double price = resultSet.getDouble(4);
+					String description = resultSet.getNString(5);
+					String type = resultSet.getNString(6);
+					int imgId = resultSet.getInt(7);
+					Date createDate = resultSet.getDate(8);
+					Date updateDate = resultSet.getDate(9);
+					resultSet.getBinaryStream(2);
+					products.add(
+							new Product(id, adminId, title, price, description, type, imgId, createDate, updateDate));
+				}
+			}
+			resultSet.close();
+			statement.close();
+		} catch (
+
+		SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			try {
+				con.close();
+			} catch (SQLException e2) {
+				e.printStackTrace();
+			}
+		}
+		return products;
+	}
+
+	@Override
+	public int getQuantityOfProduct() {
+		Connection con = null;
+		int quantity = 0;
+		try {
+			con = DatabaseConnection.getConnection();
+			PreparedStatement statement = con.prepareStatement("select count(*) from Product_1 ");
+			ResultSet resultSet = statement.executeQuery();
+			if (resultSet.next()) {
+				quantity = resultSet.getInt(1);
+
+			}
+			resultSet.close();
+			statement.close();
+		} catch (
+
+		SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			try {
+				con.close();
+			} catch (SQLException e2) {
+				e.printStackTrace();
+			}
+		}
+		return quantity;
+	}
 }
