@@ -17,5 +17,4 @@ public class CategoriesServiceImp implements ICategoriesService {
 	public List<Product> getProductByPage(int pageNum, int quantity) {
 		return productDao.getProductFollowPage(pageNum, quantity);
 	}
-
 }

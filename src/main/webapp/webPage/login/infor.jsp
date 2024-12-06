@@ -21,7 +21,7 @@
 	<div class="container border">
 		<div class="row">
 			<div class="col-3">
-				<img src="${accountImg}" alt="" class="img">
+				<img src="getImage?img_id=${accountImg}" alt="" class="img">
 			</div>
 			<div class="col-9">
 				<div>

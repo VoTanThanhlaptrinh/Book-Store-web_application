@@ -25,7 +25,8 @@
 	<div id="header-placeholder"><jsp:include
 			page="/webPage/trangChu/header.jsp"></jsp:include></div>
 	<main class="container">
-		<form class="container d-flex align-items-center gap-2 mt-5  mb-5 pd-top">
+		<form
+			class="container d-flex align-items-center gap-2 mt-5  mb-5 pd-top">
 			<select class="form-select" style="width: auto;">
 				<option>Option A Option A</option>
 			</select> <input class="form-control" placeholder="search">
@@ -33,151 +34,58 @@
 				<span class="material-symbols-outlined">search</span>
 			</button>
 		</form>
-		<div class="row justify-content-center">
-			<div class="col-md-3">
-				<div class="card">
-					<img src="webPage/img/book1.png" class="card-img-top " alt="...">
-					<div class="card-body">
-						<h5 class="card-title">Card title</h5>
-						<p class="card-text"></p>
-						<a href="#" class="btn btn-primary">Add to cart</a> <a href="#"
-							class="btn btn-primary">Buy</a>
+		<c:forEach var="i" begin="0" end="${row}">
+			<c:choose>
+				<c:when test="${lastRow == 0}">
+					<div class="row justify-content-center">
+						<c:forEach var="j" begin="0" end="3">
+							<div class="col-md-3">
+								<div class="card">
+									<img
+										src="getImage?img_id=${products.get(j +(i * 3)+ i).getImgId()}"
+										class="card-img-top " alt="...">
+									<div class="card-body">
+										<h5 class="card-title">${products.get(j +(i * 3) +i).getTitle()}</h5>
+										<p class="card-text">Giá: ${products.get(j +(i * 3) +i).getPrice()}</p>
+										<a href="#" class="btn btn-primary">Add to cart</a> <a
+											href="#" class="btn btn-primary">Buy</a>
+									</div>
+								</div>
+							</div>
+						</c:forEach>
 					</div>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="card">
-					<img src="img/book1.png" class="card-img-top " alt="...">
-					<div class="card-body">
-						<h5 class="card-title">Card title</h5>
-						<p class="card-text"></p>
-						<a href="#" class="btn btn-primary">Add to cart</a> <a href="#"
-							class="btn btn-primary">Buy</a>
+				</c:when>
+				<c:when test="${lastRow != 0}">
+					<div class="row justify-content-center">
+						<c:forEach var="j" begin="0" end="${lastRow}">
+							<div class="col-md-3">
+								<div class="card">
+									<img
+										src="getImage?img_id=${products.get(j +(i * 3)).getImgId()}"
+										class="card-img-top " alt="...">
+									<div class="card-body">
+										<h5 class="card-title">${products.get(j +(i * 3)).getTitle()}</h5>
+										<p class="card-text">Giá: ${products.get(j +(i * 3)).getPrice()}</p>
+										<a href="#" class="btn btn-primary">Add to cart</a> <a
+											href="#" class="btn btn-primary">Buy</a>
+									</div>
+								</div>
+							</div>
+						</c:forEach>
 					</div>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="card">
-					<img src="img/book1.png" class="card-img-top " alt="...">
-					<div class="card-body">
-						<h5 class="card-title">Card title</h5>
-						<p class="card-text"></p>
-						<a href="#" class="btn btn-primary">Add to cart</a> <a href="#"
-							class="btn btn-primary">Buy</a>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="card">
-					<img src="img/book1.png" class="card-img-top " alt="...">
-					<div class="card-body">
-						<h5 class="card-title">Card title</h5>
-						<p class="card-text"></p>
-						<a href="#" class="btn btn-primary">Add to cart</a> <a href="#"
-							class="btn btn-primary">Buy</a>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row justify-content-center">
-			<div class="col-md-3">
-				<div class="card">
-					<img src="img/book1.png" class="card-img-top " alt="...">
-					<div class="card-body">
-						<h5 class="card-title">Card title</h5>
-						<p class="card-text"></p>
-						<a href="#" class="btn btn-primary">Add to cart</a> <a href="#"
-							class="btn btn-primary">Buy</a>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="card">
-					<img src="img/book1.png" class="card-img-top " alt="...">
-					<div class="card-body">
-						<h5 class="card-title">Card title</h5>
-						<p class="card-text"></p>
-						<a href="#" class="btn btn-primary">Add to cart</a> <a href="#"
-							class="btn btn-primary">Buy</a>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="card">
-					<img src="img/book1.png" class="card-img-top " alt="...">
-					<div class="card-body">
-						<h5 class="card-title">Card title</h5>
-						<p class="card-text"></p>
-						<a href="#" class="btn btn-primary">Add to cart</a> <a href="#"
-							class="btn btn-primary">Buy</a>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="card">
-					<img src="img/book1.png" class="card-img-top " alt="...">
-					<div class="card-body">
-						<h5 class="card-title">Card title</h5>
-						<p class="card-text"></p>
-						<a href="#" class="btn btn-primary">Add to cart</a> <a href="#"
-							class="btn btn-primary">Buy</a>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row justify-content-center">
-			<div class="col-md-3">
-				<div class="card">
-					<img src="img/book1.png" class="card-img-top " alt="...">
-					<div class="card-body">
-						<h5 class="card-title">Card title</h5>
-						<p class="card-text"></p>
-						<a href="#" class="btn btn-primary">Add to cart</a> <a href="#"
-							class="btn btn-primary">Buy</a>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="card">
-					<img src="img/book1.png" class="card-img-top " alt="...">
-					<div class="card-body">
-						<h5 class="card-title">Card title</h5>
-						<p class="card-text"></p>
-						<a href="#" class="btn btn-primary">Add to cart</a> <a href="#"
-							class="btn btn-primary">Buy</a>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="card">
-					<img src="img/book1.png" class="card-img-top " alt="...">
-					<div class="card-body">
-						<h5 class="card-title">Card title</h5>
-						<p class="card-text"></p>
-						<a href="#" class="btn btn-primary">Add to cart</a> <a href="#"
-							class="btn btn-primary">Buy</a>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="card">
-					<img src="img/book1.png" class="card-img-top " alt="...">
-					<div class="card-body">
-						<h5 class="card-title">Card title</h5>
-						<p class="card-text"></p>
-						<a href="#" class="btn btn-primary">Add to cart</a> <a href="#"
-							class="btn btn-primary">Buy</a>
-					</div>
-				</div>
-			</div>
-		</div>
+				</c:when>
+			</c:choose>
+		</c:forEach>
 		<nav aria-label="Page navigation example" class="mt-3 mb-3">
 			<ul class="pagination justify-content-center">
 				<li class="page-item disabled"><a class="page-link" href="#"
 					tabindex="-1" aria-disabled="true">Previous</a></li>
-				<li class="page-item"><a class="page-link" href="#">1</a></li>
-				<li class="page-item"><a class="page-link" href="#">2</a></li>
-				<li class="page-item"><a class="page-link" href="#">3</a></li>
+				<li class="page-item"><a class="page-link"
+					href="tim-sach?pageNum=1">1</a></li>
+				<li class="page-item"><a class="page-link"
+					href="tim-sach?pageNum=2">2</a></li>
+				<li class="page-item"><a class="page-link"
+					href="tim-sach?pageNum=3">3</a></li>
 				<li class="page-item"><a class="page-link" href="#">Next</a></li>
 			</ul>
 		</nav>

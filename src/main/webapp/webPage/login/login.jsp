@@ -35,11 +35,11 @@
 						<h2 class="form-title">Đăng nhập</h2>
 						<div class="form-group">
 							<input type="text" class="form-input" name="username" id="name"
-								placeholder="Tên tài khoản" />
+								placeholder="Tên tài khoản" required/>
 						</div>
 						<div class="form-group">
 							<input type="password" class="form-input" name="password"
-								id="password" placeholder="Mật khẩu" /> <span
+								id="password" placeholder="Mật khẩu" required/> <span
 								toggle="#password"
 								class="zmdi zmdi-eye-off field-icon toggle-password"></span>
 						</div>

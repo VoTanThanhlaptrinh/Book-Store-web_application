@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import models.Image;
 import models.Information;
 import models.User;
 import service.LoginService;
@@ -43,10 +42,10 @@ public class InforController extends HttpServlet {
 				if (information.getImgId() == 0) {
 					path = "webPage/img/avatar/avatar.jpg";
 				} else {
-					Image img = loginService.getImageByImgId(information.getImgId());
-					String absolutePath = "C:\\Users\\VO TAN THANH\\eclipse-workspace\\BOOK_STORE\\src\\main\\webapp\\webPage\\img\\avatar\\";
-					loginService.loadImage(img, absolutePath + img.getFileName());
-					path = "webPage/img/avatar/" + img.getFileName();
+//					String absolutePath = "C:\\Users\\VO TAN THANH\\eclipse-workspace\\BOOK_STORE\\src\\main\\webapp\\webPage\\img\\avatar\\";
+//					
+//					loginService.loadImage(img, absolutePath + img.getFileName());
+					path = "" + information.getImgId();
 					session.setAttribute("command", "update");
 				}
 			}

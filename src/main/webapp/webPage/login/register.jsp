@@ -29,38 +29,36 @@
 	<c:if test="${mess != null}">
 		<div class="alert alert-danger text-center alert-css" role="alert">${mess}</div>
 	</c:if>
-	<c:if test="${warn != null}">
-		<div class="alert alert-warning text-center alert-css" role="alert">${warn}</div>
-	</c:if>
 	<div class="main">
 		<section class="signup">
 			<div class="container">
 				<div class="signup-content border">
-					<form method="POST" id="signup-form" class="signup-form" action="register">
+					<form method="POST" id="signup-form" class="signup-form"
+						action="register">
 						<h2 class="form-title">Tạo tài khoản</h2>
 						<div class="form-group">
 							<input type="text" class="form-input" name="username" id="name"
-								placeholder="Tên tài khoản" />
+								placeholder="Tên tài khoản" required />
 						</div>
 						<div class="form-group">
 							<input type="email" class="form-input" name="email" id="email"
-								placeholder="Email" />
+								placeholder="Email" required />
 						</div>
 						<div class="form-group">
 							<input type="password" class="form-input" name="password"
-								id="password" placeholder="Mật khẩu" /> <span
+								id="password" placeholder="Mật khẩu" required /> <span
 								toggle="#password"
 								class="zmdi zmdi-eye-off field-icon toggle-password"></span>
 						</div>
 						<div class="form-group">
 							<input type="password" class="form-input" name="rePassword"
-								id="re_password" placeholder="Nhập lại mật khẩu" /> <span
+								id="re_password" placeholder="Nhập lại mật khẩu" required /> <span
 								toggle="#password"
 								class="zmdi zmdi-eye-off field-icon toggle-password"></span>
 						</div>
 						<div class="form-group">
 							<input type="checkbox" name="agreeTerm" id="agree-term"
-								class="agree-term" /> <label for="agree-term"
+								class="agree-term" required/> <label for="agree-term"
 								class="label-agree-term"><span><span></span></span>Tôi
 								đồng ý tất cả <a href="#" class="term-service">Điều khoản</a></label>
 						</div>

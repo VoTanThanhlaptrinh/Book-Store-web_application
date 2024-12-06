@@ -196,7 +196,6 @@ public class ProductDAOImp implements IProductDao {
 					int imgId = resultSet.getInt(7);
 					Date createDate = resultSet.getDate(8);
 					Date updateDate = resultSet.getDate(9);
-					resultSet.getBinaryStream(2);
 					products.add(
 							new Product(id, adminId, title, price, description, type, imgId, createDate, updateDate));
 				}

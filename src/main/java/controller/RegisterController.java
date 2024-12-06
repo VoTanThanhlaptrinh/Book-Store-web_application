@@ -41,9 +41,8 @@ public class RegisterController extends HttpServlet {
 		if (loginService == null) {
 			loginService = new LoginService();
 		}
-		String mess, warning;
-		if (!pass.trim().isEmpty() && pass.equals(rePassword) && !username.trim().isEmpty() && !email.trim().isEmpty()
-				&& !accept.trim().isEmpty()) {
+		String mess;
+		if (rePassword.equals(pass)) {
 			try {
 				success = loginService.register(username, pass, email);
 			} catch (SQLException | SqlException e) {
@@ -53,13 +52,7 @@ public class RegisterController extends HttpServlet {
 				req.setAttribute("mess", mess);
 				doGet(req, resp);
 			}
-		} else {
-			warning = "nhập thiếu thông tin";
-			req.setAttribute("warn", warning);
-			doGet(req, resp);
 		}
-
-		req.setAttribute("success", success);
 		if (success)
 			resp.sendRedirect("login");
 	}
