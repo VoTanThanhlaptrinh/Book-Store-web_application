@@ -39,7 +39,7 @@ public class LoginController extends HttpServlet {
 			resp.sendRedirect("home");
 		} else {
 			String mess = "Sai mật khẩu";
-			req.setAttribute("mess",mess);
+			req.setAttribute("mess", mess);
 			doGet(req, resp);
 		}
 	}

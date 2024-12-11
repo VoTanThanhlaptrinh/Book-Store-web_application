@@ -26,7 +26,7 @@
 			page="/webPage/trangChu/header.jsp"></jsp:include></div>
 	<main class="container">
 		<form
-			class="container d-flex align-items-center gap-2 mt-5  mb-5 pd-top">
+			class="container d-flex align-items-center gap-2 mt-5  mb-5">
 			<select class="form-select" style="width: auto;">
 				<option>Option A Option A</option>
 			</select> <input class="form-control" placeholder="search">
@@ -36,7 +36,7 @@
 		</form>
 		<c:forEach var="i" begin="0" end="${row}">
 			<c:choose>
-				<c:when test="${lastRow == 0}">
+				<c:when test="${i < row}">
 					<div class="row justify-content-center">
 						<c:forEach var="j" begin="0" end="3">
 							<div class="col-md-3">
@@ -55,17 +55,17 @@
 						</c:forEach>
 					</div>
 				</c:when>
-				<c:when test="${lastRow != 0}">
-					<div class="row justify-content-center">
-						<c:forEach var="j" begin="0" end="${lastRow}">
+				<c:when test="${i == row}">
+					<div class="row justify-content">
+						<c:forEach var="j" begin="0" end="${lastRow-1}">
 							<div class="col-md-3">
 								<div class="card">
 									<img
-										src="getImage?img_id=${products.get(j +(i * 3)).getImgId()}"
+										src="getImage?img_id=${products.get(j +(i * 3)+i).getImgId()}"
 										class="card-img-top " alt="...">
 									<div class="card-body">
-										<h5 class="card-title">${products.get(j +(i * 3)).getTitle()}</h5>
-										<p class="card-text">Giá: ${products.get(j +(i * 3)).getPrice()}</p>
+										<h5 class="card-title">${products.get(j +(i * 3)+i).getTitle()}</h5>
+										<p class="card-text">Giá: ${products.get(j +(i * 3)+i).getPrice()}</p>
 										<a href="#" class="btn btn-primary">Add to cart</a> <a
 											href="#" class="btn btn-primary">Buy</a>
 									</div>

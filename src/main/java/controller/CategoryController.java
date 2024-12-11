@@ -29,15 +29,19 @@ public class CategoryController extends HttpServlet {
 		if (pageNum != null) {
 			page = Integer.valueOf(pageNum);
 		}
-		List<Product> products = categoriesService.getProductByPage(page, 12);
+		List<Product> products = categoriesService.getProductByPage(page, 4);
 		int row = products.size() / 4;
-		if (products.size() % 4 == 0) {
-			row--;
-		}
 		int elementsLastRow = products.size() % 4;
+		if (elementsLastRow == 0) {
+			row--;
+			elementsLastRow = 4;
+		}
+		if(products.size() < 4) {
+			elementsLastRow = products.size();
+		}
 		req.setAttribute("lastRow", elementsLastRow);
-		req.setAttribute("products", products);
 		req.setAttribute("row", row);
+		req.setAttribute("products", products);
 
 		req.getRequestDispatcher("webPage/categoryAndSingle/categories.jsp").forward(req, resp);
 	}

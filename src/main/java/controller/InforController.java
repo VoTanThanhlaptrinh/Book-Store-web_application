@@ -42,10 +42,7 @@ public class InforController extends HttpServlet {
 				if (information.getImgId() == 0) {
 					path = "webPage/img/avatar/avatar.jpg";
 				} else {
-//					String absolutePath = "C:\\Users\\VO TAN THANH\\eclipse-workspace\\BOOK_STORE\\src\\main\\webapp\\webPage\\img\\avatar\\";
-//					
-//					loginService.loadImage(img, absolutePath + img.getFileName());
-					path = "" + information.getImgId();
+					path = "getImage?img_id" + information.getImgId();
 					session.setAttribute("command", "update");
 				}
 			}

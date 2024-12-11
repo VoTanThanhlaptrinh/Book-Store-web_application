@@ -41,19 +41,28 @@ public class RegisterController extends HttpServlet {
 		if (loginService == null) {
 			loginService = new LoginService();
 		}
-		String mess;
-		if (rePassword.equals(pass)) {
-			try {
-				success = loginService.register(username, pass, email);
-			} catch (SQLException | SqlException e) {
-				// TODO Auto-generated catch block
-				success = false;
-				mess = e.getMessage();
-				req.setAttribute("mess", mess);
-				doGet(req, resp);
+		String mess = null;
+		if (pass.trim().length() < 8) {
+			mess = "Mật khẩu phải có ít nhất 8 ký tự";
+		} else {
+			if (!rePassword.equals(pass)) {
+				mess = "Mật khẩu nhập lại cần phải giống với mật khẩu";
+			} else {
+				try {
+					success = loginService.register(username, pass, email);
+				} catch (SQLException | SqlException e) {
+					// TODO Auto-generated catch block
+					success = false;
+					mess = e.getMessage();
+
+				}
 			}
 		}
-		if (success)
+		if (success) {
 			resp.sendRedirect("login");
+		} else {
+			req.setAttribute("mess", mess);
+			doGet(req, resp);
+		}
 	}
 }

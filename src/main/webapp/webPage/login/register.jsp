@@ -27,7 +27,7 @@
 	<div id="header-placeholder"><jsp:include
 			page="/webPage/trangChu/header.jsp"></jsp:include></div>
 	<c:if test="${mess != null}">
-		<div class="alert alert-danger text-center alert-css" role="alert">${mess}</div>
+		<div class="alert alert-warning text-center alert-css" role="alert">${mess}</div>
 	</c:if>
 	<div class="main">
 		<section class="signup">

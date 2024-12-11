@@ -4,6 +4,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.Date;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import daoImp.ImageDAOImp;
 import daoImp.InfoDAOImp;
 import daoImp.UserDAOImp;
@@ -29,7 +31,8 @@ public class LoginService implements ILoginService {
 	@Override
 	public User checkUser(String username, String password) {
 		User user = daoImp.findByUserName(username);
-		if (user != null && user.hasSamePass(password)) {
+		String storedHash = user.getPassword();
+		if (user != null && BCrypt.checkpw(password, storedHash)) {
 			return user;
 		}
 		return null;
@@ -37,7 +40,8 @@ public class LoginService implements ILoginService {
 
 	@Override
 	public boolean register(String username, String password, String email) throws SqlException {
-		User user = new User(username, password, email, new Date(System.currentTimeMillis()),
+		String passHash = BCrypt.hashpw(password, BCrypt.gensalt());
+		User user = new User(username, passHash, email, new Date(System.currentTimeMillis()),
 				new Date(System.currentTimeMillis()));
 
 		int i = 0;
