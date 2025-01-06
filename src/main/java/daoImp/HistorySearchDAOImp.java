@@ -18,7 +18,7 @@ public class HistorySearchDAOImp implements IHistorySearchDAO {
 	public List<HistorySearch> getHistorySearchsOfUser(int userId) {
 		// TODO Auto-generated method stub
 		Connection con = null;
-		List<HistorySearch> hisList = new ArrayList<HistorySearch>();
+		List<HistorySearch> hisList = new ArrayList<>();
 		try {
 			con = DatabaseConnection.getConnection();
 			PreparedStatement statement = con

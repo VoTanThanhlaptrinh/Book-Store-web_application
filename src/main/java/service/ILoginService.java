@@ -2,7 +2,6 @@ package service;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.sql.SQLException;
 
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 
@@ -14,10 +13,9 @@ import models.User;
 public interface ILoginService {
 	User checkUser(String username, String password);
 
-	boolean register(String username, String password, String email)
-			throws SQLServerException, SqlException, SQLException;
+	boolean register(String username, String password, String email) throws SQLServerException, SqlException;
 
-	Information getInforOfUser(int infoId);
+	Information getInforOfUser(int userId);
 
 	void updateInfor(Information infor);
 
@@ -30,4 +28,16 @@ public interface ILoginService {
 	void updateImage(Image img);
 
 	void loadImage(Image img, String path) throws FileNotFoundException, IOException;
+
+	String getUsername(int userId);
+	
+	byte[] resizeImg(byte[] bytes);
+	
+	boolean checkEmail(String email);
+	
+	User getUserByMail(String mail);
+	
+	String hashPass(String pass);
+
+	void updateUser(User user);
 }

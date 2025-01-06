@@ -43,6 +43,33 @@ public class CartDAOImp implements ICartDao {
 	}
 
 	@Override
+	public void createCart(int userId) {
+		Connection con = null;
+		try {
+			con = DatabaseConnection.getConnection();
+			PreparedStatement statement = con
+					.prepareStatement("insert into Cart (user_id,status,create_date,update_date) values(?,?,?,?)");
+			statement.setInt(1, userId);
+			statement.setNString(2, "empty");
+		       Date currentDate = new Date(System.currentTimeMillis());
+	            statement.setDate(3, currentDate);
+			statement.setDate(4, null);
+			statement.executeUpdate();
+			statement.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			try {
+				con.close();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+	}
+	
+
+	@Override
 	public void saveCart(Cart cart, int userId) {
 		// TODO Auto-generated method stub
 		Connection con = null;
@@ -69,16 +96,16 @@ public class CartDAOImp implements ICartDao {
 	}
 
 	@Override
-	public void updateCart(Cart cart) {
+	public void updateCart(int cartId, String status, Date update_date) {
 		// TODO Auto-generated method stub
 		Connection con = null;
 		try {
 			con = DatabaseConnection.getConnection();
 			PreparedStatement statement = con
 					.prepareStatement("update Cart set status = ?,update_date = ? where cart_id = ?");
-			statement.setNString(1, cart.getStatus());
-			statement.setDate(2, cart.getUpdateDate());
-			statement.setInt(3, cart.getCartId());
+			statement.setNString(1, status);
+			statement.setDate(2, update_date);
+			statement.setInt(3, cartId);
 			statement.executeUpdate();
 			statement.close();
 		} catch (Exception e) {

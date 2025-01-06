@@ -27,7 +27,8 @@
 				page="/webPage/trangChu/re-header.jsp"></jsp:include></div>
 	</header>
 
-	<div class="page-content-infor page-container-infor " id="page-content">
+	<div class="page-content-infor page-container-infor " id="page-content"
+		style="padding-top: 50px;">
 		<div class="padding-infor">
 			<div class="row d-flex justify-content-center ">
 				<div class="col-xl-6 col-md-12 border card">
@@ -99,8 +100,8 @@
 												aria-hidden="true"></i></a></li>
 									</ul>
 									<div class="text-end ">
-										<a href="upload"><button type="button" class="btn btn-primary">Cập
-												nhật</button></a>
+										<a href="upload"><button type="button"
+												class="btn btn-primary">Cập nhật</button></a>
 									</div>
 								</div>
 							</div>
@@ -109,6 +110,9 @@
 				</div>
 			</div>
 		</div>
+	</div>
+	<div id="footer-placeholder">
+		<jsp:include page="/webPage/trangChu/footer.jsp"></jsp:include>
 	</div>
 	<script src="webPage/login/vendor/jquery/jquery.min.js"></script>
 	<script src="webPage/login/js/main.js"></script>

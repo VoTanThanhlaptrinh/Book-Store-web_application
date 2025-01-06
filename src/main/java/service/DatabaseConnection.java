@@ -11,9 +11,9 @@ public class DatabaseConnection {
     private static final String URL = "jdbc:sqlserver://localhost\\SQLEXPRESS;databaseName=book_store;encrypt=true;trustServerCertificate=true";
     private static final String USERNAME = "user_login";
     private static final String PASSWORD = "123";
-    private static final int MAX_POOL_SIZE = 10;
-    private static final int MIN_IDLE = 5;
-    private static final long CONNECTION_TIMEOUT = 10000;
+    private static final int MAX_POOL_SIZE = 100;
+    private static final int MIN_IDLE = 10;
+    private static final long CONNECTION_TIMEOUT = 30000;
     private static final long IDLE_TIMEOUT = 600000;
     private static final long MAX_LIFETIME = 1800000;
 

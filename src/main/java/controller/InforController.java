@@ -17,7 +17,7 @@ import service.LoginService;
 public class InforController extends HttpServlet {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -32,7 +32,7 @@ public class InforController extends HttpServlet {
 			resp.sendRedirect("home");
 		} else {
 			LoginService loginService = (LoginService) session.getAttribute("loginService");
-			Information information = loginService.getInforOfUser(user.getInfoId());
+			Information information = loginService.getInforOfUser(user.getUserId());
 			String path;
 			if (information == null) {
 				information = new Information();
@@ -42,13 +42,13 @@ public class InforController extends HttpServlet {
 				if (information.getImgId() == 0) {
 					path = "webPage/img/avatar/avatar.jpg";
 				} else {
-					path = "getImage?img_id" + information.getImgId();
+					path = "getImage?img_id=" + information.getImgId();
 					session.setAttribute("command", "update");
 				}
 			}
 			req.setAttribute("accountImg", path);
 			session.setAttribute("infor", information);
-			req.getRequestDispatcher("webPage/login/infor.jsp").forward(req, resp);
+			req.getRequestDispatcher("/webPage/login/infor.jsp").forward(req, resp);
 		}
 	}
 }

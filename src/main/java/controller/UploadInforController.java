@@ -1,7 +1,7 @@
 package controller;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Date;
 
 import javax.servlet.ServletException;
@@ -16,6 +16,7 @@ import javax.servlet.http.Part;
 import models.Image;
 import models.Information;
 import models.User;
+import net.coobird.thumbnailator.Thumbnails;
 import service.LoginService;
 
 @WebServlet("/upload")
@@ -26,7 +27,7 @@ import service.LoginService;
 public class UploadInforController extends HttpServlet {
 	private String command;
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -39,7 +40,7 @@ public class UploadInforController extends HttpServlet {
 			resp.sendRedirect("home");
 		} else {
 			command = (String) session.getAttribute("command");
-			req.getRequestDispatcher("webPage/login/upload.jsp").forward(req, resp);
+			req.getRequestDispatcher("/webPage/login/upload.jsp").forward(req, resp);
 		}
 	}
 
@@ -68,40 +69,52 @@ public class UploadInforController extends HttpServlet {
 		infor.setCccd(cccd);
 		infor.setEmail(email);
 		infor.setBirth(Date.valueOf(birth));
-
+		byte[] bytes = null;
+		if (part != null) {
+			String mimeType = part.getContentType();
+			if (!"image/png".equals(mimeType) && !"image/jpg".equals(mimeType)) {
+				String mess = "file is not image with .png, .jpg";
+				req.setAttribute("mess", mess);
+				doGet(req, resp);
+			}
+			// Dùng để đưa vào thumbnails để lấy byte[] dữ liệu
+			ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+			// Chỉnh lại kích thức các ảnh khớp với 100x100 px.
+			Thumbnails.of(part.getInputStream()).size(130, 400).outputFormat("png").toOutputStream(outputStream);
+			bytes = outputStream.toByteArray();
+//			bytes = new byte[(int) part.getSize()];
+//			int offset = 0, length = 4096, byteRead = 0;
+//			try (InputStream ips = part.getInputStream()) {
+//				while ((byteRead = ips.read(bytes, offset, length)) != -1) {
+//					offset += byteRead;
+//					if (offset > part.getSize()) {
+//						break;
+//					}
+//				}
+//			} catch (Exception e) {
+//				// TODO: handle exception
+//				e.printStackTrace();
+//			}
+		}
 		if ("update".equals(command)) {
-			infor.setUpdateDate(new Date(System.currentTimeMillis()));
 			Image img = loginService.getImageByImgId(infor.getImgId());
-			if (part != null) {
-				byte[] bytes = new byte[(int) part.getSize()];
-				try (InputStream ips = part.getInputStream()) {
-					ips.read(bytes);
-				} catch (Exception e) {
-					// TODO: handle exception
-				}
+			if (bytes != null) {
 				img.setFileName(part.getSubmittedFileName());
 				img.setData(bytes);
-				loginService.updateImage(img);
-				loginService.updateInfor(infor);
 			}
+			loginService.updateImage(img);
+			loginService.updateInfor(infor);
 		}
 		if ("insert".equals(command)) {
-			infor.setCreateDate(new Date(System.currentTimeMillis()));
 			if (part != null) {
-				byte[] bytes = new byte[(int) part.getSize()];
-				try (InputStream ips = part.getInputStream()) {
-					ips.read(bytes);
-				} catch (Exception e) {
-					// TODO: handle exception
-				}
 				Image img = new Image(part.getSubmittedFileName(),
 						part.getSubmittedFileName().substring(part.getSubmittedFileName().lastIndexOf(".") + 1),
 						"ảnh đại diện", new Date(System.currentTimeMillis()), new Date(System.currentTimeMillis()),
 						bytes);
 				int imgId = loginService.saveImage(img);
 				infor.setImgId(imgId);
-				loginService.saveInfor(infor, user);
 			}
+			loginService.saveInfor(infor, user);
 		}
 		resp.sendRedirect("infor");
 	}

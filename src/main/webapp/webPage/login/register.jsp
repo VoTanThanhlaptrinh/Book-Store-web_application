@@ -29,7 +29,7 @@
 	<c:if test="${mess != null}">
 		<div class="alert alert-warning text-center alert-css" role="alert">${mess}</div>
 	</c:if>
-	<div class="main">
+	<div class="main" style="padding-top: 50px;">
 		<section class="signup">
 			<div class="container">
 				<div class="signup-content border">

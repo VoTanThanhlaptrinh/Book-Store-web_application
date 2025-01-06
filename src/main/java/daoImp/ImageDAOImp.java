@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import daoInterface.IImageDao;
 import models.Image;
@@ -15,33 +16,29 @@ public class ImageDAOImp implements IImageDao {
 	@Override
 	public Image findByImageId(int imageId) {
 		// TODO Auto-generated method stub
-		Connection con = null;
 		Image img = null;
-		try {
-			con = DatabaseConnection.getConnection();
-			PreparedStatement statement = con.prepareStatement("select * from Image where img_id = ?");
+		try (Connection con = DatabaseConnection.getConnection();
+				PreparedStatement statement = con.prepareStatement("select * from Image where img_id = ?");) {
+
 			statement.setInt(1, imageId);
-			ResultSet resultSet = statement.executeQuery();
-			while (resultSet.next()) {
-				int id = resultSet.getInt(1);
-				String fileName = resultSet.getNString(2);
-				String file_type = resultSet.getNString(3);
-				String desciption = resultSet.getNString(4);
-				Date createDate = resultSet.getDate(5);
-				Date updateDate = resultSet.getDate(6);
-				byte[] data = resultSet.getBytes(7);
-				img = new Image(id, fileName, file_type, desciption, createDate, updateDate, data);
+			try (ResultSet resultSet = statement.executeQuery();) {
+				while (resultSet.next()) {
+					int id = resultSet.getInt(1);
+					String fileName = resultSet.getNString(2);
+					String file_type = resultSet.getNString(3);
+					String desciption = resultSet.getNString(4);
+					Date createDate = resultSet.getDate(5);
+					Date updateDate = resultSet.getDate(6);
+					byte[] data = resultSet.getBytes(7);
+					img = new Image(id, fileName, file_type, desciption, createDate, updateDate, data);
+				}
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
 			}
-			resultSet.close();
-			statement.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			try {
-				con.close();
-			} catch (SQLException e2) {
-				e.printStackTrace();
-			}
 		}
 		return img;
 	}
@@ -49,11 +46,10 @@ public class ImageDAOImp implements IImageDao {
 	@Override
 	public void updateImage(Image image) {
 		// TODO Auto-generated method stub
-		Connection con = null;
-		try {
-			con = DatabaseConnection.getConnection();
-			PreparedStatement preparedStatement = con.prepareStatement(
-					"update Image set file_name = ? ,file_type = ?,description = ?,update_date = ?, data = ? where img_id = ?");
+		try (Connection con = DatabaseConnection.getConnection();
+				PreparedStatement preparedStatement = con.prepareStatement(
+						"update Image set file_name = ? ,file_type = ?,description = ?,update_date = ?, data = ? where img_id = ?");) {
+
 			preparedStatement.setNString(1, image.getFileName());
 			preparedStatement.setNString(2, image.getFileType());
 			preparedStatement.setNString(3, image.getDescription());
@@ -65,43 +61,30 @@ public class ImageDAOImp implements IImageDao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			try {
-				con.close();
-			} catch (SQLException e2) {
-				e.printStackTrace();
-			}
 		}
 	}
 
 	@Override
 	public void deleteImage(Image image) {
 		// TODO Auto-generated method stub
-		Connection con = null;
-		try {
-			con = DatabaseConnection.getConnection();
-			PreparedStatement preparedStatement = con.prepareStatement("delete Image where img_id = ?");
+		try (Connection con = DatabaseConnection.getConnection();
+				PreparedStatement preparedStatement = con.prepareStatement("delete Image where img_id = ?");) {
+
 			preparedStatement.setInt(1, image.getImgId());
 			preparedStatement.executeUpdate();
-			preparedStatement.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			try {
-				con.close();
-			} catch (SQLException e2) {
-				e.printStackTrace();
-			}
 		}
 	}
 
 	public int saveImageForProduct(Image image) {
-		Connection con = null;
 		int imageId = 0;
-		try {
-			con = DatabaseConnection.getConnection();
-			PreparedStatement preparedStatement = con.prepareStatement(
-					"insert into Image (file_name,file_type,description,create_date,update_date,data) values(?,?,?,?,?,?)",
-					PreparedStatement.RETURN_GENERATED_KEYS);
+		try (Connection con = DatabaseConnection.getConnection();
+				PreparedStatement preparedStatement = con.prepareStatement(
+						"insert into Image (file_name,file_type,description,create_date,update_date,data) values(?,?,?,?,?,?)",
+						Statement.RETURN_GENERATED_KEYS);) {
+
 			preparedStatement.setNString(1, image.getFileName());
 			preparedStatement.setNString(2, image.getFileType());
 			preparedStatement.setNString(3, image.getDescription());
@@ -110,33 +93,28 @@ public class ImageDAOImp implements IImageDao {
 			preparedStatement.setBytes(6, image.getData());
 			preparedStatement.executeUpdate();
 
-			ResultSet re = preparedStatement.getGeneratedKeys();
-			while (re.next()) {
-				imageId = re.getInt(1);
+			try (ResultSet re = preparedStatement.getGeneratedKeys();) {
+				while (re.next()) {
+					imageId = re.getInt(1);
+				}
+			} catch (Exception e) {
+				// TODO: handle exception
 			}
-			re.close();
-			preparedStatement.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			try {
-				con.close();
-			} catch (SQLException e2) {
-				e.printStackTrace();
-			}
 		}
 		return imageId;
 	}
 
 	@Override
 	public int saveImage(Image image) {
-		Connection con = null;
 		int imageId = 0;
-		try {
-			con = DatabaseConnection.getConnection();
-			PreparedStatement preparedStatement = con.prepareStatement(
-					"insert into Image (file_name,file_type,description,create_date,update_date,data) values(?,?,?,?,?,?)",
-					PreparedStatement.RETURN_GENERATED_KEYS);
+		try (Connection con = DatabaseConnection.getConnection();
+				PreparedStatement preparedStatement = con.prepareStatement(
+						"insert into Image (file_name,file_type,description,create_date,update_date,data) values(?,?,?,?,?,?)",
+						Statement.RETURN_GENERATED_KEYS);) {
+
 			preparedStatement.setNString(1, image.getFileName());
 			preparedStatement.setNString(2, image.getFileType());
 			preparedStatement.setNString(3, image.getDescription());
@@ -145,20 +123,19 @@ public class ImageDAOImp implements IImageDao {
 			preparedStatement.setBytes(6, image.getData());
 			preparedStatement.executeUpdate();
 
-			ResultSet re = preparedStatement.getGeneratedKeys();
-			while (re.next()) {
-				imageId = re.getInt(1);
+			try (ResultSet re = preparedStatement.getGeneratedKeys();) {
+				while (re.next()) {
+					imageId = re.getInt(1);
+				}
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
 			}
-			re.close();
+
 			preparedStatement.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			try {
-				con.close();
-			} catch (SQLException e2) {
-				e.printStackTrace();
-			}
 		}
 		return imageId;
 	}

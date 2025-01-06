@@ -21,31 +21,20 @@
 				page="/webPage/trangChu/header.jsp"></jsp:include></div>
 	</c:if>
 
-	<div
-		style="background-image: url(webPage/trangChu/images/banner.png); background-repeat: no-repeat; height: 500px; padding-top: 60px;">
-		<!-- Nội dung trang giả lập -->
+	<div style="padding-top: 60px; padding-bottom: 60px;">
+		<img alt="" src="webPage/trangChu/images/banner1.png">
 	</div>
 
 	<div class="topic">
-		<h2 class="danhmuc">Danh mục sản phẩm</h2>
+		<h2 class="danhmuc">Ngẫu nhiên sản phẩm</h2>
 		<div class="bookshelf">
-			<a href="cart.html"><li class="items-list"><img
-					class="item-img" src="webPage/trangChu/images/sach1.webp" alt="">sách
-					1</li></a> <a href="cart.html"><li class="items-list"><img
-					class="item-img" src="webPage/trangChu/images/sach2.webp" alt="">sách
-					1</li></a> <a href="cart.html"><li class="items-list"><img
-					class="item-img" src="webPage/trangChu/images/sach3.webp" alt="">sách
-					1</li></a> <a href="cart.html"><li class="items-list"><img
-					class="item-img" src="webPage/trangChu/images/sach4.webp" alt="">sách
-					1</li></a> <a href="cart.html"><li class="items-list"><img
-					class="item-img" src="webPage/trangChu/images/sach5.webp" alt="">sách
-					1</li></a> <a href="cart.html"><li class="items-list"><img
-					class="item-img" src="webPage/trangChu/images/sach6.webp" alt="">sách
-					1</li></a> <a href="cart.html"><li class="items-list"><img
-					class="item-img" src="webPage/trangChu/images/sach2.webp" alt="">sách
-					1</li></a> <a href="cart.html"><li class="items-list"><img
-					class="item-img" src="webPage/trangChu/images/sach3.webp" alt="">sách
-					1</li></a>
+			<c:forEach var="product" items="${randomList}">
+				<a href="chi-tiet-sach?id=${product.getProductId()}">
+					<li class="items-list"><img class="item-img"
+						src="getImage?img_id=${product.getImgId()}" alt="">
+						${product.getTitle()}</li>
+				</a>
+			</c:forEach>
 		</div>
 	</div>
 	<div style="height: 100px; padding-top: 60px;">
@@ -54,114 +43,40 @@
 	<div class="topic">
 		<h2 class="giasoc">
 			<i class="fa-solid fa-cart-shopping"
-				style="color: #ffffff; background-color: rgb(255, 85, 59); margin-right: 10px; margin-left: 10px;"></i>Giá
-			sốc trong tuần
+				style="color: #ffffff; background-color: rgb(255, 85, 59); margin-right: 10px; margin-left: 10px;"></i>Sản
+			phẩm mới
 		</h2>
 		<div class="button-list">
-			<button class="giasoc-button">
-				<img class="item-img" src="webPage/trangChu/images/sach3.webp"
-					alt="">
-				<p class="book-title">Kế toán vỉa hè</p>
-				120.000đ
-			</button>
-			<button class="giasoc-button">
-				<img class="item-img" src="webPage/trangChu/images/sach1.webp"
-					alt="">
-				<p class="book-title">Kế toán vỉa hè</p>
-				120.000đ
-			</button>
-			<button class="giasoc-button">
-				<img class="item-img" src="webPage/trangChu/images/sach4.webp"
-					alt="">
-				<p class="book-title">Kế toán vỉa hè</p>
-				120.000đ
-			</button>
-			<button class="giasoc-button">
-				<img class="item-img" src="webPage/trangChu/images/sach2.webp"
-					alt="">
-				<p class="book-title">Kế toán vỉa hè</p>
-				120.000đ
-			</button>
-			<button class="giasoc-button">
-				<img class="item-img" src="webPage/trangChu/images/sach3.webp"
-					alt="">
-				<p class="book-title">Kế toán vỉa hè</p>
-				120.000đ
-			</button>
-			<button class="giasoc-button">
-				<img class="item-img" src="webPage/trangChu/images/sach4.webp"
-					alt="">
-				<p class="book-title">Kế toán vỉa hè</p>
-				120.000đ
-			</button>
-			<button class="giasoc-button">
-				<img class="item-img" src="webPage/trangChu/images/sach5.webp"
-					alt="">
-				<p class="book-title">Kế toán vỉa hè</p>
-				120.000đ
-			</button>
-			<button class="giasoc-button">
-				<img class="item-img" src="webPage/trangChu/images/sach2.webp"
-					alt="">
-				<p class="book-title">Kế toán vỉa hè</p>
-				120.000đ
-			</button>
-			<button class="giasoc-button">
-				<img class="item-img" src="webPage/trangChu/images/sach3.webp"
-					alt="">
-				<p class="book-title">Kế toán vỉa hè</p>
-				120.000đ
-			</button>
-			<button class="giasoc-button">
-				<img class="item-img" src="webPage/trangChu/images/sach4.webp"
-					alt="">
-				<p class="book-title">Kế toán vỉa hè</p>
-				120.000đ
-			</button>
-			<button class="giasoc-button">
-				<img class="item-img" src="webPage/trangChu/images/sach6.webp"
-					alt="">
-				<p class="book-title">Kế toán vỉa hè</p>
-				120.000đ
-			</button>
-			<button class="giasoc-button">
-				<img class="item-img" src="webPage/trangChu/images/sach1.webp"
-					alt="">
-				<p class="book-title">Kế toán vỉa hè</p>
-				120.000đ
-			</button>
+			<c:forEach var="product" items="${topRecentList}">
+				<a href="chi-tiet-sach?id=${product.getProductId()}"
+					class="giasoc-button"> <img class="item-img"
+					src="getImage?img_id=${product.getImgId()}" alt="">
+					<p class="book-title">${product.getTitle()}</p>
+					${product.getPrice()}đ
+				</a>
+			</c:forEach>
 		</div>
 
 	</div>
-	<button class="xem-them">Xem thêm</button>
-
-
-
+	<a><button class="xem-them">Xem thêm</button></a>
 
 	<div style="height: 100px; padding-top: 60px;">
 		<!-- Nội dung trang giả lập -->
 	</div>
 	<div class="topic">
-		<h2 class="danhmuc">văn học nước ngoài</h2>
+		<h2 class="danhmuc">Tiểu Thuyết</h2>
 		<div class="bookshelf">
-			<a href="cart.html"><li class="items-list"><img
-					class="item-img" src="webPage/trangChu/images/sach1.webp" alt="">sách
-					1</li></a> <a href="cart.html"><li class="items-list"><img
-					class="item-img" src="webPage/trangChu/images/sach2.webp" alt="">sách
-					1</li></a> <a href="cart.html"><li class="items-list"><img
-					class="item-img" src="webPage/trangChu/images/sach3.webp" alt="">sách
-					1</li></a> <a href="cart.html"><li class="items-list"><img
-					class="item-img" src="webPage/trangChu/images/sach4.webp" alt="">sách
-					1</li></a> <a href="cart.html"><li class="items-list"><img
-					class="item-img" src="webPage/trangChu/images/sach5.webp" alt="">sách
-					1</li></a> <a href="cart.html"><li class="items-list"><img
-					class="item-img" src="webPage/trangChu/images/sach6.webp" alt="">sách
-					1</li></a> <a href="cart.html"><li class="items-list"><img
-					class="item-img" src="webPage/trangChu/images/sach2.webp" alt="">sách
-					1</li></a> <a href="cart.html"><li class="items-list"><img
-					class="item-img" src="webPage/trangChu/images/sach3.webp" alt="">sách
-					1</li></a>
+			<c:forEach var="tieuthuyet" items="${tieuthuyet}">
+				<a href="chi-tiet-sach?id=${tieuthuyet.getProductId()}">
+					<li class="items-list"><img class="item-img"
+						src="getImage?img_id=${tieuthuyet.getImgId()}" alt="">
+						${tieuthuyet.getTitle()}</li>
+				</a>
+			</c:forEach>
 		</div>
+	</div>
+	<div style="height: 100px; padding-top: 60px;">
+		<!-- Nội dung trang giả lập -->
 	</div>
 	<div style="height: 100px; padding-top: 60px;">
 		<!-- Nội dung trang giả lập -->

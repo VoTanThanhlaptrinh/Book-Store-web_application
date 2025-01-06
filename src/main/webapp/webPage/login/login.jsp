@@ -22,35 +22,46 @@
 </head>
 
 <body>
-	<div id="header-placeholder"><jsp:include
-			page="/webPage/trangChu/header.jsp"></jsp:include></div>
-	<c:if test="${mess != null}">
-		<div class="alert alert-warning text-center alert-css" role="alert">${mess}</div>
+	<c:if test="${user != null}">
+		<div id="header-placeholder"><jsp:include
+				page="/webPage/trangChu/re-header.jsp"></jsp:include></div>
 	</c:if>
-	<div class="main">
+	<c:if test="${user == null}">
+		<div id="header-placeholder"><jsp:include
+				page="/webPage/trangChu/header.jsp"></jsp:include></div>
+	</c:if>
+	<c:if test="${mess != null}">
+		<div class="alert alert-danger text-center alert-css" role="alert">${mess}</div>
+	</c:if>
+	<c:if test="${not empty loginMessage}">
+		<div class="alert alert-success" role="alert">${loginMessage}</div>
+	</c:if>
+	<div class="main" style="padding-top: 50px;">
 		<section class="signup">
 			<div class="container">
 				<div class="signup-content border">
 					<form method="POST" id="signin" class="signup-form" action="login">
+						<input type="hidden" name="productId" value="${productId}">
 						<h2 class="form-title">Đăng nhập</h2>
 						<div class="form-group">
 							<input type="text" class="form-input" name="username" id="name"
-								placeholder="Tên tài khoản" required/>
+								placeholder="Tên tài khoản" required />
 						</div>
 						<div class="form-group">
 							<input type="password" class="form-input" name="password"
-								id="password" placeholder="Mật khẩu" required/> <span
+								id="password" placeholder="Mật khẩu" required /> <span
 								toggle="#password"
 								class="zmdi zmdi-eye-off field-icon toggle-password"></span>
 						</div>
 						<div class="form-group">
+
 							<input type="submit" name="submit" id="submit"
 								class="form-submit" value="Đăng nhập" />
 						</div>
 					</form>
 					<div class="row">
 						<div class="col">
-							<a href="#">Quên mật khẩu</a>
+							<a href="forgotPass">Quên mật khẩu</a>
 						</div>
 						<div class="col text-end">
 							<a href="register">Đăng ký tài khoản</a>
@@ -60,7 +71,6 @@
 				</div>
 			</div>
 		</section>
-
 	</div>
 	<!-- JS -->
 	<script src="webPage/login/vendor/jquery/jquery.min.js"></script>

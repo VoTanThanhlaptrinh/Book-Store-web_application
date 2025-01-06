@@ -9,7 +9,8 @@ public class CartItem {
     private int productId;
     private Date createDate;
     private Date updateDate;
-	public CartItem(int cartItemId, int cartId, int quantity, int productId, Date createDate, Date updateDate) {
+    private String status;
+	public CartItem(int cartItemId, int cartId, int quantity, int productId, Date createDate, Date updateDate, String status) {
 		super();
 		this.cartItemId = cartItemId;
 		this.cartId = cartId;
@@ -17,6 +18,7 @@ public class CartItem {
 		this.productId = productId;
 		this.createDate = createDate;
 		this.updateDate = updateDate;
+		this.status = status;
 	}
 	
 	public CartItem(int cartId, int quantity, int productId, Date createDate, Date updateDate) {
@@ -26,6 +28,7 @@ public class CartItem {
 		this.productId = productId;
 		this.createDate = createDate;
 		this.updateDate = updateDate;
+		
 	}
 
 	public CartItem() {
@@ -48,6 +51,14 @@ public class CartItem {
 	}
 	public Date getUpdateDate() {
 		return updateDate;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	
 }

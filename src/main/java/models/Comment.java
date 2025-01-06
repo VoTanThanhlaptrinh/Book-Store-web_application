@@ -49,5 +49,5 @@ public class Comment {
 	public int getRating() {
 		return rating;
 	}
-	
+
 }

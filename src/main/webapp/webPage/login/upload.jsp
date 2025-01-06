@@ -21,35 +21,38 @@
 	<section class="signup">
 		<div class="container">
 			<div class="signup-content border">
-				<form method="POST" id="" class="signup-form" action="upload" enctype="multipart/form-data">
+				<form method="POST" id="" class="signup-form" action="upload"
+					enctype="multipart/form-data">
 					<h2 class="form-title">Cập nhật thông tin</h2>
 					<div class="form-group">
-						<input type="text" class="form-input" name="name" id=""
-							placeholder="Họ và tên" required/>
+						<label>Họ và tên</label> <input type="text" class="form-input"
+							name="name" id="" placeholder="Họ và tên" required />
 					</div>
 					<div class="form-group">
-						<input type="text" class="form-input" name="address" id=""
-							placeholder="Địa chỉ" required/>
+						<label>Địa chỉ</label> <input type="text" class="form-input"
+							name="address" id="" placeholder="Địa chỉ" required />
 					</div>
 					<div class="form-group">
-						<input type="number" class="form-input" name="phone" id=""
-							placeholder="Số điện thoại" required />
+						<label>Số điện thoại</label> <input type="number"
+							class="form-input" name="phone" id="" placeholder="Số điện thoại"
+							required />
 					</div>
 					<div class="form-group">
-						<input type="number" class="form-input" name="cccd" id=""
-							placeholder="Căn cước công dân" required/>
+						<label>Căn cước</label> <input type="number" class="form-input"
+							name="cccd" id="" placeholder="Căn cước công dân" required />
 					</div>
 					<div class="form-group">
-						<input type="date" class="form-input" name="birth" id=""
-							placeholder="Sinh nhật" required/>
+						<label>Sinh nhật</label> <input type="date" class="form-input"
+							name="birth" id="" placeholder="Sinh nhật" required />
 					</div>
 					<div class="form-group">
-						<input type="text" class="form-input" name="email" id=""
-							placeholder="Email" required value="${user.getEmail()}"/>
+						<label>Email</label> <input type="text" class="form-input"
+							name="email" id="" placeholder="Email" required
+							value="${user.getEmail()}" />
 					</div>
 					<div class="form-group">
-						<input type="file" class="form-input" name="file" id="myFile"
-							placeholder="File" />
+						<label>File ảnh(.jpg, .png)</label> <input type="file"
+							class="form-input" name="file" id="myFile" placeholder="File" />
 					</div>
 					<div class="form-group">
 						<input type="submit" name="submit" id="submit" class="form-submit"

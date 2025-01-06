@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="/webPage/lib/tag.jsp"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 
@@ -16,63 +16,103 @@
 	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 <link rel="stylesheet" href="webPage/trangChu/CSS/header.css">
 <link rel="stylesheet" href="webPage/trangChu/CSS/footer.css">
-<link href="webPage/categoryAndSingle/style.css" rel="stylesheet">
+<link href="webPage/categoryAndSingle/css/style.css" rel="stylesheet">
 <title>Document</title>
 </head>
 
 <body>
-	<div id="header-placeholder"><jsp:include
-			page="/webPage/trangChu/header.jsp"></jsp:include></div>
-	<main
-		class="d-flex d-inline-block container align-items-center justify-content-center">
-		<section class="container-sm mt-3 card shadow-0 border ">
-			<h3></h3>
-			<div class="row ">
-				<div class="col-5">
-					<img src="img/book1.png" alt="Book" class="img-fluid">
-				</div>
-				<div class="col-7">
-					<h3>Title</h3>
-					<p>Details: Lorem ipsum dolor sit amet consectetur adipisicing
-						elit. Perferendis tempore laboriosam atque sit porro. Sed
-						similique, quos praesentium necessitatibus veniam velit! Ratione
-						inventore sapiente commodi aliquam possimus eum voluptatem illo
-						ipsa earum mollitia. Vitae sed illo harum, dolore quibusdam
-						necessitatibus sit voluptate optio. Iste nostrum, veritatis velit
-						a cupiditate consequatur!</p>
-					<p>Details: Lorem ipsum dolor sit amet consectetur adipisicing
-						elit. Perferendis tempore laboriosam atque sit porro. Sed
-						similique, quos praesentium necessitatibus veniam velit! Ratione
-						inventore sapiente commodi aliquam possimus eum voluptatem illo
-						ipsa earum mollitia. Vitae sed illo harum, dolore quibusdam
-						necessitatibus sit voluptate optio. Iste nostrum, veritatis velit
-						a cupiditate consequatur!</p>
-					<div class="input-group">
-						<label>Amount: </label> <input type="number" placeholder="Amount"
-							value="1" class="form-control mx-auto mb-3">
-					</div>
+<c:choose>
+	<c:when test="${not empty user}">
+		<div id="header-placeholder"><jsp:include
+				page="/webPage/trangChu/re-header.jsp"></jsp:include></div>
+		</c:when>	
+	<c:otherwise>
+		<div id="header-placeholder"><jsp:include
+				page="/webPage/trangChu/header.jsp"></jsp:include></div>
+	</c:otherwise>	
+	</c:choose>
+	<c:if test="${not empty failedMess}">
+        <div class="alert alert-danger" role="alert">
+            ${failedMess}
+        </div>
+    </c:if>
+    
+    	<c:if test="${not empty noMess}">
+        <div class="alert alert-danger" role="alert">
+            ${noMess}
+        </div>
+    </c:if>
+	<main class="d-flex d-inline-block container align-items-center justify-content-center">
+<section class="container-sm mt-3 card shadow-0 border"> 
+    <h3>${product.getTitle()}</h3>
+    <div class="row">
+        <!-- Cột chứa hình ảnh -->
+        <div class="col-5">
+            <img src="getImage?img_id=${product.getImgId()}" alt="Book Image" class="img-fluid">
+        </div>
+        <!-- Cột chứa thông tin chi tiết -->
+        <div class="col-7">
+            <h3>${product.getTitle()}</h3>
+            <p>Details: ${product.getDescription()}</p>
+              <!-- Hiển thị số lượng sản phẩm hiện có -->
+            <p><strong>Số lượng còn lại:</strong> ${product.getQuantity()}</p>
+            
+            <div class="input-group">
+                <label for="amount">Amount: </label>
+                <!-- Thêm name="amount" -->
+                <input type="number" id="amount" name="amount" placeholder="Amount" value="1" class="form-control mx-auto mb-3">
+            </div>
 
-					<div class="button-group">
-						<form>
-							<button class="btn btn-primary w-100" type="submit">
-								Cart<span class="material-symbols-outlined">shopping_cart</span>
-							</button>
-						</form>
-						<form>
-							<button class="btn btn-primary w-100" type="submit">
-								Thanh toÃ¡n<span class="material-symbols-outlined">attach_money</span>
-							</button>
-						</form>
-					</div>
-				</div>
-			</div>
-		</section>
-	</main>
+            <!-- Group nút chức năng -->
+            <div class="button-group">
+                <!-- Nút thêm vào giỏ hàng -->
+                <form action="add-to-cart" method="post" onsubmit="cartUpdateHiddenAmount(event)">
+                    <input type="hidden" name="id" value="${product.getProductId()}">    
+                    <input type="hidden" id="hiddenAmount1" name="amount" value="1">
+                    	 <input type="hidden" name="pdQuantity" value="${product.getQuantity()}">   
+                    <input type="hidden" name="title" value="${product.getTitle()}">
+                    <button class="btn btn-primary w-100" type="submit">
+                        Cart<span class="material-symbols-outlined">shopping_cart</span>
+                    </button>
+                </form>
+                <!-- Nút thanh toán -->
+                <form action="checkout" method="post" onsubmit="CheckOutUpdateHiddenAmount(event)">
+                     <input type="hidden" name="id" value="${product.getProductId()}">    
+                    <input type="hidden" id="hiddenAmount2" name="amount" value="1">
+  					 <input type="hidden" name="pdQuantity" value="${product.getQuantity()}">   
+                    <input type="hidden" name="title" value="${product.getTitle()}">
+                    <button class="btn btn-primary w-100" type="submit">
+                        Thanh toán<span class="material-symbols-outlined">attach_money</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    function cartUpdateHiddenAmount(event) {
+        // Lấy giá trị từ ô số lượng
+        const amount = document.getElementById('amount').value;
+        // Cập nhật giá trị cho thẻ hidden
+        document.getElementById('hiddenAmount1').value = amount;
+    }
+    
+    function CheckOutUpdateHiddenAmount(event) {
+        // Lấy giá trị từ ô số lượng
+        const amount = document.getElementById('amount').value;
+        // Cập nhật giá trị cho thẻ hidden
+        document.getElementById('hiddenAmount2').value = amount;
+    }
+</script>
+
+</main>
+
 	<div class="container pt-5 ">
 		<div class="row d-flex justify-content-center">
 			<div class="col-md-8 col-lg-10">
 				<div class="card shadow-0 border">
-					<h3>ÄÃ¡nh GiÃ¡ Sáº£n Pháº©m</h3>
+					<h3>Đánh giá sản phẩm</h3>
 					<div class="card-body p-4">
 						<div data-mdb-input-init class="form-outline mb-4 input-group">
 							<input type="text" id="addANote" class="form-control"

@@ -24,5 +24,5 @@ public class TransactionItem {
 	public TransactionItem() {
 		super();
 	}
-    
+
 }

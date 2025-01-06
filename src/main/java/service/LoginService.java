@@ -51,12 +51,15 @@ public class LoginService implements ILoginService {
 			// TODO: handle exception
 			throw new SqlException("user đã tồn tại");
 		}
+		if(daoImp.checkEmail(email)) {
+			throw new SqlException("email đã tồn tại");
+		}
 		return i > 0;
 	}
 
 	@Override
-	public Information getInforOfUser(int infoId) {
-		return infoDao.findInfoByInfoId(infoId);
+	public Information getInforOfUser(int userId) {
+		return infoDao.findInforByUserId(userId);
 	}
 
 	@Override
@@ -65,11 +68,11 @@ public class LoginService implements ILoginService {
 		infoDao.updateInfor(infor);
 	}
 
+	@Override
 	public void saveInfor(Information infor, User user) {
 		// TODO Auto-generated method stub
-		int inforId = infoDao.saveInfor(infor);
-		user.setInfoId(inforId);
-		daoImp.updateUser(user);
+		infor.setUserId(user.getUserId());
+		infoDao.saveInfor(infor);
 	}
 
 	@Override
@@ -96,6 +99,42 @@ public class LoginService implements ILoginService {
 		fos.write(bytes);
 		fos.flush();
 		fos.close();
+	}
 
+	@Override
+	public String getUsername(int userId) {
+		// TODO Auto-generated method stub
+		return daoImp.findByUserId(userId).getUsername();
+	}
+
+	@Override
+	public byte[] resizeImg(byte[] bytes) {
+		return bytes;
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public boolean checkEmail(String email) {
+		// TODO Auto-generated method stub
+		return daoImp.checkEmail(email);
+	}
+
+	@Override
+	public User getUserByMail(String mail) {
+		// TODO Auto-generated method stub
+		return daoImp.getUserByMail(mail);
+	}
+
+	@Override
+	public String hashPass(String pass) {
+		// TODO Auto-generated method stub
+		return BCrypt.hashpw(pass, BCrypt.gensalt());
+	}
+
+	@Override
+	public void updateUser(User user) {
+		// TODO Auto-generated method stub
+		daoImp.updateUser(user);
 	}
 }

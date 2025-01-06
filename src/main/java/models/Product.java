@@ -4,20 +4,22 @@ import java.util.Date;
 
 public class Product {
 	private int productId;
-	private int addedByAdmin;
+	private int addedByUser;
 	private String title;
 	private double price;
+	
 	private String description;
 	private String type;
 	private int imgId;
 	private Date createDate;
 	private Date updateDate;
+	private int quantity;
 
-	public Product(int productId, int addedByAdmin, String title, double price, String description, String type,
-			int imgId, Date createDate, Date updateDate) {
+	public Product(int productId, int addedByUser, String title, double price, String description, String type,
+			int imgId, Date createDate, Date updateDate, int quantity) {
 		super();
 		this.productId = productId;
-		this.addedByAdmin = addedByAdmin;
+		this.addedByUser = addedByUser;
 		this.title = title;
 		this.price = price;
 		this.description = description;
@@ -25,12 +27,13 @@ public class Product {
 		this.imgId = imgId;
 		this.createDate = createDate;
 		this.updateDate = updateDate;
+		this.quantity = quantity;
 	}
 
-	public Product(int addedByAdmin, String title, double price, String description, String type, int imgId,
-			Date createDate, Date updateDate) {
+	public Product(int addedByUser, String title, double price, String description, String type, int imgId,
+			Date createDate, Date updateDate, int quantity) {
 		super();
-		this.addedByAdmin = addedByAdmin;
+		this.addedByUser = addedByUser;
 		this.title = title;
 		this.price = price;
 		this.description = description;
@@ -38,6 +41,7 @@ public class Product {
 		this.imgId = imgId;
 		this.createDate = createDate;
 		this.updateDate = updateDate;
+		this.quantity = quantity;
 	}
 
 	public Product() {
@@ -52,8 +56,9 @@ public class Product {
 		return productId;
 	}
 
-	public int getAddedByAdmin() {
-		return addedByAdmin;
+	
+	public int getAddedByUser() {
+		return addedByUser;
 	}
 
 	public String getTitle() {
@@ -84,10 +89,7 @@ public class Product {
 		return updateDate;
 	}
 
-	@Override
-	public String toString() {
-		return "Product [productId=" + productId + ", addedByAdmin=" + addedByAdmin + ", title=" + title + ", price="
-				+ price + ", description=" + description + ", type=" + type + ", imgId=" + imgId + ", createDate="
-				+ createDate + ", updateDate=" + updateDate + "]";
+	public int getQuantity() {
+		return quantity;
 	}
 }

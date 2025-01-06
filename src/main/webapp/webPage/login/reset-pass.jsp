@@ -29,19 +29,26 @@
 		<section class="signup">
 			<div class="container">
 				<div class="signup-content border">
-					<form method="POST" id="signin" class="signup-form">
+					<form method="POST" action="reset" id="signin" class="signup-form">
 						<h2 class="form-title">Thay đổi mật khẩu</h2>
 						<div class="form-group">
-							<input type="text" class="form-input" name="name" id="name"
+							<input type="password" class="form-input" name="pass" id="name"
 								placeholder="Mật khẩu mới" />
+								<span
+								toggle="#password"
+								class="zmdi zmdi-eye-off field-icon toggle-password"></span>
 						</div>
 						<div class="form-group">
-							<input type="text" class="form-input" name="password"
+							<input type="password" class="form-input" name="rePass"
 								id="password" placeholder="Nhập lại mật khẩu mới" />
+							<span
+								toggle="#password"
+								class="zmdi zmdi-eye-off field-icon toggle-password"></span>
 						</div>
 						<div class="form-group">
 							<input type="submit" name="submit" id="submit"
 								class="form-submit" value="Đổi mật khẩu" />
+							
 						</div>
 					</form>
 				</div>

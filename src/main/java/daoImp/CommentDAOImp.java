@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.Statement;
 
 import daoInterface.ICommentDAO;
 import models.Comment;
@@ -14,30 +14,25 @@ public class CommentDAOImp implements ICommentDAO {
 
 	@Override
 	public Comment getCommentByCommentId(int commentId) {
-		Connection con = null;
 		Comment comment = null;
-		try {
-			con = DatabaseConnection.getConnection();
-			PreparedStatement statement = con.prepareStatement("select * from Comment where comment_id = ?");
+		try (Connection con = DatabaseConnection.getConnection();
+				PreparedStatement statement = con.prepareStatement("select * from Comment where comment_id = ?");) {
 			statement.setInt(1, commentId);
-			ResultSet resultSet = statement.executeQuery();
-			if (resultSet.next()) {
-				int rating = resultSet.getInt(2);
-				String content = resultSet.getNString(3);
-				Date createDate = resultSet.getDate(4);
-				Date updateDate = resultSet.getDate(5);
-				comment = new Comment(commentId, rating, content, createDate, updateDate);
+			try (ResultSet resultSet = statement.executeQuery();) {
+				if (resultSet.next()) {
+					int rating = resultSet.getInt(2);
+					String content = resultSet.getNString(3);
+					Date createDate = resultSet.getDate(4);
+					Date updateDate = resultSet.getDate(5);
+					comment = new Comment(commentId, rating, content, createDate, updateDate);
+				}
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
 			}
-			resultSet.close();
-			statement.close();
 		} catch (Exception e) {
 			// TODO: handle exception
-			try {
-				con.close();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			e.printStackTrace();
 		}
 		return comment;
 	}
@@ -45,30 +40,27 @@ public class CommentDAOImp implements ICommentDAO {
 	@Override
 	public int saveComment(Comment comment) {
 		// TODO Auto-generated method stub
-		Connection con = null;
 		int commentId = 0;
-		try {
-			con = DatabaseConnection.getConnection();
+		try(Connection con = DatabaseConnection.getConnection();
 			PreparedStatement preparedStatement = con.prepareStatement(
 					"insert into Comment (rating,content,create_date,update_date) values(?,?,?,?)",
-					PreparedStatement.RETURN_GENERATED_KEYS);
+					Statement.RETURN_GENERATED_KEYS);) {
 			preparedStatement.setInt(1, comment.getRating());
 			preparedStatement.setNString(2, comment.getContent());
 			preparedStatement.setDate(3, comment.getCreateDate());
 			preparedStatement.setDate(4, comment.getUpdateDate());
 			preparedStatement.executeUpdate();
-			ResultSet resultSet = preparedStatement.getGeneratedKeys();
-			if (resultSet.next())
-				commentId = resultSet.getInt(1);
-			preparedStatement.close();
+			try(ResultSet resultSet = preparedStatement.getGeneratedKeys();) {
+				if (resultSet.next()) {
+					commentId = resultSet.getInt(1);
+				}
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
 		} catch (Exception e) {
 			// TODO: handle exception
-			try {
-				con.close();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			e.printStackTrace();
 		}
 		return commentId;
 	}
@@ -76,11 +68,9 @@ public class CommentDAOImp implements ICommentDAO {
 	@Override
 	public void updateComment(Comment comment) {
 		// TODO Auto-generated method stub
-		Connection con = null;
-		try {
-			con = DatabaseConnection.getConnection();
-			PreparedStatement preparedStatement = con
-					.prepareStatement("update Comment rating = ?, content = ?,update_date = ? where comment_id = ?");
+		try (Connection con = DatabaseConnection.getConnection();
+				PreparedStatement preparedStatement = con.prepareStatement(
+						"update Comment rating = ?, content = ?,update_date = ? where comment_id = ?");) {
 			preparedStatement.setInt(1, comment.getRating());
 			preparedStatement.setNString(2, comment.getContent());
 			preparedStatement.setDate(3, comment.getUpdateDate());
@@ -89,12 +79,7 @@ public class CommentDAOImp implements ICommentDAO {
 			preparedStatement.close();
 		} catch (Exception e) {
 			// TODO: handle exception
-			try {
-				con.close();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			e.printStackTrace();
 		}
 	}
 

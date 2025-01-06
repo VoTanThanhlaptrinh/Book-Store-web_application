@@ -1,6 +1,7 @@
 package models;
 
 import java.sql.Date;
+import java.util.List;
 
 public class User {
 	private int userId;
@@ -9,27 +10,16 @@ public class User {
 	private String email;
 	private Date createDate;
 	private Date updateDate;
-	private int infoId;
+	private List<String> roles;
 
-	public User(int userId, String username, String password, String email, Date createDate, int infoId,
-			Date updaDate) {
+	public User(int userId, String username, String password, String email, Date createDate, Date updaDate) {
 		super();
 		this.userId = userId;
 		this.username = username;
 		this.password = password;
 		this.email = email;
 		this.createDate = createDate;
-		this.infoId = infoId;
 		this.updateDate = updaDate;
-	}
-
-	public User(int userId, String username, String password, String email, Date createDate) {
-		super();
-		this.userId = userId;
-		this.username = username;
-		this.password = password;
-		this.email = email;
-		this.createDate = createDate;
 	}
 
 	public User(String username, String password, String email, Date createDate, Date updateDate) {
@@ -41,14 +31,6 @@ public class User {
 	}
 
 	public User() {
-	}
-
-	public int getInfoId() {
-		return infoId;
-	}
-
-	public void setInfoId(int infoId) {
-		this.infoId = infoId;
 	}
 
 	public int getUserId() {
@@ -91,5 +73,14 @@ public class User {
 	public Date getUpdateDate() {
 		return updateDate;
 	}
+
+	public List<String> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<String> roles) {
+		this.roles = roles;
+	}
+	
 
 }

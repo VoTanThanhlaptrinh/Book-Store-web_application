@@ -11,4 +11,6 @@ public interface IInfoDao {
 	void updateInfor(Information info);
 	
 	Information findInfoByInfoId(int infoId);
+
+	Information findInforByUserId(int userId);
 }

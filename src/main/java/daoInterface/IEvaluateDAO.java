@@ -9,4 +9,5 @@ public interface IEvaluateDAO {
 
 	int saveEvaluate(Evaluate evaluate);
 
+	void updateEvaluate(Evaluate evaluate);
 }

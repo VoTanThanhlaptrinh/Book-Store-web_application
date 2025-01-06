@@ -9,7 +9,7 @@ body {
 	display: flex;
 	align-items: center;
 	justify-content: space-around;
-	position: fixed;
+	position: sticky;
 	top: 0; /* Đặt ở đầu trang */
 	width: 100%; /* Để header rộng đầy trang */
 	/* Nền trong suốt */

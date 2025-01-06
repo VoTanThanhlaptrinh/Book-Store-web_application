@@ -32,12 +32,7 @@ body {
     padding-top: 10px;
 }
 
-.item-img {
-    background-color: white;
-    width: 150px;
-    height: 150px;
-    padding-left: 15px;
-}
+
 .items-list {
     color: rgb(90, 90, 90);
     font-weight:  normal;
@@ -71,31 +66,38 @@ a {
 
 }
 .button-list {
+    display: flex; /* Dùng flexbox để xếp ngang */
+    flex-wrap: wrap; /* Cho phép xuống dòng khi vượt quá chiều rộng */
     margin-right: 50px;
     background-color: white;
-    width: fit-content;
+    width: 100%; /* Đảm bảo chiếm toàn bộ chiều ngang */
     height: fit-content;
-    flex-direction: row;
     list-style: none;
     padding-top: 30px;
-}
-
-.book-title {
-    color: black;
-    background-color: white;
+    gap: 20px; /* Khoảng cách giữa các phần tử */
 }
 
 .giasoc-button {
+    display: flex; /* Giúp căn chỉnh nội dung bên trong */
+    flex-direction: column; /* Sắp xếp nội dung theo chiều dọc */
+    align-items: center; /* Căn giữa hình ảnh và text */
+    justify-content: center;
+    text-align: center; /* Căn giữa chữ */
+    width: 150px; /* Đặt chiều rộng cố định cho mỗi ô */
     padding-top: 10px;
-    align-items: center;
     border-radius: 10px;
     background-color: white;
     color: red;
     transition: 0.5s;
-    margin-left: 50px;
+    margin-left: 0; /* Xóa khoảng cách không cần thiết */
     border: white;
 }
 
+.item-img {
+    width: 100px; /* Kích thước hình ảnh */
+    height: 150px;
+    object-fit: cover; /* Đảm bảo ảnh không bị méo */
+}
 .xem-them {
     margin-left: 37%;
     font-size: 18px;
@@ -139,6 +141,10 @@ a {
 .banner {
     position: relative;
     text-align: center;
+}
+.book-title {
+    color: black;
+    background-color: white;
 }
 
 .banner span {

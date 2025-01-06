@@ -13,9 +13,10 @@ public class Information {
 	private Date createDate;
 	private Date updateDate;
 	private int imgId;
+	private int userId;
 
 	public Information(int infoId, String name, String address, String phoneNumber, String cccd, Date birth,
-			String email, Date createDate, Date updateDate, int imgId) {
+			String email, Date createDate, Date updateDate, int imgId, int userId) {
 		super();
 		this.infoId = infoId;
 		this.name = name;
@@ -25,12 +26,13 @@ public class Information {
 		this.birth = birth;
 		this.email = email;
 		this.createDate = createDate;
-		this.setUpdateDate(updateDate);
+		this.updateDate = updateDate;
 		this.imgId = imgId;
+		this.userId = userId;
 	}
 
 	public Information(String name, String address, String phoneNumber, String cccd, Date birth, String email,
-			Date createDate, Date updateDate, int imgId) {
+			Date createDate, Date updateDate, int imgId, int userId) {
 		super();
 		this.name = name;
 		this.address = address;
@@ -41,6 +43,7 @@ public class Information {
 		this.createDate = createDate;
 		this.updateDate = updateDate;
 		this.imgId = imgId;
+		this.userId = userId;
 	}
 
 	public Information() {
@@ -125,6 +128,14 @@ public class Information {
 
 	public void setImgId(int imgId) {
 		this.imgId = imgId;
+	}
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 	
 }
