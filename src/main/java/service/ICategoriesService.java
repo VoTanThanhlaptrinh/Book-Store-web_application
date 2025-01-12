@@ -10,4 +10,6 @@ public interface ICategoriesService {
 	Product getProductByProductId(int id);
 	
 	void saveProduct(Product p);
+	
+	List<Product> getProducts();
 }

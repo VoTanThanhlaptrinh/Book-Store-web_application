@@ -56,9 +56,7 @@ public class AddProductController extends HttpServlet {
 		HttpSession session = req.getSession();
 
 		String title = req.getParameter("title");
-		System.out.println(title);
 		String d = req.getParameter("price");
-		System.out.println(d);
 		double price = Double.valueOf(d);
 		String type = req.getParameter("type");
 
@@ -67,24 +65,45 @@ public class AddProductController extends HttpServlet {
 		String description = req.getParameter("description");
 
 		Part part = req.getPart("file");
-		String mimeType = part.getContentType();
-		if (!"image/png".equals(mimeType) && !"image/jpeg".equals(mimeType)) {
-			req.setAttribute("mess", "Chỉ chấp nhận .png hoặc .jpg");
-		} else {
-			User user = (User) session.getAttribute("user");
-			System.out.println(part.getSubmittedFileName().substring(part.getSubmittedFileName().lastIndexOf(".") + 1));
-			ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-			Thumbnails.of(part.getInputStream()).size(600, 600).outputFormat("png").toOutputStream(outputStream);
-			Image img = new Image(part.getSubmittedFileName(),
-					part.getSubmittedFileName().substring(part.getSubmittedFileName().lastIndexOf(".") + 1),
-					"ảnh đại diện", new Date(System.currentTimeMillis()), new Date(System.currentTimeMillis()),
-					outputStream.toByteArray());
+		User user = (User) session.getAttribute("user");
+		
+		String fileName = part.getSubmittedFileName();
+		String fileExtension = fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
+		System.out.println("File extension: " + fileExtension);
 
+		// Validate the file extension
+		if (!"png".equals(fileExtension) && !"jpg".equals(fileExtension) && !"jpeg".equals(fileExtension)) {
+			req.setAttribute("mess", "Chỉ chấp nhận tệp ảnh .png, .jpg, hoặc .jpeg.");
+			return;
+		}
+
+		try {
+			// Process and resize the uploaded image
+			ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+			Thumbnails.of(part.getInputStream()).size(600, 600).toOutputStream(outputStream);
+
+			// Create the Image object
+			Image img = new Image(fileName, fileExtension, "ảnh đại diện", new Date(System.currentTimeMillis()),
+					new Date(System.currentTimeMillis()), outputStream.toByteArray());
+
+			// Save the image and get the image ID
 			int imgId = loginService.saveImage(img);
+			if (imgId <= 0) {
+				req.setAttribute("mess", "Không thể lưu ảnh.");
+				return;
+			}
+
+			// Create the Product object
 			Product p = new Product(user.getUserId(), title, price, description, type, imgId,
 					new Date(System.currentTimeMillis()), new Date(System.currentTimeMillis()), quantity);
+
+			// Save the product
 			categoriesService.saveProduct(p);
+		} catch (IOException e) {
+			e.printStackTrace();
+			req.setAttribute("mess", "Đã xảy ra lỗi khi xử lý ảnh.");
 		}
+
 		doGet(req, resp);
 	}
 

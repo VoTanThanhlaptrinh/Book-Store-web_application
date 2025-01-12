@@ -21,7 +21,7 @@ public class SendMailImp implements ISendMailService {
 	}
 
 	@Override
-	public void sendMail(String email, String content) {
+	public void sendMail(String email, String content, String subject) {
 		// TODO Auto-generated method stub
 		String to = email;
 		String host = "smtp.gmail.com";
@@ -43,9 +43,9 @@ public class SendMailImp implements ISendMailService {
 			// set To email field
 			message.setRecipient(Message.RecipientType.TO, new InternetAddress(to));
 			// set email subject field
-			message.setSubject("Forgot pass");
+			message.setSubject(subject);
 			// set the content of the email message
-			message.setText("Your code is: " + content);
+			message.setText(content);
 			Transport transport = session.getTransport("smtp");
 			transport.connect(host, from, pass);
 			transport.sendMessage(message, message.getAllRecipients());

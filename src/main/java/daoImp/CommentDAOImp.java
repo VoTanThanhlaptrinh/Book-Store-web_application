@@ -70,7 +70,7 @@ public class CommentDAOImp implements ICommentDAO {
 		// TODO Auto-generated method stub
 		try (Connection con = DatabaseConnection.getConnection();
 				PreparedStatement preparedStatement = con.prepareStatement(
-						"update Comment rating = ?, content = ?,update_date = ? where comment_id = ?");) {
+						"update Comment set rating = ?, content = ?,update_date = ? where comment_id = ?");) {
 			preparedStatement.setInt(1, comment.getRating());
 			preparedStatement.setNString(2, comment.getContent());
 			preparedStatement.setDate(3, comment.getUpdateDate());

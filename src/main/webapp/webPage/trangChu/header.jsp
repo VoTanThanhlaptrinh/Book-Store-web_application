@@ -6,7 +6,7 @@
 	<nav class="nav-links">
 		<a href="home">Trang chủ</a>
 		<div class="dropdown">
-			<a href="search">Thể loại</a>
+			<a href="tim-sach">Tìm sách</a>
 			<ul class="dropdown-menu">
 				<li><a href="#fiction">giả tưởng</a></li>
 				<li><a href="#non-fiction">phiêu lưu</a></li>

@@ -3,14 +3,13 @@ package daoInterface;
 import java.sql.SQLException;
 import java.util.List;
 
-import exeption.SqlException;
 import models.User;
 public interface IUserDao {
 	List<User> getUsers();
 
 	User findByUserId(int userId);
 
-	int saveUser(User user) throws SQLException, SQLException, SqlException;
+	int saveUser(User user) throws SQLException;
 	
 	void deleteUser(User user);
 	

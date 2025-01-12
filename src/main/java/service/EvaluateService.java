@@ -53,4 +53,22 @@ public class EvaluateService implements IEvaluateService {
 		return commentDAO.getCommentByCommentId(commentId);
 	}
 
+	@Override
+	public boolean checkProductHasBeenEvaluated(int productId, int userId) {
+		// TODO Auto-generated method stub
+		return evaluateDAO.checkProduct(productId, userId);
+	}
+
+	@Override
+	public List<Evaluate> getEvaluatesByProductId(int productId) {
+		// TODO Auto-generated method stub
+		return evaluateDAO.getEvaluatesByProductId(productId);
+	}
+
+	@Override
+	public Evaluate getEvaluateOfProductByUser(int productId, int userId) {
+		// TODO Auto-generated method stub
+		return evaluateDAO.getEvaluateOfProductByUser(productId,userId);
+	}
+
 }

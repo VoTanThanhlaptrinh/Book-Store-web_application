@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import daoInterface.IUserDao;
-import exeption.SqlException;
 import models.User;
 import service.DatabaseConnection;
 
@@ -68,7 +67,7 @@ public class UserDAOImp implements IUserDao {
 	}
 
 	@Override
-	public int saveUser(User user) throws SqlException, SQLException {
+	public int saveUser(User user) throws SQLException {
 		// TODO Auto-generated method stub
 		int userId = 0;
 		try (Connection con = DatabaseConnection.getConnection();
@@ -100,7 +99,7 @@ public class UserDAOImp implements IUserDao {
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			throw new SqlException("user đã tồn tại");
+			throw new SQLException("user đã tồn tại");
 		}
 		return userId;
 	}

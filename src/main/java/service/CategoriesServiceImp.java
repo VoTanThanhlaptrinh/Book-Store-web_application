@@ -28,4 +28,10 @@ public class CategoriesServiceImp implements ICategoriesService {
 		// TODO Auto-generated method stub
 		productDao.saveProduct(p);
 	}
+
+	@Override
+	public List<Product> getProducts() {
+		// TODO Auto-generated method stub
+		return productDao.getProducts();
+	}
 }

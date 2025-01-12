@@ -2,10 +2,10 @@ package service;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.SQLException;
 
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 
-import exeption.SqlException;
 import models.Image;
 import models.Information;
 import models.User;
@@ -13,7 +13,7 @@ import models.User;
 public interface ILoginService {
 	User checkUser(String username, String password);
 
-	boolean register(String username, String password, String email) throws SQLServerException, SqlException;
+	boolean register(String username, String password, String email) throws SQLException, SQLServerException;
 
 	Information getInforOfUser(int userId);
 

@@ -3,6 +3,7 @@ package service;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.Date;
+import java.sql.SQLException;
 
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -12,7 +13,6 @@ import daoImp.UserDAOImp;
 import daoInterface.IImageDao;
 import daoInterface.IInfoDao;
 import daoInterface.IUserDao;
-import exeption.SqlException;
 import models.Image;
 import models.Information;
 import models.User;
@@ -31,29 +31,36 @@ public class LoginService implements ILoginService {
 	@Override
 	public User checkUser(String username, String password) {
 		User user = daoImp.findByUserName(username);
-		String storedHash = user.getPassword();
-		if (user != null && BCrypt.checkpw(password, storedHash)) {
-			return user;
+		if(user == null) {
+			return null;
+		}else {
+			String storedHash = user.getPassword();
+			if (BCrypt.checkpw(password, storedHash)) {
+				return user;
+			}else {
+				return null;
+			}
 		}
-		return null;
 	}
 
 	@Override
-	public boolean register(String username, String password, String email) throws SqlException {
+	public boolean register(String username, String password, String email) throws SQLException {
 		String passHash = BCrypt.hashpw(password, BCrypt.gensalt());
 		User user = new User(username, passHash, email, new Date(System.currentTimeMillis()),
 				new Date(System.currentTimeMillis()));
 
 		int i = 0;
 		try {
+			if(daoImp.checkEmail(email)) {
+				throw new SQLException("email đã tồn tại");
+			}
+			System.out.println("1");
 			i = daoImp.saveUser(user);
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			// TODO: handle exception
-			throw new SqlException("user đã tồn tại");
+			throw new SQLException("user đã tồn tại");
 		}
-		if(daoImp.checkEmail(email)) {
-			throw new SqlException("email đã tồn tại");
-		}
+		
 		return i > 0;
 	}
 

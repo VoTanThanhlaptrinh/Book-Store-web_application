@@ -42,7 +42,8 @@ public class GetCodeController extends HttpServlet {
 		}
 		if (loginService.checkEmail(email)) {
 			String code = RandomStringUtils.randomAlphanumeric(6);
-			mailService.sendMail(email, code);
+			String content = "Mã xác thực của bạn là:" + code;
+			mailService.sendMail(email, content, "Xác thực quên mật khẩu");
 			HttpSession session = req.getSession();
 			session.setAttribute("checkCode", code);
 			session.setAttribute("checkEmail", email);

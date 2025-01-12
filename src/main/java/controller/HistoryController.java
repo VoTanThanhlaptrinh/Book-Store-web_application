@@ -13,6 +13,8 @@ import javax.servlet.http.HttpSession;
 import models.Cart;
 import models.CartProductDetail;
 import models.User;
+import service.EvaluateService;
+import service.IEvaluateService;
 import serviceImplement.HienThiDonTrongGioHangImplement;
 
 @WebServlet("/history")
@@ -22,6 +24,7 @@ public class HistoryController extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
+	private IEvaluateService evaluateService;
     public HistoryController() {
         super();
         // TODO Auto-generated constructor stub
@@ -38,12 +41,10 @@ public class HistoryController extends HttpServlet {
 		User user = (User) session.getAttribute("user");
 		Cart cart = (Cart) session.getAttribute("cart");
 		HienThiDonTrongGioHangImplement htGioHang = new HienThiDonTrongGioHangImplement(user);
-		
 		System.out.println("id gio hang: " +  cart.getCartId());
 		List<CartProductDetail> ls  = htGioHang.hienThiGioHang(cart.getCartId(), "checked");
-		
 		System.out.println("so luong hang da mua: " + ls.size());
-		
+		request.setAttribute("evaluate", evaluateService);
 		request.setAttribute("history", ls);
 		request.getRequestDispatcher("webPage/giohang/history.jsp").forward(request, response);
 		
@@ -56,5 +57,9 @@ public class HistoryController extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-
+	@Override
+	public void init() throws ServletException {
+		// TODO Auto-generated method stub
+		evaluateService = new EvaluateService();
+	}
 }

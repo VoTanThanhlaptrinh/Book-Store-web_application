@@ -43,6 +43,7 @@ public class LoginController extends HttpServlet {
 			String mess = "Sai mật khẩu";
 			req.setAttribute("mess", mess);
 			doGet(req, resp);
+			return;
 		}
 		HttpSession session = req.getSession();
 		HienThiDonTrongGioHangImplement htGioHang = new HienThiDonTrongGioHangImplement(user);

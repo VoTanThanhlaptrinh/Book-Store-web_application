@@ -18,6 +18,18 @@ public class Comment {
 		this.updateDate = updateDate;
 	}
 
+	public void setRating(int rating) {
+		this.rating = rating;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public void setUpdateDate(Date updateDate) {
+		this.updateDate = updateDate;
+	}
+
 	public Comment(int rating, String content, Date createDate, Date updateDate) {
 		super();
 		this.rating = rating;

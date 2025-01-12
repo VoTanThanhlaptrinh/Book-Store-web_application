@@ -33,13 +33,13 @@
 		<section class="signup" style="padding-top: 50px;">
 			<div class="container">
 				<div class="signup-content border">
-					<form method="POST" id="signin" class="signup-form"
+					<form method="POST" action="confirm" id="signin" class="signup-form"
 						action="forgotPass">
 						<h2 class="form-title">Xác thực Email</h2>
 						<div class="form-group row">
 							<div class="col-8">
 								<p class="form-title">Chúng tôi đã gửi mã xác thực qua email của bạn.</p>
-								<input type="text" class="form-input" name="code" id="text"
+								<input type="text" class="form-input" name="conCode" id="text"
 									placeholder="Nhập mã" required />
 							</div>
 						</div>

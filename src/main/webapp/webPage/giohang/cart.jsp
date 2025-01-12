@@ -8,7 +8,7 @@
     <title>Giỏ Hàng</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="webPage/trangChu/CSS/header.css">
+<link rel="stylesheet" href="webPage/trangChu/CSS/header.css">
 <link rel="stylesheet" href="webPage/trangChu/CSS/footer.css">
 <link href="webPage/categoryAndSingle/css/style.css" rel="stylesheet">
 </head>

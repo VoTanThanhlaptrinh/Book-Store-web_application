@@ -16,6 +16,8 @@ import models.Cart;
 import models.CartItem;
 import models.CartProductDetail;
 import models.User;
+import service.ILoginService;
+import service.LoginService;
 import serviceImplement.HienThiDonTrongGioHangImplement;
 
 @WebServlet("/checkout")
@@ -25,6 +27,7 @@ public class CheckOutController extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
+	private ILoginService loginService;
     public CheckOutController() {
         super();
         // TODO Auto-generated constructor stub
@@ -44,7 +47,7 @@ public class CheckOutController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		 HttpSession session = request.getSession();
-		 User user = (User) session.getAttribute("user");
+		User user = (User) session.getAttribute("user");
 		String[] selectedItems = request.getParameterValues("selectedItems");
 		String productId = request.getParameter("id");
 		String id =  request.getParameter("id");
@@ -62,6 +65,11 @@ public class CheckOutController extends HttpServlet {
 			request.getRequestDispatcher("webPage/login/login.jsp").forward(request, response);
 		}
 		else if (selectedItems == null && productId == null) {
+			// kiểm tra nếu người dùng chưa cập nhật đủ thông tin thì không cho họ mua.
+			if(loginService.getInforOfUser(user.getUserId()) == null) {
+				request.setAttribute("mess", "Bạn phải cập nhật đủ thông để thanh toán");
+				request.getRequestDispatcher("webPage/login/upload.jsp").forward(request, response);
+			}
 			String unSelectedMess = "vui lòng chọn sản phẩm để thanh toán";
 			request.setAttribute("usmess", unSelectedMess);
 			request.getRequestDispatcher("webPage/giohang/cart.jsp").forward(request, response);
@@ -137,5 +145,9 @@ public class CheckOutController extends HttpServlet {
 		request.getRequestDispatcher("webPage/giohang/thanhcong.jsp").forward(request, response);
 		}
 	}
-
+	@Override
+	public void init() throws ServletException {
+		// TODO Auto-generated method stub
+		loginService = new LoginService();
+	}
 }

@@ -38,21 +38,21 @@
 						<h2 class="form-title">Tạo tài khoản</h2>
 						<div class="form-group">
 							<input type="text" class="form-input" name="username" id="name"
-								placeholder="Tên tài khoản" required />
+								placeholder="Tên tài khoản" required maxlength="100" />
 						</div>
 						<div class="form-group">
 							<input type="email" class="form-input" name="email" id="email"
-								placeholder="Email" required />
+								placeholder="Email" required maxlength="255" />
 						</div>
 						<div class="form-group">
 							<input type="password" class="form-input" name="password"
-								id="password" placeholder="Mật khẩu" required /> <span
+								id="password" placeholder="Mật khẩu" required  maxlength="255"/> <span
 								toggle="#password"
 								class="zmdi zmdi-eye-off field-icon toggle-password"></span>
 						</div>
 						<div class="form-group">
 							<input type="password" class="form-input" name="rePassword"
-								id="re_password" placeholder="Nhập lại mật khẩu" required /> <span
+								id="re_password" placeholder="Nhập lại mật khẩu" maxlength="255"  required /> <span
 								toggle="#password"
 								class="zmdi zmdi-eye-off field-icon toggle-password"></span>
 						</div>

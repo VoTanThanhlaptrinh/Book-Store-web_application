@@ -35,19 +35,14 @@ public class InforController extends HttpServlet {
 			Information information = loginService.getInforOfUser(user.getUserId());
 			String path;
 			if (information == null) {
-				information = new Information();
 				path = "webPage/img/avatar/avatar.jpg";
 				session.setAttribute("command", "insert");
 			} else {
-				if (information.getImgId() == 0) {
-					path = "webPage/img/avatar/avatar.jpg";
-				} else {
-					path = "getImage?img_id=" + information.getImgId();
-					session.setAttribute("command", "update");
-				}
+				path = "getImage?img_id=" + information.getImgId();
+				session.setAttribute("command", "update");
 			}
 			req.setAttribute("accountImg", path);
-			session.setAttribute("infor", information);
+			req.setAttribute("infor", information);
 			req.getRequestDispatcher("/webPage/login/infor.jsp").forward(req, resp);
 		}
 	}

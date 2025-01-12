@@ -57,15 +57,18 @@ public class RegisterController extends HttpServlet {
 				session.setAttribute("password", pass);
 				session.setAttribute("email", email);
 				String code = RandomStringUtils.randomAlphanumeric(6);
-				mailService.sendMail(email, code);
-				session.setAttribute("checkCode", code);
+				session.setAttribute("confirmCode", code);
 				resp.sendRedirect("confirm");
+				String content = "Mã xác thực của bạn là:" + code;
+				mailService.sendMail(email, content, "Xác thực đăng ký tài khoản");
 			}
 		}
 	}
+
 	@Override
 	public void init() throws ServletException {
 		// TODO Auto-generated method stub
+		loginService = new LoginService();
 		String from = "vtthanh32004@gmail.com";
 		String password = "loab yyfr gcpo fcqz";
 		mailService = new SendMailImp(from, password);

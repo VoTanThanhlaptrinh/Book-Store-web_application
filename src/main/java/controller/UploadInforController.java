@@ -40,7 +40,7 @@ public class UploadInforController extends HttpServlet {
 			resp.sendRedirect("home");
 		} else {
 			command = (String) session.getAttribute("command");
-			req.getRequestDispatcher("/webPage/login/upload.jsp").forward(req, resp);
+			req.getRequestDispatcher("webPage/login/upload.jsp").forward(req, resp);
 		}
 	}
 
@@ -53,8 +53,10 @@ public class UploadInforController extends HttpServlet {
 		HttpSession session = req.getSession();
 		User user = (User) session.getAttribute("user");
 		LoginService loginService = (LoginService) session.getAttribute("loginService");
-		Information infor = (Information) session.getAttribute("infor");
-
+		Information infor = loginService.getInforOfUser(user.getUserId());
+		if(infor == null) {
+			infor = new Information();
+		}
 		String name = req.getParameter("name");
 		String phone = req.getParameter("phone");
 		String address = req.getParameter("address");
@@ -73,28 +75,18 @@ public class UploadInforController extends HttpServlet {
 		if (part != null) {
 			String mimeType = part.getContentType();
 			if (!"image/png".equals(mimeType) && !"image/jpg".equals(mimeType)) {
-				String mess = "file is not image with .png, .jpg";
+				String mess = "Không hỗ trợ đuôi khác .png, .jpg";
 				req.setAttribute("mess", mess);
-				doGet(req, resp);
 			}
-			// Dùng để đưa vào thumbnails để lấy byte[] dữ liệu
-			ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-			// Chỉnh lại kích thức các ảnh khớp với 100x100 px.
-			Thumbnails.of(part.getInputStream()).size(130, 400).outputFormat("png").toOutputStream(outputStream);
-			bytes = outputStream.toByteArray();
-//			bytes = new byte[(int) part.getSize()];
-//			int offset = 0, length = 4096, byteRead = 0;
-//			try (InputStream ips = part.getInputStream()) {
-//				while ((byteRead = ips.read(bytes, offset, length)) != -1) {
-//					offset += byteRead;
-//					if (offset > part.getSize()) {
-//						break;
-//					}
-//				}
-//			} catch (Exception e) {
-//				// TODO: handle exception
-//				e.printStackTrace();
-//			}
+			try {
+				// Dùng để đưa vào thumbnails để lấy byte[] dữ liệu
+				ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+				// Chỉnh lại kích thức các ảnh khớp với 100x100 px.
+				Thumbnails.of(part.getInputStream()).size(130, 400).toOutputStream(outputStream);
+				bytes = outputStream.toByteArray();
+			} catch (Exception e) {
+				req.setAttribute("mess", "Đã xảy ra lỗi khi upload ảnh");
+			}
 		}
 		if ("update".equals(command)) {
 			Image img = loginService.getImageByImgId(infor.getImgId());
@@ -106,13 +98,15 @@ public class UploadInforController extends HttpServlet {
 			loginService.updateInfor(infor);
 		}
 		if ("insert".equals(command)) {
-			if (part != null) {
+			if (bytes != null) {
 				Image img = new Image(part.getSubmittedFileName(),
 						part.getSubmittedFileName().substring(part.getSubmittedFileName().lastIndexOf(".") + 1),
 						"ảnh đại diện", new Date(System.currentTimeMillis()), new Date(System.currentTimeMillis()),
 						bytes);
 				int imgId = loginService.saveImage(img);
 				infor.setImgId(imgId);
+			} else {
+				infor.setImgId(37);
 			}
 			loginService.saveInfor(infor, user);
 		}

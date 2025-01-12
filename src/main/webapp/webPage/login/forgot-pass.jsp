@@ -38,7 +38,7 @@
 						<h2 class="form-title">Quên mật khẩu</h2>
 						<div class="form-group">
 							<input type="email" class="form-input" name="email" id="email"
-								placeholder="Email" required />
+								placeholder="Email" required maxlength="255"/>
 								
 						</div>
 						<div class="form-group row">

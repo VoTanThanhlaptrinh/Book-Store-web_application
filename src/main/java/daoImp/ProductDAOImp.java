@@ -10,7 +10,6 @@ import java.util.List;
 
 import daoInterface.IProductDao;
 import models.Product;
-import models.User;
 import service.DatabaseConnection;
 public class ProductDAOImp implements IProductDao {
 
@@ -88,7 +87,7 @@ public class ProductDAOImp implements IProductDao {
 	}
 
 	@Override
-	public int saveProduct(Product product, User user) {
+	public int saveProduct(Product product) {
 		// TODO Auto-generated method stub
 		Connection con = null;
 		int productId = 0;
@@ -97,7 +96,7 @@ public class ProductDAOImp implements IProductDao {
 			PreparedStatement preparedStatement = con.prepareStatement(
 					"insert into Product_1 (added_by_user,title,price,description,type,img_id,create_date, update_date) values(?,?,?,?,?,?,?,?)",
 					PreparedStatement.RETURN_GENERATED_KEYS);
-			preparedStatement.setInt(1, user.getUserId());
+			preparedStatement.setInt(1, product.getAddedByUser());
 			preparedStatement.setString(2, product.getTitle());
 			preparedStatement.setDouble(3, product.getPrice());
 			preparedStatement.setNString(4, product.getDescription());

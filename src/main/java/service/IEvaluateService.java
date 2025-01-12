@@ -17,4 +17,11 @@ public interface IEvaluateService {
 	void updateComment(Comment c);
 	
 	Comment getCommentByCommentId(int commentId);
+	
+	boolean checkProductHasBeenEvaluated(int productId, int userId);
+	
+	List<Evaluate> getEvaluatesByProductId(int productId);
+
+	Evaluate getEvaluateOfProductByUser(int productId, int userId);
+	
 }

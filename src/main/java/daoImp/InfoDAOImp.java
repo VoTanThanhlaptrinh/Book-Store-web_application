@@ -27,8 +27,8 @@ public class InfoDAOImp implements IInfoDao {
 			preparedStatement.setNString(4, info.getCccd());
 			preparedStatement.setDate(5, info.getBirth());
 			preparedStatement.setNString(6, info.getEmail());
-			preparedStatement.setDate(7, info.getCreateDate());
-			preparedStatement.setDate(8, info.getUpdateDate());
+			preparedStatement.setDate(7, new Date(System.currentTimeMillis()));
+			preparedStatement.setDate(8, new Date(System.currentTimeMillis()));
 			preparedStatement.setInt(9, info.getImgId());
 			preparedStatement.setInt(10, info.getUserId());
 			preparedStatement.executeUpdate();

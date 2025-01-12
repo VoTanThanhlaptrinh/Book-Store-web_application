@@ -37,8 +37,6 @@ public class ForgotPassController extends HttpServlet {
 		if (checkCode.equals(code) && checkEmail.equals(email)) {
 			User user = loginService.getUserByMail(email);
 			session.setAttribute("user", user);
-			session.removeAttribute("checkCode");
-			session.removeAttribute("checkEmail");
 			resp.sendRedirect("reset");
 		} else {
 			req.setAttribute("mess", "Hành động thất bại, hãy làm lại");

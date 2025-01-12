@@ -33,21 +33,21 @@
 						<h2 class="form-title">Thay đổi mật khẩu</h2>
 						<div class="form-group">
 							<input type="password" class="form-input" name="pass" id="name"
-								placeholder="Mật khẩu mới" />
+								placeholder="Mật khẩu mới" maxlength="255" />
 								<span
 								toggle="#password"
 								class="zmdi zmdi-eye-off field-icon toggle-password"></span>
 						</div>
 						<div class="form-group">
 							<input type="password" class="form-input" name="rePass"
-								id="password" placeholder="Nhập lại mật khẩu mới" />
+								id="password" placeholder="Nhập lại mật khẩu mới" maxlength="255" />
 							<span
 								toggle="#password"
 								class="zmdi zmdi-eye-off field-icon toggle-password"></span>
 						</div>
 						<div class="form-group">
 							<input type="submit" name="submit" id="submit"
-								class="form-submit" value="Đổi mật khẩu" />
+								class="form-submit" value="Đổi mật khẩu"  />
 							
 						</div>
 					</form>

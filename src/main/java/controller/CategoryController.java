@@ -47,9 +47,16 @@ public class CategoryController extends HttpServlet {
 		HienThiDanhSachImp ht = new HienThiDanhSachImp();
 		List<Product> products = new ArrayList<>();
 		if (category.equals("") && search.equals("")) {
+			products = categoriesService.getProducts();
+			if (products.size() < 12) {
+				req.setAttribute("pages", 1);
+			} else {
+				if (products.size() % 12 > 0)
+					req.setAttribute("pages", products.size() / 12 + 1);
+				else
+					req.setAttribute("pages", products.size() / 12);
+			}
 			products = categoriesService.getProductByPage(page, 12);
-			System.out.println(category+" ?" + search);
-			System.out.println(products.size());
 		}
 
 		else if (!category.equals("") && search.equals("")) {
@@ -101,13 +108,8 @@ public class CategoryController extends HttpServlet {
 		req.setAttribute("row", row);
 		session.setAttribute("products", products);
 
+		req.setAttribute("curPage", page);
 		req.getRequestDispatcher("webPage/categoryAndSingle/categories.jsp").forward(req, resp);
-
-	}
-
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 
 	}
 

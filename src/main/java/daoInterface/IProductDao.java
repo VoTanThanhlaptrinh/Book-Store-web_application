@@ -3,14 +3,13 @@ package daoInterface;
 import java.util.List;
 
 import models.Product;
-import models.User;
 
 public interface IProductDao {
 	List<Product> getProducts();
 
 	Product findByProductId(int productId);
 
-	int saveProduct(Product product, User user);
+	int saveProduct(Product product);
 
 	void updateProduct(Product product);
 

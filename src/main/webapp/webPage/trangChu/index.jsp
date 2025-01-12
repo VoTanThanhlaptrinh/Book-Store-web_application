@@ -21,10 +21,12 @@
 				page="/webPage/trangChu/header.jsp"></jsp:include></div>
 	</c:if>
 
-	<div style="padding-top: 60px; padding-bottom: 60px;">
+	<div>
 		<img alt="" src="webPage/trangChu/images/banner1.png">
 	</div>
-
+<div style="height: 50px; padding-top: 60px;">
+		<!-- Nội dung trang giả lập -->
+	</div>
 	<div class="topic">
 		<h2 class="danhmuc">Ngẫu nhiên sản phẩm</h2>
 		<div class="bookshelf">
@@ -37,7 +39,7 @@
 			</c:forEach>
 		</div>
 	</div>
-	<div style="height: 100px; padding-top: 60px;">
+	<div style="height: 50px; padding-top: 60px;">
 		<!-- Nội dung trang giả lập -->
 	</div>
 	<div class="topic">
@@ -60,7 +62,7 @@
 	</div>
 	<a><button class="xem-them">Xem thêm</button></a>
 
-	<div style="height: 100px; padding-top: 60px;">
+	<div style="height: 50px; padding-top: 60px;">
 		<!-- Nội dung trang giả lập -->
 	</div>
 	<div class="topic">
@@ -75,10 +77,7 @@
 			</c:forEach>
 		</div>
 	</div>
-	<div style="height: 100px; padding-top: 60px;">
-		<!-- Nội dung trang giả lập -->
-	</div>
-	<div style="height: 100px; padding-top: 60px;">
+	<div style="height: 50px; padding-top: 60px;">
 		<!-- Nội dung trang giả lập -->
 	</div>
 	<div class="categories-container">
