@@ -3,6 +3,8 @@ package controller;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -80,14 +82,21 @@ public class DetailProductController extends HttpServlet {
 		String content = req.getParameter("content");
 		int rating = Integer.valueOf(req.getParameter("rate"));
 		ILoginService loginService = (ILoginService) session.getAttribute("loginService");
+	    // Lấy ngôn ngữ từ session hoặc mặc định là "vi"
+	    String lang = (String) session.getAttribute("lang");
+	    if (lang == null) {
+	        lang = "vi";
+	    }
+	    Locale locale = Locale.forLanguageTag(lang);
+	    ResourceBundle bundle = ResourceBundle.getBundle("messages", locale);
 
 		if (user == null) {
-			String mess = "You have to login if you want comment";
+			String mess = bundle.getString("comment.login.required");
 			req.setAttribute("mess", mess);
 		} else {
 			Information infor = loginService.getInforOfUser(user.getUserId());
 			if (infor == null) {
-				String mess = "You don't have enough information. Update your information";
+				String mess = bundle.getString("user.info.incomplete");
 				req.setAttribute("mess", mess);
 			} else {
 				Comment comment = new Comment(rating, content, new Date(System.currentTimeMillis()),

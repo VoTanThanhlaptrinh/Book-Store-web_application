@@ -35,6 +35,10 @@ public class BookDetailController extends HttpServlet {
 		// TODO Auto-generated method stub
 		HienThiDanhSachImp hienThi = new HienThiDanhSachImp();
 		String id = request.getParameter("id");
+		if (id == null) {
+			request.getRequestDispatcher("webPage/categoryAndSingle/single.jsp").forward(request, response);
+			return;
+		}
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
 		Product sach = hienThi.hienThiSachTheoId(Integer.parseInt(id));

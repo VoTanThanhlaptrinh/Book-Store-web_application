@@ -1,5 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ include file="/webPage/lib/tag.jsp"%>
+<!-- Lấy tham số lang từ URL và thiết lập Locale -->
+<fmt:setLocale value="${param.lang != null ? param.lang : (sessionScope.lang != null ? sessionScope.lang : 'vi')}"  />
+<fmt:setBundle basename="messages" />
+<c:if test="${param.lang != null}">
+    <c:set var="lang" value="${param.lang}" scope="session" />
+</c:if>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,6 +22,7 @@
 <link href="webPage/categoryAndSingle/css/star.css" rel="stylesheet">
 </head>
 <body>
+	<body>
 	<c:choose>
 		<c:when test="${not empty user}">
 			<div id="header-placeholder"><jsp:include
@@ -26,12 +34,11 @@
 		</c:otherwise>
 	</c:choose>
 	<div class="container mt-5">
-		<h2 class="text-center">Lịch Sử Mua Hàng</h2>
+		<h2 class="text-center"><fmt:message key="orderHistory.title" /></h2>
 		<hr>
 		<c:choose>
 			<c:when test="${empty history}">
-				<div class="alert alert-info text-center">Bạn chưa có lịch sử
-					mua hàng nào.</div>
+				<div class="alert alert-info text-center"><fmt:message key="orderHistory.noHistory" /></div>
 			</c:when>
 			<c:otherwise>
 				<input type="hidden" id="user" value="${user.getUserId()}">
@@ -39,14 +46,14 @@
 					<thead class="table-primary">
 						<tr>
 							<th>#</th>
-							<th>Hình Ảnh</th>
-							<th>Mã Sản Phẩm</th>
-							<th>Tên Sản Phẩm</th>
-							<th>Số Lượng</th>
-							<th>Ngày Tạo</th>
-							<th>Giá Tiền</th>
-							<th>Đánh giá</th>
-							<th>Mua lại</th>
+							<th><fmt:message key="orderHistory.image" /></th>
+							<th><fmt:message key="orderHistory.productCode" /></th>
+							<th><fmt:message key="orderHistory.productName" /></th>
+							<th><fmt:message key="orderHistory.quantity" /></th>
+							<th><fmt:message key="orderHistory.creationDate" /></th>
+							<th><fmt:message key="orderHistory.price" /></th>
+							<th><fmt:message key="orderHistory.review" /></th>
+							<th><fmt:message key="orderHistory.reorder" /></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -60,7 +67,6 @@
 								<td>${item.getName()}</td>
 								<td>${item.getQuantity()}</td>
 								<td>${item.getCreateDate()}</td>
-
 								<td>${item.getPrice()}</td>
 								<td>
 									<button type="button" class="btn btn-primary"
@@ -68,11 +74,11 @@
 										data-bs-target="#exampleModal${item.getProductId()}">
 										<c:if
 											test="${!evaluate.checkProductHasBeenEvaluated(item.getProductId(),user.getUserId())}">
-											Bình luận
+											<fmt:message key="orderHistory.comment" />
 										</c:if>
 										<c:if
 											test="${evaluate.checkProductHasBeenEvaluated(item.getProductId(),user.getUserId())}">
-											Bình luận lại
+											<fmt:message key="orderHistory.recomment" />
 										</c:if>
 									</button>
 									<div class="modal fade" id="exampleModal${item.getProductId()}"
@@ -83,14 +89,13 @@
 											<div class="modal-content">
 												<div class="modal-header">
 													<h5 class="modal-title"
-														id="exampleModalLabel${item.getProductId()}">Bình
-														luận</h5>
+														id="exampleModalLabel${item.getProductId()}"><fmt:message key="orderHistory.commentModalTitle" /></h5>
 													<button type="button" class="btn-close"
 														data-bs-dismiss="modal" aria-label="Close"></button>
 												</div>
 												<div class="modal-body">
 													<div style="display: flex;">
-														<label class="rating-label" title="text">Đánh giá:</label>
+														<label class="rating-label" title="text"><fmt:message key="orderHistory.rating" />:</label>
 														<div class="rate">
 															<input type="radio" id="star5_${item.getProductId()}"
 																name="rate_${item.getProductId()}" value="5" /> <label
@@ -113,20 +118,20 @@
 													<div data-mdb-input-init
 														class="form-outline mb-4 input-group">
 														<input type="text" id="addNote${item.getProductId()}"
-															class="form-control" placeholder="Nội dung"
+															class="form-control" placeholder="<fmt:message key='orderHistory.contentPlaceholder' />"
 															name="content" required maxlength="255" />
 													</div>
 												</div>
 												<div class="modal-footer">
 													<button type="button" class="btn btn-primary"
-														onclick="addComment('${item.getProductId()}');">Lưu</button>
+														onclick="addComment('${item.getProductId()}');"><fmt:message key="orderHistory.save" /></button>
 												</div>
 											</div>
 										</div>
 									</div>
 								</td>
 								<td><a href="chi-tiet-sach?id=${item.getProductId()} ">
-										<button type="button" class="btn btn-primary">mua lại</button>
+										<button type="button" class="btn btn-primary"><fmt:message key="orderHistory.reorder" /></button>
 								</a></td>
 							</tr>
 						</c:forEach>
@@ -135,10 +140,8 @@
 			</c:otherwise>
 		</c:choose>
 
-
-
 		<div class="text-center mt-4">
-			<a href="home" class="btn btn-primary">Quay Lại Trang Chủ</a>
+			<a href="home" class="btn btn-primary"><fmt:message key="orderHistory.backToHome" /></a>
 		</div>
 
 	</div>
@@ -146,41 +149,46 @@
 		<jsp:include page="/webPage/trangChu/footer.jsp"></jsp:include>
 	</div>
 	<script src="webPage/trangChu/js/footer.js"></script>
-	<!-- Thêm file JavaScript cho footer -->
 	<script src="webPage/trangChu/js/header.js"></script>
-	<!-- Bootstrap JS -->
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 	<script>
 		async function addComment(productId){
-			    const selectedRate = document.getElementsByName("rate_"+productId);
-				
-				var rating = 0;
-				selectedRate.forEach(rate =>{ if(rate.checked){
-					rating = rate.value;
-				}});
-				if(selectedRate === null){
-					console.log("Chưa chọn rating");
-					return;
-				}
-				const content = document.getElementById("addNote"+productId);
-				console.log(content);
-				if(content.value === null){
-					console.log("Chưa nhập nội dung");
-					return;
-				}
-			 try {
-				var url = ("comment?productId="+productId);
-				url += ("&rating=" + rating);
-				url += ("&content=" + content.value);
-				await fetch(url, {
-					method: 'GET',
-				});
-				alert("Bình luận thành công");
-			} catch (e) {
-				console.log(e.message);
-			} 
-		}
+			const selectedRate = document.getElementsByName("rate_"+productId);
+			
+			var rating = 0;
+			selectedRate.forEach(rate =>{ if(rate.checked){
+				rating = rate.value;
+			}});
+			if(selectedRate === null){
+				console.log("<fmt:message key='error.noRating' />");
+				return;
+			}
+			const content = document.getElementById("addNote"+productId);
+			if(content.value === null){
+				console.log("<fmt:message key='error.noContent' />");
+				return;
+			}
+		 try {
+			var url = ("comment?productId="+productId);
+			url += ("&rating=" + rating);
+			url += ("&content=" + content.value);
+			await fetch(url, {
+				method: 'GET',
+			});
+			content.value = "";
+	        selectedRate.forEach(rate => rate.checked = false);
+	        const modalElement = document.getElementById("exampleModal"+productId);
+	        const modalInstance = bootstrap.Modal.getInstance(modalElement);
+	        modalInstance.hide();
+			alert("<fmt:message key='orderHistory.commentSuccess' />");
+			
+		} catch (e) {
+			console.log(e.message);
+		} 
+	}
 	</script>
+</body>
+
 </body>
 </html>

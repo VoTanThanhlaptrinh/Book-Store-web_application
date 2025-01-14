@@ -1,7 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/webPage/lib/tag.jsp"%>
-
+<fmt:setLocale value="${param.lang != null ? param.lang : (sessionScope.lang != null ? sessionScope.lang : 'vi')}"  />
+<fmt:setBundle basename="messages" />
+<c:if test="${param.lang != null}">
+	<c:set var="lang" value="${param.lang}" scope="session" />
+</c:if>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,30 +32,30 @@
 			<div class="signup-content border">
 				<form method="POST" id="" class="signup-form" action="addProduct"
 					enctype="multipart/form-data">
-					<h2 class="form-title">Thêm Sách</h2>
+					<h2 class="form-title"><fmt:message key="add_book" /></h2>
 					<div class="form-group">
-						<label>Tiêu đề</label> <input type="text" class="form-input"
+						<label><fmt:message key="title" />:</label> <input type="text" class="form-input"
 							name="title"  placeholder="Tiêu đề" required />
 					</div>
 					<div class="form-group">
-						<label>Giá</label> <input type="number" class="form-input"
+						<label><fmt:message key="price" />:</label> <input type="number" class="form-input"
 							name="price" placeholder="Giá" required />
 					</div>
 					<div class="form-group">
-						<label>Loại</label> <input type="text" class="form-input"
+						<label><fmt:message key="category" />:</label> <input type="text" class="form-input"
 							name="type" placeholder="Loại" required />
 					</div>
 					<div class="form-group">
-						<label>Mô tả sách</label> <input type="text" class="form-input"
+						<label><fmt:message key="description" />:</label> <input type="text" class="form-input"
 							name="description"  placeholder="Mô tả sách" required />
 					</div>
 					<div class="form-group">
-						<label>Số lượng</label> <input type="number" class="form-input"
+						<label><fmt:message key="quantity" />:</label> <input type="number" class="form-input"
 							name="quantity" placeholder="Số lượng" required />
 					</div>
 					<div class="form-group">
-						<label>File ảnh sách(.jpg, .png)</label> <input type="file"
-							class="form-input" name="file" id="myFile" placeholder="File" />
+						<label><fmt:message key="file" />(.jpg, .png)</label> <input type="file"
+							class="form-input" name="file" id="myFile" placeholder="File" required/>
 					</div>
 					<div class="form-group">
 						<input type="submit" name="submit" id="submit" class="form-submit"

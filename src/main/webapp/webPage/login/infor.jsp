@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ include file="/webPage/lib/tag.jsp"%>
+<!-- Lấy tham số lang từ URL và thiết lập Locale -->
+<fmt:setLocale value="${param.lang != null ? param.lang : (sessionScope.lang != null ? sessionScope.lang : 'vi')}"  />
+<fmt:setBundle basename="messages" />
+<c:if test="${param.lang != null}">
+	<c:set var="lang" value="${param.lang}" scope="session" />
+</c:if>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -57,7 +64,7 @@
 											<h6 class="text-muted-infor f-w-400-infor">${infor.getEmail()}</h6>
 										</div>
 										<div class="col-sm-6">
-											<p class="m-b-10-infor f-w-600-infor">Phone:</p>
+											<p class="m-b-10-infor f-w-600-infor"><fmt:message key="phone_number" />:</p>
 											<h6 class="text-muted-infor f-w-400-infor">${infor.getPhoneNumber()}</h6>
 										</div>
 									</div>
@@ -65,11 +72,11 @@
 										class="m-b-20-infor m-t-40-infor p-b-5-infor b-b-default-infor f-w-600-infor"></h6>
 									<div class="row">
 										<div class="col-sm-6">
-											<p class="m-b-10-infor f-w-600-infor">Ngày sinh:</p>
+											<p class="m-b-10-infor f-w-600-infor"><fmt:message key="birthday" />:</p>
 											<h6 class="text-muted-infor f-w-400-infor">${infor.getBirth()}</h6>
 										</div>
 										<div class="col-sm-6">
-											<p class="m-b-10-infor f-w-600-infor">Địa chỉ:</p>
+											<p class="m-b-10-infor f-w-600-infor"><fmt:message key="address" />:</p>
 											<h6 class="text-muted-infor f-w-400-infor">${infor.getAddress()}</h6>
 										</div>
 									</div>
@@ -78,7 +85,7 @@
 										class="m-b-20-infor m-t-40-infor p-b-5-infor b-b-default-infor f-w-600-infor"></h6>
 									<div class="row">
 										<div class="col-sm-6">
-											<p class="m-b-10-infor f-w-600-infor">Số căn cước:</p>
+											<p class="m-b-10-infor f-w-600-infor"><fmt:message key="id_card" />:</p>
 											<h6 class="text-muted-infor f-w-400-infor">${infor.getCccd()}</h6>
 										</div>
 									</div>
@@ -101,8 +108,8 @@
 												aria-hidden="true"></i></a></li>
 									</ul>
 									<div class="text-end ">
-										<a href="upload"><button type="button"
-												class="btn btn-primary">Cập nhật</button></a>
+										<a href="upload"><button type="button" 
+												class="btn btn-primary"><fmt:message key="confirm" /></button></a>
 									</div>
 								</div>
 							</div>

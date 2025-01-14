@@ -1,19 +1,22 @@
 package controller;
 
+import java.io.IOException;
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import models.User;
+
 import models.Cart;
+import models.User;
 import service.ILoginService;
 import service.LoginService;
 import serviceImplement.HienThiDanhSachImp;
 import serviceImplement.HienThiDonTrongGioHangImplement;
-
-import java.io.IOException;
 
 @WebServlet("/login")
 public class LoginController extends HttpServlet {
@@ -27,6 +30,9 @@ public class LoginController extends HttpServlet {
 		if (session.getAttribute("user") != null) {
 			resp.sendRedirect("home");
 		} else {
+			String mess = (String) session.getAttribute("loginMessage");
+			session.removeAttribute("loginMessage");
+			req.setAttribute("loginMessage", mess);
 			req.getRequestDispatcher("webPage/login/login.jsp").forward(req, resp);
 		}
 	}
@@ -39,13 +45,21 @@ public class LoginController extends HttpServlet {
 		String productId = req.getParameter("productId");
 
 		User user = loginService.checkUser(username, password);
+		HttpSession session = req.getSession();
+		
+		  String lang = (String) session.getAttribute("lang");
+		    if (lang == null) {
+		        lang = "vi";
+		    }
+		    Locale locale = Locale.forLanguageTag(lang);
+		    ResourceBundle bundle = ResourceBundle.getBundle("messages", locale);
 		if (user == null) {
-			String mess = "Sai mật khẩu";
+			String mess = bundle.getString("incorrect.password");
 			req.setAttribute("mess", mess);
 			doGet(req, resp);
 			return;
 		}
-		HttpSession session = req.getSession();
+		
 		HienThiDonTrongGioHangImplement htGioHang = new HienThiDonTrongGioHangImplement(user);
 		htGioHang.taoGioHang(user.getUserId());
 		Cart cart = htGioHang.layGioHang(user.getUserId());

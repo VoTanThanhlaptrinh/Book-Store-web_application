@@ -1,5 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<!-- Lấy tham số lang từ URL và thiết lập Locale -->
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ include file="/webPage/lib/tag.jsp"%>
+<fmt:setLocale
+	value="${param.lang != null ? param.lang : (sessionScope.lang != null ? sessionScope.lang : 'vi')}" />
+<fmt:setBundle basename="messages" />
+<c:if test="${param.lang != null}">
+	<c:set var="lang" value="${param.lang}" scope="session" />
+</c:if>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,10 +33,13 @@
 		<div class="row justify-content-center">
 			<div class="col-md-6 text-center">
 				<!-- Hiển thị thông báo thành công -->
-				<div class="alert alert-success" role="alert">
-					<h4 class="alert-heading">${mess}</h4>
-				</div>
-
+				<c:if test="${not empty mess}">
+					<div class="alert alert-success" role="alert">
+						<h4 class="alert-heading">
+							<fmt:message key="${mess}" />
+						</h4>
+					</div>
+				</c:if>
 				<!-- Nút trở về trang chủ -->
 				<a href="home" class="btn btn-primary"> Về Trang Chủ </a>
 			</div>

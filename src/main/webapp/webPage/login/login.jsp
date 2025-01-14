@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/webPage/lib/tag.jsp"%>
+<fmt:setLocale value="${param.lang != null ? param.lang : (sessionScope.lang != null ? sessionScope.lang : 'vi')}"  />
+<fmt:setBundle basename="messages" />
+<c:if test="${param.lang != null}">
+	<c:set var="lang" value="${param.lang}" scope="session" />
+</c:if>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,10 +36,10 @@
 				page="/webPage/trangChu/header.jsp"></jsp:include></div>
 	</c:if>
 	<c:if test="${mess != null}">
-		<div class="alert alert-danger text-center alert-css" role="alert">${mess}</div>
+		<div class="alert alert-danger text-center alert-css" role="alert"><fmt:message key="${mess}" /></div>
 	</c:if>
 	<c:if test="${not empty loginMessage}">
-		<div class="alert alert-success" role="alert">${loginMessage}</div>
+		<div class="alert alert-success" role="alert"><fmt:message key="${loginMessage}" /></div>
 	</c:if>
 	<div class="main" style="padding-top: 50px;">
 		<section class="signup">
@@ -42,7 +47,7 @@
 				<div class="signup-content border">
 					<form method="POST" id="signin" class="signup-form" action="login">
 						<input type="hidden" name="productId" value="${productId}">
-						<h2 class="form-title">Đăng nhập</h2>
+						<h2 class="form-title"><fmt:message key="login" /></h2>
 						<div class="form-group">
 							<input type="text" class="form-input" name="username" id="name"
 								placeholder="Tên tài khoản" required />
@@ -56,15 +61,15 @@
 						<div class="form-group">
 
 							<input type="submit" name="submit" id="submit"
-								class="form-submit" value="Đăng nhập" />
+								class="form-submit" value="<fmt:message key="login" />" />
 						</div>
 					</form>
 					<div class="row">
 						<div class="col">
-							<a href="forgotPass">Quên mật khẩu</a>
+							<a href="forgotPass"><fmt:message key="forgot_password" /></a>
 						</div>
 						<div class="col text-end">
-							<a href="register">Đăng ký tài khoản</a>
+							<a href="register"><fmt:message key="regis" /></a>
 						</div>
 					</div>
 

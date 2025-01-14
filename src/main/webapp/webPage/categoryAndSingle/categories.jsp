@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@ include file="/webPage/lib/tag.jsp"%>
+<!-- Lấy tham số lang từ URL và thiết lập Locale -->
+<fmt:setLocale value="${param.lang != null ? param.lang : (sessionScope.lang != null ? sessionScope.lang : 'vi')}"  />
+<fmt:setBundle basename="messages" />
+<c:if test="${param.lang != null}">
+    <c:set var="lang" value="${param.lang}" scope="session" />
+</c:if>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,27 +41,29 @@
 	</c:choose>
 	<main class="container">
 		<!-- Thông báo thêm thành công -->
-		<c:if test="${not empty message}">
-			<div class="alert alert-success" role="alert">${message}</div>
+		<c:if test="${not empty message1}">
+			<div class="alert alert-success" role="alert"><fmt:message key="${message1}" /></div>
+			
 		</c:if>
 
 		<form class="container d-flex align-items-center gap-2 mt-1 mb-1"
-			action="tim-sach" method="get">
-			<select class="form-select" name="category" style="width: auto;">
-				<option value="${category}">${category}</option>
-				<option value="Khoa học - Tương lai">Khoa học - Tương lai</option>
-				<option value="Lịch sử - Quân sự">Lịch sử - Quân sự</option>
-				<option value="Kinh tế - Tài chính">Kinh tế - Tài chính</option>
-				<option value="Quản trị - Lãnh đạo">Quản trị - Lãnh đạo</option>
-				<option value="Phát triển bản thân">Phát triển bản thân</option>
-				<option value="Tâm lý học">Tâm lý học</option>
-				<option value="Truyện ngắn">Truyện ngắn</option>
-			</select> <input class="form-control" name="search" placeholder="search">
-			<button class="btn btn-primary d-flex align-items-center"
-				type="submit">
-				<span class="material-symbols-outlined">search</span>
-			</button>
-		</form>
+    action="tim-sach" method="get">
+    <select class="form-select" name="category" style="width: auto;">
+        <option value="${category}">${category}</option>
+        <option value="Khoa học - Tương lai"><fmt:message key="category_science_future" /></option>
+        <option value="Lịch sử - Quân sự"><fmt:message key="category_history_military" /></option>
+        <option value="Kinh tế - Tài chính"><fmt:message key="category_economics_finance" /></option>
+        <option value="Quản trị - Lãnh đạo"><fmt:message key="category_management_leadership" /></option>
+        <option value="Phát triển bản thân"><fmt:message key="category_self_development" /></option>
+        <option value="Tâm lý học"><fmt:message key="category_psychology" /></option>
+        <option value="Truyện ngắn"><fmt:message key="category_short_stories" /></option>
+    </select> 
+    <input class="form-control" name="search" placeholder="<fmt:message key='search_placeholder' />">
+    <button class="btn btn-primary d-flex align-items-center" type="submit">
+        <span class="material-symbols-outlined">search</span>
+    </button>
+</form>
+
 		<c:if test="${empty products}">
 			<div class="row justify-content-center">
 				<div class="col-md-6 text-center">
@@ -80,8 +87,8 @@
 												src="getImage?img_id=${products.get(j + (i * 3) + i).getImgId()}"
 												class="card-img-top" alt="...">
 											<div class="card-body">
-												<h5 class="card-title">${products.get(j + (i * 3) + i).getTitle()}</h5>
-												<p class="card-text">Giá: ${products.get(j + (i * 3) + i).getPrice()}</p>
+												<h5 class="card-title cart-item-title" style="color: black;">${products.get(j + (i * 3) + i).getTitle()}</h5>
+												<p class="card-text" style="color: red;">${products.get(j + (i * 3) + i).getPrice()}đ</p>
 											</div>
 										</div>
 									</a>
@@ -102,8 +109,8 @@
 												src="getImage?img_id=${products.get(j + (i * 3) + i).getImgId()}"
 												class="card-img-top" alt="...">
 											<div class="card-body">
-												<h5 class="card-title">${products.get(j + (i * 3) + i).getTitle()}</h5>
-												<p class="card-text">Giá: ${products.get(j + (i * 3) + i).getPrice()}</p>
+												<h5 class="card-title cart-item-title" style="color: black;">${products.get(j + (i * 3) + i).getTitle()}</h5>
+												<p class="card-text" style="color: red;">${products.get(j + (i * 3) + i).getPrice()}đ</p>
 											</div>
 										</div>
 									</a>

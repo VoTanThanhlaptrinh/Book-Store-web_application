@@ -25,7 +25,7 @@ public class HomeController extends HttpServlet {
 		HttpSession session = req.getSession();
 		User user = (User) session.getAttribute("user");
 		if (user != null && user.getRoles().contains("admin")) {
-			req.setAttribute("admin", "admin");
+			session.setAttribute("admin", "admin");
 		}
 		HienThiDanhSachImp imp = new HienThiDanhSachImp();
 

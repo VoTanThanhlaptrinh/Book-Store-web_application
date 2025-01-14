@@ -34,6 +34,13 @@ body{
   height: auto;
   display: block;
 }
+.cart-item-title {
+    height: 30px; /* Chiều cao cố định */
+    overflow: hidden; /* Ẩn nội dung tràn */
+    text-overflow: ellipsis; /* Thêm dấu ... nếu tiêu đề dài */
+    white-space: nowrap; /* Không cho xuống dòng */
+}
+
 
 section {
   max-width: 60%;

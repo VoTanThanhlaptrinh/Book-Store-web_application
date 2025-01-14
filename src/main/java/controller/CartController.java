@@ -17,6 +17,7 @@ import models.User;
 import serviceImplement.HienThiDonTrongGioHangImplement;
 
 @WebServlet("/cart")
+
 public class CartController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -44,14 +45,4 @@ public class CartController extends HttpServlet {
 		request.setAttribute("sumCart", ls.size());
 		request.getRequestDispatcher("webPage/giohang/cart.jsp").forward(request, response);
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-
-		
-	}
-
 }

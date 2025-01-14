@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/webPage/lib/tag.jsp"%>
+<fmt:setLocale value="${param.lang != null ? param.lang : (sessionScope.lang != null ? sessionScope.lang : 'vi')}"  />
+<fmt:setBundle basename="messages" />
+<c:if test="${param.lang != null}">
+	<c:set var="lang" value="${param.lang}" scope="session" />
+</c:if>
 <!DOCTYPE html>
 <html>
 
@@ -30,7 +35,7 @@
 			<div class="container">
 				<div class="signup-content border">
 					<form method="POST" action="reset" id="signin" class="signup-form">
-						<h2 class="form-title">Thay đổi mật khẩu</h2>
+						<h2 class="form-title"><fmt:message key="ch_pass" /></h2>
 						<div class="form-group">
 							<input type="password" class="form-input" name="pass" id="name"
 								placeholder="Mật khẩu mới" maxlength="255" />
@@ -47,7 +52,7 @@
 						</div>
 						<div class="form-group">
 							<input type="submit" name="submit" id="submit"
-								class="form-submit" value="Đổi mật khẩu"  />
+								class="form-submit" value=" <fmt:message key="ch_pass" />"  />
 							
 						</div>
 					</form>

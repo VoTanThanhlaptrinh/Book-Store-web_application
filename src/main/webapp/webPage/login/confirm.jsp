@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/webPage/lib/tag.jsp"%>
-
+<fmt:setLocale
+	value="${param.lang != null ? param.lang : (sessionScope.lang != null ? sessionScope.lang : 'vi')}" />
+<fmt:setBundle basename="messages" />
+<c:if test="${param.lang != null}">
+	<c:set var="lang" value="${param.lang}" scope="session" />
+</c:if>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,25 +32,29 @@
 	<div id="header-placeholder"><jsp:include
 			page="/webPage/trangChu/header.jsp"></jsp:include></div>
 	<c:if test="${mess != null}">
-		<div class="alert alert-danger text-center alert-css" role="alert">${mess}</div>
+		<div class="alert alert-danger text-center alert-css" role="alert"><fmt:message key="${mess}" /></div>
 	</c:if>
 	<div class="main">
 		<section class="signup" style="padding-top: 50px;">
 			<div class="container">
 				<div class="signup-content border">
-					<form method="POST" action="confirm" id="signin" class="signup-form"
-						action="forgotPass">
-						<h2 class="form-title">Xác thực Email</h2>
+					<form method="POST" action="confirm" id="signin"
+						class="signup-form" action="forgotPass">
+						<h2 class="form-title">
+							<fmt:message key="email_verification" />
+						</h2>
 						<div class="form-group row">
 							<div class="col-8">
-								<p class="form-title">Chúng tôi đã gửi mã xác thực qua email của bạn.</p>
+								<p class="form-title">
+									<fmt:message key="email_verification_message" />
+								</p>
 								<input type="text" class="form-input" name="conCode" id="text"
-									placeholder="Nhập mã" required />
+									placeholder="<fmt:message key='enter_code' />" required />
 							</div>
 						</div>
 						<div class="form-group">
 							<input type="submit" name="submit" id="submit"
-								class="form-submit" value="Xác nhận" />
+								class="form-submit" value="<fmt:message key='confirm' />" />
 						</div>
 					</form>
 				</div>
@@ -60,53 +69,57 @@
 </body>
 <!-- This templates was made by Colorlib (https://colorlib.com) -->
 <script type="text/javascript">
-	async function getCode() {
+	async
+	function getCode() {
+
+		var messages = {
+			wait : "<fmt:message key='waiting_message'/>",
+			systemError : "<fmt:message key='system_error'/>"
+		};
+
 		const email = document.getElementById("email").value;
 		const existingMessage = document.querySelector(".alert-css");
 		if (existingMessage) {
 			existingMessage.remove();
 		}
-		
+
 		const container = document.body;
 		const mes = document.createElement("div");
 		mes.classList.add("alert", "text-center", "alert-css", 'alert-success');
-		mes.innerText = "Chờ trong giây lát";
+		mes.innerText = messages.wait;
 		container.appendChild(mes);
-		if (!email) {
-			mes.innerText = "Hãy nhập email";
-			container.appendChild(mes);
-		} else {
-			try {
-				const existingMessage1 = document.querySelector(".alert-css");
-				if (existingMessage) {
-					existingMessage1.remove();
-				}
-				var encodedEmail = "getCode?email=";
-					encodedEmail += email;
-				const response = await fetch(encodedEmail, {
-					method: 'GET',
-					headers: {
-						Accept: 'application/json',
-						'Content-Type': 'application/json',
-					},
-				});
-				
-				const result = await response.json(); // Wait for the response
-				const message = result.message;
-				
-				if (result.status === "success") {
-					mes.classList.add('alert-success');
-				} else {
-					mes.classList.add('alert-danger');
-				}
-				
-				mes.innerText = message;
-				container.appendChild(mes);
-			} catch (error) {
-				mes.classList.add('alert-danger');
-				mes.innerText = "Lỗi hệ thống";
-				container.appendChild(mes);
+		try {
+			const existingMessage1 = document.querySelector(".alert-css");
+			if (existingMessage) {
+				existingMessage1.remove();
 			}
+			var encodedEmail = "getCode?email=";
+			encodedEmail += email;
+			const response = await
+			fetch(encodedEmail, {
+				method : 'GET',
+				headers : {
+					Accept : 'application/json',
+					'Content-Type' : 'application/json',
+				},
+			});
+
+			const result = await
+			response.json(); // Wait for the response
+			const message = result.message;
+
+			if (result.status === "success") {
+				mes.classList.add('alert-success');
+			} else {
+				mes.classList.add('alert-danger');
+			}
+
+			mes.innerText = message;
+			container.appendChild(mes);
+		} catch (error) {
+			mes.classList.add('alert-danger');
+			mes.innerText = "Lỗi hệ thống";
+			container.appendChild(mes);
 		}
 	}
 </script>

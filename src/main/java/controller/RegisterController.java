@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -42,14 +44,20 @@ public class RegisterController extends HttpServlet {
 		if (loginService == null) {
 			loginService = new LoginService();
 		}
+		  String lang = (String) session.getAttribute("lang");
+		    if (lang == null) {
+		        lang = "vi";
+		    }
+		    Locale locale = Locale.forLanguageTag(lang);
+		    ResourceBundle bundle = ResourceBundle.getBundle("messages", locale);
 		String mess = null;
 		if (pass.trim().length() < 8) {
-			mess = "Mật khẩu phải có ít nhất 8 ký tự";
+			mess = bundle.getString("password.length.required");
 			req.setAttribute("mess", mess);
 			doGet(req, resp);
 		} else {
 			if (!rePassword.equals(pass)) {
-				mess = "Mật khẩu nhập lại cần phải giống với mật khẩu";
+				mess = bundle.getString("password.confirmation.mismatch");
 				req.setAttribute("mess", mess);
 				doGet(req, resp);
 			} else {
@@ -59,8 +67,8 @@ public class RegisterController extends HttpServlet {
 				String code = RandomStringUtils.randomAlphanumeric(6);
 				session.setAttribute("confirmCode", code);
 				resp.sendRedirect("confirm");
-				String content = "Mã xác thực của bạn là:" + code;
-				mailService.sendMail(email, content, "Xác thực đăng ký tài khoản");
+				String content = bundle.getString("verification.code") + code;
+				mailService.sendMail(email, content, bundle.getString("account.registration.verification"));
 			}
 		}
 	}

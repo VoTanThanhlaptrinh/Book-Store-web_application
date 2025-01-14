@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ include file="/webPage/lib/tag.jsp"%>
+<!-- Lấy tham số lang từ URL và thiết lập Locale -->
+<fmt:setLocale value="${param.lang != null ? param.lang : (sessionScope.lang != null ? sessionScope.lang : 'vi')}"  />
+<fmt:setBundle basename="messages" />
+<c:if test="${param.lang != null}">
+    <c:set var="lang" value="${param.lang}" scope="session" />
+</c:if>
 <!DOCTYPE html>
 <html>
 
@@ -35,41 +41,49 @@
 		</c:otherwise>
 	</c:choose>
 	<c:if test="${not empty failedMess}">
-		<div class="alert alert-danger" role="alert">${failedMess}</div>
+		<div class="alert alert-danger" role="alert"><fmt:message key="${failedMess}" /></div>
 	</c:if>
 
 	<c:if test="${not empty noMess}">
-		<div class="alert alert-danger" role="alert">${noMess}</div>
+		<div class="alert alert-danger" role="alert"><fmt:message key="${noMess}" /></div>
 	</c:if>
 	<main
-		class="d-flex d-inline-block container align-items-center justify-content-center">
+		class="d-flex container align-items-center justify-content-center">
 		<section class="container-sm mt-3 card shadow-0 border">
+			<!-- Product Title -->
 			<h3>${product.getTitle()}</h3>
 			<div class="row">
-				<!-- Cột chứa hình ảnh -->
+				<!-- Image Column -->
 				<div class="col-5">
 					<img src="getImage?img_id=${product.getImgId()}" alt="Book Image"
 						class="img-fluid">
 				</div>
-				<!-- Cột chứa thông tin chi tiết -->
+
+				<!-- Product Details Column -->
 				<div class="col-7">
-					<%-- <h3>${product.getTitle()}</h3> --%>
-					<p>Details: ${product.getDescription()}</p>
-					<!-- Hiển thị số lượng sản phẩm hiện có -->
+					<!-- Product Description -->
 					<p>
-						<strong>Số lượng còn lại:</strong> ${product.getQuantity()}
+						<strong><fmt:message key="detail" />:</strong>
+						${product.getDescription()}
 					</p>
 
-					<div class="input-group">
-						<label for="amount">Amount: </label>
-						<!-- Thêm name="amount" -->
-						<input type="number" id="amount" name="amount"
-							placeholder="Amount" value="1" class="form-control mx-auto mb-3">
+					<!-- Product Remaining Quantity -->
+					<p>
+						<strong><fmt:message key="remain_quantity" />:</strong>
+						${product.getQuantity()}
+					</p>
+
+					<!-- Quantity Input -->
+					<div class="input-group mb-3">
+						<label for="amount" class="form-label me-2"> <strong><fmt:message
+									key="cart_quantity" />:</strong>
+						</label> <input type="number" id="amount" name="amount"
+							placeholder="Amount" value="1" class="form-control">
 					</div>
 
-					<!-- Group nút chức năng -->
+					<!-- Button Group -->
 					<div class="button-group">
-						<!-- Nút thêm vào giỏ hàng -->
+						<!-- Add to Cart Button -->
 						<form action="add-to-cart" method="post"
 							onsubmit="cartUpdateHiddenAmount(event)">
 							<input type="hidden" name="id" value="${product.getProductId()}">
@@ -77,11 +91,13 @@
 							<input type="hidden" name="pdQuantity"
 								value="${product.getQuantity()}"> <input type="hidden"
 								name="title" value="${product.getTitle()}">
-							<button class="btn btn-primary w-100" type="submit">
-								Cart<span class="material-symbols-outlined">shopping_cart</span>
+							<button class="btn btn-primary w-100 mb-2" type="submit">
+								<span class="material-symbols-outlined me-2">shopping_cart</span>
+								Add to Cart
 							</button>
 						</form>
-						<!-- Nút thanh toán -->
+
+						<!-- Checkout Button -->
 						<form action="checkout" method="post"
 							onsubmit="CheckOutUpdateHiddenAmount(event)">
 							<input type="hidden" name="id" value="${product.getProductId()}">
@@ -89,23 +105,21 @@
 							<input type="hidden" name="pdQuantity"
 								value="${product.getQuantity()}"> <input type="hidden"
 								name="title" value="${product.getTitle()}">
-							<button class="btn btn-primary w-100" type="submit">
-								Thanh toán<span class="material-symbols-outlined">attach_money</span>
+							<button class="btn btn-success w-100" type="submit">
+								<span class="material-symbols-outlined me-2">attach_money</span>
+								<fmt:message key="checkout" />
 							</button>
 						</form>
 					</div>
 				</div>
 			</div>
 		</section>
-
-
-
 	</main>
 	<div class="container pt-5">
 		<div class="row d-flex justify-content-center">
 			<div class="col-md-8 col-lg-10">
 				<div class="card sm shadow-0 border">
-					<h3 class="p-3">Đánh giá</h3>
+					<h3 class="p-3"><fmt:message key="evaluate" />:</h3>
 					<div class="card-body p-4">
 						<div class="navbar-nav-scroll">
 							<c:if test="${evaluates.size() > 0}">

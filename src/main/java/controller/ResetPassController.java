@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -41,8 +43,14 @@ public class ResetPassController extends HttpServlet {
 		User user = (User) session.getAttribute("user");
 		String pass = req.getParameter("pass");
 		String rePass = req.getParameter("rePass");
+		  String lang = (String) session.getAttribute("lang");
+		    if (lang == null) {
+		        lang = "vi";
+		    }
+		    Locale locale = Locale.forLanguageTag(lang);
+		    ResourceBundle bundle = ResourceBundle.getBundle("messages", locale);
 		if(pass.trim().length() < 8) {
-			String mess = "Mật khẩu phải ít nhất 8 ký tự";
+			String mess =  bundle.getString("password.length.required");
 			req.setAttribute("mess", mess);
 			doGet(req, resp);
 		}
@@ -51,7 +59,7 @@ public class ResetPassController extends HttpServlet {
 			loginService.updateUser(user);
 			resp.sendRedirect("logout");
 		} else {
-			String mess = "Mật khẩu và xác nhận mật khẩu không khớp";
+			String mess = bundle.getString("password.confirmation.mismatch2");
 			req.setAttribute("mess", mess);
 			doGet(req, resp);
 		}

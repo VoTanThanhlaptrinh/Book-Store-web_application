@@ -31,7 +31,10 @@ public class CategoryController extends HttpServlet {
 		String pageNum = req.getParameter("pageNum");
 		String category = req.getParameter("category");
 		String search = req.getParameter("search");
-
+		
+		String mess = (String) session.getAttribute("message1");
+		session.removeAttribute("message1");
+		req.setAttribute("message1", mess);
 		if (category == null) {
 			category = "";
 		}

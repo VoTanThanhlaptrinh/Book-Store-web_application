@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/webPage/lib/tag.jsp"%>
-
+<fmt:setLocale
+	value="${param.lang != null ? param.lang : (sessionScope.lang != null ? sessionScope.lang : 'vi')}" />
+<fmt:setBundle basename="messages" />
+<c:if test="${param.lang != null}">
+	<c:set var="lang" value="${param.lang}" scope="session" />
+</c:if>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,43 +32,37 @@
 	<div id="header-placeholder"><jsp:include
 			page="/webPage/trangChu/header.jsp"></jsp:include></div>
 	<c:if test="${mess != null}">
-		<div class="alert alert-danger text-center alert-css" role="alert">${mess}</div>
+		<div class="alert alert-danger text-center alert-css" role="alert"><fmt:message key="${mess}" /></div>
 	</c:if>
 	<div class="main">
-		<section class="signup" style="padding-top: 50px;">
-			<div class="container">
-				<div class="signup-content border">
-					<form method="POST" id="signin" class="signup-form"
-						action="forgotPass">
-						<h2 class="form-title">Quên mật khẩu</h2>
-						<div class="form-group">
-							<input type="email" class="form-input" name="email" id="email"
-								placeholder="Email" required maxlength="255"/>
-								
-						</div>
-						<div class="form-group row">
-							<div class="col-8">
-								<input type="text" class="form-input" name="code" id="text"
-									placeholder="Nhập mã" required />
-							</div>
-							<div class="col-4">
-								<!-- <input type="button" name="submit" id="submit"
-									class="form-submit" value="Lấy mã" /> -->
-								<button type="button" class="form-submit" onclick="getCode()">Lấy
-									mã</button>
-								
-							</div>
-
-						</div>
-						<div class="form-group">
-							<input type="submit" name="submit" id="submit"
-								class="form-submit" value="Xác nhận" />
-						</div>
-					</form>
-				</div>
-			</div>
-		</section>
-
+	<section class="signup" style="padding-top: 50px;">
+    <div class="container">
+        <div class="signup-content border">
+            <form method="POST" id="signin" class="signup-form" action="forgotPass">
+                <h2 class="form-title"><fmt:message key="email_verification" /></h2>
+                <div class="form-group">
+                    <input type="email" class="form-input" name="email" id="email"
+                        placeholder="<fmt:message key='email_placeholder' />" required maxlength="255"/>
+                </div>
+                <div class="form-group row">
+                    <div class="col-8">
+                        <input type="text" class="form-input" name="code" id="text"
+                            placeholder="<fmt:message key='enter_code' />" required />
+                    </div>
+                    <div class="col-4">
+                        <button type="button" class="form-submit" onclick="getCode()">
+                            <fmt:message key="get_code" />
+                        </button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" name="submit" id="submit" class="form-submit"
+                        value="<fmt:message key='confirm' />" />
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
 	</div>
 
 	<!-- JS -->
@@ -73,6 +72,11 @@
 <!-- This templates was made by Colorlib (https://colorlib.com) -->
 <script type="text/javascript">
 	async function getCode() {
+		   var messages = {
+		            wait: "<fmt:message key='waiting_message'/>",
+		            systemError: "<fmt:message key='system_error'/>",
+		            typemail: "<fmt:message key='type_email'/>"
+		        };
 		const email = document.getElementById("email").value;
 		const existingMessage = document.querySelector(".alert-css");
 		if (existingMessage) {
@@ -82,10 +86,10 @@
 		const container = document.body;
 		const mes = document.createElement("div");
 		mes.classList.add("alert", "text-center", "alert-css", 'alert-success');
-		mes.innerText = "Chờ trong giây lát";
+		mes.innerText = messages.wait;
 		container.appendChild(mes);
 		if (!email) {
-			mes.innerText = "Hãy nhập email";
+			mes.innerText = messages.typemail;
 			container.appendChild(mes);
 		} else {
 			try {
@@ -112,11 +116,11 @@
 					mes.classList.add('alert-danger');
 				}
 				
-				mes.innerText = message;
+				mes.innerText = messages.systemError;
 				container.appendChild(mes);
 			} catch (error) {
 				mes.classList.add('alert-danger');
-				mes.innerText = "Lỗi hệ thống";
+				mes.innerText = message
 				container.appendChild(mes);
 			}
 		}

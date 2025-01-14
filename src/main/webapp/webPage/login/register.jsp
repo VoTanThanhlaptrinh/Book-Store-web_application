@@ -1,7 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/webPage/lib/tag.jsp"%>
-
+<fmt:setLocale value="${param.lang != null ? param.lang : (sessionScope.lang != null ? sessionScope.lang : 'vi')}"  />
+<fmt:setBundle basename="messages" />
+<c:if test="${param.lang != null}">
+	<c:set var="lang" value="${param.lang}" scope="session" />
+</c:if>
 <!DOCTYPE html>
 <html>
 
@@ -27,7 +31,7 @@
 	<div id="header-placeholder"><jsp:include
 			page="/webPage/trangChu/header.jsp"></jsp:include></div>
 	<c:if test="${mess != null}">
-		<div class="alert alert-warning text-center alert-css" role="alert">${mess}</div>
+		<div class="alert alert-warning text-center alert-css" role="alert"><fmt:message key="${mess}" /></div>
 	</c:if>
 	<div class="main" style="padding-top: 50px;">
 		<section class="signup">
@@ -35,14 +39,14 @@
 				<div class="signup-content border">
 					<form method="POST" id="signup-form" class="signup-form"
 						action="register">
-						<h2 class="form-title">Tạo tài khoản</h2>
+						<h2 class="form-title"> <fmt:message key="create_account" /></h2>
 						<div class="form-group">
 							<input type="text" class="form-input" name="username" id="name"
 								placeholder="Tên tài khoản" required maxlength="100" />
 						</div>
 						<div class="form-group">
 							<input type="email" class="form-input" name="email" id="email"
-								placeholder="Email" required maxlength="255" />
+								placeholder="Email" required maxlength="255"  />
 						</div>
 						<div class="form-group">
 							<input type="password" class="form-input" name="password"
@@ -59,17 +63,15 @@
 						<div class="form-group">
 							<input type="checkbox" name="agreeTerm" id="agree-term"
 								class="agree-term" required/> <label for="agree-term"
-								class="label-agree-term"><span><span></span></span>Tôi
-								đồng ý tất cả <a href="#" class="term-service">Điều khoản</a></label>
+								class="label-agree-term"><span><span></span></span><fmt:message key="agree_all" /><a href="#" class="term-service"><fmt:message key="dieukhoan" /></a></label>
 						</div>
 						<div class="form-group">
 							<input type="submit" name="submit" id="submit"
-								class="form-submit" value="Đăng ký" />
+								class="form-submit" value="<fmt:message key="regis" /> " />
 						</div>
 					</form>
 					<p class="loginhere">
-						Bạn đã có tài khoản ? <a href="login" class="loginhere-link">Đăng
-							nhập ở đây</a>
+						<fmt:message key="already_have_account" /> ? <a href="login" class="loginhere-link"> <fmt:message key="login_here" /></a>
 					</p>
 				</div>
 			</div>

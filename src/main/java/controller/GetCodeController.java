@@ -2,6 +2,8 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,8 +34,15 @@ public class GetCodeController extends HttpServlet {
 		resp.setCharacterEncoding("utf-8");
 		req.setCharacterEncoding("utf-8");
 		resp.setContentType("application/json");
-
 		String email = req.getParameter("email");
+		HttpSession session = req.getSession();
+		
+		  String lang = (String) session.getAttribute("lang");
+		    if (lang == null) {
+		        lang = "vi";
+		    }
+		    Locale locale = Locale.forLanguageTag(lang);
+		    ResourceBundle bundle = ResourceBundle.getBundle("messages", locale);
 		PrintWriter writer = resp.getWriter();
 		if (email == null || email.trim().isEmpty()) {
 			writer.print("{\"status\": \"error\",\"message\": \"Email không được để trống.\"}");
@@ -42,9 +51,9 @@ public class GetCodeController extends HttpServlet {
 		}
 		if (loginService.checkEmail(email)) {
 			String code = RandomStringUtils.randomAlphanumeric(6);
-			String content = "Mã xác thực của bạn là:" + code;
-			mailService.sendMail(email, content, "Xác thực quên mật khẩu");
-			HttpSession session = req.getSession();
+			String content = bundle.getString("verification.code") + code;
+			mailService.sendMail(email, content, bundle.getString("account.registration.verification"));
+		
 			session.setAttribute("checkCode", code);
 			session.setAttribute("checkEmail", email);
 			String re = (" \"" + code + "\"" + "}");

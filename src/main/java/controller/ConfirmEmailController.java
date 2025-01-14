@@ -2,6 +2,8 @@ package controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -43,10 +45,18 @@ public class ConfirmEmailController extends HttpServlet {
 		String email = (String) session.getAttribute("email");
 		String code = req.getParameter("conCode");
 		String confirmCode = (String) session.getAttribute("confirmCode");
+
+		String lang = (String) session.getAttribute("lang");
+		if (lang == null) {
+			lang = "vi";
+		}
+		Locale locale = Locale.forLanguageTag(lang);
+		ResourceBundle bundle = ResourceBundle.getBundle("messages", locale);
+
 		if (confirmCode == null) {
 			confirmCode = RandomStringUtils.randomAlphanumeric(6);
-			String content = "Mã xác thực của bạn là:" + confirmCode;
-			mailService.sendMail(email, content, "Xác thực đăng ký tài khoản");
+			String content = bundle.getString("auth.code.label") + confirmCode;
+			mailService.sendMail(email, content, bundle.getString("auth.registration.title"));
 			session.setAttribute("confirmCode", confirmCode);
 			doGet(req, resp);
 			return;
@@ -56,7 +66,7 @@ public class ConfirmEmailController extends HttpServlet {
 				loginService.register(username, password, email);
 				resp.sendRedirect("login");
 			} else {
-				req.setAttribute("mess", "Sai mã xác thực");
+				req.setAttribute("mess", bundle.getString("auth.code.invalid"));
 				doGet(req, resp);
 				return;
 			}

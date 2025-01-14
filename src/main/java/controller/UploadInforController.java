@@ -54,7 +54,7 @@ public class UploadInforController extends HttpServlet {
 		User user = (User) session.getAttribute("user");
 		LoginService loginService = (LoginService) session.getAttribute("loginService");
 		Information infor = loginService.getInforOfUser(user.getUserId());
-		if(infor == null) {
+		if (infor == null) {
 			infor = new Information();
 		}
 		String name = req.getParameter("name");
@@ -64,7 +64,24 @@ public class UploadInforController extends HttpServlet {
 		String birth = req.getParameter("birth");
 		String email = req.getParameter("email");
 		Part part = req.getPart("file");
-
+		if (name.trim().length() > 100) {
+			String mess = "Tên chữ được lưu giới hạn 100 ký tự";
+			req.setAttribute("mess", mess);
+			doGet(req, resp);
+			return;
+		}
+		if (phone.trim().length() != 10 || phone.trim().length() != 11) {
+			String mess = "Số điện thoại không được khác 10 hoặc 11";
+			req.setAttribute("mess", mess);
+			doGet(req, resp);
+			return;
+		}
+		if (cccd.trim().length() != 12) {
+			String mess = "Căn cước công dân phải chính xác 12 số";
+			req.setAttribute("mess", mess);
+			doGet(req, resp);
+			return;
+		}
 		infor.setName(name);
 		infor.setPhoneNumber(phone);
 		infor.setAddress(address);
@@ -77,6 +94,8 @@ public class UploadInforController extends HttpServlet {
 			if (!"image/png".equals(mimeType) && !"image/jpg".equals(mimeType)) {
 				String mess = "Không hỗ trợ đuôi khác .png, .jpg";
 				req.setAttribute("mess", mess);
+				doGet(req, resp);
+				return;
 			}
 			try {
 				// Dùng để đưa vào thumbnails để lấy byte[] dữ liệu
@@ -86,6 +105,8 @@ public class UploadInforController extends HttpServlet {
 				bytes = outputStream.toByteArray();
 			} catch (Exception e) {
 				req.setAttribute("mess", "Đã xảy ra lỗi khi upload ảnh");
+				doGet(req, resp);
+				return;
 			}
 		}
 		if ("update".equals(command)) {
