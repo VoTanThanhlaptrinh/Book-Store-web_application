@@ -93,7 +93,7 @@
 								name="title" value="${product.getTitle()}">
 							<button class="btn btn-primary w-100 mb-2" type="submit">
 								<span class="material-symbols-outlined me-2">shopping_cart</span>
-								Add to Cart
+								<fmt:message key="atk" />
 							</button>
 						</form>
 
