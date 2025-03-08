@@ -2,10 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/webPage/lib/tag.jsp"%>
 <!-- Lấy tham số lang từ URL và thiết lập Locale -->
-<fmt:setLocale value="${param.lang != null ? param.lang : (sessionScope.lang != null ? sessionScope.lang : 'vi')}"  />
+<fmt:setLocale
+	value="${param.lang != null ? param.lang : (sessionScope.lang != null ? sessionScope.lang : 'vi')}" />
 <fmt:setBundle basename="messages" />
 <c:if test="${param.lang != null}">
-    <c:set var="lang" value="${param.lang}" scope="session" />
+	<c:set var="lang" value="${param.lang}" scope="session" />
 </c:if>
 <!DOCTYPE html>
 <html>
@@ -41,85 +42,91 @@
 		</c:otherwise>
 	</c:choose>
 	<c:if test="${not empty failedMess}">
-		<div class="alert alert-danger" role="alert"><fmt:message key="${failedMess}" /></div>
+		<div class="alert alert-danger" role="alert">
+			<fmt:message key="${failedMess}" />
+		</div>
 	</c:if>
 
 	<c:if test="${not empty noMess}">
-		<div class="alert alert-danger" role="alert"><fmt:message key="${noMess}" /></div>
+		<div class="alert alert-danger" role="alert">
+			<fmt:message key="${noMess}" />
+		</div>
 	</c:if>
-	<main
-		class="d-flex container align-items-center justify-content-center">
-		<section class="container-sm mt-3 card shadow-0 border">
-			<!-- Product Title -->
-			<h3>${product.getTitle()}</h3>
-			<div class="row">
-				<!-- Image Column -->
-				<div class="col-5">
-					<img src="getImage?img_id=${product.getImgId()}" alt="Book Image"
-						class="img-fluid">
-				</div>
-
-				<!-- Product Details Column -->
-				<div class="col-7">
-					<!-- Product Description -->
-					<p>
-						<strong><fmt:message key="detail" />:</strong>
-						${product.getDescription()}
-					</p>
-
-					<!-- Product Remaining Quantity -->
-					<p>
-						<strong><fmt:message key="remain_quantity" />:</strong>
-						${product.getQuantity()}
-					</p>
-
-					<!-- Quantity Input -->
-					<div class="input-group mb-3">
-						<label for="amount" class="form-label me-2"> <strong><fmt:message
-									key="cart_quantity" />:</strong>
-						</label> <input type="number" id="amount" name="amount"
-							placeholder="Amount" value="1" class="form-control">
-					</div>
-
-					<!-- Button Group -->
-					<div class="button-group">
-						<!-- Add to Cart Button -->
-						<form action="add-to-cart" method="post"
-							onsubmit="cartUpdateHiddenAmount(event)">
-							<input type="hidden" name="id" value="${product.getProductId()}">
-							<input type="hidden" id="hiddenAmount1" name="amount" value="1">
-							<input type="hidden" name="pdQuantity"
-								value="${product.getQuantity()}"> <input type="hidden"
-								name="title" value="${product.getTitle()}">
-							<button class="btn btn-primary w-100 mb-2" type="submit">
-								<span class="material-symbols-outlined me-2">shopping_cart</span>
-								<fmt:message key="atk" />
-							</button>
-						</form>
-
-						<!-- Checkout Button -->
-						<form action="checkout" method="post"
-							onsubmit="CheckOutUpdateHiddenAmount(event)">
-							<input type="hidden" name="id" value="${product.getProductId()}">
-							<input type="hidden" id="hiddenAmount2" name="amount" value="1">
-							<input type="hidden" name="pdQuantity"
-								value="${product.getQuantity()}"> <input type="hidden"
-								name="title" value="${product.getTitle()}">
-							<button class="btn btn-success w-100" type="submit">
-								<span class="material-symbols-outlined me-2">attach_money</span>
-								<fmt:message key="checkout" />
-							</button>
-						</form>
-					</div>
-				</div>
+	<section class="container my-5 detail-product">
+		<div class="row">
+			<!-- Hình ảnh sản phẩm -->
+			<div class="col-lg-5 col-md-12">
+				<img src="getImage?img_id=${product.getImgId()}" alt=""
+					class="img-fluid rounded">
 			</div>
-		</section>
-	</main>
-	<div class="container pt-5">
+
+			<!-- Thông tin sản phẩm -->
+			<div class="col-lg-6 col-md-12">
+				<h6 class="text-muted">Trang chủ / Chi tiết sách</h6>
+				<h3 class="py-3 fw-bold">${product.getTitle()}</h3>
+				<h2 class="text-danger fw-bold">${product.price}đ</h2>
+
+				<!-- Nhập số lượng -->
+				<div class="d-flex align-items-center gap-2 mt-3">
+					<label for="amount" class="fw-semibold">Số lượng:</label> <input
+						type="number" class="form-control w-25 text-center" value="1"
+						id="amount" name="amount" min="1">
+				</div>
+
+				<!-- Nút thêm vào giỏ & Mua ngay -->
+				<div class="btn-group mt-4">
+					<form action="add-to-cart" method="post"
+						onsubmit="cartUpdateHiddenAmount(event)">
+						<input type="hidden" name="id" value="${product.getProductId()}">
+						<input type="hidden" id="hiddenAmount1" name="amount" value="1">
+						<input type="hidden" name="pdQuantity"
+							value="${product.getQuantity()}"> <input type="hidden"
+							name="title" value="${product.getTitle()}">
+						<button type="submit" class="btn card-btn fw-bold px-4 py-2">
+							<fmt:message key="atk" />
+						</button>
+					</form>
+					<form action="checkout" method="post"
+						onsubmit="CheckOutUpdateHiddenAmount(event)">
+						<input type="hidden" name="id" value="${product.getProductId()}">
+						<input type="hidden" id="hiddenAmount2" name="amount" value="1">
+						<input type="hidden" name="pdQuantity"
+							value="${product.getQuantity()}"> <input type="hidden"
+							name="title" value="${product.getTitle()}">
+						<button type="submit"
+							class="btn buy-btn fw-bold px-4 py-2 ms-2">
+							<fmt:message key="checkout" />
+						</button>
+					</form>
+				</div>
+
+				<!-- Số lượng tồn kho -->
+				<div class="d-flex align-items-center mt-3">
+					<h5 class="mb-0 fw-bold text-muted">
+						<fmt:message key="remain_quantity" />
+						:
+					</h5>
+					<span class="ms-2 fw-semibold">${product.getQuantity()}</span>
+				</div>
+
+				<!-- Mô tả sản phẩm -->
+				<h4 class="mt-4 mb-3 fw-bold">
+					<fmt:message key="detail" />
+					:
+				</h4>
+				<p class="text-muted">${product.getDescription()}</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="container pt-5">
 		<div class="row d-flex justify-content-center">
 			<div class="col-md-8 col-lg-10">
-				<div class="card sm shadow-0 border">
-					<h3 class="p-3"><fmt:message key="evaluate" />:</h3>
+				<div class="card sm shadow-0 border section-comment ">
+					<h3 class="p-3">
+						<fmt:message key="evaluate" />
+						:
+					</h3>
 					<div class="card-body p-4">
 						<div class="navbar-nav-scroll">
 							<c:if test="${evaluates.size() > 0}">
@@ -152,7 +159,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</section>
 
 	<script>
 		function cartUpdateHiddenAmount(event) {
