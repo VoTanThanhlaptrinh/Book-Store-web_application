@@ -3,7 +3,6 @@ package service;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.Date;
-import java.sql.SQLException;
 
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -33,34 +32,30 @@ public class LoginService implements ILoginService {
 		User user = daoImp.findByUserName(username);
 		if(user == null) {
 			return null;
+		}
+		String storedHash = user.getPassword();
+		if (BCrypt.checkpw(password, storedHash)) {
+			return user;
 		}else {
-			String storedHash = user.getPassword();
-			if (BCrypt.checkpw(password, storedHash)) {
-				return user;
-			}else {
-				return null;
-			}
+			return null;
 		}
 	}
 
 	@Override
-	public boolean register(String username, String password, String email) throws SQLException {
+	public boolean register(String username, String password, String email) throws Exception {
 		String passHash = BCrypt.hashpw(password, BCrypt.gensalt());
 		User user = new User(username, passHash, email, new Date(System.currentTimeMillis()),
 				new Date(System.currentTimeMillis()));
-
 		int i = 0;
-		try {
-			if(daoImp.checkEmail(email)) {
-				throw new SQLException("email đã tồn tại");
-			}
-			System.out.println("1");
-			i = daoImp.saveUser(user);
-		} catch (SQLException e) {
-			// TODO: handle exception
-			throw new SQLException("user đã tồn tại");
+		if(daoImp.checkEmail(email)) {
+			throw new Exception("email đã tồn tại");
 		}
-		
+		try {
+			i = daoImp.saveUser(user);
+		} catch (Exception e) {
+			// TODO: handle exception
+			throw new Exception("user đã tồn tại");
+		}
 		return i > 0;
 	}
 
