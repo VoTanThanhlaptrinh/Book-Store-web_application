@@ -1,13 +1,10 @@
 package controller;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
 import org.apache.commons.lang3.RandomStringUtils;
-
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -69,14 +66,11 @@ public class ConfirmEmailController extends HttpServlet {
 				doGet(req, resp);
 				return;
 			}
-		} catch (SQLServerException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			req.setAttribute("mess", e.getMessage());
 			doGet(req, resp);
 			return;
 		}
-
 	}
 
 	@Override
@@ -84,7 +78,7 @@ public class ConfirmEmailController extends HttpServlet {
 		// TODO Auto-generated method stub
 		loginService = new LoginService();
 		String from = "vtthanh32004@gmail.com";
-		String password = "loab yyfr gcpo fcqz";
+		String password = "rldl qiwm hkuw nety";
 		mailService = new SendMailImp(from, password);
 	}
 }

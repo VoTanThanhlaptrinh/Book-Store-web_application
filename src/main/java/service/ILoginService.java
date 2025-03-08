@@ -13,7 +13,7 @@ import models.User;
 public interface ILoginService {
 	User checkUser(String username, String password);
 
-	boolean register(String username, String password, String email) throws SQLException, SQLServerException;
+	boolean register(String username, String password, String email) throws SQLServerException, SQLException, Exception;
 
 	Information getInforOfUser(int userId);
 

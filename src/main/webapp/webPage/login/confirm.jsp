@@ -32,7 +32,9 @@
 	<div id="header-placeholder"><jsp:include
 			page="/webPage/trangChu/header.jsp"></jsp:include></div>
 	<c:if test="${mess != null}">
-		<div class="alert alert-danger text-center alert-css" role="alert"><fmt:message key="${mess}" /></div>
+		<div class="alert alert-danger text-center alert-css" role="alert">
+			<fmt:message key="${mess}" />
+		</div>
 	</c:if>
 	<div class="main">
 		<section class="signup" style="padding-top: 50px;">
@@ -69,14 +71,12 @@
 </body>
 <!-- This templates was made by Colorlib (https://colorlib.com) -->
 <script type="text/javascript">
-	async
-	function getCode() {
+	async function getCode() {
 
 		var messages = {
 			wait : "<fmt:message key='waiting_message'/>",
 			systemError : "<fmt:message key='system_error'/>"
 		};
-
 		const email = document.getElementById("email").value;
 		const existingMessage = document.querySelector(".alert-css");
 		if (existingMessage) {
@@ -89,14 +89,13 @@
 		mes.innerText = messages.wait;
 		container.appendChild(mes);
 		try {
+
 			const existingMessage1 = document.querySelector(".alert-css");
 			if (existingMessage) {
 				existingMessage1.remove();
 			}
-			var encodedEmail = "getCode?email=";
-			encodedEmail += email;
 			const response = await
-			fetch(encodedEmail, {
+			fetch("getCode?email=" + email, {
 				method : 'GET',
 				headers : {
 					Accept : 'application/json',
