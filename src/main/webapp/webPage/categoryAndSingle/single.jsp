@@ -14,20 +14,35 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <link rel="stylesheet" href="webPage/trangChu/CSS/header.css">
 <link rel="stylesheet" href="webPage/trangChu/CSS/footer.css">
 <link href="webPage/categoryAndSingle/css/style.css" rel="stylesheet">
 <link href="webPage/categoryAndSingle/css/star.css" rel="stylesheet">
-<title>Book Detail</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+	integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+	integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+	crossorigin="anonymous"></script>
+<link href="webPage/categoryAndSingle/css/single.css" rel="stylesheet">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+	integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link href="https://fonts.cdnfonts.com/css/cofo-sans" rel="stylesheet">
+<title>Chi tiết sách</title>
 </head>
 
 <body>
@@ -52,7 +67,7 @@
 			<fmt:message key="${noMess}" />
 		</div>
 	</c:if>
-	<section class="container my-5 detail-product">
+	<%-- <section class="container my-5 detail-product">
 		<div class="row">
 			<!-- Hình ảnh sản phẩm -->
 			<div class="col-lg-5 col-md-12">
@@ -93,8 +108,7 @@
 						<input type="hidden" name="pdQuantity"
 							value="${product.getQuantity()}"> <input type="hidden"
 							name="title" value="${product.getTitle()}">
-						<button type="submit"
-							class="btn buy-btn fw-bold px-4 py-2 ms-2">
+						<button type="submit" class="btn buy-btn fw-bold px-4 py-2 ms-2">
 							<fmt:message key="checkout" />
 						</button>
 					</form>
@@ -115,6 +129,118 @@
 					:
 				</h4>
 				<p class="text-muted">${product.getDescription()}</p>
+			</div>
+		</div>
+	</section> --%>
+	<!-- Chi tiết sách mới   -->
+	<section class="container-fluid product-background pt-2 ">
+		<div class="row justify-content-center gap-5 ms-6">
+			<div class="col-12 col-lg-3">
+				<img src="getImage?img_id=${product.getImgId()}"
+					class="img-fluid box-shadow w-100"
+					style="height: 450px; object-fit: cover;">
+			</div>
+			<div class="col-12 col-lg-4">
+				<h1 class="bold">${product.getTitle()}</h1>
+				<h4>Tác giả: Thành</h4>
+				<div class="d-flex gap-3">
+					<div class="rating-box">
+						<div class="stars">
+							<i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i>
+							<i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i>
+							<i class="fa-solid fa-star"></i>
+						</div>
+					</div>
+					<span class="rating-text">4.6(2999 đánh giá trên hệ thống)</span>
+				</div>
+				<h5>Paperback | English</h5>
+				<div class="d-flex icon gap-3 py-4 align-items-center">
+					<img src="webPage/categoryAndSingle/img/2168281.png"
+						class="img-fluid"> <img
+						src="webPage/categoryAndSingle/img/4494468.png" class="img-fluid">
+					<img src="webPage/categoryAndSingle/img/4494465.png"
+						class="img-fluid"> <img
+						src="webPage/categoryAndSingle/img/download.png" class="img-fluid">
+				</div>
+				<h3 class="fst-italic">The sun day time No.1 Bestseller</h3>
+				<h6>
+					Out of the secret world i once knew, i have tried to make a theatre
+					for the lager worlds we inhabit. First comes the imaginning, then
+					the search for reality. Then go back to the imagining... <span
+						class="text-orange">Read mode</span>
+				</h6>
+				<hr>
+				<div class="row">
+					<div class="col-sm-3 col-12 mt-2 bold">
+						<h6>Language</h6>
+						<h6>Quantity</h6>
+						<h6>Size/Pages</h6>
+					</div>
+					<div class="col-sm-3 col-12 mt-2">
+						<span class="fst-italic">English</span> <span class="fst-italic">Papperback</span>
+						<span class="fst-italic">352p</span>
+					</div>
+					<div class="col-sm-3 col-12 mt-2 bold">
+						<h6>Publisher</h6>
+						<h6>Publish date</h6>
+						<h6>ISBN</h6>
+					</div>
+					<div class="col-sm-3 col-12 mt-2">
+						<p class="fst-italic">Ông A</p>
+						<p class="fst-italic">2017 / 05</p>
+						<p class="fst-italic">23746039524</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-12 col-lg-3 mt-5">
+
+				<div class="d-flex align-items-center gap-2">
+					<h1 class="money-text">${product.price}đ</h1>
+					<h5 class="ms-5  fst-italic">Online</h5>
+				</div>
+				<div class="d-flex align-items-center gap-1">
+					<h2 class="money-text">${product.price* 0.8}đ</h2>
+					<span class="money-detail ">-20%</span>
+					<h5 class="ms-4 fst-italic">Tại shop</h5>
+				</div>
+				<hr class="py-2">
+				<div class="d-flex align-items-center gap-3">
+					<img src="webPage/categoryAndSingle/img/dropbox.png"
+						class="img-fluid dropbox-img"></img>
+					<h6>Miễn phí giao với đơn trên 500000.0đ</h6>
+				</div>
+				<div class="d-flex align-items-center gap-3 mt-3">
+					<img src="webPage/categoryAndSingle/img/check.png"
+						class="img-fluid dropbox-img"></img>
+					<h6>Có sẵn, giao hàng trong 2 ngày</h6>
+				</div>
+				<div class="d-flex align-items-center gap-3 mt-3">
+					<img src="webPage/categoryAndSingle/img/shopping-store.png"
+						class="img-fluid dropbox-img"></img>
+					<h6>Có sẵn tại tất cả các cửa hàng</h6>
+				</div>
+				<form action="add-to-cart" method="post"
+					onsubmit="cartUpdateHiddenAmount(event)">
+					<input type="hidden" name="id" value="${product.getProductId()}">
+					<input type="hidden" id="hiddenAmount1" name="amount" value="1">
+					<input type="hidden" name="pdQuantity"
+						value="${product.getQuantity()}"> <input type="hidden"
+						name="title" value="${product.getTitle()}">
+					<button class="card-btn mt-4" type="submit" id="card-btn">
+						<strong><fmt:message key="atk" /> </strong>
+					</button>
+				</form>
+				<form action="checkout" method="post"
+					onsubmit="CheckOutUpdateHiddenAmount(event)">
+					<input type="hidden" name="id" value="${product.getProductId()}">
+					<input type="hidden" id="hiddenAmount2" name="amount" value="1">
+					<input type="hidden" name="pdQuantity"
+						value="${product.getQuantity()}"> <input type="hidden"
+						name="title" value="${product.getTitle()}">
+					<button class="buy-btn mt-2" type="submit" id="buy-btn">
+						<strong> <fmt:message key="checkout" /></strong>
+					</button>
+				</form>
 			</div>
 		</div>
 	</section>
