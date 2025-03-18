@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/webPage/lib/tag.jsp"%>
+
 <fmt:setLocale value="${param.lang != null ? param.lang : (sessionScope.lang != null ? sessionScope.lang : 'vi')}"  />
 <fmt:setBundle basename="messages" />
 <c:if test="${param.lang != null}">
@@ -11,9 +12,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="webPage/trangChu/CSS/index.css">
-<link rel="stylesheet" href="webPage/trangChu/CSS/header.css">
-<link rel="stylesheet" href="webPage/trangChu/CSS/footer.css">
+<link rel="stylesheet" href="/BOOK_STORE/webPage/trangChu/CSS/index.css">
+<link rel="stylesheet" href="/BOOK_STORE/webPage/trangChu/CSS/header.css">
+<link rel="stylesheet" href="/BOOK_STORE/webPage/trangChu/CSS/footer.css">
+<script src="https://cdn.lordicon.com/lordicon.js"></script>
+    <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <title>Trang chủ</title>
 </head>
 <body>
@@ -24,84 +28,227 @@
         <div id="header-placeholder"><jsp:include page="/webPage/trangChu/header.jsp"></jsp:include></div>
     </c:if>
 
-    <div>
-        <img alt="" src="webPage/trangChu/images/banner1.png">
-    </div>
-    
-    <div style="height: 50px; padding-top: 60px;">
-        <!-- Nội dung trang giả lập -->
-    </div>
-    <div class="topic">
-        <h2 class="danhmuc"><fmt:message key="random" /></h2> <!-- Updated -->
-        <div class="bookshelf">
-            <c:forEach var="product" items="${randomList}">
-                <a href="chi-tiet-sach?id=${product.getProductId()}" class="giasoc-button"> 
-                    <img class="item-img" src="getImage?img_id=${product.getImgId()}" alt="">
-                    <p class="book-title">${product.getTitle()}</p>
-                    ${product.getPrice()}đ
-                </a>
-            </c:forEach>
-        </div>
-    </div>
-    
-    <div style="height: 50px; padding-top: 60px;">
-        <!-- Nội dung trang giả lập -->
-    </div>
-    
-    <div class="topic">
-        <h2 class="giasoc">
-            <i class="fa-solid fa-cart-shopping" style="color: #ffffff; background-color: rgb(255, 85, 59); margin-right: 10px; margin-left: 10px;"></i>
-            <fmt:message key="new_product" /> <!-- Updated -->
-        </h2>
-        <div class="button-list">
-            <c:forEach var="product" items="${topRecentList}">
-                <a href="chi-tiet-sach?id=${product.getProductId()}" class="giasoc-button"> 
-                    <img class="item-img" src="getImage?img_id=${product.getImgId()}" alt="">
-                    <p class="book-title">${product.getTitle()}</p>
-                    ${product.getPrice()}đ
-                </a>
-            </c:forEach>
-        </div>
-    </div>
-    
-    <a><button class="xem-them"><fmt:message key="see_more" /></button></a> <!-- Updated -->
-
-    <div style="height: 50px; padding-top: 60px;">
-        <!-- Nội dung trang giả lập -->
-    </div>
-    
-    <div class="topic">
-        <h2 class="danhmuc"><fmt:message key="novel" /></h2> <!-- Updated -->
-        <div class="bookshelf">
-            <c:forEach var="tieuthuyet" items="${tieuthuyet}">
-                <a href="chi-tiet-sach?id=${tieuthuyet.getProductId()}" class="giasoc-button"> 
-                    <img class="item-img" src="getImage?img_id=${tieuthuyet.getImgId()}" alt="">
-                    <p class="book-title">${tieuthuyet.getTitle()}</p>
-                    ${tieuthuyet.getPrice()}đ
-                </a>
-            </c:forEach>
-        </div>
+     <div class="banner_div">
+            <div class="banner_1">
+                    <img src="https://cdn1.fahasa.com/media/magentothem/banner7/ThaiHa_Bac_Resize_840x320.png" alt="">
+            </div>
+            <div class="banner_list_1">
+                <img src="https://cdn1.fahasa.com/media/wysiwyg/Thang-03-2025/Subpark_Way.png" alt="">
+                <img src="https://cdn1.fahasa.com/media/wysiwyg/Thang-03-2025/Fahasa_OnineT3_392x156_1.jpg" alt="">
+                <img src="https://cdn1.fahasa.com/media/magentothem/banner7/TrangThuBongT2g_840x320.jpg" alt="">
+            </div>
     </div>
 
-    <div style="height: 50px; padding-top: 60px;">
-        <!-- Nội dung trang giả lập -->
+    <div class="content_div_1">
+        <div class="content_div_1_element">
+            <img src="https://img.freepik.com/free-vector/gradient-hyper-pink-ice-cream-illustration_52683-140811.jpg?t=st=1741852927~exp=1741856527~hmac=cad0f8ba692f706a3223065eee7afaac8182e628e5a9f9429ee25daa1d8d9923&w=1380"
+             alt="" >
+            <p> Sách tham khảo</p>
+
+        </div>
+
+        <div class="content_div_1_element">
+            <img src="https://img.freepik.com/premium-vector/golden-tet-sale-banner-2025-with-red-envelopes-vouchers_196898-3336.jpg?w=900" alt="">
+            <p>Sách nhập vai </p>
+        </div>
+
+        
+        <div class="content_div_1_element">
+            <img src="https://img.freepik.com/premium-vector/special-shopping-day-sale-discount-deals-with-blue-gradient-trapezium-label-badge-banner-vector_171508-2505.jpg?w=900" alt="">
+            <p>Sách nhập vai </p>
+        </div>
+
+        <div class="content_div_1_element">
+            <img src="https://img.freepik.com/free-vector/gradient-hyper-pink-ice-cream-illustration_52683-140811.jpg?t=st=1741852927~exp=1741856527~hmac=cad0f8ba692f706a3223065eee7afaac8182e628e5a9f9429ee25daa1d8d9923&w=1380"
+             alt="" >
+            <p> Sách tham khảo</p>
+
+        </div>
+
+        <div class="content_div_1_element">
+            <img src="https://img.freepik.com/premium-vector/golden-tet-sale-banner-2025-with-red-envelopes-vouchers_196898-3336.jpg?w=900" alt="">
+            <p>Sách nhập vai </p>
+        </div>
+
+        
+        <div class="content_div_1_element">
+            <img src="https://img.freepik.com/premium-vector/special-shopping-day-sale-discount-deals-with-blue-gradient-trapezium-label-badge-banner-vector_171508-2505.jpg?w=900" alt="">
+            <p>Sách nhập vai </p>
+        </div>
+
+        <div class="content_div_1_element">
+            <img src="https://img.freepik.com/free-vector/gradient-hyper-pink-ice-cream-illustration_52683-140811.jpg?t=st=1741852927~exp=1741856527~hmac=cad0f8ba692f706a3223065eee7afaac8182e628e5a9f9429ee25daa1d8d9923&w=1380"
+             alt="" >
+            <p> Sách tham khảo</p>
+
+        </div>
+
+        <div class="content_div_1_element">
+            <img src="https://img.freepik.com/premium-vector/golden-tet-sale-banner-2025-with-red-envelopes-vouchers_196898-3336.jpg?w=900" alt="">
+            <p>Sách nhập vai </p>
+        </div>
+
     </div>
-    
-    <div class="categories-container">
-        <div class="category">
-            <h3><fmt:message key="domestic_literature" /></h3> <!-- Updated -->
-            <div class="banner">
-                <span><fmt:message key="domestic_literature" /></span> <img src="webPage/trangChu/images/bookbanner.jpg" alt="Văn học banner">
-            </div>
-            <div class="books">
-                <img src="webPage/trangChu/images/sach1.webp" alt="Book 1"> 
-                <img src="webPage/trangChu/images/sach2.webp" alt="Book 2"> 
-                <img src="webPage/trangChu/images/sach3.webp" alt="Book 3"> 
-                <img src="webPage/trangChu/images/sach4.webp" alt="Book 4">
+
+    <div class="sale-content">
+        <video autoplay loop muted playsinline id="background-video">
+            <source src="https://cdn.pixabay.com/video/2023/07/04/170065-842720168_large.mp4" type="video/mp4">
+        </video>
+
+        <div class="content">
+            <div class="content-left">
+            <img src="https://cdn0.fahasa.com/skin/frontend/ma_vanese/fahasa/images/flashsale/label-flashsale.svg?q=" alt="">
+
+            <div class="countdown-container">
+                Kết thúc trong 
+                <div class="countdown-box" id="hours">00</div> 
+                <span class="separator">:</span> 
+                <div class="countdown-box" id="minutes">00</div> 
+                <span class="separator">:</span> 
+                <div class="countdown-box" id="seconds">00</div>
             </div>
         </div>
-        <!-- More categories here with <fmt:message key="domestic_literature" /> -->
+            <div class="content-right">
+               <a href="#">Xem tất cả ></a>   
+            </div>
+        </div>
+
+          <div class="sale-books">
+            <div class="sale-books-element">
+                <img src="https://cdn1.fahasa.com/media/catalog/product/8/9/8935212361910.jpg" alt="">
+                <p>Những câu chuyện tò mò của bé</p>
+                <h4>136.000 đ</h4>
+                <h6>150.000 đ</h6>
+                <h5>20%</h5>
+            </div>
+            <div class="sale-books-element">
+                <img src="https://cdn1.fahasa.com/media/catalog/product/8/9/8935246943663.jpg" alt="">
+                <p>Sổ tay vật lý cấp 3- ALL in One</p>
+                <h4>50.000 đ</h4>
+                <h6>100.000 đ</h6>
+                <h5>50%</h5>
+            </div>
+            <div class="sale-books-element">
+                <img src="https://cdn1.fahasa.com/media/catalog/product/8/9/8935235243163.jpg" alt="">
+                <p>Khi mọi điều không như ý </p>
+                <h4>241.000 đ</h4>
+                <h6>300.000 đ</h6>
+                <h5>36%</h5>
+            </div>
+            <div class="sale-books-element">
+                <img src="https://cdn1.fahasa.com/media/catalog/product/9/7/9786044049007.jpg" alt="">
+                <p>Đánh giá năng lực Dhqg- THPHCM, tổng ôn phần tư duy logic</p>
+                <h4>50.000 đ</h4>
+                <h6>100.000 đ</h6>
+                <h5>50%</h5>
+            </div>
+            <div class="sale-books-element">
+                <img src="https://cdn1.fahasa.com/media/catalog/product/8/9/8935235243163.jpg" alt="">
+                <p>Khi mọi điều không như ý </p>
+                <h4>241.000 đ</h4>
+                <h6>300.000 đ</h6>
+                <h5>36%</h5>
+            </div>
+          </div>  
+
+          
     </div>
+    
+    <div class="danh-muc-sp">
+            <h1>Danh mục sản phẩm</h1>
+                <hr style="margin-top: 20px; color: rgb(197, 197, 197);">
+            <div class="danh-muc-sp-element">
+                <a href="#">
+                <div class="danh-muc-sp-element-1"> 
+                        <img src="https://cdn1.fahasa.com/media/wysiwyg/Duy-VHDT/Danh-muc-san-pham/2502/8936066695107.jpg" alt="">
+                        <p>Kinh tế</p>
+                </div>
+            </a>
+            <a href="#">
+                <div class="danh-muc-sp-element-1">
+                    <img src="https://cdn1.fahasa.com/media/wysiwyg/Duy-VHDT/Danh-muc-san-pham/8935244874389.jpg" alt="">
+                    <p>Văn học</p>
+                </div>
+            </a>
+            <a href="#">
+                <div class="danh-muc-sp-element-1">
+                    <img src="https://cdn1.fahasa.com/media/wysiwyg/Duy-VHDT/Danh-muc-san-pham/bup-sen-xanh-100x100.png" alt="">
+                    <p>Thiếu nhi</p>
+                </div>
+            </a>
+            <a href="#">
+                <div class="danh-muc-sp-element-1">
+                    <img src="https://cdn1.fahasa.com/media/wysiwyg/Duy-VHDT/Danh-muc-san-pham/240715/atomichabit100x100.jpg" alt="">
+                    <p>Tâm lý</p>
+                </div>
+            </a>
+
+
+            <a href="#">
+                <div class="danh-muc-sp-element-1"> 
+                        <img src="https://cdn1.fahasa.com/media/wysiwyg/Duy-VHDT/Danh-muc-san-pham/2502/8936066695107.jpg" alt="">
+                        <p>Kinh tế</p>
+                </div>
+            </a>
+            <a href="#">
+                <div class="danh-muc-sp-element-1">
+                    <img src="https://cdn1.fahasa.com/media/wysiwyg/Duy-VHDT/Danh-muc-san-pham/8935244874389.jpg" alt="">
+                    <p>Văn học</p>
+                </div>
+            </a>
+            <a href="#">
+                <div class="danh-muc-sp-element-1">
+                    <img src="https://cdn1.fahasa.com/media/wysiwyg/Duy-VHDT/Danh-muc-san-pham/bup-sen-xanh-100x100.png" alt="">
+                    <p>Thiếu nhi</p>
+                </div>
+            </a>
+            <a href="#">
+                <div class="danh-muc-sp-element-1">
+                    <img src="https://cdn1.fahasa.com/media/wysiwyg/Duy-VHDT/Danh-muc-san-pham/240715/atomichabit100x100.jpg" alt="">
+                    <p>Tâm lý</p>
+                </div>
+            </a>
+            <a href="#">
+                <div class="danh-muc-sp-element-1">
+                    <img src="https://cdn1.fahasa.com/media/wysiwyg/Duy-VHDT/Danh-muc-san-pham/bup-sen-xanh-100x100.png" alt="">
+                    <p>Thiếu nhi</p>
+                </div>
+            </a>
+    
+                    </div>
+              
+
+
+                
+    </div>
+    <script>
+        let totalSeconds = 9000; // 1 giờ 24 phút 15 giây
+
+        function updateCountdown() {
+            let hours = Math.floor(totalSeconds / 3600);
+            let minutes = Math.floor((totalSeconds % 3600) / 60);
+            let seconds = totalSeconds % 60;
+
+            document.getElementById("hours").innerText = String(hours).padStart(2, '0');
+            document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
+            document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
+        }
+
+        function startCountdown() {
+            updateCountdown();
+            let countdown = setInterval(() => {
+                if (totalSeconds > 0) {
+                    totalSeconds--;
+                    updateCountdown();
+                } else {
+                    clearInterval(countdown);
+                    alert("Hết giờ!");
+                }
+            }, 1000);
+        }
+
+        startCountdown();
+    </script>
 
     <!-- Footer will be included here -->
     <div id="footer-placeholder">
