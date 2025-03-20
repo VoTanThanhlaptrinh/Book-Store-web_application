@@ -26,7 +26,61 @@
                 loop
                 autoplay>
             </dotlottie-player>
-        </div>  
+               <div class="dropdown">
+                <h2>Sách trong nước</h2>
+                <div class="vertical-line"></div>
+                <div class="drd_line">
+                <div class="drd_line_1">
+                <div class="link_dropdown_1"><a class="link_dropdown_1_a1" href="#">Văn học</a>
+                    <a class="link_dropdown_1_a2" href="#">Tiểu thuyết</a>
+                    <a class="link_dropdown_1_a2" href="#">Truyện ngắn</a>
+                    <a class="link_dropdown_1_a2" href="#">Light-novel</a>
+                    <a class="link_dropdown_1_a2" href="#">Ngôn tình</a>
+                    <a class="link_dropdown_1_a3" href="#">Xem tất cả</a>
+                </div>
+                <div class="link_dropdown_1"><a class="link_dropdown_1_a1" href="#">Kinh tế</a>
+                    <a class="link_dropdown_1_a2" href="#">Nhân Vật - Bài Học Kinh Doanh</a>
+                    <a class="link_dropdown_1_a2" href="#">Quản Trị - Lãnh Đạo</a>
+                    <a class="link_dropdown_1_a2" href="#">Light-novel</a>
+                    <a class="link_dropdown_1_a2" href="#">Marketing - Bán Hàng</a>
+                    <a class="link_dropdown_1_a3" href="#">Xem tất cả</a>
+                </div>      
+                <div class="link_dropdown_1"><a class="link_dropdown_1_a1" href="#">Tâm Lý - Kĩ Năng Sống</a>
+                    <a class="link_dropdown_1_a2" href="#">Kỹ Năng Sống</a>
+                    <a class="link_dropdown_1_a2" href="#">Rèn Luyện Nhân Cách</a>
+                    <a class="link_dropdown_1_a2" href="#">Tâm Lý</a>
+                    <a class="link_dropdown_1_a2" href="#">Sách Cho Tuổi Mới Lớn</a>
+                    <a class="link_dropdown_1_a3" href="#">Xem tất cả</a>
+                </div>
+            </div>    
+        
+                 <div class="drd_line_1">
+                <div class="link_dropdown_1"><a class="link_dropdown_1_a1" href="#">Nuôi Dạy Con</a>
+                    <a class="link_dropdown_1_a2" href="#">Cẩm Nang Làm Cha Mẹ</a>
+                    <a class="link_dropdown_1_a2" href="#">Phương Pháp Giáo Dục Trẻ</a>
+                    <a class="link_dropdown_1_a2" href="#">Phát Triển Trí Tuệ Cho Trẻ</a>
+                    <a class="link_dropdown_1_a2" href="#">Phát Triển Kỹ Năng Cho Trẻ</a>
+                    <a class="link_dropdown_1_a3" href="#">Xem tất cả</a>
+                </div>
+                <div class="link_dropdown_1"><a class="link_dropdown_1_a1" href="#">Sách Thiếu Nhi</a>
+                    <a class="link_dropdown_1_a2" href="#">Manga - Comic</a>
+                    <a class="link_dropdown_1_a2" href="#">Kiến Thức Bách Khoa</a>
+                    <a class="link_dropdown_1_a2" href="#">Sách Tranh Kỹ Năng Sống</a>
+                    <a class="link_dropdown_1_a2" href="#">Vừa Học - Vừa Chơi</a>
+                    <a class="link_dropdown_1_a3" href="#">Xem tất cả</a>
+                </div>      
+                <div class="link_dropdown_1"><a class="link_dropdown_1_a1" href="#">Tiểu Sử - Hồi Ký</a>
+                    <a class="link_dropdown_1_a2" href="#">Câu Chuyện Cuộc Đời</a>
+                    <a class="link_dropdown_1_a2" href="#">Chính Trị</a>
+                    <a class="link_dropdown_1_a2" href="#">Kinh Tế</a>
+                    <a class="link_dropdown_1_a2" href="#">Nghệ Thuật - Giải Trí</a>
+                    <a class="link_dropdown_1_a3" href="#">Xem tất cả</a>
+                </div>
+            </div>  
+            </div>    
+        </div>               
+             </div>  
+     
         
         <div class="search-box">
             <input type="text" placeholder="Tìm kiếm...">

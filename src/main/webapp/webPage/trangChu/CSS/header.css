@@ -22,10 +22,12 @@ header {
 .filter_div {
     padding: 2px;
     border: 2px solid black;
+    
     border-radius: 5px;
     margin-right: 40px;
     display: flex;
     cursor: pointer;
+    position: relative; /* Đảm bảo dropdown bám vào */
 }
 .filter_div p{
     font-size: 13px;
@@ -34,6 +36,74 @@ header {
     padding-top: 13px;
     margin-left: 5px;
     margin-right: 5px;
+}
+
+.dropdown {
+    display: none;
+    position: absolute;
+    width: max-content;
+    margin-top: 2px;
+    height: max-content;
+    padding: 30px;
+    top: 100%; /* Đặt ngay dưới .filter_div */
+    left: 0;
+    background: white;
+    color: rgb(4, 4, 4);
+    min-width: 150px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    overflow: hidden;
+}
+.drd_line {
+    display: flex;
+    flex-direction: column;
+    gap: 70px;
+}
+.drd_line_1 {
+    width: max-content;
+    display: flex;
+    justify-content: space-evenly;
+    gap: 40px;
+}
+.link_dropdown_1 {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    gap: 10px;
+}
+.link_dropdown_1_a1 {
+    text-decoration: none;
+    font-size: 20px;
+    color: black;
+    font-weight:  bold;
+    line-height:  inherit;
+}
+.link_dropdown_1_a2 {
+    text-decoration: none;
+    font-size: 15px;
+    color: rgb(66, 66, 66);
+    font-weight:  normal;
+    line-height:  inherit;
+} 
+
+.link_dropdown_1_a2:hover {
+    color:#5d6900;
+}
+.link_dropdown_1_a3 {
+    text-decoration: none;
+    font-size: medium;
+    color: #5d6900;
+    font-weight:  normal;
+    line-height:  inherit;
+}
+.vertical-line {
+    width: 1px; 
+    margin-left: 12px;
+    height: 100px; 
+    background-color: rgb(187, 187, 187); 
+}
+.filter_div:hover .dropdown {
+    display: flex;
 }
 
 .search-box {

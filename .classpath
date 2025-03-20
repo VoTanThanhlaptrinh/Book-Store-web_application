@@ -14,5 +14,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="D:/ApacheTomcat/apache-tomcat-10.1.5/lib/jakarta.servlet-api-6.0.0.jar"/>
+	<classpathentry kind="lib" path="D:/HikariCP-5.0.1.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
