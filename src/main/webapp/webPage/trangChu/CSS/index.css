@@ -1,184 +1,210 @@
 @charset "UTF-8";
 
-body {
-    background-color: beige;
-    font-family: sans-serif;
-    color: rgb(0, 0, 0);
-    font-weight:  normal;
-    line-height:  inherit;
-}
-
-.danhmuc{
-    font-size: 40px;
-    background-color: white;
-}
-
-.topic {
-    background-color: rgb(255, 255, 255);
-    border: 3px solid rgb(255, 255, 255);
-    border-radius: 10px;
-    width: 100%;
-    height: fit-content;
-    text-align: center;
-    margin-top: 80px;
-    
-}
-
-.bookshelf{
-    background-color: white;
+.banner_div {
+    margin-left: 140px;
+    margin-top: 50px;
     display: flex;
-    flex-direction: row;
-    list-style: none;
-    padding-top: 10px;
+    align-items: center;
+}
+.banner_1 {
+    width : max-content; 
+    height:  max-content;
+  
+}
+body {
+    background-color: rgb(237, 237, 237);
+}
+.banner_1 img {
+    width: 900px;
+    height: 450px;
+    border-radius: 10px;
+    border: none;
+}
+.banner_list_1 {
+    margin-left: 40px;
+    display: flex;
+    flex-direction: column; /* Hiển thị theo chiều dọc */
+    align-items: center; /* Căn giữa các item */
+    gap: 10px; /* Khoảng cách giữa các sản phẩm */
+
+}
+.banner_list_1 img{
+    width: 300px;
+    height: 140px;
+    border-radius: 10px;
+}
+.content_div_1 {
+    display: flex;
+    width: 1243px;
+    height: fit-content;
+    background-color: white;
+    border-radius: 5px;
+    
+    margin-top: 30px;
+    margin-left: 140px;
+    cursor: pointer;
+}
+.content_div_1_element {
+    display: flex; /* Kích hoạt Flexbox */
+    align-items: center;
+    flex-direction: column; /* Xếp phần tử theo cột */
+    margin-left: 30px;
+    margin-top: 50px;
+    
+    width: 120px;
+    height:120px;
+    border-radius: 5px;
+    gap: 10px;
+    color: black
 }
 
-
-.items-list {
-    color: rgb(90, 90, 90);
-    font-weight:  normal;
-    line-height:  inherit;
+.content_div_1_element img {
+    width: 50px; 
+    height: 50px;
+    border-radius: 5px;
+}
+.content_div_1_element p {
+    padding-top: 18px;
+    color: rgb(104, 104, 104);
+}
+.sale-content {
+    margin-top: 30px;
+    width: 100%;
+    height: 500px;
+    background-color: crimson;
+}
+.sale-content video {
+    position: absolute;
+    width: 100%;
+    object-fit: fill;
+    height: 500px;
+}
+.content {
+    display: flex;
+    justify-content: space-between;
     position: relative;
-    background-color: #ffffff;
-    width: 150px;
-    height: 200px;
-    padding-left: 30px;
-    padding-top: 20px;
+    border-radius: 5px;
+    background-color: white;
+    height: max-content;
+    width: 1243px;
+    margin-left: 140px;
+    top: 40px;
+    z-index: 1;
+    text-align: center;
+    color: rgb(0, 0, 0);
+    font-size: 12px;
+    font-weight: bold;
 }
-.items-list:hover {
-    color: #2894dc;
+.countdown-container {
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    font-weight: bold;
 }
-a {
+.countdown-box {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background-color: black;
+    color: white;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 5px;
+    margin: 0 5px;
+}
+.separator {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0 3px;
+}
+.content-left {
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+}
+.content-left a{
+    top: 10px;
+}
+.sale-books {
+    position: relative;
+    display: flex;
+    width: 1243px;
+    gap: 3%;
+    margin-top: 90px;
+    margin-left: 140px;
+    height: max-content;
+}
+.sale-books img {
+    width: 100px;
+    height: 150px;
+
+}
+.sale-books-element {
+    background-color: white;
+    display: grid;
+    border-radius: 5px;
+    place-items: center; /* Căn giữa cả ngang và dọc */
+    width: 240px;
+    height: 300px;
+}
+.sale-books-element img {
+    width: 190px;
+    height: 190px;
+}
+.sale-books-element h4 {
+    color: red;
+}
+.sale-books-element h5 {
+    display: inline-block; /* Giúp khung chỉ bao quanh nội dung */
+    background-color: red;
+    color: white;
+    border: 2px solid red/* Độ dày và màu của khung */
+}
+.sale-books-element h6 {
+    text-decoration: line-through;
+    color: rgb(104, 104, 104);
+}
+.danh-muc-sp {
+    width: 1243px;
+    height: 250px;
+    border-radius: 5px;
+    margin-top: 40px;
+    background-color: white;
+    margin-left: 140px;
+}
+.danh-muc-sp a {
+    color: black;
     text-decoration: none;
 }
-
-.giasoc {
-    position: relative;
-    text-align: left;
-    height: 50px;
-    margin-top: -3px;
-    font-size: 30px;
-    border-radius: 10px;
-    color: white;
-    font-weight:  normal;
-    line-height:  inherit;
-    background-color: rgb(40, 131, 211);
-    transition: 1s;
-
-}
-.button-list {
-    display: flex; /* Dùng flexbox để xếp ngang */
-    flex-wrap: wrap; /* Cho phép xuống dòng khi vượt quá chiều rộng */
-    margin-right: 50px;
-    background-color: white;
-    width: 100%; /* Đảm bảo chiếm toàn bộ chiều ngang */
-    height: fit-content;
-    list-style: none;
-    padding-top: 30px;
-    gap: 20px; /* Khoảng cách giữa các phần tử */
-}
-
-.giasoc-button {
-    display: flex; /* Giúp căn chỉnh nội dung bên trong */
-    flex-direction: column; /* Sắp xếp nội dung theo chiều dọc */
-    align-items: center; /* Căn giữa hình ảnh và text */
-    justify-content: center;
-    text-align: center; /* Căn giữa chữ */
-    width: 150px; /* Đặt chiều rộng cố định cho mỗi ô */
-    padding-top: 10px;
-    border-radius: 10px;
-    background-color: white;
-    color: red;
-    transition: 0.5s;
-    margin-left: 0; /* Xóa khoảng cách không cần thiết */
-    border: white;
-}
-
-.item-img {
-    width: 100px; /* Kích thước hình ảnh */
-    height: 150px;
-    object-fit: cover; /* Đảm bảo ảnh không bị méo */
-}
-.xem-them {
-    margin-left: 37%;
-    font-size: 18px;
-    background-color: white;
-    border: none;
-    color: rgb(160, 160, 160);
-    font-weight:  normal;
-    line-height:  inherit;
-    border-radius: 10px;
-    margin-top: 30px;
-    width: 400px;
-    height: 50px;
-}
-
-
-.categories-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    padding: 20px;
-}
-
-.category {
-    background-color: #ffffff;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    margin: 10px;
-    width: calc(25% - 20px);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-}
-
-.category h3 {
-    margin: 0;
-    padding: 10px;
-    background-color: #f06d5e;
-    color: #ffffff;
-    text-align: center;
-}
-
-.banner {
-    position: relative;
-    text-align: center;
-}
-.book-title {
+.danh-muc-sp h1 {
+    font-family: sans-serif;
+    padding-left: 20px;
+    padding-top: 20px;
+    font-size: 20px;
     color: black;
-    background-color: white;
+    font-weight:  bold;
+    line-height:  inherit;
 }
-
-.banner span {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    color: white;
-    font-size: 1rem;
-    font-weight: bold;
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 5px 10px;
-    border-radius: 4px;
-}
-
-.banner img {
-    width: 100%;
-    height: auto;
-}
-
-.books {
+.danh-muc-sp-element {
     display: flex;
-    justify-content: space-around;
-    padding: 10px;
+    margin-left: 40px;
+    margin-top: 30px;
+    gap: 20px;
 }
-
-.books img {
-    width: 60px;
-    height: auto;
-    margin: 0 5px;
-    border-radius: 4px;
-    transition: transform 0.3s ease;
+.danh-muc-sp-element-1 {
+    display: grid;
+    cursor: pointer;
+    padding: 5px;
+    gap: 20px;
+    place-items: center; /* Căn giữa cả ngang và dọc */
+    width: max-content;
+    height: max-content;
 }
+.danh-muc-sp-element-1 img {
+    width: 100px;
+    height: 100px;
 
-.books img:hover {
-    transform: scale(1.1);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.danh-muc-sp-element-1:hover {
+    color: blueviolet;
 }

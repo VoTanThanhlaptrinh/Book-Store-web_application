@@ -28,14 +28,16 @@ public class ProductDAOImp implements IProductDao {
 				String title = resultSet.getNString(2);
 				double price = resultSet.getDouble(3);
 				String description = resultSet.getNString(4);
-				String type = resultSet.getNString(5);
-				int imgId = resultSet.getInt(6);
-				Date createDate = resultSet.getDate(7);
-				Date updateDate = resultSet.getDate(8);
-				int quantity = resultSet.getInt(9);
-				int adminId = resultSet.getInt(10);
-				products.add(new Product(id, adminId, title, price, description, type, imgId, createDate, updateDate,
-						quantity));
+				
+				int imgId = resultSet.getInt(5);
+				Date createDate = resultSet.getDate(6);
+				Date updateDate = resultSet.getDate(7);
+				int quantity = resultSet.getInt(8);
+				int adminId = resultSet.getInt(9);
+				int cate_parent = resultSet.getInt(10);
+				int cate_id = resultSet.getInt(11);
+				products.add(new Product(id, adminId, title, price, description, imgId, createDate, updateDate,
+						quantity, cate_parent, cate_id));
 				// System.out.println(id + adminId+title+ price+ description+ type+ imgId+
 				// createDate+ updateDate);
 			}
@@ -62,19 +64,20 @@ public class ProductDAOImp implements IProductDao {
 			PreparedStatement statement = con.prepareStatement("select * from Product_1 where product_id = ?");
 			statement.setInt(1, productId);
 			ResultSet resultSet = statement.executeQuery();
-			if (resultSet.next()) {
+			while (resultSet.next()) {
 				int id = resultSet.getInt(1);
 				String title = resultSet.getNString(2);
 				double price = resultSet.getDouble(3);
 				String description = resultSet.getNString(4);
-				String type = resultSet.getNString(5);
-				int imgId = resultSet.getInt(6);
-				Date createDate = resultSet.getDate(7);
-				Date updateDate = resultSet.getDate(8);
-				int quantity = resultSet.getInt(9);
-				int adminId = resultSet.getInt(10);
-				product = new Product(id, adminId, title, price, description, type, imgId, createDate, updateDate,
-						quantity);
+				int imgId = resultSet.getInt(5);
+				Date createDate = resultSet.getDate(6);
+				Date updateDate = resultSet.getDate(7);
+				int quantity = resultSet.getInt(8);
+				int adminId = resultSet.getInt(9);
+				int cate_parent = resultSet.getInt(10);
+				int cate_id = resultSet.getInt(11);
+				product = new Product(id, adminId, title, price, description, imgId, createDate, updateDate,
+						quantity, cate_parent, cate_id);
 			}
 			resultSet.close();
 			statement.close();
@@ -98,17 +101,19 @@ public class ProductDAOImp implements IProductDao {
 		try {
 			con = DatabaseConnection.getConnection();
 			PreparedStatement preparedStatement = con.prepareStatement(
-					"insert into Product_1 (added_by_user,title,price,description,type,img_id,create_date, update_date,pdQuantity) values(?,?,?,?,?,?,?,?,?)",
+					"insert into Product_1 (added_by_user,title,price,description,img_id,create_date, update_date,pdQuantity, "
+					+ "category_parent, category_id) values(?,?,?,?,?,?,?,?,?,?)",
 					PreparedStatement.RETURN_GENERATED_KEYS);
 			preparedStatement.setInt(1, product.getAddedByUser());
 			preparedStatement.setString(2, product.getTitle());
 			preparedStatement.setDouble(3, product.getPrice());
 			preparedStatement.setNString(4, product.getDescription());
-			preparedStatement.setNString(5, product.getType());
 			preparedStatement.setInt(6, product.getImgId());
 			preparedStatement.setDate(7, new Date(System.currentTimeMillis()));
 			preparedStatement.setDate(8, new Date(System.currentTimeMillis()));
 			preparedStatement.setInt(9, product.getQuantity());
+			preparedStatement.setInt(10, product.getCategory_parent());
+			preparedStatement.setInt(11, product.getCategory_id());
 			preparedStatement.executeUpdate();
 			ResultSet re = preparedStatement.getGeneratedKeys();
 			if (re.next()) {
@@ -134,18 +139,19 @@ public class ProductDAOImp implements IProductDao {
 		try {
 			con = DatabaseConnection.getConnection();
 			PreparedStatement preparedStatement = con.prepareStatement(
-					"update Product_1 set added_by_user = ?, title = ?,price = ?,description = ?,type = ?,img_id = ?, update_date = ?, pdQuantity= ? where product_id = ?"
+					"update Product_1 set added_by_user = ?, title = ?,price = ?,description = ?,img_id = ?, update_date = ?, pdQuantity= ?"
+					+ ",category_parent=?,category_id=? where product_id = ?"
 							+ product.getProductId());
 			preparedStatement.setInt(1, product.getAddedByUser());
 			preparedStatement.setString(2, product.getTitle());
 			preparedStatement.setDouble(3, product.getPrice());
 			preparedStatement.setNString(4, product.getDescription());
-			preparedStatement.setNString(5, product.getType());
 			preparedStatement.setInt(6, product.getImgId());
 			preparedStatement.setDate(7, new Date(System.currentTimeMillis()));
-			preparedStatement.setInt(8, product.getProductId());
+			preparedStatement.setDate(8, new Date(System.currentTimeMillis()));
 			preparedStatement.setInt(9, product.getQuantity());
-			preparedStatement.setInt(10, product.getProductId());
+			preparedStatement.setInt(10, product.getCategory_parent());
+			preparedStatement.setInt(11, product.getCategory_id());
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
 		} catch (SQLException e) {
@@ -198,13 +204,15 @@ public class ProductDAOImp implements IProductDao {
 					String title = resultSet.getNString(2);
 					double price = resultSet.getDouble(3);
 					String description = resultSet.getNString(4);
-					String type = resultSet.getNString(5);
-					int imgId = resultSet.getInt(6);
-					Date createDate = resultSet.getDate(7);
-					Date updateDate = resultSet.getDate(8);
-					int userId = resultSet.getInt(10);
-					products.add(new Product(id, userId, title, price, description, type, imgId, createDate, updateDate,
-							quantity));
+					int imgId = resultSet.getInt(5);
+					Date createDate = resultSet.getDate(6);
+					Date updateDate = resultSet.getDate(7);
+					int quantity1 = resultSet.getInt(8);
+					int adminId = resultSet.getInt(9);
+					int cate_parent = resultSet.getInt(10);
+					int cate_id = resultSet.getInt(11);
+					products.add(new Product(id, adminId, title, price, description, imgId, createDate, updateDate,
+							quantity1, cate_parent, cate_id));
 
 				}
 			}
@@ -253,28 +261,31 @@ public class ProductDAOImp implements IProductDao {
 	}
 
 	@Override
-	public List<Product> getProductsByType(String type) {
+	public List<Product> getProductsByType(int category_parent) {
 		Connection con = null;
 		List<Product> products = null;
 		try {
 			products = new ArrayList<>();
 			con = DatabaseConnection.getConnection();
-			String query = "SELECT * FROM Product_1 WHERE type = ?";
+			String query = "SELECT * FROM Product_1 WHERE category_parent = ?";
 			PreparedStatement preparedStatement = con.prepareStatement(query);
-			preparedStatement.setString(1, type);
+			preparedStatement.setInt(1, category_parent);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				int id = resultSet.getInt(1);
 				String title = resultSet.getNString(2);
 				double price = resultSet.getDouble(3);
 				String description = resultSet.getNString(4);
-				int imgId = resultSet.getInt(6);
-				Date createDate = resultSet.getDate(7);
-				Date updateDate = resultSet.getDate(8);
-				int quantity = resultSet.getInt(9);
-				int adminId = resultSet.getInt(10);
-				products.add(new Product(id, adminId, title, price, description, type, imgId, createDate, updateDate,
-						quantity));
+				int imgId = resultSet.getInt(5);
+				Date createDate = resultSet.getDate(6);
+				Date updateDate = resultSet.getDate(7);
+				int quantity1 = resultSet.getInt(8);
+				int adminId = resultSet.getInt(9);
+				int cate_parent = resultSet.getInt(10);
+				int cate_id = resultSet.getInt(11);
+				products.add(new Product(id, adminId, title, price, description, imgId, createDate, updateDate,
+						quantity1, cate_parent, cate_id));
+
 			}
 			resultSet.close();
 			preparedStatement.close();
@@ -308,14 +319,16 @@ public class ProductDAOImp implements IProductDao {
 				String title = resultSet.getNString(2);
 				double price = resultSet.getDouble(3);
 				String description = resultSet.getNString(4);
-				String type = resultSet.getNString(5);
-				int imgId = resultSet.getInt(6);
-				Date createDate = resultSet.getDate(7);
-				Date updateDate = resultSet.getDate(8);
-				int quantity = resultSet.getInt(9);
-				int adminId = resultSet.getInt(10);
-				products.add(new Product(id, adminId, title, price, description, type, imgId, createDate, updateDate,
-						quantity));
+				int imgId = resultSet.getInt(5);
+				Date createDate = resultSet.getDate(6);
+				Date updateDate = resultSet.getDate(7);
+				int quantity1 = resultSet.getInt(8);
+				int adminId = resultSet.getInt(9);
+				int cate_parent = resultSet.getInt(10);
+				int cate_id = resultSet.getInt(11);
+				products.add(new Product(id, adminId, title, price, description, imgId, createDate, updateDate,
+						quantity1, cate_parent, cate_id));
+
 			}
 			resultSet.close();
 			preparedStatement.close();
@@ -348,14 +361,16 @@ public class ProductDAOImp implements IProductDao {
 				String title = resultSet.getNString(2);
 				double price = resultSet.getDouble(3);
 				String description = resultSet.getNString(4);
-				String type = resultSet.getNString(5);
-				int imgId = resultSet.getInt(6);
-				Date createDate = resultSet.getDate(7);
-				Date updateDate = resultSet.getDate(8);
-				int quantity = resultSet.getInt(9);
-				int adminId = resultSet.getInt(10);
-				products.add(new Product(id, adminId, title, price, description, type, imgId, createDate, updateDate,
-						quantity));
+				int imgId = resultSet.getInt(5);
+				Date createDate = resultSet.getDate(6);
+				Date updateDate = resultSet.getDate(7);
+				int quantity1 = resultSet.getInt(8);
+				int adminId = resultSet.getInt(9);
+				int cate_parent = resultSet.getInt(10);
+				int cate_id = resultSet.getInt(11);
+				products.add(new Product(id, adminId, title, price, description, imgId, createDate, updateDate,
+						quantity1, cate_parent, cate_id));
+
 			}
 			resultSet.close();
 			preparedStatement.close();
@@ -389,14 +404,16 @@ public class ProductDAOImp implements IProductDao {
 				String title = resultSet.getNString(2);
 				double price = resultSet.getDouble(3);
 				String description = resultSet.getNString(4);
-				String type = resultSet.getNString(5);
-				int imgId = resultSet.getInt(6);
-				Date createDate = resultSet.getDate(7);
-				Date updateDate = resultSet.getDate(8);
-				int quantity = resultSet.getInt(9);
-				int adminId = resultSet.getInt(10);
-				products.add(new Product(id, adminId, title, price, description, type, imgId, createDate, updateDate,
-						quantity));
+				int imgId = resultSet.getInt(5);
+				Date createDate = resultSet.getDate(6);
+				Date updateDate = resultSet.getDate(7);
+				int quantity1 = resultSet.getInt(8);
+				int adminId = resultSet.getInt(9);
+				int cate_parent = resultSet.getInt(10);
+				int cate_id = resultSet.getInt(11);
+				products.add(new Product(id, adminId, title, price, description, imgId, createDate, updateDate,
+						quantity1, cate_parent, cate_id));
+
 			}
 			resultSet.close();
 			preparedStatement.close();
@@ -461,13 +478,16 @@ public class ProductDAOImp implements IProductDao {
 				String title = resultSet.getNString(2);
 				double price = resultSet.getDouble(3);
 				String description = resultSet.getNString(4);
-				String type = resultSet.getNString(5);
-				int imgId = resultSet.getInt(6);
-				Date createDate = resultSet.getDate(7);
-				Date updateDate = resultSet.getDate(8);
-				int adminId = resultSet.getInt(10);
-				products.add(new Product(id, adminId, title, price, description, type, imgId, createDate, updateDate,
-						quantity));
+				int imgId = resultSet.getInt(5);
+				Date createDate = resultSet.getDate(6);
+				Date updateDate = resultSet.getDate(7);
+				int quantity1 = resultSet.getInt(8);
+				int adminId = resultSet.getInt(9);
+				int cate_parent = resultSet.getInt(10);
+				int cate_id = resultSet.getInt(11);
+				products.add(new Product(id, adminId, title, price, description, imgId, createDate, updateDate,
+						quantity1, cate_parent, cate_id));
+
 			}
 			resultSet.close();
 			preparedStatement.close();
@@ -501,16 +521,19 @@ public class ProductDAOImp implements IProductDao {
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				int id = resultSet.getInt(1);
-				String titleResult = resultSet.getNString(2);
+				String title1 = resultSet.getNString(2);
 				double price = resultSet.getDouble(3);
 				String description = resultSet.getNString(4);
-				int imgId = resultSet.getInt(6);
-				Date createDate = resultSet.getDate(7);
-				Date updateDate = resultSet.getDate(8);
-				int quantity = resultSet.getInt(9);
-				int adminId = resultSet.getInt(10);
-				products.add(new Product(id, adminId, titleResult, price, description, type, imgId, createDate,
-						updateDate, quantity));
+				int imgId = resultSet.getInt(5);
+				Date createDate = resultSet.getDate(6);
+				Date updateDate = resultSet.getDate(7);
+				int quantity1 = resultSet.getInt(8);
+				int adminId = resultSet.getInt(9);
+				int cate_parent = resultSet.getInt(10);
+				int cate_id = resultSet.getInt(11);
+				products.add(new Product(id, adminId, title1, price, description, imgId, createDate, updateDate,
+						quantity1, cate_parent, cate_id));
+
 			}
 			resultSet.close();
 			preparedStatement.close();
