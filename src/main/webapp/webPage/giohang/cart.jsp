@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ include file="/webPage/lib/tag.jsp"%>
 <!DOCTYPE html>
 <%@ include file="/webPage/lib/tag.jsp"%>
 <!-- Lấy tham số lang từ URL và thiết lập Locale -->

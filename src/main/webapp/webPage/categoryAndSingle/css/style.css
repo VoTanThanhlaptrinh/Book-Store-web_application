@@ -4,14 +4,14 @@ body {
 
 /*Single mới  */
 .detail-product {
-	background-color: white;
-	display: flex;
-	padding: 20px;
-	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-	border-radius: 10px;
-	gap: 20px;
-	align-items: center;
-	margin: 20px auto;
+	background-color: #f8f8f8;
+display: flex;
+padding: 30px;
+box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.3); /* Giảm khoảng cách nhưng tăng độ rõ */
+border-radius: 15px;
+gap: 25px;
+align-items: center;
+margin: 30px auto;
 }
 .section-comment{
 	background-color: white;

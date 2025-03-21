@@ -23,9 +23,9 @@ public class HomeController extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = req.getSession();
 		User user = (User) session.getAttribute("user");
-		if (user != null && user.getRoles().contains("admin")) {
-			session.setAttribute("admin", "admin");
-		}
+//		if (user != null && user.getRoles().contains("admin")) {
+//			session.setAttribute("admin", "admin");
+//		}
 		HienThiDanhSachImp imp = new HienThiDanhSachImp();
 
 		req.setAttribute("randomList", imp.hienThiNgauNhienSoSanPham(8));
