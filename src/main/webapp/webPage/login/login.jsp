@@ -73,6 +73,9 @@
 							<a href="register"><fmt:message key="regis" /></a>
 						</div>
 					</div>
+					<div>
+					<a href="googleLoginRedirect"><button>Đăng nhập bằng Google</button></a>
+					</div>
 
 				</div>
 			</div>

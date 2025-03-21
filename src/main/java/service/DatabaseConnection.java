@@ -38,7 +38,6 @@ public class DatabaseConnection {
             config.setConnectionTimeout(CONNECTION_TIMEOUT);
             config.setIdleTimeout(IDLE_TIMEOUT);
             config.setMaxLifetime(MAX_LIFETIME);
-
             dataSource = new HikariDataSource(config);
         } catch (Exception e) {
             throw new RuntimeException("Error initializing DataSource", e);

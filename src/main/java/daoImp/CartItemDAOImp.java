@@ -60,15 +60,13 @@ public class CartItemDAOImp implements ICartItemDao {
 	            WHERE ci.status = ? AND ci.cart_id = ?
 	        """;
 	        
-	        Connection connection;
+	        Connection connection = null;
 			try {
 				connection = DatabaseConnection.getConnection();
 				 PreparedStatement statement = connection.prepareStatement(query);
 	        		statement.setString(1, status);
 	        		statement.setInt(2, cartId);
 	             ResultSet resultSet = statement.executeQuery();
-
-	        	
 	            while (resultSet.next()) {
 	                CartProductDetail detail = new CartProductDetail();
 	                detail.setCartItemId(resultSet.getInt("cart_item_id"));
@@ -85,11 +83,14 @@ public class CartItemDAOImp implements ICartItemDao {
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			}finally {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
-	            
-
-	    
-
 	        return cartProductDetails;
 	    }
 	@Override

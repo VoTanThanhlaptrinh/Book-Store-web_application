@@ -43,41 +43,46 @@ public class RegisterController extends HttpServlet {
 		if (loginService == null) {
 			loginService = new LoginService();
 		}
-		  String lang = (String) session.getAttribute("lang");
-		    if (lang == null) {
-		        lang = "vi";
-		    }
-		    Locale locale = Locale.forLanguageTag(lang);
-		    ResourceBundle bundle = ResourceBundle.getBundle("messages", locale);
+		String lang = (String) session.getAttribute("lang");
+		if (lang == null) {
+			lang = "vi";
+		}
+		Locale locale = Locale.forLanguageTag(lang);
+		ResourceBundle bundle = ResourceBundle.getBundle("messages", locale);
 		String mess = null;
 		if (pass.trim().length() < 8) {
 			mess = bundle.getString("password.length.required");
 			req.setAttribute("mess", mess);
 			doGet(req, resp);
-		} else {
-			if (!rePassword.equals(pass)) {
-				mess = bundle.getString("password.confirmation.mismatch");
-				req.setAttribute("mess", mess);
-				doGet(req, resp);
-			} else {
-				session.setAttribute("username", username);
-				session.setAttribute("password", pass);
-				session.setAttribute("email", email);
-				String code = RandomStringUtils.randomAlphanumeric(6);
-				session.setAttribute("confirmCode", code);
-				resp.sendRedirect("confirm");
-				String content = bundle.getString("verification.code") + code;
-				mailService.sendMail(email, content, bundle.getString("account.registration.verification"));
-			}
+			return;
 		}
+		if (!rePassword.equals(pass)) {
+			mess = bundle.getString("password.confirmation.mismatch");
+			req.setAttribute("mess", mess);
+			doGet(req, resp);
+			return;
+		}
+		if(loginService.checkEmail(email)) {
+			req.setAttribute("mess", "Email đã tồn tại trong hệ thống");
+			doGet(req, resp);
+			return;
+		}
+		
+		session.setAttribute("username", username);
+		session.setAttribute("password", pass);
+		session.setAttribute("email", email);
+		String code = RandomStringUtils.randomAlphanumeric(6);
+		session.setAttribute("confirmCode", code);
+		resp.sendRedirect("confirm");
+		String content = bundle.getString("verification.code") + code;
+		mailService.sendMail(email, content, bundle.getString("account.registration.verification"));
+
 	}
 
 	@Override
 	public void init() throws ServletException {
 		// TODO Auto-generated method stub
 		loginService = new LoginService();
-		String from = "vtthanh32004@gmail.com";
-		String password = "loab yyfr gcpo fcqz";
-		mailService = new SendMailImp(from, password);
+		mailService = new SendMailImp();
 	}
 }

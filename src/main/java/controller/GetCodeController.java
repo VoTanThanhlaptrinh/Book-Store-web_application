@@ -67,9 +67,7 @@ public class GetCodeController extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		// TODO Auto-generated method stub
-		String from = "vtthanh32004@gmail.com";
-		String password = "loab yyfr gcpo fcqz";
-		mailService = new SendMailImp(from, password);
+		mailService = new SendMailImp();
 		loginService = new LoginService();
 	}
 }
