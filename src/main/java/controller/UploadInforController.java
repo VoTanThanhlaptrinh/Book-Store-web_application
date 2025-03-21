@@ -70,8 +70,8 @@ public class UploadInforController extends HttpServlet {
 			doGet(req, resp);
 			return;
 		}
-		if (phone.trim().length() != 10 || phone.trim().length() != 11) {
-			String mess = "Số điện thoại không được khác 10 hoặc 11";
+		if (phone.trim().length() != 10 && phone.trim().length() != 11) {
+			String mess = "Số điện thoại 10 hoặc 11 chữ số";
 			req.setAttribute("mess", mess);
 			doGet(req, resp);
 			return;

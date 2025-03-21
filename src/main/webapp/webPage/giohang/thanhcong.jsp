@@ -1,6 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <!-- Lấy tham số lang từ URL và thiết lập Locale -->
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="/webPage/lib/tag.jsp"%>
 <fmt:setLocale
 	value="${param.lang != null ? param.lang : (sessionScope.lang != null ? sessionScope.lang : 'vi')}" />
@@ -29,7 +28,7 @@
 		<div id="header-placeholder"><jsp:include
 				page="/webPage/trangChu/header.jsp"></jsp:include></div>
 	</c:if>
-	<div class="container py-5" style="padding-top: 50px;">
+	<div class="container py-5" style="margin-top: 100px; margin-bottom: 100px">
 		<div class="row justify-content-center">
 			<div class="col-md-6 text-center">
 				<!-- Hiển thị thông báo thành công -->

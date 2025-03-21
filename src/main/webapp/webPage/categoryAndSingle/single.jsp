@@ -15,8 +15,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="webPage/trangChu/CSS/header.css">
-<link rel="stylesheet" href="webPage/trangChu/CSS/footer.css">
+
 <link href="webPage/categoryAndSingle/css/style.css" rel="stylesheet">
 <link href="webPage/categoryAndSingle/css/star.css" rel="stylesheet">
 <link
@@ -42,6 +41,8 @@
 	integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
 	crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link href="https://fonts.cdnfonts.com/css/cofo-sans" rel="stylesheet">
+<link rel="stylesheet" href="webPage/trangChu/CSS/header.css">
+<link rel="stylesheet" href="webPage/trangChu/CSS/footer.css">
 <title>Chi tiết sách</title>
 </head>
 
