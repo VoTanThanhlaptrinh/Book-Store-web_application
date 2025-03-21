@@ -32,8 +32,8 @@ public class HienThiDanhSachImp implements HienThiSachService{
     }
 
 	@Override
-    public List<Product> hienThiSachTheoTheLoai(String type) {
-		return productDao.getProductsByType(type);
+    public List<Product> hienThiSachTheoTheLoai(int category_parent) {
+		return productDao.getProductsByType(category_parent);
     }
 	
 	@Override

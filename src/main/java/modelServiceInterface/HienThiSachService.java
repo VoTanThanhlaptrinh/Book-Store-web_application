@@ -11,7 +11,7 @@ public interface HienThiSachService {
 
 	List<Product> hienThiSachTheoTen(String title);
 
-	List<Product> hienThiSachTheoTheLoai(String type);
+	List<Product> hienThiSachTheoTheLoai(int category_parent);
 
 	List<Product> hienthisachtheoGia(double gia, int duoi_tren, int phamvi);
 
