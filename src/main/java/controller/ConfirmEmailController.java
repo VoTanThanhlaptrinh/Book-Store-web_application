@@ -77,8 +77,6 @@ public class ConfirmEmailController extends HttpServlet {
 	public void init() throws ServletException {
 		// TODO Auto-generated method stub
 		loginService = new LoginService();
-		String from = "vtthanh32004@gmail.com";
-		String password = "rldl qiwm hkuw nety";
-		mailService = new SendMailImp(from, password);
+		mailService = new SendMailImp();
 	}
 }

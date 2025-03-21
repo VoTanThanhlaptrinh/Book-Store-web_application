@@ -14,10 +14,14 @@ public class SendMailImp implements ISendMailService {
 	private String from;
 	private String pass;
 
-	public SendMailImp(String from, String pass) {
+	public SendMailImp() {
 		super();
-		this.from = from;
-		this.pass = pass;
+		this.from = "vtthanh32004@gmail.com";
+		this.pass = "rldl qiwm hkuw nety";
+//		this.from = "votanthanh32004@gmail.com";
+//		this.pass = "wvxk oyvr meiu bghq";
+//		this.from = "22130257@st.hcmuaf.edu.vn";
+//		this.pass = "euza ktrq dzei uywj";
 	}
 
 	@Override
@@ -35,6 +39,7 @@ public class SendMailImp implements ISendMailService {
 
 		// create the mail Session object
 		Session session = Session.getInstance(props);
+		session.setDebug(true);
 		try {
 			// create a MimeMessage object
 			Message message = new MimeMessage(session);
