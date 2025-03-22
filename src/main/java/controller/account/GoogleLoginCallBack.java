@@ -1,26 +1,22 @@
-package controller;
+package controller.account;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
+import java.sql.Date;
+import java.sql.SQLException;
 import java.util.Arrays;
-import java.util.List;
-
-import org.apache.jasper.tagplugins.jstl.core.Url;
-import org.apache.tomcat.util.buf.UriUtil;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import jakarta.json.Json;
-import jakarta.json.JsonArray;
 import jakarta.json.JsonObject;
-import jakarta.json.JsonReader;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -28,9 +24,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import models.User;
+import service.ILoginService;
+import service.LoginService;
 
 @WebServlet("/callback")
-public class GoogleLoginCallback extends HttpServlet {
+public class GoogleLoginCallBack extends HttpServlet {
 	/**
 	 * 
 	 */
@@ -38,16 +36,16 @@ public class GoogleLoginCallback extends HttpServlet {
 	private static final String CLIENT_SECRET = "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";
 	private static final String CLIENT_ID = "53880802995-cgfj4oa7d0a868nvkjqjn8v9pdeiqvn8.apps.googleusercontent.com";
 	private static final String REDIRECT_URI = "http://localhost:8080/BOOK_STORE/callback";
+	private ILoginService loginService;
+	private boolean error;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String code = request.getParameter("code");
-
 		if (code == null || code.isEmpty()) {
 			response.getWriter().println("Lỗi khi đăng nhập Google!");
 			return;
 		}
-
 		// Đổi mã `code` thành Access Token
 		try {
 			String accessToken = getAccessToken(code);
@@ -55,16 +53,27 @@ public class GoogleLoginCallback extends HttpServlet {
 				response.getWriter().println("Không lấy được Access Token!");
 				return;
 			}
+			HttpSession session = request.getSession();
+			String lang = (String) session.getAttribute("lang");
+			if (lang == null) {
+				lang = "vi";
+			}
+			Locale locale = Locale.forLanguageTag(lang);
+			ResourceBundle bundle = ResourceBundle.getBundle("messages", locale);
 
 			// Lấy thông tin người dùng từ Google
 			User user = getUserInfo(accessToken);
-			List<String> role = new ArrayList<String>();
-//			role.add("user");
-//			user.setRoles(role);
-			// Lưu vào session
-			HttpSession session = request.getSession();
+			if(user == null) {
+				String mess = bundle.getString("email.exist");
+				request.setAttribute("mess", mess);
+				request.getRequestDispatcher("webPage/login/login.jsp").forward(request, response);
+				return;
+			}
+			// Lưu vào session để đăng nhập thay người dùng
 			session.setAttribute("user", user);
 
+			// TODO: handle exception
+			
 			// Chuyển hướng về trang chính
 			response.sendRedirect("home");
 		} catch (Exception e) {
@@ -109,21 +118,35 @@ public class GoogleLoginCallback extends HttpServlet {
 		try (BufferedReader br = new BufferedReader(
 				new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8))) {
 			JsonObject jsonObject = Json.createReader(br).readObject();
-			String id = jsonObject.getString("id");
-			String name = jsonObject.getString("name");
 			String email = jsonObject.getString("email");
-			System.out.println("Google ID: " + id);
-			System.out.println("User Name: " + name);
-			System.out.println("User Email: " + email);
-			User user = new User();
-			user.setUsername(email);
-			return user;
+			if (loginService.checkEmail(email)) {
+				return null;
+			}
+			return createUser(email);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new IOException("Lỗi hệ thống");
 		}
+	}
 
-		// Trích xuất thông tin user
+	private User createUser(String username) throws SQLException {
+		User user = new User();
+		user.setUsername(username);
+		user.setEmail(username);
+		user.setStatus("Alive");
+		user.setCreateDate(new Date(System.currentTimeMillis()));
+		user.setUpdateDate(new Date(System.currentTimeMillis()));
+		user.setRoles(Arrays.asList("user"));
+		user.setActivate(true);
+		user.setSocialLogin(true);
+		user.setSocialLoginName("Google");
+		loginService.register(user);
+		return user;
+	}
 
+	@Override
+	public void init() throws ServletException {
+		// TODO Auto-generated method stub
+		loginService = new LoginService();
 	}
 }

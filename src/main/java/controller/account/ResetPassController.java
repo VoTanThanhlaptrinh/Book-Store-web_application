@@ -1,4 +1,4 @@
-package controller;
+package controller.account;
 
 import java.io.IOException;
 import java.util.Locale;
@@ -24,15 +24,7 @@ public class ResetPassController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		HttpSession session = req.getSession();
-		if (session.getAttribute("user") != null) {
-			req.getRequestDispatcher("webPage/login/reset-pass.jsp").forward(req, resp);
-		} else {
-			String mess = "Hãy đăng nhập để có thể đổi mật khẩu";
-			req.setAttribute("mess", mess);
-			req.getRequestDispatcher("webPage/login/login.jsp").forward(req, resp);
-		}
-
+		req.getRequestDispatcher("webPage/login/reset-pass.jsp").forward(req, resp);
 	}
 
 	@Override
