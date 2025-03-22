@@ -1,4 +1,4 @@
-package controller;
+package controller.account;
 
 import java.io.IOException;
 import java.util.Locale;
@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import models.User;
 import service.ILoginService;
 import service.ISendMailService;
 import service.LoginService;
@@ -30,15 +31,12 @@ public class ConfirmEmailController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		req.getRequestDispatcher("webPage/login/confirm.jsp").forward(req, resp);
-
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
-		String username = (String) session.getAttribute("username");
-		String password = (String) session.getAttribute("password");
-		String email = (String) session.getAttribute("email");
+		User user = (User) session.getAttribute("userCreated");
 		String code = req.getParameter("conCode");
 		String confirmCode = (String) session.getAttribute("confirmCode");
 
@@ -52,14 +50,16 @@ public class ConfirmEmailController extends HttpServlet {
 		if (confirmCode == null) {
 			confirmCode = RandomStringUtils.randomAlphanumeric(6);
 			String content = bundle.getString("auth.code.label") + confirmCode;
-			mailService.sendMail(email, content, bundle.getString("auth.registration.title"));
+			mailService.sendMail(user.getEmail(), content, bundle.getString("auth.registration.title"));
 			session.setAttribute("confirmCode", confirmCode);
 			doGet(req, resp);
 			return;
 		}
 		try {
 			if (confirmCode.equals(code)) {
-				loginService.register(username, password, email);
+				user.setActivate(true);
+				loginService.activateUser(user);
+				session.setAttribute("user", user);
 				resp.sendRedirect("login");
 			} else {
 				req.setAttribute("mess", bundle.getString("auth.code.invalid"));

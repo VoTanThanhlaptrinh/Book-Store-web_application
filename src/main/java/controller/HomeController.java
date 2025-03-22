@@ -32,10 +32,10 @@ public class HomeController extends HttpServlet {
 
 		req.setAttribute("topRecentList", imp.getTopProductsById(12));
 
-		req.setAttribute("tieuthuyet", imp.hienThiSachTheoTheLoai("Tiểu thuyết"));
-		req.setAttribute("ptbt", imp.hienThiSachTheoTheLoai("Phát triển bản thân"));
-		req.setAttribute("tlh", imp.hienThiSachTheoTheLoai("Tâm lý học - Pháp luật"));
-		req.setAttribute("kinhte", imp.hienThiSachTheoTheLoai("Kinh tế - Tài chính"));
+//		req.setAttribute("tieuthuyet", imp.hienThiSachTheoTheLoai("Tiểu thuyết"));
+//		req.setAttribute("ptbt", imp.hienThiSachTheoTheLoai("Phát triển bản thân"));
+//		req.setAttribute("tlh", imp.hienThiSachTheoTheLoai("Tâm lý học - Pháp luật"));
+//		req.setAttribute("kinhte", imp.hienThiSachTheoTheLoai("Kinh tế - Tài chính"));
 		req.getRequestDispatcher("webPage/trangChu/index.jsp").forward(req, resp);
 	}
 

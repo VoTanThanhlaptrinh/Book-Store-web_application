@@ -4,17 +4,15 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import com.microsoft.sqlserver.jdbc.SQLServerException;
-
 import models.Image;
 import models.Information;
 import models.User;
 
 public interface ILoginService {
 	User checkUser(String username, String password);
-
-	boolean register(String username, String password, String email) throws SQLServerException, SQLException, Exception;
-
+	
+	void register(User user) throws SQLException;
+	
 	Information getInforOfUser(int userId);
 
 	void updateInfor(Information infor);
@@ -40,4 +38,6 @@ public interface ILoginService {
 	String hashPass(String pass);
 
 	void updateUser(User user);
+
+	void activateUser(User user);
 }
