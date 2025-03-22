@@ -1,4 +1,3 @@
-@charset "UTF-8";
 * {
     margin: 0;
     padding: 0;
@@ -7,24 +6,44 @@
 body {
     font-family: Arial, sans-serif;
 }
-header {
+.web-ad {
+    padding: 10px;
+    padding-left: 140px;
+    display: flex;
+    background-color:black;
+    gap: 6px;
+}
+.web-ad2 {
+    font-size: 10px;
+    color: rgb(255, 255, 255);
+    font-weight:  bold;
+    line-height:  inherit;
+}
+.web-ad1 {
+    font-size: 10px;
+    color: rgb(255, 255, 255);
+    font-weight:  normal;
+    line-height:  inherit;
+}
+.header-1 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
-    background-color: #e5e5e5;
+    padding-top: 10px;
+    background-image: url("https://img.freepik.com/free-photo/texture_23-2148161782.jpg?t=st=1742576333~exp=1742579933~hmac=956168789d1ca9de0c625ff5ed0c38982d6f833bf773c7c076cc45af1528f229&w=1380");
+    padding-bottom: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+.logo h2 {
+    margin-left: 140px;
+}
 .center_header {
-
     display: flex;
 }
 .filter_div {
-    padding: 2px;
-    border: 2px solid black;
-    
-    border-radius: 5px;
-    margin-right: 40px;
+    border-right: 2px solid gray;
+    border-left: 2px solid gray;
+    max-width: 180px;
     display: flex;
     cursor: pointer;
     position: relative; /* Đảm bảo dropdown bám vào */
@@ -49,9 +68,9 @@ header {
     left: 0;
     background: white;
     color: rgb(4, 4, 4);
+    border: 2px solid gray;
     min-width: 150px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
     overflow: hidden;
 }
 .drd_line {
@@ -105,14 +124,12 @@ header {
 .filter_div:hover .dropdown {
     display: flex;
 }
-
 .search-box {
+    position: relative;
     display: flex;
     align-items: center;
     background: #fff;
-    border-radius: 12px;
-    border: 1px solid #ddd;
-    overflow: hidden;
+    border: 2px solid black;
     width: 500px;
     margin-right: 50px;
 }
@@ -126,13 +143,36 @@ header {
     outline: none;
 }
 
+
+/* Style cho danh sách dropdown */
+.dropdown-list {
+    display: none; /* Ẩn danh sách ban đầu */
+    position: absolute;
+    top: 100%; /* Đặt danh sách ngay dưới ô tìm kiếm */
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-top: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+
+.dropdown-item {
+    padding: 10px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.dropdown-item:hover {
+    background-color: #f0f0f0;
+}
 /* Nút tìm kiếm */
 .search-box button {
     background: #6cb3ff; 
     border: none;
     width: 60px;
     height: 45px;
-    border-radius: 12px; /* Bo góc giống trong ảnh */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -143,11 +183,15 @@ header {
 }
   /* Popup chọn ngôn ngữ */
 .language-selector {
+    margin-top: 10px;
     position: absolute;
-    top: 10px;
     right: 10px;
     cursor: pointer;
-    margin-right: 370px;
+    
+}
+.language-selector img {
+    width: 40px; 
+    height: 40px;
 }
 .language-popup {
     display: none;
@@ -178,6 +222,7 @@ header {
     background: #f0f0f0;
 }
 .icons {
+    margin-right: 130px;
     display: flex;
     gap: 15px;
 }
@@ -188,7 +233,6 @@ header {
     margin-right: 5px;
     cursor: pointer;
     border: 2px solid black;
-    border-radius: 5px;
 }
 
 .login_div_text {
@@ -214,7 +258,6 @@ header {
     margin-right: 5px;
     cursor: pointer;
     border: 2px solid black;
-    border-radius: 5px;
 }
 
 .cart_div_text {
@@ -232,4 +275,32 @@ header {
     color: rgb(0, 0, 0);
     font-weight:  normal;
     line-height:  inherit;
+}
+.header-2 {
+    display: flex;
+    gap: 10px;
+    padding-left: 140px;
+    width: 100%;
+    height: max-content;
+    background-color: #ffffff;
+    border-top: 2px solid gray;
+    border-bottom: 2px solid gray;
+}
+.box-policy ul {
+    display: flex;
+    flex-direction: row;
+    margin-top: 8px;
+    margin-left: 80px;
+    gap: 80px;
+}
+.box-item {
+    display: flex;
+    gap: 3px;
+}
+.box-item img {
+    width: 20px;
+    height: 20px;
+}
+.box-text {
+    font-size: 15px;
 }

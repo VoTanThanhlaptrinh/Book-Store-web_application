@@ -217,10 +217,116 @@
     
                     </div>
               
+ </div>
+ <div class="xu_huong_mua_sam">
+        <div class="xu_huong_mua_sam_header">
+            <img src="https://cdn-icons-png.freepik.com/512/5469/5469166.png?uid=R98667800&ga=GA1.1.8040849.1740927601"
+                alt="">
+            <h1>Xu Hướng Mua Sắm</h1>
+        </div>
+        <div class="display-list-grid">
+            <div class="sale-books-element">
+                <img src="https://cdn1.fahasa.com/media/catalog/product/n/d/ndivia-co-may-tu-duy-vi-dai--full------t2-2025----outline-02.jpg"
+                    alt="">
+                <p>NVIDIA-Cỗ máy tư duy vĩ đại</p>
+                <h4>186.000</h4>
+                <h6>200.000</h6>
+                <h5>36%</h5>
+                <p>Đã bán: 50</p>
+            </div>
+            <div class="sale-books-element">
+                <img src="https://cdn1.fahasa.com/media/catalog/product/n/d/ndivia-co-may-tu-duy-vi-dai--full------t2-2025----outline-02.jpg"
+                    alt="">
+                <p>NVIDIA-Cỗ máy tư duy vĩ đại</p>
+                <h4>186.000</h4>
+                <h6>200.000</h6>
+                <h5>36%</h5>
+                <p>Đã bán: 50</p>
+            </div>
 
+            <div class="sale-books-element">
+                <img src="https://cdn1.fahasa.com/media/catalog/product/n/d/ndivia-co-may-tu-duy-vi-dai--full------t2-2025----outline-02.jpg"
+                    alt="">
+                <p>NVIDIA-Cỗ máy tư duy vĩ đại</p>
+                <h4>186.000</h4>
+                <h6>200.000</h6>
+                <h5>36%</h5>
+                <p>Đã bán: 50</p>
+            </div>
+            <div class="sale-books-element">
+                <img src="https://cdn1.fahasa.com/media/catalog/product/n/d/ndivia-co-may-tu-duy-vi-dai--full------t2-2025----outline-02.jpg"
+                    alt="">
+                <p>NVIDIA-Cỗ máy tư duy vĩ đại</p>
+                <h4>186.000</h4>
+                <h6>200.000</h6>
+                <h5>36%</h5>
+                <p>Đã bán: 50</p>
+            </div>
+ 
+            <div class="sale-books-element">
+                <img src="https://cdn1.fahasa.com/media/catalog/product/n/d/ndivia-co-may-tu-duy-vi-dai--full------t2-2025----outline-02.jpg"
+                    alt="">
+                <p>NVIDIA-Cỗ máy tư duy vĩ đại</p>
+                <h4>186.000</h4>
+                <h6>200.000</h6>
+                <h5>36%</h5>
+                <p>Đã bán: 50</p>
+            </div>
+            <div class="sale-books-element">
+                <img src="https://cdn1.fahasa.com/media/catalog/product/n/d/ndivia-co-may-tu-duy-vi-dai--full------t2-2025----outline-02.jpg"
+                    alt="">
+                <p>NVIDIA-Cỗ máy tư duy vĩ đại</p>
+                <h4>186.000</h4>
+                <h6>200.000</h6>
+                <h5>36%</h5>
+                <p>Đã bán: 50</p>
+            </div>
+            
+            <div class="sale-books-element">
+                <img src="https://cdn1.fahasa.com/media/catalog/product/n/d/ndivia-co-may-tu-duy-vi-dai--full------t2-2025----outline-02.jpg"
+                    alt="">
+                <p>NVIDIA-Cỗ máy tư duy vĩ đại</p>
+                <h4>186.000</h4>
+                <h6>200.000</h6>
+                <h5>36%</h5>
+                <p>Đã bán: 50</p>
+            </div>
+            <div class="sale-books-element">
+                <img src="https://cdn1.fahasa.com/media/catalog/product/n/d/ndivia-co-may-tu-duy-vi-dai--full------t2-2025----outline-02.jpg"
+                    alt="">
+                <p>NVIDIA-Cỗ máy tư duy vĩ đại</p>
+                <h4>186.000</h4>
+                <h6>200.000</h6>
+                <h5>36%</h5>
+                <p>Đã bán: 50</p>
+            </div>
+            
+            <div class="sale-books-element">
+                <img src="https://cdn1.fahasa.com/media/catalog/product/n/d/ndivia-co-may-tu-duy-vi-dai--full------t2-2025----outline-02.jpg"
+                    alt="">
+                <p>NVIDIA-Cỗ máy tư duy vĩ đại</p>
+                <h4>186.000</h4>
+                <h6>200.000</h6>
+                <h5>36%</h5>
+                <p>Đã bán: 50</p>
+            </div>
+            <div class="sale-books-element">
+                <img src="https://cdn1.fahasa.com/media/catalog/product/n/d/ndivia-co-may-tu-duy-vi-dai--full------t2-2025----outline-02.jpg"
+                    alt="">
+                <p>NVIDIA-Cỗ máy tư duy vĩ đại</p>
+                <h4>186.000</h4>
+                <h6>200.000</h6>
+                <h5>36%</h5>
+                <p>Đã bán: 50</p>
+            </div>    
+               
+        </div>
 
-                
+       <div class="button-xem-them"> Xem Thêm </div>
     </div>
+    
+                
+   
     <script>
         let totalSeconds = 9000; // 1 giờ 24 phút 15 giây
 
