@@ -1,4 +1,4 @@
-package controller;
+package controller.category_checkout;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -62,7 +62,7 @@ public class CategoryController extends HttpServlet {
 		}
 
 		else if (!category.equals("") && search.equals("")) {
-			products = ht.hienThiSachTheoTheLoai(category);
+//			products = ht.hienThiSachTheoTheLoai(category);
 
 			if (products.size() < 12) {
 				int size = products.size();

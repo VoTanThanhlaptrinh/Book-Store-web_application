@@ -46,13 +46,17 @@ public class UserDAOImp implements IUserDao {
 			statement.setInt(1, userId);
 			try (ResultSet resultSet = statement.executeQuery();) {
 				while (resultSet.next()) {
-					int id = resultSet.getInt(1);
-					String userName = resultSet.getNString(2);
+					String username = resultSet.getNString(2);
 					String password = resultSet.getNString(3);
 					Date date = resultSet.getDate(4);
 					String email = resultSet.getNString(5);
-					Date updatedate = resultSet.getDate(6);
-					user = new User(id, userName, password, email, date, updatedate);
+					Date updateDate = resultSet.getDate(6);
+					user = new User(userId, username, password, email, date, updateDate);
+					user.setSocialLogin(resultSet.getBoolean(7));
+					user.setSocialLoginName(resultSet.getNString(8));
+					user.setStatus(resultSet.getNString(9));
+					user.setActivate(resultSet.getBoolean(10));
+					user.setRoles(getRolesByUserId(userId));
 				}
 			} catch (Exception e) {
 				// TODO: handle exception
@@ -67,18 +71,22 @@ public class UserDAOImp implements IUserDao {
 	}
 
 	@Override
-	public int saveUser(User user) throws SQLException {
+	public void saveUser(User user) throws SQLException {
 		// TODO Auto-generated method stub
 		int userId = 0;
 		try (Connection con = DatabaseConnection.getConnection();
 				PreparedStatement preparedStatement = con.prepareStatement(
-						"insert into User_1 (username,password,create_date,email,update_date) values(?,?,?,?,?) ",
+						"insert into User_1 (username,password,create_date,email,update_date,is_social_login,social_login_name,status,is_activate) values(?,?,?,?,?,?,?,?,?) ",
 						Statement.RETURN_GENERATED_KEYS);) {
 			preparedStatement.setString(1, user.getUsername());
 			preparedStatement.setString(2, user.getPassword());
 			preparedStatement.setDate(3, user.getCreateDate());
 			preparedStatement.setNString(4, user.getEmail());
-			preparedStatement.setDate(5, new Date(System.currentTimeMillis()));
+			preparedStatement.setDate(5, user.getUpdateDate());
+			preparedStatement.setBoolean(6, user.isSocialLogin());
+			preparedStatement.setNString(7, user.getSocialLoginName());
+			preparedStatement.setNString(8, user.getStatus());
+			preparedStatement.setBoolean(9, user.isActivate());
 			preparedStatement.executeUpdate();
 			try (ResultSet resultSet = preparedStatement.getGeneratedKeys();) {
 				if (resultSet.next()) {
@@ -89,9 +97,8 @@ public class UserDAOImp implements IUserDao {
 				e.printStackTrace();
 			}
 			try (PreparedStatement preStatement = con
-					.prepareStatement("insert into Role_User(role_id,user_id,status) values(2,?,?)")) {
+					.prepareStatement("insert into Role_User(role_id,user_id) values(2,?)")) {
 				preStatement.setInt(1, userId);
-				preStatement.setNString(2, "Active");
 				preStatement.executeUpdate();
 			} catch (Exception e) {
 				// TODO: handle exception
@@ -101,7 +108,6 @@ public class UserDAOImp implements IUserDao {
 			// TODO Auto-generated catch block
 			throw new SQLException("user đã tồn tại");
 		}
-		return userId;
 	}
 
 	@Override
@@ -147,6 +153,10 @@ public class UserDAOImp implements IUserDao {
 					String email = resultSet.getNString(5);
 					Date updateDate = resultSet.getDate(6);
 					user = new User(id, username, password, email, date, updateDate);
+					user.setSocialLogin(resultSet.getBoolean(7));
+					user.setSocialLoginName(resultSet.getNString(8));
+					user.setStatus(resultSet.getNString(9));
+					user.setActivate(resultSet.getBoolean(10));
 					user.setRoles(getRolesByUserId(id));
 				}
 			} catch (Exception e) {
@@ -209,11 +219,15 @@ public class UserDAOImp implements IUserDao {
 			try (ResultSet resultSet = statement.executeQuery();) {
 				if (resultSet.next()) {
 					int id = resultSet.getInt(1);
-					String username = resultSet.getString(2);
+					String username = resultSet.getNString(2);
 					String password = resultSet.getNString(3);
 					Date date = resultSet.getDate(4);
 					Date updateDate = resultSet.getDate(6);
 					user = new User(id, username, password, email, date, updateDate);
+					user.setSocialLogin(resultSet.getBoolean(7));
+					user.setSocialLoginName(resultSet.getNString(8));
+					user.setStatus(resultSet.getNString(9));
+					user.setActivate(resultSet.getBoolean(10));
 					user.setRoles(getRolesByUserId(id));
 				}
 			} catch (Exception e) {
@@ -225,5 +239,21 @@ public class UserDAOImp implements IUserDao {
 			e.printStackTrace();
 		}
 		return user;
+	}
+
+	@Override
+	public void activateUser(User user) {
+		// TODO Auto-generated method stub
+		try (Connection con = DatabaseConnection.getConnection();
+				PreparedStatement preparedStatement = con
+						.prepareStatement("update User_1 set is_activate = ?, update_date = ? where user_id = ?");) {
+			preparedStatement.setBoolean(1, user.isActivate());
+			preparedStatement.setDate(2, new Date(System.currentTimeMillis()));
+			preparedStatement.setInt(3, user.getUserId());
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
