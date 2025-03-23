@@ -25,13 +25,13 @@ public interface ILoginService {
 	void loadImage(Image img, String path) throws FileNotFoundException, IOException;
 
 	String getUsername(int userId);
-	
+
 	byte[] resizeImg(byte[] bytes);
-	
+
 	boolean checkEmail(String email);
-	
+
 	User getUserByMail(String mail);
-	
+
 	String hashPass(String pass);
 
 	void updateUser(User user);
@@ -39,4 +39,5 @@ public interface ILoginService {
 	void activateUser(User user);
 
 	void register(User user);
+
 }

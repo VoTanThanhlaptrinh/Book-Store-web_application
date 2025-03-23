@@ -39,12 +39,12 @@ public class RegisterController extends HttpServlet {
 		// TODO Auto-generated method stub
 		// gọi session
 		HttpSession session = req.getSession();
-		
+
 		String username = req.getParameter("username"); // lấy username từ form
 		String pass = req.getParameter("password"); // lấy password từ form
 		String email = req.getParameter("email"); // lấy email từ form
 		String rePassword = req.getParameter("rePassword"); // lấy rePassword từ form
-		
+
 		// Set ngôn ngữ mặc định trên web là tiếng việt.
 		String lang = (String) session.getAttribute("lang");
 		if (lang == null) {
@@ -96,23 +96,25 @@ public class RegisterController extends HttpServlet {
 			return;
 		}
 		// kiểm tra xem email đã tồn tại trong hệ thống hay chưa
-		if(loginService.checkEmail(email)) {
+		if (loginService.checkEmail(email)) {
 			mess = bundle.getString("email.exist");
 			req.setAttribute("mess", mess); // thông báo cho người dùng
 			doGet(req, resp);
 			return;
 		}
 		User user = createUser(username, rePassword, email); // tạo đối tượng user sau khi validate dữ liệu
-		loginService.register(user);
-		
+
 		session.setAttribute("user", user); // bỏ user vào session để chuyển đi nơi khác
+
+		loginService.register(user);
+
 		String code = RandomStringUtils.randomAlphanumeric(6); // tạo random mã để gửi email xác thực
 		session.setAttribute("confirmCode", code);
-		
+
 		resp.sendRedirect("confirm"); // di chuyển sang trang confirm
-		
+
 		String content = bundle.getString("verification.code") + code;
-		
+
 		// gọi service gửi email là mã xác thực cho user
 		mailService.sendMail(email, content, bundle.getString("account.registration.verification"));
 	}
@@ -123,7 +125,8 @@ public class RegisterController extends HttpServlet {
 		mailService = new SendMailImp();
 		loginService = new LoginService();
 	}
-	private User createUser(String username, String password,String email) {
+
+	private User createUser(String username, String password, String email) {
 		User user = new User();
 		user.setUsername(username);
 		user.setPassword(password);

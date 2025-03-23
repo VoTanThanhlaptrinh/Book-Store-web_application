@@ -1,4 +1,4 @@
-package controller;
+package controller.product;
 
 import java.io.IOException;
 import java.sql.Date;

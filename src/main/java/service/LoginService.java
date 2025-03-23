@@ -2,7 +2,6 @@ package service;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.sql.SQLException;
 
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -30,13 +29,13 @@ public class LoginService implements ILoginService {
 	@Override
 	public User checkUser(String username, String password) {
 		User user = daoImp.findByUserName(username);
-		if(user == null) {
+		if (user == null) {
 			return null;
 		}
 		String storedHash = user.getPassword();
 		if (BCrypt.checkpw(password, storedHash)) {
 			return user;
-		}else {
+		} else {
 			return null;
 		}
 	}
@@ -121,23 +120,19 @@ public class LoginService implements ILoginService {
 		// TODO Auto-generated method stub
 		daoImp.updateUser(user);
 	}
-
 	@Override
+
 	public void activateUser(User user) {
 		// TODO Auto-generated method stub
 		daoImp.activateUser(user);
 	}
 
+
 	@Override
 	public void register(User user) {
-		// TODO Auto-generated method stub
-		try {
-			String passHash = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
-			user.setPassword(passHash);
-			daoImp.saveUser(user);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		String passHash = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
+		user.setPassword(passHash);
+		daoImp.saveUser(user);
 	}
+
 }
