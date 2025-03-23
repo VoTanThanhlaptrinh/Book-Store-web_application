@@ -71,8 +71,6 @@ public class GoogleLoginCallBack extends HttpServlet {
 			}
 			// Lưu vào session để đăng nhập thay người dùng
 			session.setAttribute("user", user);
-
-			// TODO: handle exception
 			
 			// Chuyển hướng về trang chính
 			response.sendRedirect("home");
