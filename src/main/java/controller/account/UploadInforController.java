@@ -1,4 +1,4 @@
-package controller;
+package controller.account;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

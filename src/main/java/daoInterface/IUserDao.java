@@ -1,6 +1,5 @@
 package daoInterface;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import models.User;
@@ -9,7 +8,8 @@ public interface IUserDao {
 
 	User findByUserId(int userId);
 
-	int saveUser(User user) throws SQLException;
+
+	void saveUser(User user);
 	
 	void deleteUser(User user);
 	
@@ -20,4 +20,6 @@ public interface IUserDao {
 	boolean checkEmail(String email);
 
 	User getUserByMail(String mail);
+
+	void activateUser(User user);
 }

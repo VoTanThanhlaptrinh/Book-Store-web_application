@@ -1,4 +1,4 @@
-package controller;
+package controller.category_checkout;
 
 
 import java.io.IOException;

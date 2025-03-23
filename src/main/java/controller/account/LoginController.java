@@ -1,4 +1,4 @@
-package controller;
+package controller.account;
 
 import java.io.IOException;
 import java.util.Locale;
@@ -45,20 +45,20 @@ public class LoginController extends HttpServlet {
 
 		User user = loginService.checkUser(username, password);
 		HttpSession session = req.getSession();
-		
-		  String lang = (String) session.getAttribute("lang");
-		    if (lang == null) {
-		        lang = "vi";
-		    }
-		    Locale locale = Locale.forLanguageTag(lang);
-		    ResourceBundle bundle = ResourceBundle.getBundle("messages", locale);
+
+		String lang = (String) session.getAttribute("lang");
+		if (lang == null) {
+			lang = "vi";
+		}
+		Locale locale = Locale.forLanguageTag(lang);
+		ResourceBundle bundle = ResourceBundle.getBundle("messages", locale);
 		if (user == null) {
 			String mess = bundle.getString("incorrect.password");
 			req.setAttribute("mess", mess);
 			doGet(req, resp);
 			return;
 		}
-		
+
 		HienThiDonTrongGioHangImplement htGioHang = new HienThiDonTrongGioHangImplement(user);
 		htGioHang.taoGioHang(user.getUserId());
 		Cart cart = htGioHang.layGioHang(user.getUserId());
@@ -66,15 +66,20 @@ public class LoginController extends HttpServlet {
 		session.setAttribute("cart", cart);
 		session.setAttribute("user", user);
 
+		String previousURL = (String) session.getAttribute("previousURL");
+		System.out.println(previousURL);
+		if (previousURL != null) {
+			resp.sendRedirect(previousURL);
+			session.removeAttribute("previousURL");
+			return;
+		}
 		if (user != null && !productId.equals("")) {
 			HienThiDanhSachImp ds = new HienThiDanhSachImp();
 			req.setAttribute("product", ds.hienThiSachTheoId(Integer.parseInt(productId)));
-
 			resp.sendRedirect("chi-tiet-sach?id=" + productId);
 		} else if (user != null && productId.equals("")) {
 			resp.sendRedirect("home");
 		}
-
 	}
 
 	@Override
