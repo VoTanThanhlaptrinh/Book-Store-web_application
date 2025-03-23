@@ -27,18 +27,18 @@ import models.User;
 import service.ILoginService;
 import service.LoginService;
 
-@WebServlet("/callback")
-public class GoogleLoginCallBack extends HttpServlet {
+@WebServlet("/facebookCallBack")
+public class FacebookLoginCallBack extends HttpServlet {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static final String CLIENT_SECRET = "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";
-	private static final String CLIENT_ID = "53880802995-cgfj4oa7d0a868nvkjqjn8v9pdeiqvn8.apps.googleusercontent.com";
-	private static final String REDIRECT_URI = "http://localhost:8080/BOOK_STORE/callback";
+	private static final String FACEBOOK_APP_ID = "8512198988882407";
+	private static final String FACEBOOK_APP_SECRET = "692c98f436f299af3cb1ae313c0a0acb";
+//	private static final String FACEBOOK_LINK_GET_TOKEN = "https://graph.facebook.com/oauth/access_token?client_id=%s&client_secret=%s&redirect_uri=%s&code=%s";
 	private ILoginService loginService;
-	private boolean error;
 
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String code = request.getParameter("code");
@@ -63,7 +63,7 @@ public class GoogleLoginCallBack extends HttpServlet {
 
 			// Lấy thông tin người dùng từ Google
 			User user = getUserInfo(accessToken);
-			if(user == null) {
+			if (user == null) {
 				String mess = bundle.getString("email.exist");
 				request.setAttribute("mess", mess);
 				request.getRequestDispatcher("webPage/login/login.jsp").forward(request, response);
@@ -71,7 +71,7 @@ public class GoogleLoginCallBack extends HttpServlet {
 			}
 			// Lưu vào session để đăng nhập thay người dùng
 			session.setAttribute("user", user);
-			
+
 			// Chuyển hướng về trang chính
 			response.sendRedirect("home");
 		} catch (Exception e) {
@@ -79,21 +79,18 @@ public class GoogleLoginCallBack extends HttpServlet {
 		}
 	}
 
-	// Hàm đổi code thành Access Token
-	private String getAccessToken(String code) throws IOException, URISyntaxException {
-		String tokenUrl = "https://oauth2.googleapis.com/token";
+	private String getAccessToken(String code) throws URISyntaxException, IOException {
+		String tokenUrl = "https://graph.facebook.com/v2.12/oauth/access_token?client_id=" + FACEBOOK_APP_ID
+				+ "&redirect_uri=http://localhost:8080/BOOK_STORE/facebookCallBack&client_secret=" + FACEBOOK_APP_SECRET
+				+ "&code=" + code;
 		URL url = new URI(tokenUrl).toURL();
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-		conn.setRequestMethod("POST");
+		conn.setRequestMethod("GET");
 		conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 		conn.setDoOutput(true);
 
 		// Gửi request
-		String params = "code=" + code + "&client_id=" + CLIENT_ID + "&client_secret=" + CLIENT_SECRET
-				+ "&redirect_uri=" + REDIRECT_URI + "&grant_type=authorization_code";
-
 		OutputStream os = conn.getOutputStream();
-		os.write(params.getBytes());
 		os.flush();
 		os.close();
 		// Đọc response
@@ -110,16 +107,14 @@ public class GoogleLoginCallBack extends HttpServlet {
 	// Hàm lấy thông tin người dùng
 	private User getUserInfo(String accessToken) throws IOException, URISyntaxException {
 		HttpURLConnection conn = (HttpURLConnection) new URI(
-				"https://www.googleapis.com/oauth2/v1/userinfo?access_token=" + accessToken).toURL().openConnection();
+				"https://graph.facebook.com/me?fields=id,name,email&access_token=" + accessToken).toURL()
+				.openConnection();
 		conn.setRequestMethod("GET");
 
 		try (BufferedReader br = new BufferedReader(
 				new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8))) {
 			JsonObject jsonObject = Json.createReader(br).readObject();
 			String email = jsonObject.getString("email");
-			if (loginService.checkEmail(email)) {
-				return null;
-			}
 			return createUser(email);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -127,6 +122,13 @@ public class GoogleLoginCallBack extends HttpServlet {
 		}
 	}
 
+	@Override
+	public void init() throws ServletException {
+		// TODO Auto-generated method stub
+		loginService = new LoginService();
+	}
+
+	// Hàm tạo người dùng
 	private User createUser(String username) throws SQLException {
 		User user = new User();
 		user.setUsername(username);
@@ -137,14 +139,8 @@ public class GoogleLoginCallBack extends HttpServlet {
 		user.setRoles(Arrays.asList("user"));
 		user.setActivate(true);
 		user.setSocialLogin(true);
-		user.setSocialLoginName("Google");
+		user.setSocialLoginName("Facebook");
 		loginService.register(user);
 		return user;
-	}
-
-	@Override
-	public void init() throws ServletException {
-		// TODO Auto-generated method stub
-		loginService = new LoginService();
 	}
 }
