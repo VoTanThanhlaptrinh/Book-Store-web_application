@@ -1,0 +1,110 @@
+@charset "UTF-8";
+.banner-filter {
+
+    margin-top: 10px;
+    margin-left: 140px;
+}
+.banner-filter img {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Hiệu ứng đổ bóng */
+    width: 1230px;
+    height: 308px;
+}
+.return-to-index {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    gap: 5px;
+    margin-left: 140px;
+}
+.returun-to-index-a {
+    display: flex;
+    flex-direction: row;
+}
+.returun-to-index-a a{
+    text-decoration: none;
+    font-size: 13px;
+    color: rgb(56, 56, 56);
+    font-weight:  normal;
+    line-height:  inherit;
+}
+.return-to-index p {
+    font-size: 13px;
+    color: rgb(95, 95, 95);
+    font-weight:  normal;
+    line-height:  inherit;
+}
+.returun-to-index-a :hover {
+    text-decoration: underline;
+    color: chartreuse;
+}
+.container {
+    margin-top: 30px;
+    margin-left: 140px;
+    background-color: rgb(172, 137, 204);
+    width: 1230px;
+    height: max-content;
+}
+.category-filter {
+    background-color: white;
+    border: 1px solid black;
+    width: 340px;
+    height: 1000px;
+}
+.current-category {
+    width: 338px;
+    padding: 10px;
+    background-color: white;
+}
+.category-filter-li {
+    margin-top: 10px;
+}
+.current-category h4 {
+    font-size: 16px;
+    font-weight: bold;
+    color: #ff5d30;
+}
+
+.current-category li {
+    display: block;
+    margin-left: 20px;
+    margin-bottom: 12px;
+    font-size: 14px;
+    color: #333;
+}
+.current-category li a:hover {
+    color: #ff5d30;
+}
+.current-category li a {
+    text-decoration: none;
+    font-size: 15px;
+    color: #333;
+    font-weight:  normal;
+    line-height:  inherit;
+}
+.price-filter {
+    width: 338px;
+    padding: 10px;
+    margin-top: 20px;
+    background-color: white;
+  }
+  
+.price-filter h4 {
+    font-size: 16px;
+    font-weight: bold;
+    color: #ff5d30;
+  }
+  
+ .price-filter label {
+    display: block;
+    margin-bottom: 12px;
+    margin-left: 20px;
+    font-size: 14px;
+    cursor: pointer; /* Thêm con trỏ chuột */
+    color: #333;
+  }
+  .price-filter label:hover {
+    color: #ff5d30;
+  }
+  .price-filter input[type="checkbox"] {
+    margin-right: 8px;
+  }
