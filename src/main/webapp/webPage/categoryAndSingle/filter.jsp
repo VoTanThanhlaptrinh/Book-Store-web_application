@@ -26,8 +26,7 @@
     <c:if test="${user == null}">
         <div id="header-placeholder"><jsp:include page="/webPage/trangChu/header.jsp"></jsp:include></div>
     </c:if>
-    
-    <div class="return-to-index">
+      <div class="return-to-index">
         <div class="returun-to-index-a">
            <a href="/index.html">Trang chủ</a>
         </div>
@@ -41,25 +40,27 @@
      <div class="container">
 
             <div class="category-filter">
-                    <h4>Nhóm sản phẩn</h4>
                     <div class="current-category">
                             <h4>Sách Tiếng việt</h4>
                             <div class="category-filter-li">
-                                <li><a href="#">Thiếu nhi</a></li>
-                                <li><a href="#">Giáo Khoa, Tham Khảo</a></li>
-                                <li><a href="#">Văn Học</a></li>
-                                <li><a href="#">Tâm Lý, Kỹ Năng Sống</a></li>
-                                <li><a href="#">Manga-Comic</a></li>
-                                <li><a href="#">Sách Học Ngoại Ngữ</a></li>
-                                <li><a href="#">Kinh tế</a></li>
-                                <li><a href="#">Khoa học kỹ thuật</a></li>
-                                <li><a href="#">Nuôi dạy con</a></li>
-                                <li><a href="#">chính trị, Pháp lý</a></li>
-                                <li><a href="#">Tiểu sử hồi ký</a></li>
-                                <li><a href="#">Văn học, Nghệ Thuật, Du lịch</a></li>
+                                <li class="displayli"><a href="#">Thiếu nhi</a></li>
+                                <li class="displayli"><a href="#">Giáo Khoa, Tham Khảo</a></li>
+                                <li class="displayli"><a href="#">Văn Học</a></li>
+                                <li class="displayli"><a href="#">Tâm Lý, Kỹ Năng Sống</a></li>
+                                <li class="displayli"><a href="#">Manga-Comic</a></li>
+                                <li class="hidden"><a href="#">Sách Học Ngoại Ngữ</a></li>
+                                <li class="hidden"><a href="#">Kinh tế</a></li>
+                                <li class="hidden"><a href="#">Khoa học kỹ thuật</a></li>
+                                <li class="hidden"><a href="#">Nuôi dạy con</a></li>
+                                <li class="hidden"><a href="#">chính trị, Pháp lý</a></li>
+                                <li class="hidden"><a href="#">Tiểu sử hồi ký</a></li>
+                                <li class="hidden"><a href="#">Văn học, Nghệ Thuật, Du lịch</a></li>
+                                <div class="see-more" onclick="toggleMore()">
+                                    Xem Thêm <span class="arrow">▼</span>
+                                  </div>
                             </div>
                     </div>
-
+                    <div class="line"></div>
                     <div class="price-filter">
                         <h4>GIÁ</h4>
                         <div class="category-filter-li">
@@ -75,8 +76,142 @@
 
                      </div>
 
+            <div class = "item-filter">
+                <div class="item-filter-img">
+                    <img src="https://cdn1.fahasa.com/media/magentothem/banner7/CanhCutThanToc_840x320.png" alt="">
+                    </div>
+                <div class="item-filter-sort-type">
+                    <h4>Sắp xếp theo: </h4>
+                    <div class="item-filter-dropdown">
+                        <button class="item-filter-dropdown-button">
+                          Bán Chạy Tuần <span class="arrow">▼</span>
+                        </button>
+                        <ul class="item-filter-dropdown-menu">
+                          <li>Bán Chạy Ngày</li>
+                          <li>Bán Chạy Tháng</li>
+                          <li>Bán Chạy Năm</li>
+                        </ul>
+                      </div>
+                    <div class="san-pham">24 Sản Phẩm</div>
+                </div>
+                <div class="line"></div>
 
+
+                <div class="xu_huong_mua_sam">
+                    <div class="display-list-grid">
+                        <div class="sale-books-element">
+                            <img src="https://cdn1.fahasa.com/media/catalog/product/n/d/ndivia-co-may-tu-duy-vi-dai--full------t2-2025----outline-02.jpg"
+                                alt="">
+                            <p class="text-limited">NVIDIA-Cỗ máy tư duy vĩ đại</p>
+                            <div class="gia-tien-giam">
+                                <h4>186.000</h4>
+                                <h5>36%</h5>
+                                </div>
+                                <h6>200.000</h6>
+         
+                        </div>
+                        <div class="sale-books-element">
+                            <img src="https://cdn1.fahasa.com/media/catalog/product/n/d/ndivia-co-may-tu-duy-vi-dai--full------t2-2025----outline-02.jpg"
+                                alt="">
+                                <p class="text-limited">NVIDIA-Cỗ máy tư duy vĩ đại</p>
+                            <div class="gia-tien-giam">
+                                <h4>186.000</h4>
+                                <h5>36%</h5>
+                                </div>
+                                <h6>200.000</h6>
+                 
+                        </div>
+            
+                        <div class="sale-books-element">
+                            <img src="https://cdn1.fahasa.com/media/catalog/product/n/d/ndivia-co-may-tu-duy-vi-dai--full------t2-2025----outline-02.jpg"
+                                alt="">
+                                <p class="text-limited">NVIDIA-Cỗ máy tư duy vĩ đại</p>
+                            <div class="gia-tien-giam">
+                                <h4>186.000</h4>
+                                <h5>36%</h5>
+                                </div>
+                                <h6>200.000</h6>
+                         
+                        </div>
+                        <div class="sale-books-element">
+                            <img src="https://cdn1.fahasa.com/media/catalog/product/n/d/ndivia-co-may-tu-duy-vi-dai--full------t2-2025----outline-02.jpg"
+                                alt="">
+                                <p class="text-limited">NVIDIA-Cỗ máy tư duy vĩ đại</p>
+                            <div class="gia-tien-giam">
+                                <h4>186.000</h4>
+                                <h5>36%</h5>
+                                </div>
+                                <h6>200.000</h6>
+                           
+                        </div>
+             
+                        <div class="sale-books-element">
+                            <img src="https://cdn1.fahasa.com/media/catalog/product/n/d/ndivia-co-may-tu-duy-vi-dai--full------t2-2025----outline-02.jpg"
+                                alt="">
+                                <p class="text-limited">NVIDIA-Cỗ máy tư duy vĩ đại</p>
+                            <div class="gia-tien-giam">
+                                <h4>186.000</h4>
+                                <h5>36%</h5>
+                                </div>
+                                <h6>200.000</h6>
+                              
+                        </div>
+                        <div class="sale-books-element">
+                            <img src="https://cdn1.fahasa.com/media/catalog/product/n/d/ndivia-co-may-tu-duy-vi-dai--full------t2-2025----outline-02.jpg"
+                                alt="">
+                                <p class="text-limited">NVIDIA-Cỗ máy tư duy vĩ đại</p>
+                            <div class="gia-tien-giam">
+                                <h4>186.000</h4>
+                                <h5>36%</h5>
+                                </div>
+                                <h6>200.000</h6>
+                                
+                        </div>
+                        
+                        <div class="sale-books-element">
+                            <img src="https://cdn1.fahasa.com/media/catalog/product/n/d/ndivia-co-may-tu-duy-vi-dai--full------t2-2025----outline-02.jpg"
+                                alt="">
+                                <p class="text-limited">NVIDIA-Cỗ máy tư duy vĩ đại</p>
+                            <div class="gia-tien-giam">
+                                <h4>186.000</h4>
+                                <h5>36%</h5>
+                                </div>
+                                <h6>200.000</h6>
+                                
+                        </div>
+                        <div class="sale-books-element">
+                            <img src="https://cdn1.fahasa.com/media/catalog/product/n/d/ndivia-co-may-tu-duy-vi-dai--full------t2-2025----outline-02.jpg"
+                                alt="">
+                                <p class="text-limited">NVIDIA-Cỗ máy tư duy vĩ đại</p>
+                            <div class="gia-tien-giam">
+                                <h4>186.000</h4>
+                                <h5>36%</h5>
+                                </div>
+                                <h6>200.000</h6>
+                              
+                        </div>    
+                           
+                    </div>
+            
+                
+                </div>
+
+                <div class="pagination">
+                    <button class="prev-btn">&lt;</button>
+                    <span class="page-number">1</span>
+                    <span>...</span>
+                    <span class="page-number">3</span>
+                    <span class="page-number">4</span>
+                    <span class="page-number active">5</span>
+                    <span class="page-number">6</span>
+                    <span class="page-number">7</span>
+                    <span>...</span>
+                    <span class="page-number">10</span>
+                    <button class="next-btn">&gt;</button>
+                  </div>
+            </div>
      </div>       
+
     <script>
         function initializeDropdown() {
             const searchInput = document.getElementById('search-input');
@@ -103,5 +238,59 @@
         })
         .catch(error => console.error('Error loading header:', error));
     </script>
+    <script>
+        function toggleMore() {
+        const hiddenItems = document.querySelectorAll('.hidden');
+        const seeMore = document.querySelector('.see-more');
+        
+        hiddenItems.forEach(item => {
+          // Hiển thị hoặc ẩn các mục
+          item.style.display = item.style.display === 'block' ? 'none' : 'block';
+        });
+      
+        // Thêm hoặc bỏ class "active" để xoay mũi tên
+        seeMore.classList.toggle('active');
+      }</script>
+
+      <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const dropdown = document.querySelector(".item-filter-dropdown");
+            const button = dropdown.querySelector(".item-filter-dropdown-button");
+           const menu = dropdown.querySelector(".item-filter-dropdown-menu")
+            button.addEventListener("click", function () {
+                button.style.borderBottom = "none"; // Xóa border
+                menu.style.borderTop = "none"
+              dropdown.classList.toggle("open");
+              
+                
+               
+        
+            });
+          
+            // Close dropdown when clicking outside
+            document.addEventListener("click", function (e) {
+              if (!dropdown.contains(e.target)) {
+                  button.style.borderBottom = "1px solid #cccccc"; // Xóa border
+                menu.style.borderTop = "1px solid #CCCCCC"
+                dropdown.classList.remove("open");
+               
+              }
+            });
+          }); 
+        </script>
+
+        <script>
+            document.querySelectorAll(".page-number").forEach((page) => {
+                page.addEventListener("click", function () {
+                  // Xóa class 'active' khỏi tất cả các trang
+                  document.querySelectorAll(".page-number").forEach((p) => {
+                    p.classList.remove("active");
+                  });
+              
+                  // Thêm class 'active' vào trang được nhấn
+                  page.classList.add("active");
+                });
+              });
+        </script>
 </body>
 </html>
