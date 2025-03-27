@@ -70,8 +70,8 @@ public class UserDAOImp implements IUserDao {
 		return user;
 	}
 
-	@Override
-	public void saveUser(User user) throws SQLException {
+	public void saveUser(User user) {
+
 		// TODO Auto-generated method stub
 		int userId = 0;
 		try (Connection con = DatabaseConnection.getConnection();
@@ -86,6 +86,8 @@ public class UserDAOImp implements IUserDao {
 			preparedStatement.setBoolean(6, user.isSocialLogin());
 			preparedStatement.setNString(7, user.getSocialLoginName());
 			preparedStatement.setNString(8, user.getStatus());
+			preparedStatement.setString(7, user.getSocialLoginName());
+			preparedStatement.setString(8, user.getStatus());
 			preparedStatement.setBoolean(9, user.isActivate());
 			preparedStatement.executeUpdate();
 			try (ResultSet resultSet = preparedStatement.getGeneratedKeys();) {
@@ -106,7 +108,7 @@ public class UserDAOImp implements IUserDao {
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			throw new SQLException("user đã tồn tại");
+			e.printStackTrace();
 		}
 	}
 

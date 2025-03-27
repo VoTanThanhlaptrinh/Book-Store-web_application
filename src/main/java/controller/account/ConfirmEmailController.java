@@ -31,6 +31,7 @@ public class ConfirmEmailController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
+
 		User user = (User) session.getAttribute("user"); // Lấy ra thông tin user đã đăng nhập
 		String code = req.getParameter("conCode"); // lấy code từ input của người dùng
 		String confirmCode = (String) session.getAttribute("confirmCode"); // lấy code được gửi từ mail đặt trong session
@@ -49,14 +50,16 @@ public class ConfirmEmailController extends HttpServlet {
 			doGet(req, resp);
 			return;
 		}
+		// mã xác thực giống nhau thì xác thực tài khoản và quay trở về trang trước đó.
 		if (confirmCode.equals(code)) {
 			user.setActivate(true);
 			loginService.activateUser(user);
 			session.setAttribute("user", user);
 			session.removeAttribute("confirmCode");
-			String previousURL = (String) req.getAttribute("previousURL");
+			String previousURL = (String) session.getAttribute("previousURL");
 			if (previousURL != null) {
 				resp.sendRedirect(previousURL);
+				session.removeAttribute("previousURL");
 				return;
 			}
 			resp.sendRedirect("login");

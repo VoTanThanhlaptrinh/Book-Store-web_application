@@ -17,7 +17,8 @@ import models.User;
 import service.ISendMailService;
 import service.SendMailImp;
 
-@WebFilter(value = { "/checkout", "/reset" })
+@WebFilter(filterName = "activateFilter")
+
 public class ActivateFilter extends HttpFilter {
 
 	/**
@@ -43,20 +44,21 @@ public class ActivateFilter extends HttpFilter {
 		Locale locale = Locale.forLanguageTag(lang);
 		ResourceBundle bundle = ResourceBundle.getBundle("messages", locale);
 		String previousURL = req.getRequestURL().toString();
-		
+
 		if (!user.isActivate()) {
 			// gửi thông báo người dùng cần kích hoạt tài khoản để sử dụng dịch vụ này
 			String mess = bundle.getString("activate.message");
 			req.setAttribute("mess", mess);
-			// Lấy ra url trước đó, nếu user xác thực thành công thì sẽ trở về trang trước đó
+			// Lấy ra url trước đó, nếu user xác thực thành công thì sẽ trở về trang trước
+			// đó
 			previousURL = req.getRequestURL().toString();
-			req.setAttribute("previousURL", previousURL);
-			
+			session.setAttribute("previousURL", previousURL);
+
 			req.getRequestDispatcher("webPage/login/confirm.jsp").forward(req, res); // di chuyển tới trang xác thực
-			
+
 			String code = RandomStringUtils.randomAlphanumeric(6); // tạo random mã để gửi email xác thực
 			session.setAttribute("confirmCode", code);
-			
+
 			// gọi service gửi email là mã xác thực cho user
 			String content = bundle.getString("verification.code") + code;
 			sendMailService.sendMail(user.getEmail(), content, bundle.getString("account.registration.verification"));

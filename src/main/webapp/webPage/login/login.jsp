@@ -2,7 +2,8 @@
 	pageEncoding="UTF-8"%>
 
 <%@ include file="/webPage/lib/tag.jsp"%>
-<fmt:setLocale value="${param.lang != null ? param.lang : (sessionScope.lang != null ? sessionScope.lang : 'vi')}"  />
+<fmt:setLocale
+	value="${param.lang != null ? param.lang : (sessionScope.lang != null ? sessionScope.lang : 'vi')}" />
 <fmt:setBundle basename="messages" />
 <c:if test="${param.lang != null}">
 	<c:set var="lang" value="${param.lang}" scope="session" />
@@ -21,10 +22,14 @@
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
 	rel="stylesheet">
+
 <!-- Main css -->
 <link rel="stylesheet" href="webPage/trangChu/CSS/header.css">
 <link rel="stylesheet" href="webPage/trangChu/CSS/footer.css">
 <link href="webPage/login/css/style.css" rel="stylesheet">
+<link
+	href="webPage/login/fonts/font-awesome-4.7.0/css/font-awesome.min.css"
+	rel="stylesheet">
 </head>
 
 <body>
@@ -37,10 +42,14 @@
 				page="/webPage/trangChu/header.jsp"></jsp:include></div>
 	</c:if>
 	<c:if test="${mess != null}">
-		<div class="alert alert-danger text-center alert-css" role="alert"><fmt:message key="${mess}" /></div>
+		<div class="alert alert-danger text-center alert-css" role="alert">
+			<fmt:message key="${mess}" />
+		</div>
 	</c:if>
 	<c:if test="${not empty loginMessage}">
-		<div class="alert alert-success" role="alert"><fmt:message key="${loginMessage}" /></div>
+		<div class="alert alert-success" role="alert">
+			<fmt:message key="${loginMessage}" />
+		</div>
 	</c:if>
 	<div class="main" style="padding-top: 50px;">
 		<section class="signup">
@@ -48,7 +57,9 @@
 				<div class="signup-content border">
 					<form method="POST" id="signin" class="signup-form" action="login">
 						<input type="hidden" name="productId" value="${productId}">
-						<h2 class="form-title"><fmt:message key="login" /></h2>
+						<h2 class="form-title">
+							<fmt:message key="login" />
+						</h2>
 						<div class="form-group">
 							<input type="text" class="form-input" name="username" id="name"
 								placeholder="Tên tài khoản" required />
@@ -73,10 +84,15 @@
 							<a href="register"><fmt:message key="regis" /></a>
 						</div>
 					</div>
-					<div>
-					<a href="googleLoginRedirect"><button>Đăng nhập bằng Google</button></a>
-					</div>
 
+					<div class="d-flex gap-3 mt-5">
+						<a class="btn-google m-b-20" href="googleLoginRedirect"> <img
+							src="webPage/login/images/icon-google.png" alt="GOOGLE">
+							Google
+						</a> <a class="btn-face m-b-20" href="facebookRedirect"> <i
+							class="fa fa-facebook-official"></i> Facebook
+						</a>
+					</div>
 				</div>
 			</div>
 		</section>

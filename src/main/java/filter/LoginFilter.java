@@ -12,7 +12,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import models.User;
-@WebFilter(value = {"/checkout","/confirm"})
+@WebFilter(filterName = "loginFilter")
+
 public class LoginFilter extends HttpFilter {
 
 	/**
@@ -30,11 +31,11 @@ public class LoginFilter extends HttpFilter {
 		}
 		Locale locale = Locale.forLanguageTag(lang);
 		ResourceBundle bundle = ResourceBundle.getBundle("messages", locale);
-		String previousURL = req.getRequestURL().toString();
+
 		if (user == null) {
 			String loginMessage = bundle.getString("error.notLoggedIn");
 			session.setAttribute("loginMessage", loginMessage);
-			req.setAttribute("previousURL", previousURL);
+			session.setAttribute("previousURL", req.getRequestURL().toString());
 			req.getRequestDispatcher("webPage/login/login.jsp").forward(req, res);
 			return;
 		}

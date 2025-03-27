@@ -1,38 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app id="WebApp_ID" xmlns="https://jakarta.ee/xml/ns/jakartaee"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee
+<web-app id="WebApp_ID"
+	xmlns="https://jakarta.ee/xml/ns/jakartaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee
                              https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
-         version="6.0">
+	version="6.0">
 	<display-name>BOOK_STORE</display-name>
 	<servlet>
-    <description></description>
-    <display-name>CategoryController</display-name>
-    <servlet-name>CategoryController</servlet-name>
-    <servlet-class>controller.CategoryController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>CategoryController</servlet-name>
-    <url-pattern>/tim-sach</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>BookDetailController</display-name>
-    <servlet-name>BookDetailController</servlet-name>
-    <servlet-class>controller.BookDetailController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>BookDetailController</servlet-name>
-    <url-pattern>/chi-tiet-sach</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>DeleteController</display-name>
-    <servlet-name>DeleteController</servlet-name>
-    <servlet-class>controller.DeleteController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>DeleteController</servlet-name>
-    <url-pattern>/delete</url-pattern>
-  </servlet-mapping>
+		<description></description>
+		<display-name>CategoryController</display-name>
+		<servlet-name>CategoryController</servlet-name>
+		<servlet-class>controller.CategoryController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CategoryController</servlet-name>
+		<url-pattern>/tim-sach</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description></description>
+		<display-name>BookDetailController</display-name>
+		<servlet-name>BookDetailController</servlet-name>
+		<servlet-class>controller.BookDetailController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>BookDetailController</servlet-name>
+		<url-pattern>/chi-tiet-sach</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description></description>
+		<display-name>DeleteController</display-name>
+		<servlet-name>DeleteController</servlet-name>
+		<servlet-class>controller.DeleteController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DeleteController</servlet-name>
+		<url-pattern>/delete</url-pattern>
+	</servlet-mapping>
+
+	<!-- start Filter -->
+
+	<filter-mapping>
+		<filter-name>loginFilter</filter-name>
+		<url-pattern>/checkout</url-pattern>
+		<url-pattern>/confirm</url-pattern>
+	</filter-mapping>
+
+	<filter-mapping>
+		<filter-name>activateFilter</filter-name>
+		<url-pattern>/checkout</url-pattern>
+		<url-pattern>/reset</url-pattern>
+	</filter-mapping>
+	
+	<!-- end Filter -->
 </web-app>

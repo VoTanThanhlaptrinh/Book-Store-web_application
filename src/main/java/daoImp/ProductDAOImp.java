@@ -28,7 +28,6 @@ public class ProductDAOImp implements IProductDao {
 				String title = resultSet.getNString(2);
 				double price = resultSet.getDouble(3);
 				String description = resultSet.getNString(4);
-				
 				int imgId = resultSet.getInt(5);
 				Date createDate = resultSet.getDate(6);
 				Date updateDate = resultSet.getDate(7);
