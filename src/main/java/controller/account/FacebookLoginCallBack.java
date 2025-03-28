@@ -15,6 +15,8 @@ import java.util.Arrays;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import daoImp.SocialLoginDAOImpl;
+import daoInterface.ISocialLoginDAO;
 import jakarta.json.Json;
 import jakarta.json.JsonObject;
 import jakarta.servlet.ServletException;
@@ -23,6 +25,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import models.SocialLogin;
 import models.User;
 import service.ILoginService;
 import service.LoginService;
@@ -37,6 +40,7 @@ public class FacebookLoginCallBack extends HttpServlet {
 	private static final String FACEBOOK_APP_SECRET = "692c98f436f299af3cb1ae313c0a0acb";
 //	private static final String FACEBOOK_LINK_GET_TOKEN = "https://graph.facebook.com/oauth/access_token?client_id=%s&client_secret=%s&redirect_uri=%s&code=%s";
 	private ILoginService loginService;
+	private ISocialLoginDAO socialLoginDAO;
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -115,7 +119,20 @@ public class FacebookLoginCallBack extends HttpServlet {
 				new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8))) {
 			JsonObject jsonObject = Json.createReader(br).readObject();
 			String email = jsonObject.getString("email");
-			return createUser(email);
+			User user;
+			// nếu user đã tồn tại thì người dùng được phép đăng nhập
+			if (loginService.checkEmail(email)) {
+				user = loginService.getUserByMail(email);
+				return user;
+			}
+			String id = jsonObject.getString("id");
+			user = createUser(email);
+			if (!socialLoginDAO.checkIdSocialLogin(id)) {
+				SocialLogin socialLogin = new SocialLogin(id, user.getUserId(), "Facebook",
+						new Date(System.currentTimeMillis()));
+				socialLoginDAO.save(socialLogin);
+			}
+			return user;
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new IOException("Lỗi hệ thống");
@@ -126,6 +143,7 @@ public class FacebookLoginCallBack extends HttpServlet {
 	public void init() throws ServletException {
 		// TODO Auto-generated method stub
 		loginService = new LoginService();
+		socialLoginDAO = new SocialLoginDAOImpl();
 	}
 
 	// Hàm tạo người dùng
@@ -139,7 +157,6 @@ public class FacebookLoginCallBack extends HttpServlet {
 		user.setRoles(Arrays.asList("user"));
 		user.setActivate(true);
 		user.setSocialLogin(true);
-		user.setSocialLoginName("Facebook");
 		loginService.register(user);
 		return user;
 	}

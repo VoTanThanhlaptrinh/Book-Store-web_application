@@ -75,7 +75,7 @@
             </lord-icon>
         </div>
             <div class="login_div_text">
-                <p class = "login_div_text_1">Đăng nhập/Đăng kí</p>
+                <a href="login" class="login_div_text_1">Đăng nhập/Đăng kí</a>
                 <p class = "login_div_text_2">Tài khoản của tôi</p>
             </div>
             

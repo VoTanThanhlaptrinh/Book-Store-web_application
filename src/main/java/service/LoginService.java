@@ -129,10 +129,10 @@ public class LoginService implements ILoginService {
 
 
 	@Override
-	public void register(User user) {
+	public int register(User user) {
 		String passHash = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
 		user.setPassword(passHash);
-		daoImp.saveUser(user);
+		return daoImp.saveUser(user);
 	}
 
 }
