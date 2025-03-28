@@ -13,7 +13,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Information detail</title>
+<title>Trang thông tin cá nhân</title>
 
 <link href="webPage/login/css/infor.css" rel="stylesheet">
 <link

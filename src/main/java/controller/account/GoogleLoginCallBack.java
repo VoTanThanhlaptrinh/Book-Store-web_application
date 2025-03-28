@@ -15,6 +15,8 @@ import java.util.Arrays;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import daoImp.SocialLoginDAOImpl;
+import daoInterface.ISocialLoginDAO;
 import jakarta.json.Json;
 import jakarta.json.JsonObject;
 import jakarta.servlet.ServletException;
@@ -23,6 +25,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import models.SocialLogin;
 import models.User;
 import service.ILoginService;
 import service.LoginService;
@@ -37,7 +40,7 @@ public class GoogleLoginCallBack extends HttpServlet {
 	private static final String CLIENT_ID = "53880802995-cgfj4oa7d0a868nvkjqjn8v9pdeiqvn8.apps.googleusercontent.com";
 	private static final String REDIRECT_URI = "http://localhost:8080/BOOK_STORE/callback";
 	private ILoginService loginService;
-	private boolean error;
+	private ISocialLoginDAO socialLoginDAO;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -63,7 +66,7 @@ public class GoogleLoginCallBack extends HttpServlet {
 
 			// Lấy thông tin người dùng từ Google
 			User user = getUserInfo(accessToken);
-			if(user == null) {
+			if (user == null) {
 				String mess = bundle.getString("email.exist");
 				request.setAttribute("mess", mess);
 				request.getRequestDispatcher("webPage/login/login.jsp").forward(request, response);
@@ -71,7 +74,7 @@ public class GoogleLoginCallBack extends HttpServlet {
 			}
 			// Lưu vào session để đăng nhập thay người dùng
 			session.setAttribute("user", user);
-			
+
 			// Chuyển hướng về trang chính
 			response.sendRedirect("home");
 		} catch (Exception e) {
@@ -116,11 +119,22 @@ public class GoogleLoginCallBack extends HttpServlet {
 		try (BufferedReader br = new BufferedReader(
 				new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8))) {
 			JsonObject jsonObject = Json.createReader(br).readObject();
+			// đọc email từ request
 			String email = jsonObject.getString("email");
+			User user;
+			// nếu user đã tồn tại thì người dùng được phép đăng nhập
 			if (loginService.checkEmail(email)) {
-				return null;
+				user = loginService.getUserByMail(email);
+				return user;
 			}
-			return createUser(email);
+			String id = jsonObject.getString("id");
+			user = createUser(email);
+			if (!socialLoginDAO.checkIdSocialLogin(id)) {
+				SocialLogin socialLogin = new SocialLogin(id, user.getUserId(), "Google",
+						new Date(System.currentTimeMillis()));
+				socialLoginDAO.save(socialLogin);
+			}
+			return user;
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new IOException("Lỗi hệ thống");
@@ -137,7 +151,6 @@ public class GoogleLoginCallBack extends HttpServlet {
 		user.setRoles(Arrays.asList("user"));
 		user.setActivate(true);
 		user.setSocialLogin(true);
-		user.setSocialLoginName("Google");
 		loginService.register(user);
 		return user;
 	}
@@ -146,5 +159,6 @@ public class GoogleLoginCallBack extends HttpServlet {
 	public void init() throws ServletException {
 		// TODO Auto-generated method stub
 		loginService = new LoginService();
+		socialLoginDAO = new SocialLoginDAOImpl();
 	}
 }
