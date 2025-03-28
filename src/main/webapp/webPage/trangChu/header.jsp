@@ -112,22 +112,22 @@
             <div class="vertical-line"></div>
             <div class="drd_line">
             <div class="drd_line_1">
-            <div class="link_dropdown_1"><a class="link_dropdown_1_a1" href="#">Văn học</a>
-                <a class="link_dropdown_1_a2" href="#">Tiểu thuyết</a>
-                <a class="link_dropdown_1_a2" href="#">Truyện ngắn</a>
-                <a class="link_dropdown_1_a2" href="#">Light-novel</a>
-                <a class="link_dropdown_1_a2" href="#">Ngôn tình</a>
-                <a class="link_dropdown_1_a3" href="#">Xem tất cả</a>
+            <div class="link_dropdown_1"><a class="link_dropdown_1_a1" href="FilterServlet">Văn học</a>
+                <a class="link_dropdown_1_a2" href="/webPage/categoryAndSingle/filter.jsp">Tiểu thuyết</a>
+                <a class="link_dropdown_1_a2" href="/webPage/categoryAndSingle/filter.jsp">Truyện ngắn</a>
+                <a class="link_dropdown_1_a2" href="/webPage/categoryAndSingle/filter.jsp">Light-novel</a>
+                <a class="link_dropdown_1_a2" href="/webPage/categoryAndSingle/filter.jsp">Ngôn tình</a>
+                <a class="link_dropdown_1_a3" href="/webPage/categoryAndSingle/filter.jsp">Xem tất cả</a>
             </div>
             <div class="link_dropdown_1"><a class="link_dropdown_1_a1" href="#">Kinh tế</a>
-                <a class="link_dropdown_1_a2" href="#">Nhân Vật - Bài Học Kinh Doanh</a>
-                <a class="link_dropdown_1_a2" href="#">Quản Trị - Lãnh Đạo</a>
-                <a class="link_dropdown_1_a2" href="#">Light-novel</a>
-                <a class="link_dropdown_1_a2" href="#">Marketing - Bán Hàng</a>
-                <a class="link_dropdown_1_a3" href="#">Xem tất cả</a>
+                <a class="link_dropdown_1_a2" href="/webPage/categoryAndSingle/filter.jsp">Nhân Vật - Bài Học Kinh Doanh</a>
+                <a class="link_dropdown_1_a2" href="/webPage/categoryAndSingle/filter.jsp">Quản Trị - Lãnh Đạo</a>
+                <a class="link_dropdown_1_a2" href="/webPage/categoryAndSingle/filter.jsp">Light-novel</a>
+                <a class="link_dropdown_1_a2" href="/webPage/categoryAndSingle/filter.jsp">Marketing - Bán Hàng</a>
+                <a class="link_dropdown_1_a3" href="/webPage/categoryAndSingle/filter.jsp">Xem tất cả</a>
             </div>      
             <div class="link_dropdown_1"><a class="link_dropdown_1_a1" href="#">Tâm Lý - Kĩ Năng Sống</a>
-                <a class="link_dropdown_1_a2" href="#">Kỹ Năng Sống</a>
+                <a class="link_dropdown_1_a2" href="/webPage/categoryAndSingle/filter.jsp">Kỹ Năng Sống</a>
                 <a class="link_dropdown_1_a2" href="#">Rèn Luyện Nhân Cách</a>
                 <a class="link_dropdown_1_a2" href="#">Tâm Lý</a>
                 <a class="link_dropdown_1_a2" href="#">Sách Cho Tuổi Mới Lớn</a>

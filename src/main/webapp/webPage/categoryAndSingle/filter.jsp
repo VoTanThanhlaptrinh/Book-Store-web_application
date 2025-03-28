@@ -92,7 +92,7 @@
                           <li>Bán Chạy Năm</li>
                         </ul>
                       </div>
-                    <div class="san-pham">24 Sản Phẩm</div>
+                    <div class="san-pham">8 Sản Phẩm</div>
                 </div>
                 <div class="line"></div>
 
