@@ -36,8 +36,8 @@ public class FacebookLoginCallBack extends HttpServlet {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static final String FACEBOOK_APP_ID = "8512198988882407";
-	private static final String FACEBOOK_APP_SECRET = "692c98f436f299af3cb1ae313c0a0acb";
+	private static String FACEBOOK_APP_ID;
+	private static String FACEBOOK_APP_SECRET;
 //	private static final String FACEBOOK_LINK_GET_TOKEN = "https://graph.facebook.com/oauth/access_token?client_id=%s&client_secret=%s&redirect_uri=%s&code=%s";
 	private ILoginService loginService;
 	private ISocialLoginDAO socialLoginDAO;
@@ -142,6 +142,8 @@ public class FacebookLoginCallBack extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		// TODO Auto-generated method stub
+		FACEBOOK_APP_ID = getServletContext().getInitParameter("FACEBOOK_APP_ID");
+		FACEBOOK_APP_SECRET = getServletContext().getInitParameter("FACEBOOK_APP_SECRET");
 		loginService = new LoginService();
 		socialLoginDAO = new SocialLoginDAOImpl();
 	}

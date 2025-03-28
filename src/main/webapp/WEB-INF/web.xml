@@ -52,4 +52,12 @@
 	</filter-mapping>
 	
 	<!-- end Filter -->
+	<context-param>
+	    <param-name>FACEBOOK_APP_ID</param-name>
+	    <param-value>1862835147867306</param-value>
+	</context-param>
+	<context-param>
+	    <param-name>FACEBOOK_APP_SECRET</param-name>
+	    <param-value>776df64d498b035596d3269f58f68942</param-value>
+	</context-param>
 </web-app>

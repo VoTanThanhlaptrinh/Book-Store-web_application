@@ -30,14 +30,13 @@ public class LoginService implements ILoginService {
 	public User checkUser(String username, String password) {
 		User user = daoImp.findByUserName(username);
 		if (user == null) {
-			return null;
+			return user;
 		}
 		String storedHash = user.getPassword();
 		if (BCrypt.checkpw(password, storedHash)) {
 			return user;
-		} else {
-			return null;
 		}
+		return null;
 	}
 
 	@Override
@@ -120,13 +119,13 @@ public class LoginService implements ILoginService {
 		// TODO Auto-generated method stub
 		daoImp.updateUser(user);
 	}
+
 	@Override
 
 	public void activateUser(User user) {
 		// TODO Auto-generated method stub
 		daoImp.activateUser(user);
 	}
-
 
 	@Override
 	public int register(User user) {
