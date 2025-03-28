@@ -92,124 +92,57 @@
                           <li>Bán Chạy Năm</li>
                         </ul>
                       </div>
-                    <div class="san-pham">24 Sản Phẩm</div>
+                    <div class="san-pham">8 Sản Phẩm</div>
                 </div>
                 <div class="line"></div>
 
 
-                <div class="xu_huong_mua_sam">
-                    <div class="display-list-grid">
-                        <div class="sale-books-element">
-                            <img src="https://cdn1.fahasa.com/media/catalog/product/n/d/ndivia-co-may-tu-duy-vi-dai--full------t2-2025----outline-02.jpg"
-                                alt="">
-                            <p class="text-limited">NVIDIA-Cỗ máy tư duy vĩ đại</p>
-                            <div class="gia-tien-giam">
-                                <h4>186.000</h4>
-                                <h5>36%</h5>
-                                </div>
-                                <h6>200.000</h6>
-         
-                        </div>
-                        <div class="sale-books-element">
-                            <img src="https://cdn1.fahasa.com/media/catalog/product/n/d/ndivia-co-may-tu-duy-vi-dai--full------t2-2025----outline-02.jpg"
-                                alt="">
-                                <p class="text-limited">NVIDIA-Cỗ máy tư duy vĩ đại</p>
-                            <div class="gia-tien-giam">
-                                <h4>186.000</h4>
-                                <h5>36%</h5>
-                                </div>
-                                <h6>200.000</h6>
-                 
-                        </div>
-            
-                        <div class="sale-books-element">
-                            <img src="https://cdn1.fahasa.com/media/catalog/product/n/d/ndivia-co-may-tu-duy-vi-dai--full------t2-2025----outline-02.jpg"
-                                alt="">
-                                <p class="text-limited">NVIDIA-Cỗ máy tư duy vĩ đại</p>
-                            <div class="gia-tien-giam">
-                                <h4>186.000</h4>
-                                <h5>36%</h5>
-                                </div>
-                                <h6>200.000</h6>
-                         
-                        </div>
-                        <div class="sale-books-element">
-                            <img src="https://cdn1.fahasa.com/media/catalog/product/n/d/ndivia-co-may-tu-duy-vi-dai--full------t2-2025----outline-02.jpg"
-                                alt="">
-                                <p class="text-limited">NVIDIA-Cỗ máy tư duy vĩ đại</p>
-                            <div class="gia-tien-giam">
-                                <h4>186.000</h4>
-                                <h5>36%</h5>
-                                </div>
-                                <h6>200.000</h6>
-                           
-                        </div>
-             
-                        <div class="sale-books-element">
-                            <img src="https://cdn1.fahasa.com/media/catalog/product/n/d/ndivia-co-may-tu-duy-vi-dai--full------t2-2025----outline-02.jpg"
-                                alt="">
-                                <p class="text-limited">NVIDIA-Cỗ máy tư duy vĩ đại</p>
-                            <div class="gia-tien-giam">
-                                <h4>186.000</h4>
-                                <h5>36%</h5>
-                                </div>
-                                <h6>200.000</h6>
-                              
-                        </div>
-                        <div class="sale-books-element">
-                            <img src="https://cdn1.fahasa.com/media/catalog/product/n/d/ndivia-co-may-tu-duy-vi-dai--full------t2-2025----outline-02.jpg"
-                                alt="">
-                                <p class="text-limited">NVIDIA-Cỗ máy tư duy vĩ đại</p>
-                            <div class="gia-tien-giam">
-                                <h4>186.000</h4>
-                                <h5>36%</h5>
-                                </div>
-                                <h6>200.000</h6>
-                                
-                        </div>
-                        
-                        <div class="sale-books-element">
-                            <img src="https://cdn1.fahasa.com/media/catalog/product/n/d/ndivia-co-may-tu-duy-vi-dai--full------t2-2025----outline-02.jpg"
-                                alt="">
-                                <p class="text-limited">NVIDIA-Cỗ máy tư duy vĩ đại</p>
-                            <div class="gia-tien-giam">
-                                <h4>186.000</h4>
-                                <h5>36%</h5>
-                                </div>
-                                <h6>200.000</h6>
-                                
-                        </div>
-                        <div class="sale-books-element">
-                            <img src="https://cdn1.fahasa.com/media/catalog/product/n/d/ndivia-co-may-tu-duy-vi-dai--full------t2-2025----outline-02.jpg"
-                                alt="">
-                                <p class="text-limited">NVIDIA-Cỗ máy tư duy vĩ đại</p>
-                            <div class="gia-tien-giam">
-                                <h4>186.000</h4>
-                                <h5>36%</h5>
-                                </div>
-                                <h6>200.000</h6>
-                              
-                        </div>    
-                           
+              <div class="xu_huong_mua_sam">
+        <div class="display-list-grid">
+            <!-- Hiển thị danh sách sản phẩm -->
+            <c:forEach var="product" items="${products}">
+                <div class="sale-books-element">
+                    <img src="getImage?img_id=${product.getImgId()}" alt="${product.title}">
+                    <p class="text-limited">${product.title}</p>
+                    <div class="gia-tien-giam">
+                        <h4>${product.price} VND</h4>
+                        <h5>36%</h5> <!-- Giả sử giảm giá cố định -->
                     </div>
-            
-                
+                    <h6>200.000 VND</h6> <!-- Giá gốc giả định -->
                 </div>
+            </c:forEach>
+        </div>
+    </div>
 
-                <div class="pagination">
-                    <button class="prev-btn">&lt;</button>
-                    <span class="page-number">1</span>
-                    <span>...</span>
-                    <span class="page-number">3</span>
-                    <span class="page-number">4</span>
-                    <span class="page-number active">5</span>
-                    <span class="page-number">6</span>
-                    <span class="page-number">7</span>
-                    <span>...</span>
-                    <span class="page-number">10</span>
-                    <button class="next-btn">&gt;</button>
-                  </div>
-            </div>
+    <!-- Phân trang -->
+    <div class="pagination">
+        <!-- Nút "<" -->
+        <c:if test="${currentPage > 1}">
+            <button onclick="location.href='FilterServlet?page=1'"><<</button>
+            <button onclick="location.href='FilterServlet?page=${currentPage - 1}'"><</button>
+        </c:if>
+
+		      <!-- Hiển thị các trang gần đây -->
+		<c:set var="startPage" value="${currentPage - 2 > 0 ? currentPage - 2 : 1}" />
+		<c:set var="endPage" value="${currentPage + 2 < totalPages ? currentPage + 2 : totalPages}" />
+		
+		<c:forEach var="i" begin="${startPage}" end="${endPage}">
+		    <c:choose>
+		        <c:when test="${i == currentPage}">
+		            <span class="active">${i}</span>
+		        </c:when>
+		        <c:otherwise>
+		            <span onclick="location.href='FilterServlet?page=${i}'">${i}</span>
+		        </c:otherwise>
+		    </c:choose>
+		</c:forEach>
+
+        <!-- Nút ">" -->
+        <c:if test="${currentPage < totalPages}">
+            <button onclick="location.href='FilterServlet?page=${currentPage + 1}'">></button>
+            <button onclick="location.href='FilterServlet?page=${totalPages}'">>></button>
+        </c:if>
+    </div>
      </div>       
 
     <script>
