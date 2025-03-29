@@ -29,13 +29,27 @@ public class FilterController extends HttpServlet {
         // Tính toán offset cho câu truy vấn SQL
         int offset = (currentPage - 1) * productsPerPage;
 
-        // Lấy tổng số sản phẩm
+        // Lấy thông tin lọc (categoryId hoặc categoryParentId)
+        Integer categoryId = null;
+        Integer categoryParentId = null;
+        try {
+            categoryId = Integer.parseInt(request.getParameter("categoryId"));
+        } catch (NumberFormatException e) {
+            // Không có categoryId
+        }
+        try {
+            categoryParentId = Integer.parseInt(request.getParameter("categoryParentId"));
+        } catch (NumberFormatException e) {
+            // Không có categoryParentId
+        }
+
+        // Lấy tổng số sản phẩm dựa trên điều kiện lọc
         NewProductDao productDAO = new NewProductDao();
-        int totalProducts = productDAO.getTotalProduct(); // Gọi phương thức getTotalProduct()
+        int totalProducts = productDAO.getTotalProducts(categoryId, categoryParentId);
         int totalPages = (int) Math.ceil((double) totalProducts / productsPerPage);
 
-        // Lấy danh sách sản phẩm theo phân trang
-        List<FilterProduct> productList = productDAO.getProducts(productsPerPage, offset);
+        // Lấy danh sách sản phẩm theo phân trang và điều kiện lọc
+        List<FilterProduct> productList = productDAO.getProducts(productsPerPage, offset, categoryId, categoryParentId);
 
         // Đưa dữ liệu vào request
         request.setAttribute("products", productList);

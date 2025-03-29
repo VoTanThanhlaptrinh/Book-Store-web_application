@@ -12,7 +12,9 @@ public class FilterProduct {
 	        this.title = title;
 	        this.price = price;
 	    }
-
+	    public FilterProduct() {
+	    	
+	    }
 
 	    public int getProductId() { return productId; }
 	    public void setProductId(int productId) { this.productId = productId; }

@@ -40,26 +40,17 @@
      <div class="container">
 
             <div class="category-filter">
-                    <div class="current-category">
-                            <h4>Sách Tiếng việt</h4>
-                            <div class="category-filter-li">
-                                <li class="displayli"><a href="#">Thiếu nhi</a></li>
-                                <li class="displayli"><a href="#">Giáo Khoa, Tham Khảo</a></li>
-                                <li class="displayli"><a href="#">Văn Học</a></li>
-                                <li class="displayli"><a href="#">Tâm Lý, Kỹ Năng Sống</a></li>
-                                <li class="displayli"><a href="#">Manga-Comic</a></li>
-                                <li class="hidden"><a href="#">Sách Học Ngoại Ngữ</a></li>
-                                <li class="hidden"><a href="#">Kinh tế</a></li>
-                                <li class="hidden"><a href="#">Khoa học kỹ thuật</a></li>
-                                <li class="hidden"><a href="#">Nuôi dạy con</a></li>
-                                <li class="hidden"><a href="#">chính trị, Pháp lý</a></li>
-                                <li class="hidden"><a href="#">Tiểu sử hồi ký</a></li>
-                                <li class="hidden"><a href="#">Văn học, Nghệ Thuật, Du lịch</a></li>
-                                <div class="see-more" onclick="toggleMore()">
-                                    Xem Thêm <span class="arrow">▼</span>
-                                  </div>
-                            </div>
-                    </div>
+					 <div class="current-category">
+					 
+						    <h4>Sách Tiếng Việt</h4>
+						    <button onclick="loadSubCategories(2)">Tải thể loại nhỏ</button>
+						       <div class="category-filter-li" id="category-list1">
+						        <!-- Danh sách thể loại nhỏ sẽ được cập nhật động -->
+						    </div>
+						    <div class="see-more" onclick="toggleMore()">
+						        Xem Thêm <span class="arrow">▼</span>
+						    </div>
+						</div>
                     <div class="line"></div>
                     <div class="price-filter">
                         <h4>GIÁ</h4>
@@ -129,18 +120,18 @@
 		<c:forEach var="i" begin="${startPage}" end="${endPage}">
 		    <c:choose>
 		        <c:when test="${i == currentPage}">
-		            <span class="active">${i}</span>
+		            <span class="page-number active">${i}</span>
 		        </c:when>
 		        <c:otherwise>
-		            <span onclick="location.href='FilterServlet?page=${i}'">${i}</span>
+		            <span  class="page-number" onclick="location.href='FilterServlet?page=${i}'">${i}</span>
 		        </c:otherwise>
 		    </c:choose>
 		</c:forEach>
 
         <!-- Nút ">" -->
         <c:if test="${currentPage < totalPages}">
-            <button onclick="location.href='FilterServlet?page=${currentPage + 1}'">></button>
-            <button onclick="location.href='FilterServlet?page=${totalPages}'">>></button>
+            <button class="next-btn" onclick="location.href='FilterServlet?page=${currentPage + 1}'">></button>
+            <button class="next-btn" onclick="location.href='FilterServlet?page=${totalPages}'">>></button>
         </c:if>
     </div>
      </div>       
@@ -162,7 +153,7 @@
                 });
             }
         }
-        fetch('header.html')
+        fetch('header.jsp')
         .then(response => response.text())
         .then(data => {
             document.getElementById('header').innerHTML = data;
@@ -171,19 +162,75 @@
         })
         .catch(error => console.error('Error loading header:', error));
     </script>
-    <script>
-        function toggleMore() {
-        const hiddenItems = document.querySelectorAll('.hidden');
-        const seeMore = document.querySelector('.see-more');
-        
-        hiddenItems.forEach(item => {
-          // Hiển thị hoặc ẩn các mục
-          item.style.display = item.style.display === 'block' ? 'none' : 'block';
-        });
+  <script>
+  // Hàm tải danh sách thể loại nhỏ
+
+function loadSubCategories(categoryParentId) {
+  const xhr = new XMLHttpRequest();
+  xhr.open("GET", "AjaxCategoryServlet?categoryParentId=" + categoryParentId, true);
+  
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      const subCategories = JSON.parse(xhr.responseText);
+      console.log("Dữ liệu từ server:", subCategories); // Debug dữ liệu
       
-        // Thêm hoặc bỏ class "active" để xoay mũi tên
-        seeMore.classList.toggle('active');
-      }</script>
+      // Khai báo biến categoryListElement
+      const categoryListElement = document.getElementById("category-list1");
+      if (!categoryListElement) {
+        console.error("Thẻ category-list không tồn tại!");
+        return;
+      }
+      var html = "";
+      
+      subCategories.forEach((category, index) => {
+    	    // Không cần JSON.stringify và JSON.parse nếu category đã là object
+    	  const {id, name} = category;
+    	  console.log(name); 
+			console.log(id);  
+  
+			html += '<li class="' + (index >= 5 ? 'hidden' : 'displayli') + '">' +
+	        '<a href="#" onclick="filterByCategory(' + id + ')">' + name + '</a>' +
+	        '</li>';
+			 console.log(html);
+
+    	});
+      // Sử dụng biến categoryListElement
+      categoryListElement.innerHTML = html;
+    } else {
+      console.error("Lỗi khi tải dữ liệu từ server.");
+    }
+  };
+  
+  xhr.send();
+}
+
+
+
+
+
+  // Hàm xử lý sự kiện "Xem Thêm"
+  function toggleMore() {
+      const hiddenItems = document.querySelectorAll(".hidden");
+      const seeMoreButton = document.querySelector(".see-more .arrow");
+
+      hiddenItems.forEach(item => {
+          item.classList.toggle("displayli");
+          item.classList.toggle("hidden");
+      });
+
+      // Đổi mũi tên
+      if (seeMoreButton.textContent === "▼") {
+          seeMoreButton.textContent = "▲";
+      } else {
+          seeMoreButton.textContent = "▼";
+      }
+  }
+
+  // Hàm lọc sản phẩm
+  function filterByCategory(categoryId) {
+      window.location.href = "FilterServlet?page=1&categoryId=" + categoryId;
+  }
+</script>
 
       <script>
         document.addEventListener("DOMContentLoaded", function () {

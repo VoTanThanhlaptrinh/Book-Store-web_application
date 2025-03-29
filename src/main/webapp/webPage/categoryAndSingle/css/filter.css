@@ -77,7 +77,7 @@ body {
     background-color: rgb(168, 168, 168); /* Màu sắc */
 }
 .displayli {
-    display: block;
+    display: list-item;
     margin-left: 20px;
     margin-bottom: 12px;
     font-size: 14px;
@@ -90,6 +90,9 @@ body {
     color: #333;
     display: none; /* Ẩn các mục ban đầu */
   } 
+.category-filter-li {
+    min-height: 100px; /* Đảm bảo có đủ không gian */
+}
 .see-more {
     color: #FF8000;
     font-weight: bold;
@@ -294,6 +297,7 @@ body {
 }
   
 .page-number.active {
+	cursor:pointer;
     background-color: #d32f2f; /* Màu đỏ */
     color: #fff;
 }
