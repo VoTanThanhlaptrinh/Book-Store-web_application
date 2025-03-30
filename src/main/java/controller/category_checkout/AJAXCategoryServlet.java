@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import models.Category;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import daoImp.FilterDAO;
@@ -29,12 +30,20 @@ public class AJAXCategoryServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		   // Lấy ID của thể loại lớn từ tham số URL
+		
         int categoryParentId = Integer.parseInt(request.getParameter("categoryParentId"));
 
-        // Lấy danh sách thể loại nhỏ
-        List<Category> subCategories = new FilterDAO().getSubCategories(categoryParentId);
-     
+        List<Category> subCategories = new ArrayList<>();
+        
+        if (categoryParentId == 0) {
+        	  // Lấy danh sách thể loại lớn
+        	subCategories.addAll(new FilterDAO().getTopCategories());
+        }
+        else {
+        	  // Lấy danh sách thể loại nhỏ
+        	 subCategories = new FilterDAO().getSubCategories(categoryParentId);
+        }
+        
         // Chuyển danh sách thể loại nhỏ thành JSON
         Gson gson = new Gson();
         String jsonResponse = gson.toJson(subCategories);

@@ -41,12 +41,15 @@
 
             <div class="category-filter">
 					 <div class="current-category">
-					 
-						    <h4>Sách Tiếng Việt</h4>
-						    <button onclick="loadSubCategories(2)">Tải thể loại nhỏ</button>
-						       <div class="category-filter-li" id="category-list1">
+					 		<p class="all-cate" onclick="loadParentCategory()">ALL CATEGORIES</p>
+					 		
+					 		 <div class="category-filter-li" id="category-parent-list">
 						        <!-- Danh sách thể loại nhỏ sẽ được cập nhật động -->
+						        
+						         <div class="category-filter-child-list" id="category-list1">  
+						    	</div>
 						    </div>
+						      
 						    <div class="see-more" onclick="toggleMore()">
 						        Xem Thêm <span class="arrow">▼</span>
 						    </div>
@@ -135,8 +138,14 @@
         </c:if>
     </div>
      </div>       
-
+	 </div>  
     <script>
+    
+    
+	    document.addEventListener("DOMContentLoaded", function () {
+	        loadParentCategory(); // Tự động gọi hàm khi trang tải xong
+	    });
+    
         function initializeDropdown() {
             const searchInput = document.getElementById('search-input');
             const dropdownList = document.getElementById('dropdown-list');
@@ -165,6 +174,44 @@
   <script>
   // Hàm tải danh sách thể loại nhỏ
 
+  function loadParentCategory() {
+	  const xhr = new XMLHttpRequest();
+	  xhr.open("GET", "AjaxCategoryServlet?categoryParentId=" + 0, true);
+	  xhr.onload = function () {
+		    if (xhr.status === 200) {
+		      const subCategories = JSON.parse(xhr.responseText);
+		      console.log("Dữ liệu từ server:", subCategories); // Debug dữ liệu
+		      
+		      // Khai báo biến categoryListElement
+		      const categoryListElement = document.getElementById("category-parent-list");
+		      if (!categoryListElement) {
+		        console.error("Thẻ category-parent-list không tồn tại!");
+		        return;
+		      }
+		      var html = "";
+		      
+		      subCategories.forEach((category, index) => {
+		    	    // Không cần JSON.stringify và JSON.parse nếu category đã là object
+		    	  const {id, name} = category;
+		    	  console.log(name); 
+					console.log(id);  
+		  
+				    html += '<li class="' + (index >= 3 ? 'hidden' : 'displayli') + '">' +
+		            '<button onclick="loadSubCategories(' + id + ')">' + name + '</button>' +
+		            '</li>' +
+		            '<div id="category-list' + id + '"></div>'; // Thêm div với id động
+
+		    	});
+		      // Sử dụng biến categoryListElement
+		      categoryListElement.innerHTML = html;
+		    } else {
+		      console.error("Lỗi khi tải dữ liệu từ server.");
+		    }
+		  };
+		  
+		  xhr.send();
+  }
+  
 function loadSubCategories(categoryParentId) {
   const xhr = new XMLHttpRequest();
   xhr.open("GET", "AjaxCategoryServlet?categoryParentId=" + categoryParentId, true);
@@ -175,7 +222,7 @@ function loadSubCategories(categoryParentId) {
       console.log("Dữ liệu từ server:", subCategories); // Debug dữ liệu
       
       // Khai báo biến categoryListElement
-      const categoryListElement = document.getElementById("category-list1");
+          const categoryListElement = document.getElementById("category-list" + categoryParentId);
       if (!categoryListElement) {
         console.error("Thẻ category-list không tồn tại!");
         return;
@@ -188,7 +235,7 @@ function loadSubCategories(categoryParentId) {
     	  console.log(name); 
 			console.log(id);  
   
-			html += '<li class="' + (index >= 5 ? 'hidden' : 'displayli') + '">' +
+			html += '<li class="' + (index >= 3 ? 'hidden' : 'displayli') + '">' +
 	        '<a href="#" onclick="filterByCategory(' + id + ')">' + name + '</a>' +
 	        '</li>';
 			 console.log(html);
@@ -204,8 +251,11 @@ function loadSubCategories(categoryParentId) {
   xhr.send();
 }
 
-
-
+	
+	// Hàm lọc sản phẩm
+	function filterByCategory(categoryId) {
+	    window.location.href = "FilterServlet?page=1&categoryId=" + categoryId;
+	}
 
 
   // Hàm xử lý sự kiện "Xem Thêm"
@@ -226,10 +276,7 @@ function loadSubCategories(categoryParentId) {
       }
   }
 
-  // Hàm lọc sản phẩm
-  function filterByCategory(categoryId) {
-      window.location.href = "FilterServlet?page=1&categoryId=" + categoryId;
-  }
+
 </script>
 
       <script>
