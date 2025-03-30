@@ -40,26 +40,20 @@
      <div class="container">
 
             <div class="category-filter">
-                    <div class="current-category">
-                            <h4>Sách Tiếng việt</h4>
-                            <div class="category-filter-li">
-                                <li class="displayli"><a href="#">Thiếu nhi</a></li>
-                                <li class="displayli"><a href="#">Giáo Khoa, Tham Khảo</a></li>
-                                <li class="displayli"><a href="#">Văn Học</a></li>
-                                <li class="displayli"><a href="#">Tâm Lý, Kỹ Năng Sống</a></li>
-                                <li class="displayli"><a href="#">Manga-Comic</a></li>
-                                <li class="hidden"><a href="#">Sách Học Ngoại Ngữ</a></li>
-                                <li class="hidden"><a href="#">Kinh tế</a></li>
-                                <li class="hidden"><a href="#">Khoa học kỹ thuật</a></li>
-                                <li class="hidden"><a href="#">Nuôi dạy con</a></li>
-                                <li class="hidden"><a href="#">chính trị, Pháp lý</a></li>
-                                <li class="hidden"><a href="#">Tiểu sử hồi ký</a></li>
-                                <li class="hidden"><a href="#">Văn học, Nghệ Thuật, Du lịch</a></li>
-                                <div class="see-more" onclick="toggleMore()">
-                                    Xem Thêm <span class="arrow">▼</span>
-                                  </div>
-                            </div>
-                    </div>
+					 <div class="current-category">
+					 		<p class="all-cate" onclick="loadParentCategory()">ALL CATEGORIES</p>
+					 		
+					 		 <div class="category-filter-li" id="category-parent-list">
+						        <!-- Danh sách thể loại nhỏ sẽ được cập nhật động -->
+						        
+						         <div class="category-filter-child-list" id="category-list1">  
+						    	</div>
+						    </div>
+						      
+						    <div class="see-more" onclick="toggleMore()">
+						        Xem Thêm <span class="arrow">▼</span>
+						    </div>
+						</div>
                     <div class="line"></div>
                     <div class="price-filter">
                         <h4>GIÁ</h4>
@@ -92,127 +86,66 @@
                           <li>Bán Chạy Năm</li>
                         </ul>
                       </div>
-                    <div class="san-pham">24 Sản Phẩm</div>
+                    <div class="san-pham">8 Sản Phẩm</div>
                 </div>
                 <div class="line"></div>
 
 
-                <div class="xu_huong_mua_sam">
-                    <div class="display-list-grid">
-                        <div class="sale-books-element">
-                            <img src="https://cdn1.fahasa.com/media/catalog/product/n/d/ndivia-co-may-tu-duy-vi-dai--full------t2-2025----outline-02.jpg"
-                                alt="">
-                            <p class="text-limited">NVIDIA-Cỗ máy tư duy vĩ đại</p>
-                            <div class="gia-tien-giam">
-                                <h4>186.000</h4>
-                                <h5>36%</h5>
-                                </div>
-                                <h6>200.000</h6>
-         
-                        </div>
-                        <div class="sale-books-element">
-                            <img src="https://cdn1.fahasa.com/media/catalog/product/n/d/ndivia-co-may-tu-duy-vi-dai--full------t2-2025----outline-02.jpg"
-                                alt="">
-                                <p class="text-limited">NVIDIA-Cỗ máy tư duy vĩ đại</p>
-                            <div class="gia-tien-giam">
-                                <h4>186.000</h4>
-                                <h5>36%</h5>
-                                </div>
-                                <h6>200.000</h6>
-                 
-                        </div>
-            
-                        <div class="sale-books-element">
-                            <img src="https://cdn1.fahasa.com/media/catalog/product/n/d/ndivia-co-may-tu-duy-vi-dai--full------t2-2025----outline-02.jpg"
-                                alt="">
-                                <p class="text-limited">NVIDIA-Cỗ máy tư duy vĩ đại</p>
-                            <div class="gia-tien-giam">
-                                <h4>186.000</h4>
-                                <h5>36%</h5>
-                                </div>
-                                <h6>200.000</h6>
-                         
-                        </div>
-                        <div class="sale-books-element">
-                            <img src="https://cdn1.fahasa.com/media/catalog/product/n/d/ndivia-co-may-tu-duy-vi-dai--full------t2-2025----outline-02.jpg"
-                                alt="">
-                                <p class="text-limited">NVIDIA-Cỗ máy tư duy vĩ đại</p>
-                            <div class="gia-tien-giam">
-                                <h4>186.000</h4>
-                                <h5>36%</h5>
-                                </div>
-                                <h6>200.000</h6>
-                           
-                        </div>
-             
-                        <div class="sale-books-element">
-                            <img src="https://cdn1.fahasa.com/media/catalog/product/n/d/ndivia-co-may-tu-duy-vi-dai--full------t2-2025----outline-02.jpg"
-                                alt="">
-                                <p class="text-limited">NVIDIA-Cỗ máy tư duy vĩ đại</p>
-                            <div class="gia-tien-giam">
-                                <h4>186.000</h4>
-                                <h5>36%</h5>
-                                </div>
-                                <h6>200.000</h6>
-                              
-                        </div>
-                        <div class="sale-books-element">
-                            <img src="https://cdn1.fahasa.com/media/catalog/product/n/d/ndivia-co-may-tu-duy-vi-dai--full------t2-2025----outline-02.jpg"
-                                alt="">
-                                <p class="text-limited">NVIDIA-Cỗ máy tư duy vĩ đại</p>
-                            <div class="gia-tien-giam">
-                                <h4>186.000</h4>
-                                <h5>36%</h5>
-                                </div>
-                                <h6>200.000</h6>
-                                
-                        </div>
-                        
-                        <div class="sale-books-element">
-                            <img src="https://cdn1.fahasa.com/media/catalog/product/n/d/ndivia-co-may-tu-duy-vi-dai--full------t2-2025----outline-02.jpg"
-                                alt="">
-                                <p class="text-limited">NVIDIA-Cỗ máy tư duy vĩ đại</p>
-                            <div class="gia-tien-giam">
-                                <h4>186.000</h4>
-                                <h5>36%</h5>
-                                </div>
-                                <h6>200.000</h6>
-                                
-                        </div>
-                        <div class="sale-books-element">
-                            <img src="https://cdn1.fahasa.com/media/catalog/product/n/d/ndivia-co-may-tu-duy-vi-dai--full------t2-2025----outline-02.jpg"
-                                alt="">
-                                <p class="text-limited">NVIDIA-Cỗ máy tư duy vĩ đại</p>
-                            <div class="gia-tien-giam">
-                                <h4>186.000</h4>
-                                <h5>36%</h5>
-                                </div>
-                                <h6>200.000</h6>
-                              
-                        </div>    
-                           
+              <div class="xu_huong_mua_sam">
+        <div class="display-list-grid">
+            <!-- Hiển thị danh sách sản phẩm -->
+            <c:forEach var="product" items="${products}">
+                <div class="sale-books-element">
+                    <img src="getImage?img_id=${product.getImgId()}" alt="${product.title}">
+                    <p class="text-limited">${product.title}</p>
+                    <div class="gia-tien-giam">
+                        <h4>${product.price} VND</h4>
+                        <h5>36%</h5> <!-- Giả sử giảm giá cố định -->
                     </div>
-            
-                
+                    <h6>200.000 VND</h6> <!-- Giá gốc giả định -->
                 </div>
+            </c:forEach>
+        </div>
+    </div>
 
-                <div class="pagination">
-                    <button class="prev-btn">&lt;</button>
-                    <span class="page-number">1</span>
-                    <span>...</span>
-                    <span class="page-number">3</span>
-                    <span class="page-number">4</span>
-                    <span class="page-number active">5</span>
-                    <span class="page-number">6</span>
-                    <span class="page-number">7</span>
-                    <span>...</span>
-                    <span class="page-number">10</span>
-                    <button class="next-btn">&gt;</button>
-                  </div>
-            </div>
+    <!-- Phân trang -->
+    <div class="pagination">
+        <!-- Nút "<" -->
+        <c:if test="${currentPage > 1}">
+            <button onclick="location.href='FilterServlet?page=1'"><<</button>
+            <button onclick="location.href='FilterServlet?page=${currentPage - 1}'"><</button>
+        </c:if>
+
+		      <!-- Hiển thị các trang gần đây -->
+		<c:set var="startPage" value="${currentPage - 2 > 0 ? currentPage - 2 : 1}" />
+		<c:set var="endPage" value="${currentPage + 2 < totalPages ? currentPage + 2 : totalPages}" />
+		
+		<c:forEach var="i" begin="${startPage}" end="${endPage}">
+		    <c:choose>
+		        <c:when test="${i == currentPage}">
+		            <span class="page-number active">${i}</span>
+		        </c:when>
+		        <c:otherwise>
+		            <span  class="page-number" onclick="location.href='FilterServlet?page=${i}'">${i}</span>
+		        </c:otherwise>
+		    </c:choose>
+		</c:forEach>
+
+        <!-- Nút ">" -->
+        <c:if test="${currentPage < totalPages}">
+            <button class="next-btn" onclick="location.href='FilterServlet?page=${currentPage + 1}'">></button>
+            <button class="next-btn" onclick="location.href='FilterServlet?page=${totalPages}'">>></button>
+        </c:if>
+    </div>
      </div>       
-
+	 </div>  
     <script>
+    
+    
+	    document.addEventListener("DOMContentLoaded", function () {
+	        loadParentCategory(); // Tự động gọi hàm khi trang tải xong
+	    });
+    
         function initializeDropdown() {
             const searchInput = document.getElementById('search-input');
             const dropdownList = document.getElementById('dropdown-list');
@@ -229,7 +162,7 @@
                 });
             }
         }
-        fetch('header.html')
+        fetch('header.jsp')
         .then(response => response.text())
         .then(data => {
             document.getElementById('header').innerHTML = data;
@@ -238,19 +171,113 @@
         })
         .catch(error => console.error('Error loading header:', error));
     </script>
-    <script>
-        function toggleMore() {
-        const hiddenItems = document.querySelectorAll('.hidden');
-        const seeMore = document.querySelector('.see-more');
-        
-        hiddenItems.forEach(item => {
-          // Hiển thị hoặc ẩn các mục
-          item.style.display = item.style.display === 'block' ? 'none' : 'block';
-        });
+  <script>
+  // Hàm tải danh sách thể loại nhỏ
+
+  function loadParentCategory() {
+	  const xhr = new XMLHttpRequest();
+	  xhr.open("GET", "AjaxCategoryServlet?categoryParentId=" + 0, true);
+	  xhr.onload = function () {
+		    if (xhr.status === 200) {
+		      const subCategories = JSON.parse(xhr.responseText);
+		      console.log("Dữ liệu từ server:", subCategories); // Debug dữ liệu
+		      
+		      // Khai báo biến categoryListElement
+		      const categoryListElement = document.getElementById("category-parent-list");
+		      if (!categoryListElement) {
+		        console.error("Thẻ category-parent-list không tồn tại!");
+		        return;
+		      }
+		      var html = "";
+		      
+		      subCategories.forEach((category, index) => {
+		    	    // Không cần JSON.stringify và JSON.parse nếu category đã là object
+		    	  const {id, name} = category;
+		    	  console.log(name); 
+					console.log(id);  
+		  
+				    html += '<li class="' + (index >= 3 ? 'hidden' : 'displayli') + '">' +
+		            '<button onclick="loadSubCategories(' + id + ')">' + name + '</button>' +
+		            '</li>' +
+		            '<div id="category-list' + id + '"></div>'; // Thêm div với id động
+
+		    	});
+		      // Sử dụng biến categoryListElement
+		      categoryListElement.innerHTML = html;
+		    } else {
+		      console.error("Lỗi khi tải dữ liệu từ server.");
+		    }
+		  };
+		  
+		  xhr.send();
+  }
+  
+function loadSubCategories(categoryParentId) {
+  const xhr = new XMLHttpRequest();
+  xhr.open("GET", "AjaxCategoryServlet?categoryParentId=" + categoryParentId, true);
+  
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      const subCategories = JSON.parse(xhr.responseText);
+      console.log("Dữ liệu từ server:", subCategories); // Debug dữ liệu
       
-        // Thêm hoặc bỏ class "active" để xoay mũi tên
-        seeMore.classList.toggle('active');
-      }</script>
+      // Khai báo biến categoryListElement
+          const categoryListElement = document.getElementById("category-list" + categoryParentId);
+      if (!categoryListElement) {
+        console.error("Thẻ category-list không tồn tại!");
+        return;
+      }
+      var html = "";
+      
+      subCategories.forEach((category, index) => {
+    	    // Không cần JSON.stringify và JSON.parse nếu category đã là object
+    	  const {id, name} = category;
+    	  console.log(name); 
+			console.log(id);  
+  
+			html += '<li class="' + (index >= 3 ? 'hidden' : 'displayli') + '">' +
+	        '<a href="#" onclick="filterByCategory(' + id + ')">' + name + '</a>' +
+	        '</li>';
+			 console.log(html);
+
+    	});
+      // Sử dụng biến categoryListElement
+      categoryListElement.innerHTML = html;
+    } else {
+      console.error("Lỗi khi tải dữ liệu từ server.");
+    }
+  };
+  
+  xhr.send();
+}
+
+	
+	// Hàm lọc sản phẩm
+	function filterByCategory(categoryId) {
+	    window.location.href = "FilterServlet?page=1&categoryId=" + categoryId;
+	}
+
+
+  // Hàm xử lý sự kiện "Xem Thêm"
+  function toggleMore() {
+      const hiddenItems = document.querySelectorAll(".hidden");
+      const seeMoreButton = document.querySelector(".see-more .arrow");
+
+      hiddenItems.forEach(item => {
+          item.classList.toggle("displayli");
+          item.classList.toggle("hidden");
+      });
+
+      // Đổi mũi tên
+      if (seeMoreButton.textContent === "▼") {
+          seeMoreButton.textContent = "▲";
+      } else {
+          seeMoreButton.textContent = "▼";
+      }
+  }
+
+
+</script>
 
       <script>
         document.addEventListener("DOMContentLoaded", function () {

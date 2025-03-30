@@ -53,9 +53,8 @@ public class UserDAOImp implements IUserDao {
 					Date updateDate = resultSet.getDate(6);
 					user = new User(userId, username, password, email, date, updateDate);
 					user.setSocialLogin(resultSet.getBoolean(7));
-					user.setSocialLoginName(resultSet.getNString(8));
-					user.setStatus(resultSet.getNString(9));
-					user.setActivate(resultSet.getBoolean(10));
+					user.setStatus(resultSet.getNString(8));
+					user.setActivate(resultSet.getBoolean(9));
 					user.setRoles(getRolesByUserId(userId));
 				}
 			} catch (Exception e) {
@@ -70,13 +69,13 @@ public class UserDAOImp implements IUserDao {
 		return user;
 	}
 
-	public void saveUser(User user) {
+	public int saveUser(User user) {
 
 		// TODO Auto-generated method stub
 		int userId = 0;
 		try (Connection con = DatabaseConnection.getConnection();
 				PreparedStatement preparedStatement = con.prepareStatement(
-						"insert into User_1 (username,password,create_date,email,update_date,is_social_login,social_login_name,status,is_activate) values(?,?,?,?,?,?,?,?,?) ",
+						"insert into User_1 (username,password,create_date,email,update_date,is_social_login,status,is_activate) values(?,?,?,?,?,?,?,?,?) ",
 						Statement.RETURN_GENERATED_KEYS);) {
 			preparedStatement.setString(1, user.getUsername());
 			preparedStatement.setString(2, user.getPassword());
@@ -84,24 +83,16 @@ public class UserDAOImp implements IUserDao {
 			preparedStatement.setNString(4, user.getEmail());
 			preparedStatement.setDate(5, user.getUpdateDate());
 			preparedStatement.setBoolean(6, user.isSocialLogin());
-			preparedStatement.setNString(7, user.getSocialLoginName());
-			preparedStatement.setNString(8, user.getStatus());
-			preparedStatement.setString(7, user.getSocialLoginName());
-			preparedStatement.setString(8, user.getStatus());
-			preparedStatement.setBoolean(9, user.isActivate());
+			preparedStatement.setNString(7, user.getStatus());
+			preparedStatement.setBoolean(8, user.isActivate());
 			preparedStatement.executeUpdate();
-			try (ResultSet resultSet = preparedStatement.getGeneratedKeys();) {
+			try (ResultSet resultSet = preparedStatement.getGeneratedKeys();
+				PreparedStatement preStatement = con.prepareStatement("insert into Role_User(role_id,user_id) values(2,?)")) {
 				if (resultSet.next()) {
 					userId = resultSet.getInt(1);
+					preStatement.setInt(1, userId);
+					preStatement.executeUpdate();
 				}
-			} catch (Exception e) {
-				// TODO: handle exception
-				e.printStackTrace();
-			}
-			try (PreparedStatement preStatement = con
-					.prepareStatement("insert into Role_User(role_id,user_id) values(2,?)")) {
-				preStatement.setInt(1, userId);
-				preStatement.executeUpdate();
 			} catch (Exception e) {
 				// TODO: handle exception
 				e.printStackTrace();
@@ -110,6 +101,7 @@ public class UserDAOImp implements IUserDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return userId;
 	}
 
 	@Override
@@ -156,9 +148,8 @@ public class UserDAOImp implements IUserDao {
 					Date updateDate = resultSet.getDate(6);
 					user = new User(id, username, password, email, date, updateDate);
 					user.setSocialLogin(resultSet.getBoolean(7));
-					user.setSocialLoginName(resultSet.getNString(8));
-					user.setStatus(resultSet.getNString(9));
-					user.setActivate(resultSet.getBoolean(10));
+					user.setStatus(resultSet.getNString(8));
+					user.setActivate(resultSet.getBoolean(9));
 					user.setRoles(getRolesByUserId(id));
 				}
 			} catch (Exception e) {
@@ -227,9 +218,8 @@ public class UserDAOImp implements IUserDao {
 					Date updateDate = resultSet.getDate(6);
 					user = new User(id, username, password, email, date, updateDate);
 					user.setSocialLogin(resultSet.getBoolean(7));
-					user.setSocialLoginName(resultSet.getNString(8));
-					user.setStatus(resultSet.getNString(9));
-					user.setActivate(resultSet.getBoolean(10));
+					user.setStatus(resultSet.getNString(8));
+					user.setActivate(resultSet.getBoolean(9));
 					user.setRoles(getRolesByUserId(id));
 				}
 			} catch (Exception e) {

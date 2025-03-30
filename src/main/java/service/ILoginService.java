@@ -38,6 +38,6 @@ public interface ILoginService {
 
 	void activateUser(User user);
 
-	void register(User user);
+	int register(User user);
 
 }

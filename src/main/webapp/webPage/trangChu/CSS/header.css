@@ -244,12 +244,14 @@ body {
     color: rgb(242, 242, 242);
     font-weight:  normal;
     line-height:  inherit;
+    text-decoration: none;
 }
 .login_div_text_2 {
     font-size: 13px;
     color: rgb(0, 0, 0);
     font-weight:  normal;
     line-height:  inherit;
+    text-decoration: none;
 }
 .cart_div {
     padding: 2px;

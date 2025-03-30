@@ -9,7 +9,7 @@ public interface IUserDao {
 	User findByUserId(int userId);
 
 
-	void saveUser(User user);
+	int saveUser(User user);
 	
 	void deleteUser(User user);
 	

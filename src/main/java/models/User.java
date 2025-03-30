@@ -12,7 +12,6 @@ public class User {
 	private Date updateDate;
 	private List<String> roles;
 	private boolean isSocialLogin;
-	private String socialLoginName;
 	private String status;
 	private boolean isActivate;
 	public User(int userId, String username, String password, String email, Date createDate, Date updaDate) {
@@ -34,7 +33,7 @@ public class User {
 	}
 	
 	public User(String username, String password, String email, Date createDate, Date updateDate, List<String> roles,
-			boolean isSocialLogin, String socialLoginName, String status, boolean isActivate) {
+			boolean isSocialLogin, String status, boolean isActivate) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -43,7 +42,6 @@ public class User {
 		this.updateDate = updateDate;
 		this.roles = roles;
 		this.isSocialLogin = isSocialLogin;
-		this.socialLoginName = socialLoginName;
 		this.status = status;
 		this.isActivate = isActivate;
 	}
@@ -107,14 +105,6 @@ public class User {
 
 	public void setSocialLogin(boolean isSocialLogin) {
 		this.isSocialLogin = isSocialLogin;
-	}
-
-	public String getSocialLoginName() {
-		return socialLoginName;
-	}
-
-	public void setSocialLoginName(String socialLoginName) {
-		this.socialLoginName = socialLoginName;
 	}
 
 	public String getStatus() {

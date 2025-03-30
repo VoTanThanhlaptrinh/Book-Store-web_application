@@ -24,7 +24,7 @@ public class ConfirmEmailController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		req.getRequestDispatcher("webPage/login/confirm.jsp").forward(req, resp);
 	}
 
@@ -51,21 +51,26 @@ public class ConfirmEmailController extends HttpServlet {
 			return;
 		}
 		// mã xác thực giống nhau thì xác thực tài khoản và quay trở về trang trước đó.
-		if (confirmCode.equals(code)) {
-			user.setActivate(true);
-			loginService.activateUser(user);
-			session.setAttribute("user", user);
-			session.removeAttribute("confirmCode");
-			String previousURL = (String) session.getAttribute("previousURL");
-			if (previousURL != null) {
-				resp.sendRedirect(previousURL);
-				session.removeAttribute("previousURL");
-				return;
-			}
-			resp.sendRedirect("login");
-		} else {
+		if (!confirmCode.equals(code)) {
 			req.setAttribute("mess", bundle.getString("auth.code.invalid"));
 			doGet(req, resp);
+			return;
+		}
+		boolean accept = (boolean) session.getAttribute("acceptChangePass");
+		if(!accept) {
+			accept = true;
+			session.setAttribute("acceptChangePass", accept);
+			resp.sendRedirect("changePass");
+			return;
+		}
+		user.setActivate(true);
+		loginService.activateUser(user);
+		session.setAttribute("user", user);
+		session.removeAttribute("confirmCode");
+		String previousURL = (String) session.getAttribute("previousURL");
+		if (previousURL != null) {
+			resp.sendRedirect(previousURL);
+			session.removeAttribute("previousURL");
 			return;
 		}
 	}

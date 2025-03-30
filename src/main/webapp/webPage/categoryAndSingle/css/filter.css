@@ -71,13 +71,19 @@ body {
     font-weight: bold;
     color: #ff5d30;
 }
+.all-cate {
+	 font-size: 16px;
+     font-weight: bold;
+     color: #333;
+     padding-bottom: 5px;
+}
 .line {
     width: 100%; /* Chiều dài */
     height: 0.5px; /* Độ dày */
     background-color: rgb(168, 168, 168); /* Màu sắc */
 }
 .displayli {
-    display: block;
+    display: list-item;
     margin-left: 20px;
     margin-bottom: 12px;
     font-size: 14px;
@@ -90,6 +96,7 @@ body {
     color: #333;
     display: none; /* Ẩn các mục ban đầu */
   } 
+
 .see-more {
     color: #FF8000;
     font-weight: bold;
@@ -294,6 +301,7 @@ body {
 }
   
 .page-number.active {
+	cursor:pointer;
     background-color: #d32f2f; /* Màu đỏ */
     color: #fff;
 }

@@ -13,7 +13,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>Cập nhật mật khẩu</title>
+<title>Thay đổi mật khẩu</title>
 
 <!-- Font Icon -->
 <link rel="stylesheet"
@@ -34,8 +34,15 @@
 		<section class="signup">
 			<div class="container">
 				<div class="signup-content border">
-					<form method="POST" action="reset" id="signin" class="signup-form">
+					<form method="POST" action="changePass" id="signin" class="signup-form">
 						<h2 class="form-title"><fmt:message key="ch_pass" /></h2>
+						<div class="form-group">
+							<input type="password" class="form-input" name="oldPass" id="name"
+								placeholder="Mật khẩu cũ" maxlength="255" />
+								<span
+								toggle="#password"
+								class="zmdi zmdi-eye-off field-icon toggle-password"></span>
+						</div>
 						<div class="form-group">
 							<input type="password" class="form-input" name="pass" id="name"
 								placeholder="Mật khẩu mới" maxlength="255" />
