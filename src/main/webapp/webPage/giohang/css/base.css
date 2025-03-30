@@ -1,0 +1,35 @@
+@charset "UTF-8";
+:root {
+    --white--color: #fff;
+    --black--color: #000;
+    --text-color: #333;
+    --navbar-height:28px;
+    --header-height:120px;
+    --header-with-search-height:calc(var(--header-height) - var(--navbar-height));
+}
+
+* {
+    box-sizing: inherit;
+}
+/* 62.5%  tuong duong 10px*/
+html {
+    font-size: 62.5%;
+    line-height: 1.6rem;
+    font-family: "Roboto", sans-serif;
+    box-sizing: border-box;
+}
+
+.grid {
+    width: 1200px;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.grid_full_width {
+    width: 100%;
+}
+/* wrap: nhảy hàng nếu tổng chiều dài lớn hơn grid__row */
+.grid__row {
+    display: flex;
+    flex-wrap: wrap;
+}
