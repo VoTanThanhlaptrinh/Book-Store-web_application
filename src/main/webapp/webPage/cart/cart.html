@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/cart.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="app">
+        <header class="header">
+            <div class="nav">
+                <nav class="header__navbar">
+                    <ul class="header__navbar--list">
+                        <li class="header__navbar--item header__navbar--item--seqarate">Vào cửa hàng trên ứng dụng</li>
+                        <li class="header__navbar--item">Kết nối
+                            <a href="" class="header__navbar--icon--link"><i class="fa-brands fa-facebook"></i></a>
+                            <a href="" class="header__navbar--icon--link"><i class="fa-brands fa-instagram"></i></a>
+                        </li>
+                    </ul>
+                    <ul class="header__navbar--list">
+                        <li class="header__navbar--item"><a class="header__navbar--item-link" href=""><i
+                                    class="fa-solid fa-bell header__navbar--icon--link"></i>Thông báo</a></li>
+                        <li class="header__navbar--item"><a class="header__navbar--item-link" href=""><i
+                                    class="far fa-question-circle header__navbar--icon--link"></i>Trợ giúp</a></li>
+                        <li class="header__navbar--item header__navbar--item--dynamic header__navbar--item--seqarate">
+                            Đăng kí</li>
+                        <li class="header__navbar--item header__navbar--item--dynamic">Đăng nhập</li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="grid">
+            
+
+                <div class="header-with-search">
+                    <div class="header__logo">
+                       <ul class="header_logo_list">
+                        <li class="header_logo_list_item header_logo_list_item1">BOOK STORE</li>
+                        <li class="header_logo_list_item">Giỏ Hàng</li>
+                       </ul>
+                    </div>
+                    <div class="header__search">
+                        <input type="text" class="header__search-input" placeholder="tìm kiếm sản phẩm">
+                        <div class="header__search-select">
+                            <span class="header__search-option" style="white-space: nowrap;">Trong shop</span>
+                            <i class="fa-solid fa-angle-down"></i>
+                        </div>
+                        <i class="header__search-icon-search fa-solid fa-magnifying-glass"></i>
+                    </div>
+                  
+                </div>
+            </div>
+        </header>
+
+        <div class="container">
+            <div class="cart_table">
+                <ul class="cart_list">
+                    <input type="checkbox" class="cart_list-checkbox">
+                    <li class="cart_list-item">Sản phẩm</li>
+                </ul>
+                <ul class="cart_list cart_list1">
+                    <li class="cart_list-item">Đơn giá</li>
+                    <li class="cart_list-item">Số lượng</li>
+                    <li class="cart_list-item">Số tiền</li>
+                    <li class="cart_list-item">Thao tác</li>
+                </ul>
+            </div>
+
+
+            <!-- thông tin sản phẩm -->
+            <div class="cart_product">
+                <div class="cart_product_brand">
+                    <ul class="cart_product_brand_list">
+                        <input type="checkbox" name="" id="" class="cart_list-checkbox">
+                        <li class="cart_product_brand_item cart_product_brand_like">
+                            Yêu thích</li>
+                        <div class="cart_product_brand_item">
+                            <li class="cart_product_brand_item_name">Topick Global</li>
+                            <i class="fas fa-comments cart_product_brand_item_icon"></i>
+                        </div>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="cart_product_info">
+                    <div class="cart_product_info_list">
+                        <ul class="cart_product_info_list_item">
+                            <input type="checkbox" name="" id="" class="cart_list-checkbox">
+                                <img src="img/download.jpg" alt="" class="cart_product_info_list_img">          
+                            <li class="cart_product_info_list_productname">
+                                Phân loại hàng này bán hết, vui lòng lựa chọn một phân loại khác
+                            </li>
+                        </ul>
+                        <ul class="cart_product_info_list_item cart_product_info_list_item1">
+                            <li class="cart_product_info_item_item">300000vnđ</li>
+                            <div class="cart_product_info_item_item quantity">
+                                <button class="btn-quantity minus quantity_item">-</button>
+                                <input type="text" class="input-quantity quantity_item" value="1" min="1">
+                                <button class="btn-quantity plus quantity_item">+</button>
+                            </div>
+                            
+                            <li class="cart_product_info_item_item">600vnđ</li>
+                            <li class="cart_product_info_item_item cart_product_info_item_item_delete">xóa</li>
+                        </ul>
+                    </div>
+
+                </div>
+            
+              
+
+                <div class="cart_procuct_ship">
+                    <div class="cart_procuct_ship_list"> 
+                        <i class="fa-solid fa-truck-fast cart_procuct_ship_item cart_procuct_ship_item_icon "></i>
+                        <span class="cart_procuct_ship_item">Giảm ₫500.000 phí vận chuyển đơn tối thiểu ₫0
+                        </span>
+                    </div>
+                     <div class="cart_procuct_ship_list"> 
+                        <i class="fa-solid fa-ticket cart_procuct_ship_item cart_procuct_ship_item_icon " style="color: #ee4d2d;"></i>
+                        <span class="cart_procuct_ship_item">Nhận voucher giảm giá lên đến đ100.000
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <!--  -->
+      
+ <!-- thông tin sản phẩm -->
+            <div class="cart_product">
+                <div class="cart_product_brand">
+                    <ul class="cart_product_brand_list">
+                        <input type="checkbox" name="" id="" class="cart_list-checkbox">
+                        <li class="cart_product_brand_item cart_product_brand_like">
+                            Yêu thích</li>
+                        <div class="cart_product_brand_item">
+                            <li class="cart_product_brand_item_name">Topick Global</li>
+                            <i class="fas fa-comments cart_product_brand_item_icon"></i>
+                        </div>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="cart_product_info">
+                    <div class="cart_product_info_list">
+                        <ul class="cart_product_info_list_item">
+                            <input type="checkbox" name="" id="" class="cart_list-checkbox">
+                                <img src="img/download.jpg" alt="" class="cart_product_info_list_img">          
+                            <li class="cart_product_info_list_productname">
+                                Phân loại hàng này bán hết, vui lòng lựa chọn một phân loại khác
+                            </li>
+                        </ul>
+                        <ul class="cart_product_info_list_item cart_product_info_list_item1">
+                            <li class="cart_product_info_item_item">300000vnđ</li>
+                            <div class="cart_product_info_item_item quantity">
+                                <button class="btn-quantity minus quantity_item">-</button>
+                                <input type="text" class="input-quantity quantity_item" value="1" min="1">
+                                <button class="btn-quantity plus quantity_item">+</button>
+                            </div>
+                            
+                            <li class="cart_product_info_item_item">600vnđ</li>
+                            <li class="cart_product_info_item_item cart_product_info_item_item_delete">xóa</li>
+                        </ul>
+                    </div>
+
+                </div>
+            
+              
+
+                <div class="cart_procuct_ship">
+                    <div class="cart_procuct_ship_list"> 
+                        <i class="fa-solid fa-truck-fast cart_procuct_ship_item cart_procuct_ship_item_icon "></i>
+                        <span class="cart_procuct_ship_item">Giảm ₫500.000 phí vận chuyển đơn tối thiểu ₫0
+                        </span>
+                    </div>
+                     <div class="cart_procuct_ship_list"> 
+                        <i class="fa-solid fa-ticket cart_procuct_ship_item cart_procuct_ship_item_icon " style="color: #ee4d2d;"></i>
+                        <span class="cart_procuct_ship_item">Nhận voucher giảm giá lên đến đ100.000
+                        </span>
+                    </div>
+                </div>
+            </div> <!-- thông tin sản phẩm -->
+            <div class="cart_product">
+                <div class="cart_product_brand">
+                    <ul class="cart_product_brand_list">
+                        <input type="checkbox" name="" id="" class="cart_list-checkbox">
+                        <li class="cart_product_brand_item cart_product_brand_like">
+                            Yêu thích</li>
+                        <div class="cart_product_brand_item">
+                            <li class="cart_product_brand_item_name">Topick Global</li>
+                            <i class="fas fa-comments cart_product_brand_item_icon"></i>
+                        </div>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="cart_product_info">
+                    <div class="cart_product_info_list">
+                        <ul class="cart_product_info_list_item">
+                            <input type="checkbox" name="" id="" class="cart_list-checkbox">
+                                <img src="img/download.jpg" alt="" class="cart_product_info_list_img">          
+                            <li class="cart_product_info_list_productname">
+                                Phân loại hàng này bán hết, vui lòng lựa chọn một phân loại khác
+                            </li>
+                        </ul>
+                        <ul class="cart_product_info_list_item cart_product_info_list_item1">
+                            <li class="cart_product_info_item_item">300000vnđ</li>
+                            <div class="cart_product_info_item_item quantity">
+                                <button class="btn-quantity minus quantity_item">-</button>
+                                <input type="text" class="input-quantity quantity_item" value="1" min="1">
+                                <button class="btn-quantity plus quantity_item">+</button>
+                            </div>
+                            
+                            <li class="cart_product_info_item_item">600vnđ</li>
+                            <li class="cart_product_info_item_item cart_product_info_item_item_delete">xóa</li>
+                        </ul>
+                    </div>
+
+                </div>
+            
+              
+
+                <div class="cart_procuct_ship">
+                    <div class="cart_procuct_ship_list"> 
+                        <i class="fa-solid fa-truck-fast cart_procuct_ship_item cart_procuct_ship_item_icon "></i>
+                        <span class="cart_procuct_ship_item">Giảm ₫500.000 phí vận chuyển đơn tối thiểu ₫0
+                        </span>
+                    </div>
+                     <div class="cart_procuct_ship_list"> 
+                        <i class="fa-solid fa-ticket cart_procuct_ship_item cart_procuct_ship_item_icon " style="color: #ee4d2d;"></i>
+                        <span class="cart_procuct_ship_item">Nhận voucher giảm giá lên đến đ100.000
+                        </span>
+                    </div>
+                </div>
+            </div> <!-- thông tin sản phẩm -->
+            <div class="cart_product">
+                <div class="cart_product_brand">
+                    <ul class="cart_product_brand_list">
+                        <input type="checkbox" name="" id="" class="cart_list-checkbox">
+                        <li class="cart_product_brand_item cart_product_brand_like">
+                            Yêu thích</li>
+                        <div class="cart_product_brand_item">
+                            <li class="cart_product_brand_item_name">Topick Global</li>
+                            <i class="fas fa-comments cart_product_brand_item_icon"></i>
+                        </div>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="cart_product_info">
+                    <div class="cart_product_info_list">
+                        <ul class="cart_product_info_list_item">
+                            <input type="checkbox" name="" id="" class="cart_list-checkbox">
+                                <img src="img/download.jpg" alt="" class="cart_product_info_list_img">          
+                            <li class="cart_product_info_list_productname">
+                                Phân loại hàng này bán hết, vui lòng lựa chọn một phân loại khác
+                            </li>
+                        </ul>
+                        <ul class="cart_product_info_list_item cart_product_info_list_item1">
+                            <li class="cart_product_info_item_item">300000vnđ</li>
+                            <div class="cart_product_info_item_item quantity">
+                                <button class="btn-quantity minus quantity_item">-</button>
+                                <input type="text" class="input-quantity quantity_item" value="1" min="1">
+                                <button class="btn-quantity plus quantity_item">+</button>
+                            </div>
+                            
+                            <li class="cart_product_info_item_item">600vnđ</li>
+                            <li class="cart_product_info_item_item cart_product_info_item_item_delete">xóa</li>
+                        </ul>
+                    </div>
+
+                </div>
+            
+              
+
+                <div class="cart_procuct_ship">
+                    <div class="cart_procuct_ship_list"> 
+                        <i class="fa-solid fa-truck-fast cart_procuct_ship_item cart_procuct_ship_item_icon "></i>
+                        <span class="cart_procuct_ship_item">Giảm ₫500.000 phí vận chuyển đơn tối thiểu ₫0
+                        </span>
+                    </div>
+                     <div class="cart_procuct_ship_list"> 
+                        <i class="fa-solid fa-ticket cart_procuct_ship_item cart_procuct_ship_item_icon " style="color: #ee4d2d;"></i>
+                        <span class="cart_procuct_ship_item">Nhận voucher giảm giá lên đến đ100.000
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+<!--  -->
+<div class="cart_table cart_order">
+    <ul class="cart_order_list cart_order_list1">
+        <input type="checkbox" class="cart_list-checkbox">
+        <li class="cart_order_list_item">Chọn tất cả</li>
+    </ul>
+    <ul class="cart_order_list cart_order_list2">
+        <li class="cart_order_list_item ">Tổng tiền: </li>
+        <li class="cart_order_list_item_order">Mua hàng</li>
+    </ul>
+</div>
+<!--  -->
+        </div>
+
+        <footer class="footer">
+
+        </footer>
+    </div>
+</body>
+
+</html>
