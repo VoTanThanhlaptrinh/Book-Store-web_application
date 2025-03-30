@@ -71,6 +71,12 @@ body {
     font-weight: bold;
     color: #ff5d30;
 }
+.all-cate {
+	 font-size: 16px;
+     font-weight: bold;
+     color: #333;
+     padding-bottom: 5px;
+}
 .line {
     width: 100%; /* Chiều dài */
     height: 0.5px; /* Độ dày */
@@ -90,9 +96,7 @@ body {
     color: #333;
     display: none; /* Ẩn các mục ban đầu */
   } 
-.category-filter-li {
-    min-height: 100px; /* Đảm bảo có đủ không gian */
-}
+
 .see-more {
     color: #FF8000;
     font-weight: bold;
