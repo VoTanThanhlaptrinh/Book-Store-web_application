@@ -462,12 +462,12 @@
           <div class="main-nav">
                <!-- Sidebar Logo -->
                <div class="logo-box">
-                    <a href="index.html" class="logo-dark">
+                    <a href="admin/home" class="logo-dark">
                          <img src="../webPage/admin/assets/images/logo-sm.png" class="logo-sm" alt="logo sm">
                          <img src="../webPage/admin/assets/images/logo-dark.png" class="logo-lg" alt="logo dark">
                     </a>
 
-                    <a href="index.html" class="logo-light">
+                    <a href="admin/home" class="logo-light">
                          <img src="../webPage/admin/assets/images/logo-sm.png" class="logo-sm" alt="logo sm">
                          <img src="../webPage/admin/assets/images/logo-light.png" class="logo-lg" alt="logo light">
                     </a>
@@ -514,7 +514,7 @@
                                                   <li class="menu-title">General</li>
 
                                                   <li class="nav-item active">
-                                                       <a class="nav-link active" href="index.html">
+                                                       <a class="nav-link active" href="admin/home">
                                                             <span class="nav-icon">
                                                                  <iconify-icon
                                                                       icon="solar:widget-5-bold-duotone"><template
@@ -550,7 +550,7 @@
                                                   </li>
 
                                                   <li class="nav-item">
-                                                       <a class="nav-link menu-arrow" href="index.html#sidebarProducts"
+                                                       <a class="nav-link menu-arrow" href="admin/home#sidebarProducts"
                                                             data-bs-toggle="collapse" role="button"
                                                             aria-expanded="false" aria-controls="sidebarProducts">
                                                             <span class="nav-icon">
@@ -614,7 +614,7 @@
                                                   
 
                                                   <li class="nav-item">
-                                                       <a class="nav-link menu-arrow" href="index.html#sidebarOrders"
+                                                       <a class="nav-link menu-arrow" href="admin/home#sidebarOrders"
                                                             data-bs-toggle="collapse" role="button"
                                                             aria-expanded="false" aria-controls="sidebarOrders">
                                                             <span class="nav-icon">
@@ -712,7 +712,7 @@
                                                   </li>
 
                                                   <li class="nav-item">
-                                                       <a class="nav-link menu-arrow" href="index.html#sidebarRoles"
+                                                       <a class="nav-link menu-arrow" href="admin/home#sidebarRoles"
                                                             data-bs-toggle="collapse" role="button"
                                                             aria-expanded="false" aria-controls="sidebarRoles">
                                                             <span class="nav-icon">
@@ -774,7 +774,7 @@
                                                   
 
                                                   <li class="nav-item">
-                                                       <a class="nav-link menu-arrow" href="index.html#sidebarCustomers"
+                                                       <a class="nav-link menu-arrow" href="admin/home#sidebarCustomers"
                                                             data-bs-toggle="collapse" role="button"
                                                             aria-expanded="false" aria-controls="sidebarCustomers">
                                                             <span class="nav-icon">
@@ -816,7 +816,7 @@
                                                   <li class="menu-title mt-2">Other</li>
 
                                                   <li class="nav-item">
-                                                       <a class="nav-link menu-arrow" href="index.html#sidebarCoupons"
+                                                       <a class="nav-link menu-arrow" href="admin/home#sidebarCoupons"
                                                             data-bs-toggle="collapse" role="button"
                                                             aria-expanded="false" aria-controls="sidebarCoupons">
                                                             <span class="nav-icon">

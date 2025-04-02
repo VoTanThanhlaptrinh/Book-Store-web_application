@@ -40,11 +40,11 @@
                               <div class="col-lg-6 py-lg-5">
                                    <div class="d-flex flex-column h-100 justify-content-center">
                                         <div class="auth-logo mb-4">
-                                             <a href="index.html" class="logo-dark">
+                                             <a href="admin/home" class="logo-dark">
                                                   <img src="../webPage/admin/assets/images/logo-dark.png" height="24" alt="logo dark">
                                              </a>
 
-                                             <a href="index.html" class="logo-light">
+                                             <a href="admin/home" class="logo-light">
                                                   <img src="../webPage/admin/assets/images/logo-light.png" height="24" alt="logo light">
                                              </a>
                                         </div>
@@ -54,7 +54,7 @@
                                         <p class="text-muted mt-1 mb-4">Enter your email address and password to access admin panel.</p>
 
                                         <div class="mb-5">
-                                             <form action="index.html" class="authentication-form">
+                                             <form action="#" class="authentication-form">
                                                   <div class="mb-3">
                                                        <label class="form-label" for="example-email">Email</label>
                                                        <input type="email" id="example-email" name="example-email" class="form-control bg-" placeholder="Enter your email">

@@ -14,19 +14,19 @@
      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
      <!-- App favicon -->
-     <link rel="shortcut icon" href="assets/images/favicon.ico">
+     <link rel="shortcut icon" href="../webPage/admin/assets/images/favicon.ico">
 
      <!-- Vendor css (Require in all Page) -->
-     <link href="assets/css/vendor.min.css" rel="stylesheet" type="text/css" />
+     <link href="../webPage/admin/assets/css/vendor.min.css" rel="stylesheet" type="text/css" />
 
      <!-- Icons css (Require in all Page) -->
-     <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+     <link href="../webPage/admin/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
 
      <!-- App css (Require in all Page) -->
-     <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
+     <link href="../webPage/admin/assets/css/app.min.css" rel="stylesheet" type="text/css" />
 
      <!-- Theme Config js (Require in all Page) -->
-     <script src="assets/js/config.js"></script>
+     <script src="../webPage/admin/assets/js/config.js"></script>
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
      
 </head>
@@ -159,7 +159,7 @@
                                                                            class="dropdown-item py-3 border-bottom text-wrap">
                                                                            <div class="d-flex">
                                                                                 <div class="flex-shrink-0">
-                                                                                     <img src="assets/images/users/avatar-1.jpg"
+                                                                                     <img src="../webPage/admin/assets/images/users/avatar-1.jpg"
                                                                                           class="img-fluid me-2 avatar-sm rounded-circle"
                                                                                           alt="avatar-1">
                                                                                 </div>
@@ -201,7 +201,7 @@
                                                                            class="dropdown-item py-3 border-bottom">
                                                                            <div class="d-flex">
                                                                                 <div class="flex-shrink-0">
-                                                                                     <img src="assets/images/users/avatar-3.jpg"
+                                                                                     <img src="../webPage/admin/assets/images/users/avatar-3.jpg"
                                                                                           class="img-fluid me-2 avatar-sm rounded-circle"
                                                                                           alt="avatar-3">
                                                                                 </div>
@@ -255,7 +255,7 @@
                                                                            class="dropdown-item py-3 border-bottom">
                                                                            <div class="d-flex">
                                                                                 <div class="flex-shrink-0">
-                                                                                     <img src="assets/images/users/avatar-5.jpg"
+                                                                                     <img src="../webPage/admin/assets/images/users/avatar-5.jpg"
                                                                                           class="img-fluid me-2 avatar-sm rounded-circle"
                                                                                           alt="avatar-5">
                                                                                 </div>
@@ -359,7 +359,7 @@
                                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <span class="d-flex align-items-center">
                                              <img class="rounded-circle" width="32"
-                                                  src="assets/images/users/avatar-1.jpg"
+                                                  src="../webPage/admin/assets/images/users/avatar-1.jpg"
                                                   alt="avatar-3">
                                         </span>
                                    </a>
@@ -367,26 +367,26 @@
                                         <!-- item-->
                                         <h6 class="dropdown-header">Welcome Gaston!</h6>
                                         <a class="dropdown-item"
-                                             href="pages-profile.html">
+                                             href="pages-profile">
                                              <i class="bx bx-user-circle text-muted fs-18 align-middle me-1"></i><span
                                                   class="align-middle">Profile</span>
                                         </a>
-                                        <a class="dropdown-item" href="apps-chat.html">
+                                        <a class="dropdown-item" href="apps-chat">
                                              <i class="bx bx-message-dots text-muted fs-18 align-middle me-1"></i><span
                                                   class="align-middle">Messages</span>
                                         </a>
 
                                         <a class="dropdown-item"
-                                             href="pages-pricing.html">
+                                             href="pages-pricing">
                                              <i class="bx bx-wallet text-muted fs-18 align-middle me-1"></i><span
                                                   class="align-middle">Pricing</span>
                                         </a>
-                                        <a class="dropdown-item" href="pages-faqs.html">
+                                        <a class="dropdown-item" href="pages-faqs">
                                              <i class="bx bx-help-circle text-muted fs-18 align-middle me-1"></i><span
                                                   class="align-middle">Help</span>
                                         </a>
                                         <a class="dropdown-item"
-                                             href="auth-lock-screen.html">
+                                             href="auth-lock-screen">
                                              <i class="bx bx-lock text-muted fs-18 align-middle me-1"></i><span
                                                   class="align-middle">Lock screen</span>
                                         </a>
@@ -394,7 +394,7 @@
                                         <div class="dropdown-divider my-1"></div>
 
                                         <a class="dropdown-item text-danger"
-                                             href="auth-signin.html">
+                                             href="auth-signin">
                                              <i class="bx bx-log-out fs-18 align-middle me-1"></i><span
                                                   class="align-middle">Logout</span>
                                         </a>
@@ -504,24 +504,24 @@
                                    </div>
                                    <div class="position-relative ps-4">
                                         <div class="mb-4">
-                                             <span class="position-absolute start-0 translate-middle-x bg-success bg-gradient d-inline-flex align-items-center justify-content-center rounded-circle text-light fs-20"><img src="assets/images/users/avatar-7.jpg" alt="avatar-5" class="avatar-sm rounded-circle"></span>
+                                             <span class="position-absolute start-0 translate-middle-x bg-success bg-gradient d-inline-flex align-items-center justify-content-center rounded-circle text-light fs-20"><img src="../webPage/admin/assets/images/users/avatar-7.jpg" alt="avatar-5" class="avatar-sm rounded-circle"></span>
                                              <div class="ms-2">
                                                   <h5 class="mb-0 text-dark fw-semibold fs-15 lh-base">Alex Smith Attached Photos
                                                   </h5>
                                                   <div class="row g-2 mt-2">
                                                        <div class="col-lg-4">
                                                             <a href="#!">
-                                                                 <img src="assets/images/small/img-6.jpg" alt="" class="img-fluid rounded">
+                                                                 <img src="../webPage/admin/assets/images/small/img-6.jpg" alt="" class="img-fluid rounded">
                                                             </a>
                                                        </div>
                                                        <div class="col-lg-4">
                                                             <a href="#!">
-                                                                 <img src="assets/images/small/img-3.jpg" alt="" class="img-fluid rounded">
+                                                                 <img src="../webPage/admin/assets/images/small/img-3.jpg" alt="" class="img-fluid rounded">
                                                             </a>
                                                        </div>
                                                        <div class="col-lg-4">
                                                             <a href="#!">
-                                                                 <img src="assets/images/small/img-4.jpg" alt="" class="img-fluid rounded">
+                                                                 <img src="../webPage/admin/assets/images/small/img-4.jpg" alt="" class="img-fluid rounded">
                                                             </a>
                                                        </div>
                                                   </div>
@@ -531,7 +531,7 @@
                                    </div>
                                    <div class="position-relative ps-4">
                                         <div class="mb-4">
-                                             <span class="position-absolute start-0 translate-middle-x bg-success bg-gradient d-inline-flex align-items-center justify-content-center rounded-circle text-light fs-20"><img src="assets/images/users/avatar-6.jpg" alt="avatar-5" class="avatar-sm rounded-circle"></span>
+                                             <span class="position-absolute start-0 translate-middle-x bg-success bg-gradient d-inline-flex align-items-center justify-content-center rounded-circle text-light fs-20"><img src="../webPage/admin/assets/images/users/avatar-6.jpg" alt="avatar-5" class="avatar-sm rounded-circle"></span>
                                              <div class="ms-2">
                                                   <h5 class="mb-0 text-dark fw-semibold fs-15 lh-base">Rebecca J. added a new team member
                                                   </h5>
@@ -673,14 +673,14 @@
           <div class="main-nav">
                <!-- Sidebar Logo -->
                <div class="logo-box">
-                    <a href="index.html" class="logo-dark">
-                         <img src="assets/images/logo-sm.png" class="logo-sm" alt="logo sm">
-                         <img src="assets/images/logo-dark.png" class="logo-lg" alt="logo dark">
+                    <a href="admin/home" class="logo-dark">
+                         <img src="../webPage/admin/assets/images/logo-sm.png" class="logo-sm" alt="logo sm">
+                         <img src="../webPage/admin/assets/images/logo-dark.png" class="logo-lg" alt="logo dark">
                     </a>
 
-                    <a href="index.html" class="logo-light">
-                         <img src="assets/images/logo-sm.png" class="logo-sm" alt="logo sm">
-                         <img src="assets/images/logo-light.png" class="logo-lg" alt="logo light">
+                    <a href="admin/home" class="logo-light">
+                         <img src="../webPage/admin/assets/images/logo-sm.png" class="logo-sm" alt="logo sm">
+                         <img src="../webPage/admin/assets/images/logo-light.png" class="logo-lg" alt="logo light">
                     </a>
                </div>
 
@@ -725,7 +725,7 @@
                                                   <li class="menu-title">General</li>
 
                                                   <li class="nav-item active">
-                                                       <a class="nav-link active" href="index.html">
+                                                       <a class="nav-link active" href="admin/home">
                                                             <span class="nav-icon">
                                                                  <iconify-icon
                                                                       icon="solar:widget-5-bold-duotone"><template
@@ -761,7 +761,7 @@
                                                   </li>
 
                                                   <li class="nav-item">
-                                                       <a class="nav-link menu-arrow" href="index.html#sidebarProducts"
+                                                       <a class="nav-link menu-arrow" href="index#sidebarProducts"
                                                             data-bs-toggle="collapse" role="button"
                                                             aria-expanded="false" aria-controls="sidebarProducts">
                                                             <span class="nav-icon">
@@ -798,23 +798,23 @@
                                                             <ul class="nav sub-navbar-nav">
                                                                  <li class="sub-nav-item">
                                                                       <a class="sub-nav-link"
-                                                                           href="product-list.html">List</a>
+                                                                           href="product-list">List</a>
                                                                  </li>
                                                                  <li class="sub-nav-item">
                                                                       <a class="sub-nav-link"
-                                                                           href="product-grid.html">Grid</a>
+                                                                           href="product-grid">Grid</a>
                                                                  </li>
                                                                  <li class="sub-nav-item">
                                                                       <a class="sub-nav-link"
-                                                                           href="product-details.html">Details</a>
+                                                                           href="product-details">Details</a>
                                                                  </li>
                                                                  <li class="sub-nav-item">
                                                                       <a class="sub-nav-link"
-                                                                           href="product-edit.html">Edit</a>
+                                                                           href="product-edit">Edit</a>
                                                                  </li>
                                                                  <li class="sub-nav-item">
                                                                       <a class="sub-nav-link"
-                                                                           href="product-add.html">Create</a>
+                                                                           href="product-add">Create</a>
                                                                  </li>
                                                             </ul>
                                                        </div>
@@ -825,7 +825,7 @@
                                                   
 
                                                   <li class="nav-item">
-                                                       <a class="nav-link menu-arrow" href="index.html#sidebarOrders"
+                                                       <a class="nav-link menu-arrow" href="index#sidebarOrders"
                                                             data-bs-toggle="collapse" role="button"
                                                             aria-expanded="false" aria-controls="sidebarOrders">
                                                             <span class="nav-icon">
@@ -862,19 +862,19 @@
 
                                                                  <li class="sub-nav-item">
                                                                       <a class="sub-nav-link"
-                                                                           href="orders-list.html">List</a>
+                                                                           href="orders-list">List</a>
                                                                  </li>
                                                                  <li class="sub-nav-item">
                                                                       <a class="sub-nav-link"
-                                                                           href="order-detail.html">Details</a>
+                                                                           href="order-detail">Details</a>
                                                                  </li>
                                                                  <li class="sub-nav-item">
                                                                       <a class="sub-nav-link"
-                                                                           href="order-cart.html">Cart</a>
+                                                                           href="order-cart">Cart</a>
                                                                  </li>
                                                                  <li class="sub-nav-item">
                                                                       <a class="sub-nav-link"
-                                                                           href="order-checkout.html">Check
+                                                                           href="order-checkout">Check
                                                                            Out</a>
                                                                  </li>
                                                             </ul>
@@ -890,7 +890,7 @@
                                                   <li class="menu-title mt-2">Users</li>
 
                                                   <li class="nav-item">
-                                                       <a class="nav-link" href="pages-profile.html">
+                                                       <a class="nav-link" href="pages-profile">
                                                             <span class="nav-icon">
                                                                  <iconify-icon
                                                                       icon="solar:chat-square-like-bold-duotone"><template
@@ -923,7 +923,7 @@
                                                   </li>
 
                                                   <li class="nav-item">
-                                                       <a class="nav-link menu-arrow" href="index.html#sidebarRoles"
+                                                       <a class="nav-link menu-arrow" href="index#sidebarRoles"
                                                             data-bs-toggle="collapse" role="button"
                                                             aria-expanded="false" aria-controls="sidebarRoles">
                                                             <span class="nav-icon">
@@ -967,15 +967,15 @@
                                                                  <ul class="nav sub-navbar-nav">
                                                                       <li class="sub-nav-item">
                                                                            <a class="sub-nav-link"
-                                                                                href="role-list.html">List</a>
+                                                                                href="role-list">List</a>
                                                                       </li>
                                                                       <li class="sub-nav-item">
                                                                            <a class="sub-nav-link"
-                                                                                href="role-edit.html">Edit</a>
+                                                                                href="role-edit">Edit</a>
                                                                       </li>
                                                                       <li class="sub-nav-item">
                                                                            <a class="sub-nav-link"
-                                                                                href="role-add.html">Create</a>
+                                                                                href="role-add">Create</a>
                                                                       </li>
                                                                  </ul>
                                                             </ul>
@@ -985,7 +985,7 @@
                                                   
 
                                                   <li class="nav-item">
-                                                       <a class="nav-link menu-arrow" href="index.html#sidebarCustomers"
+                                                       <a class="nav-link menu-arrow" href="index#sidebarCustomers"
                                                             data-bs-toggle="collapse" role="button"
                                                             aria-expanded="false" aria-controls="sidebarCustomers">
                                                             <span class="nav-icon">
@@ -1012,11 +1012,11 @@
 
                                                                  <li class="sub-nav-item">
                                                                       <a class="sub-nav-link"
-                                                                           href="customer-list.html">List</a>
+                                                                           href="customer-list">List</a>
                                                                  </li>
                                                                  <li class="sub-nav-item">
                                                                       <a class="sub-nav-link"
-                                                                           href="customer-detail.html">Details</a>
+                                                                           href="customer-detail">Details</a>
                                                                  </li>
                                                             </ul>
                                                        </div>
@@ -1027,7 +1027,7 @@
                                                   <li class="menu-title mt-2">Other</li>
 
                                                   <li class="nav-item">
-                                                       <a class="nav-link menu-arrow" href="index.html#sidebarCoupons"
+                                                       <a class="nav-link menu-arrow" href="index#sidebarCoupons"
                                                             data-bs-toggle="collapse" role="button"
                                                             aria-expanded="false" aria-controls="sidebarCoupons">
                                                             <span class="nav-icon">
@@ -1052,18 +1052,18 @@
                                                             <ul class="nav sub-navbar-nav">
                                                                  <li class="sub-nav-item">
                                                                       <a class="sub-nav-link"
-                                                                           href="coupons-list.html">List</a>
+                                                                           href="coupons-list">List</a>
                                                                  </li>
                                                                  <li class="sub-nav-item">
                                                                       <a class="sub-nav-link"
-                                                                           href="coupons-add.html">Add</a>
+                                                                           href="coupons-add">Add</a>
                                                                  </li>
                                                             </ul>
                                                        </div>
                                                   </li>
 
                                                   <li class="nav-item">
-                                                       <a class="nav-link" href="pages-review.html">
+                                                       <a class="nav-link" href="pages-review">
                                                             <span class="nav-icon">
                                                                  <iconify-icon
                                                                       icon="solar:chat-square-like-bold-duotone"><template
@@ -1274,7 +1274,7 @@
                                                                            <div class="d-flex align-items-center p-2 rounded gap-2 border">
                                                                                 <div class="d-flex align-items-center gap-2">
                                                                                      <div class="rounded-3 bg-light avatar-md d-flex align-items-center justify-content-center">
-                                                                                          <img src="assets/images/brands/dhl.png" alt="" class="avatar rounded">
+                                                                                          <img src="../webPage/admin/assets/images/brands/dhl.png" alt="" class="avatar rounded">
                                                                                      </div>
                                                                                      <div>
                                                                                           <h5 class="text-dark fw-medium">
@@ -1301,7 +1301,7 @@
                                                                            <div class="d-flex align-items-center p-2 rounded gap-2 border">
                                                                                 <div class="d-flex align-items-center gap-2">
                                                                                      <div class="rounded-3 bg-light avatar-md d-flex align-items-center justify-content-center">
-                                                                                          <img src="assets/images/brands/fedex.png" alt="" class="avatar rounded">
+                                                                                          <img src="../webPage/admin/assets/images/brands/fedex.png" alt="" class="avatar rounded">
                                                                                      </div>
                                                                                      <div>
                                                                                           <h5 class="text-dark fw-medium">
@@ -1328,7 +1328,7 @@
                                                                            <div class="d-flex align-items-center p-2 rounded gap-2 border">
                                                                                 <div class="d-flex align-items-center gap-2">
                                                                                      <div class="rounded-3 bg-light avatar-md d-flex align-items-center justify-content-center">
-                                                                                          <img src="assets/images/brands/ups.png" alt="" class="avatar rounded">
+                                                                                          <img src="../webPage/admin/assets/images/brands/ups.png" alt="" class="avatar rounded">
                                                                                      </div>
                                                                                      <div>
                                                                                           <h5 class="text-dark fw-medium">
@@ -1393,7 +1393,7 @@
                                                                                 <button class="btn btn-light w-100 collapsed rounded-0 border-bottom rounded-top-1" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                                                                      <div class="d-flex align-items-center justify-content-between">
                                                                                           <span class="fs-5">Paypal</span>
-                                                                                          <img src="assets/images/card/paypal.svg" alt="" class="avatar-sm">
+                                                                                          <img src="../webPage/admin/assets/images/card/paypal.svg" alt="" class="avatar-sm">
                                                                                      </div>
                                                                                 </button>
                                                                            </h2>
@@ -1415,9 +1415,9 @@
                                                                                      <div class="d-flex align-items-center justify-content-between">
                                                                                           <span class="fs-5">Credit card</span>
                                                                                           <div class="icons text-end">
-                                                                                               <img src="assets/images/card/mastercard.svg" alt="" class="avatar-sm">
-                                                                                               <img src="assets/images/card/stripe.svg" alt="" class="avatar-sm">
-                                                                                               <img src="assets/images/card/visa.svg" alt="" class="avatar-sm">
+                                                                                               <img src="../webPage/admin/assets/images/card/mastercard.svg" alt="" class="avatar-sm">
+                                                                                               <img src="../webPage/admin/assets/images/card/stripe.svg" alt="" class="avatar-sm">
+                                                                                               <img src="../webPage/admin/assets/images/card/visa.svg" alt="" class="avatar-sm">
                                                                                           </div>
                                                                                      </div>
                                                                                 </button>
@@ -1535,7 +1535,7 @@
                                         <div class="table-responsive">
                                              <div class="d-flex align-items-center gap-3 mb-4">
                                                   <div class="rounded bg-light avatar d-flex align-items-center justify-content-center">
-                                                       <img src="assets/images/product/p-1.png" alt="" class="avatar">
+                                                       <img src="../webPage/admin/assets/images/product/p-1.png" alt="" class="avatar">
                                                   </div>
                                                   <div>
                                                        <a href="#!" class="text-dark fw-medium fs-15">Men Black Slim Fit T-shirt</a>
@@ -1548,7 +1548,7 @@
                                              </div>
                                              <div class="d-flex align-items-center gap-3 mb-4">
                                                   <div class="rounded bg-light avatar d-flex align-items-center justify-content-center">
-                                                       <img src="assets/images/product/p-5.png" alt="" class="avatar">
+                                                       <img src="../webPage/admin/assets/images/product/p-5.png" alt="" class="avatar">
                                                   </div>
                                                   <div>
                                                        <a href="#!" class="text-dark fw-medium fs-15">Dark Green Cargo Pent</a>
@@ -1561,7 +1561,7 @@
                                              </div>
                                              <div class="d-flex align-items-center gap-3 mb-4">
                                                   <div class="rounded bg-light avatar d-flex align-items-center justify-content-center">
-                                                       <img src="assets/images/product/p-8.png" alt="" class="avatar">
+                                                       <img src="../webPage/admin/assets/images/product/p-8.png" alt="" class="avatar">
                                                   </div>
                                                   <div>
                                                        <a href="#!" class="text-dark fw-medium fs-15">Men Dark Brown Wallet</a>
@@ -1574,7 +1574,7 @@
                                              </div>
                                              <div class="d-flex align-items-center gap-3 mb-4">
                                                   <div class="rounded bg-light avatar d-flex align-items-center justify-content-center">
-                                                       <img src="assets/images/product/p-10.png" alt="" class="avatar">
+                                                       <img src="../webPage/admin/assets/images/product/p-10.png" alt="" class="avatar">
                                                   </div>
                                                   <div>
                                                        <a href="#!" class="text-dark fw-medium fs-15">Kid's Yellow T-shirt</a>
@@ -1640,7 +1640,7 @@
                               </div>
 
                               <div class="main-btn my-4 text-end">
-                                   <a href="order-cart.html" class="btn btn-danger">Back To Cart</a>
+                                   <a href="order-cart" class="btn btn-danger">Back To Cart</a>
                                    <a href="#!" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#checkoutModal">Checkout Order</a>
                               </div>
                               <div data-bs-theme="dark">
@@ -1680,7 +1680,7 @@
                                                        <div class="row align-items-center">
                                                             <div class="col-lg-12">
                                                                  <div class="check-icon text-center">
-                                                                      <img src="assets/images/party.png" alt="" class="img-fluid">
+                                                                      <img src="../webPage/admin/assets/images/party.png" alt="" class="img-fluid">
                                                                       <h4 class="fw-semibold mt-3">Thank You !</h4>
                                                                       <p class="mb-1">Your Transaction Was
                                                                            Successful</p>
@@ -1706,7 +1706,7 @@
                                                                            <p class="mb-0">hello@dundermuffilin.com</p>
                                                                       </div>
                                                                       <div class="col-lg-4 col-6 text-end">
-                                                                           <img src="assets/images/users/avatar-1.jpg" alt="" class="avatar rounded-circle">
+                                                                           <img src="../webPage/admin/assets/images/users/avatar-1.jpg" alt="" class="avatar rounded-circle">
                                                                       </div>
                                                                  </div>
                                                                  <div class="row justify-content-between mt-3 align-items-center">
@@ -1725,7 +1725,7 @@
                                              <div data-bs-theme="dark">
                                                   <div class="card-footer d-flex align-items-center border-0 bg-body gap-3 rounded">
                                                        <div class="rounded-3 avatar bg-light d-flex align-items-center justify-content-center">
-                                                            <img src="assets/images/card/mastercard.svg" alt="" class="avatar-sm">
+                                                            <img src="../webPage/admin/assets/images/card/mastercard.svg" alt="" class="avatar-sm">
                                                        </div>
                                                        <div class="d-block">
                                                             <p class="text-white fw-semibold mb-0">
@@ -1773,10 +1773,10 @@
      <!-- END Wrapper -->
 
      <!-- Vendor Javascript (Require in all Page) -->
-     <script src="assets/js/vendor.js"></script>
+     <script src="../webPage/admin/assets/js/vendor.js"></script>
 
      <!-- App Javascript (Require in all Page) -->
-     <script src="assets/js/app.js"></script>
+     <script src="../webPage/admin/assets/js/app.js"></script>
 </body>
 
 </html>
