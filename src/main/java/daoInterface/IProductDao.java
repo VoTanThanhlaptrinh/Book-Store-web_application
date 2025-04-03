@@ -26,4 +26,6 @@ public interface IProductDao {
 	List<Product> getProductsByTypeAndTitle(String type, String title);
 
 	List<Product> getListOfTitleByCategory(String category, String titleKeyword, int pageNum, int quantity);
+
+	int getTotalProducts();
 }

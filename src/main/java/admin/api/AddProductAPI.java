@@ -1,4 +1,4 @@
-package admin.controller;
+package admin.api;
 
 import java.io.IOException;
 
@@ -7,16 +7,16 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-@WebServlet("/admin/home")
-public class HomeAdminController extends HttpServlet {
+@WebServlet("/add-product")
+public class AddProductAPI extends HttpServlet {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		req.getRequestDispatcher("/webPage/admin/index.jsp").forward(req, resp);
+		
 	}
 }

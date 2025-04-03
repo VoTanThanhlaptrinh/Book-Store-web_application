@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/webPage/lib/tag.jsp"%>
 <!DOCTYPE html>
-<!-- saved from url=(0050)pages-profile.html -->
+<!-- saved from url=(0050)pages-profile -->
 <html lang="en" data-bs-theme="light" data-topbar-color="light" data-menu-color="dark" data-menu-size="sm-hover-active">
 
 <head>
@@ -404,31 +404,31 @@
                                    <div class="dropdown-menu dropdown-menu-end">
                                         <!-- item-->
                                         <h6 class="dropdown-header">Welcome Gaston!</h6>
-                                        <a class="dropdown-item" href="pages-profile.html">
+                                        <a class="dropdown-item" href="pages-profile">
                                              <i class="bx bx-user-circle text-muted fs-18 align-middle me-1"></i><span
                                                   class="align-middle">Profile</span>
                                         </a>
-                                        <a class="dropdown-item" href="apps-chat.html">
+                                        <a class="dropdown-item" href="apps-chat">
                                              <i class="bx bx-message-dots text-muted fs-18 align-middle me-1"></i><span
                                                   class="align-middle">Messages</span>
                                         </a>
 
-                                        <a class="dropdown-item" href="pages-pricing.html">
+                                        <a class="dropdown-item" href="pages-pricing">
                                              <i class="bx bx-wallet text-muted fs-18 align-middle me-1"></i><span
                                                   class="align-middle">Pricing</span>
                                         </a>
-                                        <a class="dropdown-item" href="pages-faqs.html">
+                                        <a class="dropdown-item" href="pages-faqs">
                                              <i class="bx bx-help-circle text-muted fs-18 align-middle me-1"></i><span
                                                   class="align-middle">Help</span>
                                         </a>
-                                        <a class="dropdown-item" href="auth-lock-screen.html">
+                                        <a class="dropdown-item" href="auth-lock-screen">
                                              <i class="bx bx-lock text-muted fs-18 align-middle me-1"></i><span
                                                   class="align-middle">Lock screen</span>
                                         </a>
 
                                         <div class="dropdown-divider my-1"></div>
 
-                                        <a class="dropdown-item text-danger" href="auth-signin.html">
+                                        <a class="dropdown-item text-danger" href="auth-signin">
                                              <i class="bx bx-log-out fs-18 align-middle me-1"></i><span
                                                   class="align-middle">Logout</span>
                                         </a>
@@ -542,7 +542,7 @@
                                                                                                class="d-flex align-items-center gap-2">
                                                                                                <i
                                                                                                     class="bx bxl-figma fs-20 text-red"></i>
-                                                                                               <a href="pages-profile.html#!"
+                                                                                               <a href="pages-profile#!"
                                                                                                     class="text-dark fw-medium">Concept.fig</a>
                                                                                           </div>
                                                                                      </div>
@@ -551,7 +551,7 @@
                                                                                                class="d-flex align-items-center gap-2">
                                                                                                <i
                                                                                                     class="bx bxl-file-doc fs-20 text-success"></i>
-                                                                                               <a href="pages-profile.html#!"
+                                                                                               <a href="pages-profile#!"
                                                                                                     class="text-dark fw-medium">larkon.docs</a>
                                                                                           </div>
                                                                                      </div>
@@ -608,11 +608,11 @@
                                                                                      Completed</span></p>
                                                                            <div
                                                                                 class="d-flex align-items-center gap-3 mt-1 bg-light bg-opacity-50 p-2 rounded-2">
-                                                                                <a href="pages-profile.html#!"
+                                                                                <a href="pages-profile#!"
                                                                                      class="fw-medium text-dark">UI/UX
                                                                                      Figma Design</a>
                                                                                 <div class="ms-auto">
-                                                                                     <a href="pages-profile.html#!"
+                                                                                     <a href="pages-profile#!"
                                                                                           class="fw-medium text-primary fs-18"
                                                                                           data-bs-toggle="tooltip"
                                                                                           data-bs-title="Download"
@@ -654,7 +654,7 @@
                                                                                 calendar, and pre-order E-commerce &amp;
                                                                                 Marketing pages.</p>
                                                                            <div class="mt-2">
-                                                                                <a href="pages-profile.html#!"
+                                                                                <a href="pages-profile#!"
                                                                                      class="btn btn-light btn-sm">Download
                                                                                      Zip</a>
                                                                            </div>
@@ -676,19 +676,19 @@
                                                                            </h5>
                                                                            <div class="row g-2 mt-2">
                                                                                 <div class="col-lg-4">
-                                                                                     <a href="pages-profile.html#!">
+                                                                                     <a href="pages-profile#!">
                                                                                           <img src="../webPage/admin/assets/images/small/img-6.jpg" alt=""
                                                                                                class="img-fluid rounded">
                                                                                      </a>
                                                                                 </div>
                                                                                 <div class="col-lg-4">
-                                                                                     <a href="pages-profile.html#!">
+                                                                                     <a href="pages-profile#!">
                                                                                           <img src="../webPage/admin/assets/images/small/img-3.jpg" alt=""
                                                                                                class="img-fluid rounded">
                                                                                      </a>
                                                                                 </div>
                                                                                 <div class="col-lg-4">
-                                                                                     <a href="pages-profile.html#!">
+                                                                                     <a href="pages-profile#!">
                                                                                           <img src="../webPage/admin/assets/images/small/img-4.jpg" alt=""
                                                                                                class="img-fluid rounded">
                                                                                      </a>
@@ -784,7 +784,7 @@
                                                                  </div>
                                                             </div>
                                                        </div>
-                                                       <a href="pages-profile.html#!"
+                                                       <a href="pages-profile#!"
                                                             class="btn btn-outline-dark w-100">View All</a>
                                                   </div>
                                              </div>
@@ -980,12 +980,12 @@
           <div class="main-nav">
                <!-- Sidebar Logo -->
                <div class="logo-box">
-                    <a href="index.html" class="logo-dark">
+                    <a href="admin/home" class="logo-dark">
                          <img src="../webPage/admin/assets/images/logo-sm.png" class="logo-sm" alt="logo sm">
                          <img src="../webPage/admin/assets/images/logo-dark.png" class="logo-lg" alt="logo dark">
                     </a>
 
-                    <a href="index.html" class="logo-light">
+                    <a href="admin/home" class="logo-light">
                          <img src="../webPage/admin/assets/images/logo-sm.png" class="logo-sm" alt="logo sm">
                          <img src="../webPage/admin/assets/images/logo-light.png" class="logo-lg" alt="logo light">
                     </a>
@@ -1032,7 +1032,7 @@
                                                   <li class="menu-title">General</li>
 
                                                   <li class="nav-item active">
-                                                       <a class="nav-link active" href="index.html">
+                                                       <a class="nav-link active" href="admin/home">
                                                             <span class="nav-icon">
                                                                  <iconify-icon
                                                                       icon="solar:widget-5-bold-duotone"><template
@@ -1068,7 +1068,7 @@
                                                   </li>
 
                                                   <li class="nav-item">
-                                                       <a class="nav-link menu-arrow" href="index.html#sidebarProducts"
+                                                       <a class="nav-link menu-arrow" href="index#sidebarProducts"
                                                             data-bs-toggle="collapse" role="button"
                                                             aria-expanded="false" aria-controls="sidebarProducts">
                                                             <span class="nav-icon">
@@ -1105,23 +1105,16 @@
                                                             <ul class="nav sub-navbar-nav">
                                                                  <li class="sub-nav-item">
                                                                       <a class="sub-nav-link"
-                                                                           href="product-list.html">List</a>
+                                                                           href="product-list">List</a>
+                                                                 </li>
+                                                                 
+                                                                 <li class="sub-nav-item">
+                                                                      <a class="sub-nav-link"
+                                                                           href="product-edit">Edit</a>
                                                                  </li>
                                                                  <li class="sub-nav-item">
                                                                       <a class="sub-nav-link"
-                                                                           href="product-grid.html">Grid</a>
-                                                                 </li>
-                                                                 <li class="sub-nav-item">
-                                                                      <a class="sub-nav-link"
-                                                                           href="product-details.html">Details</a>
-                                                                 </li>
-                                                                 <li class="sub-nav-item">
-                                                                      <a class="sub-nav-link"
-                                                                           href="product-edit.html">Edit</a>
-                                                                 </li>
-                                                                 <li class="sub-nav-item">
-                                                                      <a class="sub-nav-link"
-                                                                           href="product-add.html">Create</a>
+                                                                           href="product-add">Create</a>
                                                                  </li>
                                                             </ul>
                                                        </div>
@@ -1132,7 +1125,7 @@
                                                   
 
                                                   <li class="nav-item">
-                                                       <a class="nav-link menu-arrow" href="index.html#sidebarOrders"
+                                                       <a class="nav-link menu-arrow" href="index#sidebarOrders"
                                                             data-bs-toggle="collapse" role="button"
                                                             aria-expanded="false" aria-controls="sidebarOrders">
                                                             <span class="nav-icon">
@@ -1169,19 +1162,19 @@
 
                                                                  <li class="sub-nav-item">
                                                                       <a class="sub-nav-link"
-                                                                           href="orders-list.html">List</a>
+                                                                           href="orders-list">List</a>
                                                                  </li>
                                                                  <li class="sub-nav-item">
                                                                       <a class="sub-nav-link"
-                                                                           href="order-detail.html">Details</a>
+                                                                           href="order-detail">Details</a>
                                                                  </li>
                                                                  <li class="sub-nav-item">
                                                                       <a class="sub-nav-link"
-                                                                           href="order-cart.html">Cart</a>
+                                                                           href="order-cart">Cart</a>
                                                                  </li>
                                                                  <li class="sub-nav-item">
                                                                       <a class="sub-nav-link"
-                                                                           href="order-checkout.html">Check
+                                                                           href="order-checkout">Check
                                                                            Out</a>
                                                                  </li>
                                                             </ul>
@@ -1197,7 +1190,7 @@
                                                   <li class="menu-title mt-2">Users</li>
 
                                                   <li class="nav-item">
-                                                       <a class="nav-link" href="pages-profile.html">
+                                                       <a class="nav-link" href="pages-profile">
                                                             <span class="nav-icon">
                                                                  <iconify-icon
                                                                       icon="solar:chat-square-like-bold-duotone"><template
@@ -1230,7 +1223,7 @@
                                                   </li>
 
                                                   <li class="nav-item">
-                                                       <a class="nav-link menu-arrow" href="index.html#sidebarRoles"
+                                                       <a class="nav-link menu-arrow" href="index#sidebarRoles"
                                                             data-bs-toggle="collapse" role="button"
                                                             aria-expanded="false" aria-controls="sidebarRoles">
                                                             <span class="nav-icon">
@@ -1274,15 +1267,15 @@
                                                                  <ul class="nav sub-navbar-nav">
                                                                       <li class="sub-nav-item">
                                                                            <a class="sub-nav-link"
-                                                                                href="role-list.html">List</a>
+                                                                                href="role-list">List</a>
                                                                       </li>
                                                                       <li class="sub-nav-item">
                                                                            <a class="sub-nav-link"
-                                                                                href="role-edit.html">Edit</a>
+                                                                                href="role-edit">Edit</a>
                                                                       </li>
                                                                       <li class="sub-nav-item">
                                                                            <a class="sub-nav-link"
-                                                                                href="role-add.html">Create</a>
+                                                                                href="role-add">Create</a>
                                                                       </li>
                                                                  </ul>
                                                             </ul>
@@ -1292,7 +1285,7 @@
                                                   
 
                                                   <li class="nav-item">
-                                                       <a class="nav-link menu-arrow" href="index.html#sidebarCustomers"
+                                                       <a class="nav-link menu-arrow" href="index#sidebarCustomers"
                                                             data-bs-toggle="collapse" role="button"
                                                             aria-expanded="false" aria-controls="sidebarCustomers">
                                                             <span class="nav-icon">
@@ -1319,11 +1312,11 @@
 
                                                                  <li class="sub-nav-item">
                                                                       <a class="sub-nav-link"
-                                                                           href="customer-list.html">List</a>
+                                                                           href="customer-list">List</a>
                                                                  </li>
                                                                  <li class="sub-nav-item">
                                                                       <a class="sub-nav-link"
-                                                                           href="customer-detail.html">Details</a>
+                                                                           href="customer-detail">Details</a>
                                                                  </li>
                                                             </ul>
                                                        </div>
@@ -1334,7 +1327,7 @@
                                                   <li class="menu-title mt-2">Other</li>
 
                                                   <li class="nav-item">
-                                                       <a class="nav-link menu-arrow" href="index.html#sidebarCoupons"
+                                                       <a class="nav-link menu-arrow" href="index#sidebarCoupons"
                                                             data-bs-toggle="collapse" role="button"
                                                             aria-expanded="false" aria-controls="sidebarCoupons">
                                                             <span class="nav-icon">
@@ -1359,18 +1352,18 @@
                                                             <ul class="nav sub-navbar-nav">
                                                                  <li class="sub-nav-item">
                                                                       <a class="sub-nav-link"
-                                                                           href="coupons-list.html">List</a>
+                                                                           href="coupons-list">List</a>
                                                                  </li>
                                                                  <li class="sub-nav-item">
                                                                       <a class="sub-nav-link"
-                                                                           href="coupons-add.html">Add</a>
+                                                                           href="coupons-add">Add</a>
                                                                  </li>
                                                             </ul>
                                                        </div>
                                                   </li>
 
                                                   <li class="nav-item">
-                                                       <a class="nav-link" href="pages-review.html">
+                                                       <a class="nav-link" href="pages-review">
                                                             <span class="nav-icon">
                                                                  <iconify-icon
                                                                       icon="solar:chat-square-like-bold-duotone"><template
@@ -1452,14 +1445,14 @@
                                                   <p class="mb-0">Project Head Manager</p>
                                              </div>
                                              <div class="d-flex align-items-center gap-2 my-2 my-lg-0">
-                                                  <a href="pages-profile.html#!" class="btn btn-info"><i
+                                                  <a href="pages-profile#!" class="btn btn-info"><i
                                                             class="bx bx-message-dots"></i>
                                                        Message</a>
-                                                  <a href="pages-profile.html#!" class="btn btn-outline-primary"><i
+                                                  <a href="pages-profile#!" class="btn btn-outline-primary"><i
                                                             class="bx bx-plus"></i>
                                                        Follow</a>
                                                   <div class="dropdown">
-                                                       <a href="pages-profile.html#"
+                                                       <a href="pages-profile#"
                                                             class="dropdown-toggle arrow-none card-drop"
                                                             data-bs-toggle="dropdown" aria-expanded="false">
                                                             <iconify-icon icon="solar:menu-dots-bold"
@@ -1774,7 +1767,7 @@
                                                                  </svg>
                                                             </template></iconify-icon>
                                                   </div>
-                                                  <p class="mb-0 fs-14">Email <a href="pages-profile.html#!"
+                                                  <p class="mb-0 fs-14">Email <a href="pages-profile#!"
                                                             class="text-primary fw-semibold">hello@dundermuffilin.com</a>
                                                   </p>
                                              </div>
@@ -1805,7 +1798,7 @@
                                                                  </svg>
                                                             </template></iconify-icon>
                                                   </div>
-                                                  <p class="mb-0 fs-14">Website <a href="pages-profile.html#!"
+                                                  <p class="mb-0 fs-14">Website <a href="pages-profile#!"
                                                             class="text-primary fw-semibold">www.larkon.co</a></p>
                                              </div>
                                              <div class="d-flex align-items-center gap-2 mb-2">
@@ -1875,7 +1868,7 @@
                                                   </p>
                                              </div>
                                              <div class="mt-2">
-                                                  <a href="pages-profile.html#!" class="text-primary">View More</a>
+                                                  <a href="pages-profile#!" class="text-primary">View More</a>
                                              </div>
                                         </div>
                                    </div>
@@ -1894,7 +1887,7 @@
                                              growth marketing at the world's biggest retailer. I've run SingleFire I've
                                              created world-class campaigns; I've built digital marketing organizations
                                              from the ground up. I have over 20 years' experience leading... <a
-                                                  href="pages-profile.html#!" class="text-primary">See more</a></p>
+                                                  href="pages-profile#!" class="text-primary">See more</a></p>
                                         <h4 class="card-title mb-2">My Approach :</h4>
                                         <p>When it comes to Project Head Manager, I believe in a holistic approach that
                                              combines creativity with technical expertise. I start by understanding your
@@ -2104,7 +2097,7 @@
                                         <p class="text-muted">Copy the URL below and share it with your friends:</p>
                                         <p
                                              class="d-flex align-items-center border p-2 rounded-2 border-dashed bg-body text-start mb-0">
-                                             https://larkon-mileage.com <a href="pages-profile.html#!"
+                                             https://larkon-mileage.com <a href="pages-profile#!"
                                                   class="ms-auto fs-4"><i class="ti ti-copy"></i></a></p>
                                    </div>
                               </div>
@@ -2157,7 +2150,7 @@
                                         </div>
                                    </div>
                                    <div class="card-footer border-top text-center">
-                                        <a href="pages-profile.html#!" class="link-primary">View More</a>
+                                        <a href="pages-profile#!" class="link-primary">View More</a>
                                    </div>
                               </div>
                          </div>
@@ -2171,9 +2164,9 @@
                                                   <h4 class="mb-1">Gaston Lapierre , <span
                                                             class="fs-13 text-muted fw-medium ms-1">Project Head Manager
                                                             . Nov 16</span></h4>
-                                                  <p class="mb-0">Asked a question <a href="pages-profile.html#!"
+                                                  <p class="mb-0">Asked a question <a href="pages-profile#!"
                                                             class="text-primary ms-1">#inbound</a> <a
-                                                            href="pages-profile.html#!"
+                                                            href="pages-profile#!"
                                                             class="text-primary ms-1">#SaaS</a></p>
                                              </div>
                                         </div>
@@ -2182,13 +2175,13 @@
                                         <p class="mb-0">We are a Series A B2B startup offering a custom solution.
                                              Currently, we are utilizing @MixPanel and collaborating with @Division of
                                              Labor to rebuild our pages. Shoutout to @Jennifer Smith for her
-                                             support...<a href="pages-profile.html#!" class="link-primary"> See more</a>
+                                             support...<a href="pages-profile#!" class="link-primary"> See more</a>
                                         </p>
                                    </div>
                                    <div class="card-footer border-top">
                                         <div class="row">
                                              <div class="col-lg-2 col-4">
-                                                  <a href="pages-profile.html#!"
+                                                  <a href="pages-profile#!"
                                                        class="text-primary d-inline-flex gap-1 align-items-center fs-14"><iconify-icon
                                                             icon="solar:pen-new-square-broken" class="fs-16"><template
                                                                  shadowrootmode="open">
@@ -2206,7 +2199,7 @@
                                                             </template></iconify-icon> Answer</a>
                                              </div>
                                              <div class="col-lg-2 col-4">
-                                                  <a href="pages-profile.html#!"
+                                                  <a href="pages-profile#!"
                                                        class="text-dark d-inline-flex gap-1 align-items-center fs-14"><iconify-icon
                                                             icon="solar:hand-shake-broken" class="fs-16"><template
                                                                  shadowrootmode="open">
@@ -2224,7 +2217,7 @@
                                                             </template></iconify-icon> Thanks</a>
                                              </div>
                                              <div class="col-lg-2 col-4">
-                                                  <a href="pages-profile.html#!"
+                                                  <a href="pages-profile#!"
                                                        class="text-dark d-inline-flex gap-1 align-items-center fs-14"><iconify-icon
                                                             icon="solar:lightbulb-minimalistic-broken"
                                                             class="fs-16"><template shadowrootmode="open">
@@ -2253,21 +2246,21 @@
                                                   <h4 class="mb-1">Gaston Lapierre , <span
                                                             class="fs-13 text-muted fw-medium ms-1">Project Head Manager
                                                             . Nov 11</span></h4>
-                                                  <p class="mb-0">Asked a question <a href="pages-profile.html#!"
+                                                  <p class="mb-0">Asked a question <a href="pages-profile#!"
                                                             class="text-primary ms-1">#LatAm</a> <a
-                                                            href="pages-profile.html#!"
+                                                            href="pages-profile#!"
                                                             class="text-primary ms-1">#Europe</a></p>
                                              </div>
                                         </div>
                                         <h4 class="mt-3">Looking for a new landing page optimization vendor</h4>
                                         <p class="mb-0">We are currently using @Optimizely, but find that they are
                                              missing a number with a custom solution that no... <a
-                                                  href="pages-profile.html#!" class="link-primary"> See more</a></p>
+                                                  href="pages-profile#!" class="link-primary"> See more</a></p>
                                    </div>
                                    <div class="card-footer border-top">
                                         <div class="row">
                                              <div class="col-lg-2 col-4">
-                                                  <a href="pages-profile.html#!"
+                                                  <a href="pages-profile#!"
                                                        class="text-primary d-inline-flex gap-1 align-items-center fs-14"><iconify-icon
                                                             icon="solar:pen-new-square-broken" class="fs-16"><template
                                                                  shadowrootmode="open">
@@ -2285,7 +2278,7 @@
                                                             </template></iconify-icon> Answer</a>
                                              </div>
                                              <div class="col-lg-2 col-4">
-                                                  <a href="pages-profile.html#!"
+                                                  <a href="pages-profile#!"
                                                        class="text-dark d-inline-flex gap-1 align-items-center fs-14"><iconify-icon
                                                             icon="solar:hand-shake-broken" class="fs-16"><template
                                                                  shadowrootmode="open">
@@ -2303,7 +2296,7 @@
                                                             </template></iconify-icon> Thanks</a>
                                              </div>
                                              <div class="col-lg-2 col-4">
-                                                  <a href="pages-profile.html#!"
+                                                  <a href="pages-profile#!"
                                                        class="text-dark d-inline-flex gap-1 align-items-center fs-14"><iconify-icon
                                                             icon="solar:lightbulb-minimalistic-broken"
                                                             class="fs-16"><template shadowrootmode="open">
@@ -2332,9 +2325,9 @@
                                                   <h4 class="mb-1">Gaston Lapierre , <span
                                                             class="fs-13 text-muted fw-medium ms-1">Project Head Manager
                                                             . Nov 08</span></h4>
-                                                  <p class="mb-0">Asked a question <a href="pages-profile.html#!"
+                                                  <p class="mb-0">Asked a question <a href="pages-profile#!"
                                                             class="text-primary ms-1">#Performance-marketing</a> <a
-                                                            href="pages-profile.html#!"
+                                                            href="pages-profile#!"
                                                             class="text-primary ms-1">#CRM</a></p>
                                              </div>
                                         </div>
@@ -2342,12 +2335,12 @@
                                         <p class="mb-0">CRMs are powerful tools that help you expedite business growth
                                              while number with a custom eliminating friction, improving cross-team
                                              collaboration, managing your contact records, syncing...<a
-                                                  href="pages-profile.html#!" class="link-primary"> See more</a></p>
+                                                  href="pages-profile#!" class="link-primary"> See more</a></p>
                                    </div>
                                    <div class="card-footer border-top">
                                         <div class="row">
                                              <div class="col-lg-2 col-4">
-                                                  <a href="pages-profile.html#!"
+                                                  <a href="pages-profile#!"
                                                        class="text-primary d-inline-flex gap-1 align-items-center fs-14"><iconify-icon
                                                             icon="solar:pen-new-square-broken" class="fs-16"><template
                                                                  shadowrootmode="open">
@@ -2365,7 +2358,7 @@
                                                             </template></iconify-icon> Answer</a>
                                              </div>
                                              <div class="col-lg-2 col-4">
-                                                  <a href="pages-profile.html#!"
+                                                  <a href="pages-profile#!"
                                                        class="text-dark d-inline-flex gap-1 align-items-center fs-14"><iconify-icon
                                                             icon="solar:hand-shake-broken" class="fs-16"><template
                                                                  shadowrootmode="open">
@@ -2383,7 +2376,7 @@
                                                             </template></iconify-icon> Thanks</a>
                                              </div>
                                              <div class="col-lg-2 col-4">
-                                                  <a href="pages-profile.html#!"
+                                                  <a href="pages-profile#!"
                                                        class="text-dark d-inline-flex gap-1 align-items-center fs-14"><iconify-icon
                                                             icon="solar:lightbulb-minimalistic-broken"
                                                             class="fs-16"><template shadowrootmode="open">

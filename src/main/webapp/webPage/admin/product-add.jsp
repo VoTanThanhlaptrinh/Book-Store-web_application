@@ -1001,26 +1001,26 @@
                                         <!-- item-->
                                         <h6 class="dropdown-header">Welcome Gaston!</h6>
                                         <a class="dropdown-item"
-                                             href="pages-profile.html">
+                                             href="pages-profile">
                                              <i class="bx bx-user-circle text-muted fs-18 align-middle me-1"></i><span
                                                   class="align-middle">Profile</span>
                                         </a>
-                                        <a class="dropdown-item" href="apps-chat.html">
+                                        <a class="dropdown-item" href="apps-chat">
                                              <i class="bx bx-message-dots text-muted fs-18 align-middle me-1"></i><span
                                                   class="align-middle">Messages</span>
                                         </a>
 
                                         <a class="dropdown-item"
-                                             href="pages-pricing.html">
+                                             href="pages-pricing">
                                              <i class="bx bx-wallet text-muted fs-18 align-middle me-1"></i><span
                                                   class="align-middle">Pricing</span>
                                         </a>
-                                        <a class="dropdown-item" href="pages-faqs.html">
+                                        <a class="dropdown-item" href="pages-faqs">
                                              <i class="bx bx-help-circle text-muted fs-18 align-middle me-1"></i><span
                                                   class="align-middle">Help</span>
                                         </a>
                                         <a class="dropdown-item"
-                                             href="auth-lock-screen.html">
+                                             href="auth-lock-screen">
                                              <i class="bx bx-lock text-muted fs-18 align-middle me-1"></i><span
                                                   class="align-middle">Lock screen</span>
                                         </a>
@@ -1028,7 +1028,7 @@
                                         <div class="dropdown-divider my-1"></div>
 
                                         <a class="dropdown-item text-danger"
-                                             href="auth-signin.html">
+                                             href="auth-signin">
                                              <i class="bx bx-log-out fs-18 align-middle me-1"></i><span
                                                   class="align-middle">Logout</span>
                                         </a>
@@ -1307,12 +1307,12 @@
           <div class="main-nav">
                <!-- Sidebar Logo -->
                <div class="logo-box">
-                    <a href="index.html" class="logo-dark">
+                    <a href="admin/home" class="logo-dark">
                          <img src="../webPage/admin/assets/images/logo-sm.png" class="logo-sm" alt="logo sm">
                          <img src="../webPage/admin/assets/images/logo-dark.png" class="logo-lg" alt="logo dark">
                     </a>
 
-                    <a href="index.html" class="logo-light">
+                    <a href="admin/home" class="logo-light">
                          <img src="../webPage/admin/assets/images/logo-sm.png" class="logo-sm" alt="logo sm">
                          <img src="../webPage/admin/assets/images/logo-light.png" class="logo-lg" alt="logo light">
                     </a>
@@ -1359,7 +1359,7 @@
                                                   <li class="menu-title">General</li>
 
                                                   <li class="nav-item active">
-                                                       <a class="nav-link active" href="index.html">
+                                                       <a class="nav-link active" href="admin/home">
                                                             <span class="nav-icon">
                                                                  <iconify-icon
                                                                       icon="solar:widget-5-bold-duotone"><template
@@ -1395,7 +1395,7 @@
                                                   </li>
 
                                                   <li class="nav-item">
-                                                       <a class="nav-link menu-arrow" href="index.html#sidebarProducts"
+                                                       <a class="nav-link menu-arrow" href="index#sidebarProducts"
                                                             data-bs-toggle="collapse" role="button"
                                                             aria-expanded="false" aria-controls="sidebarProducts">
                                                             <span class="nav-icon">
@@ -1432,23 +1432,16 @@
                                                             <ul class="nav sub-navbar-nav">
                                                                  <li class="sub-nav-item">
                                                                       <a class="sub-nav-link"
-                                                                           href="product-list.html">List</a>
+                                                                           href="product-list">List</a>
+                                                                 </li>
+                                                                
+                                                                 <li class="sub-nav-item">
+                                                                      <a class="sub-nav-link"
+                                                                           href="product-edit">Edit</a>
                                                                  </li>
                                                                  <li class="sub-nav-item">
                                                                       <a class="sub-nav-link"
-                                                                           href="product-grid.html">Grid</a>
-                                                                 </li>
-                                                                 <li class="sub-nav-item">
-                                                                      <a class="sub-nav-link"
-                                                                           href="product-details.html">Details</a>
-                                                                 </li>
-                                                                 <li class="sub-nav-item">
-                                                                      <a class="sub-nav-link"
-                                                                           href="product-edit.html">Edit</a>
-                                                                 </li>
-                                                                 <li class="sub-nav-item">
-                                                                      <a class="sub-nav-link"
-                                                                           href="product-add.html">Create</a>
+                                                                           href="product-add">Create</a>
                                                                  </li>
                                                             </ul>
                                                        </div>
@@ -1459,7 +1452,7 @@
                                                   
 
                                                   <li class="nav-item">
-                                                       <a class="nav-link menu-arrow" href="index.html#sidebarOrders"
+                                                       <a class="nav-link menu-arrow" href="index#sidebarOrders"
                                                             data-bs-toggle="collapse" role="button"
                                                             aria-expanded="false" aria-controls="sidebarOrders">
                                                             <span class="nav-icon">
@@ -1496,19 +1489,19 @@
 
                                                                  <li class="sub-nav-item">
                                                                       <a class="sub-nav-link"
-                                                                           href="orders-list.html">List</a>
+                                                                           href="orders-list">List</a>
                                                                  </li>
                                                                  <li class="sub-nav-item">
                                                                       <a class="sub-nav-link"
-                                                                           href="order-detail.html">Details</a>
+                                                                           href="order-detail">Details</a>
                                                                  </li>
                                                                  <li class="sub-nav-item">
                                                                       <a class="sub-nav-link"
-                                                                           href="order-cart.html">Cart</a>
+                                                                           href="order-cart">Cart</a>
                                                                  </li>
                                                                  <li class="sub-nav-item">
                                                                       <a class="sub-nav-link"
-                                                                           href="order-checkout.html">Check
+                                                                           href="order-checkout">Check
                                                                            Out</a>
                                                                  </li>
                                                             </ul>
@@ -1524,7 +1517,7 @@
                                                   <li class="menu-title mt-2">Users</li>
 
                                                   <li class="nav-item">
-                                                       <a class="nav-link" href="pages-profile.html">
+                                                       <a class="nav-link" href="pages-profile">
                                                             <span class="nav-icon">
                                                                  <iconify-icon
                                                                       icon="solar:chat-square-like-bold-duotone"><template
@@ -1557,7 +1550,7 @@
                                                   </li>
 
                                                   <li class="nav-item">
-                                                       <a class="nav-link menu-arrow" href="index.html#sidebarRoles"
+                                                       <a class="nav-link menu-arrow" href="index#sidebarRoles"
                                                             data-bs-toggle="collapse" role="button"
                                                             aria-expanded="false" aria-controls="sidebarRoles">
                                                             <span class="nav-icon">
@@ -1601,15 +1594,15 @@
                                                                  <ul class="nav sub-navbar-nav">
                                                                       <li class="sub-nav-item">
                                                                            <a class="sub-nav-link"
-                                                                                href="role-list.html">List</a>
+                                                                                href="role-list">List</a>
                                                                       </li>
                                                                       <li class="sub-nav-item">
                                                                            <a class="sub-nav-link"
-                                                                                href="role-edit.html">Edit</a>
+                                                                                href="role-edit">Edit</a>
                                                                       </li>
                                                                       <li class="sub-nav-item">
                                                                            <a class="sub-nav-link"
-                                                                                href="role-add.html">Create</a>
+                                                                                href="role-add">Create</a>
                                                                       </li>
                                                                  </ul>
                                                             </ul>
@@ -1619,7 +1612,7 @@
                                                   
 
                                                   <li class="nav-item">
-                                                       <a class="nav-link menu-arrow" href="index.html#sidebarCustomers"
+                                                       <a class="nav-link menu-arrow" href="index#sidebarCustomers"
                                                             data-bs-toggle="collapse" role="button"
                                                             aria-expanded="false" aria-controls="sidebarCustomers">
                                                             <span class="nav-icon">
@@ -1646,11 +1639,11 @@
 
                                                                  <li class="sub-nav-item">
                                                                       <a class="sub-nav-link"
-                                                                           href="customer-list.html">List</a>
+                                                                           href="customer-list">List</a>
                                                                  </li>
                                                                  <li class="sub-nav-item">
                                                                       <a class="sub-nav-link"
-                                                                           href="customer-detail.html">Details</a>
+                                                                           href="customer-detail">Details</a>
                                                                  </li>
                                                             </ul>
                                                        </div>
@@ -1661,7 +1654,7 @@
                                                   <li class="menu-title mt-2">Other</li>
 
                                                   <li class="nav-item">
-                                                       <a class="nav-link menu-arrow" href="index.html#sidebarCoupons"
+                                                       <a class="nav-link menu-arrow" href="index#sidebarCoupons"
                                                             data-bs-toggle="collapse" role="button"
                                                             aria-expanded="false" aria-controls="sidebarCoupons">
                                                             <span class="nav-icon">
@@ -1686,18 +1679,18 @@
                                                             <ul class="nav sub-navbar-nav">
                                                                  <li class="sub-nav-item">
                                                                       <a class="sub-nav-link"
-                                                                           href="coupons-list.html">List</a>
+                                                                           href="coupons-list">List</a>
                                                                  </li>
                                                                  <li class="sub-nav-item">
                                                                       <a class="sub-nav-link"
-                                                                           href="coupons-add.html">Add</a>
+                                                                           href="coupons-add">Add</a>
                                                                  </li>
                                                             </ul>
                                                        </div>
                                                   </li>
 
                                                   <li class="nav-item">
-                                                       <a class="nav-link" href="pages-review.html">
+                                                       <a class="nav-link" href="pages-review">
                                                             <span class="nav-icon">
                                                                  <iconify-icon
                                                                       icon="solar:chat-square-like-bold-duotone"><template
@@ -1764,8 +1757,8 @@
                <div class="container-xxl">
 
                     <div class="row">
-                         <div class="col-xl-3 col-lg-4">
-                              <div class="card">
+                         <!--<div class="col-xl-3 col-lg-4">
+                               <div class="card">
                                    <div class="card-body">
                                         <img src="../webPage/admin/assets/images/product/p-1.png" alt="" class="img-fluid rounded bg-light">
                                         <div class="mt-3">
@@ -1820,10 +1813,10 @@
                                              </div>
                                         </div>
                                    </div>
-                              </div>
-                         </div>
+                              </div> 
+                         </div>-->
 
-                         <div class="col-xl-9 col-lg-8 ">
+                         <div class="col-xl-12 col-lg-12">
                               <div class="card">
                                    <div class="card-header">
                                         <h4 class="card-title">Add Product Photo</h4>
@@ -1877,35 +1870,36 @@
                                              </div>
                                         </div>
                                         <div class="row">
-                                             <div class="col-lg-4">
+                                             <div class="col-lg-3">
                                                   <form>
                                                        <div class="mb-3">
-                                                            <label for="product-brand" class="form-label">Brand</label>
-                                                            <input type="text" id="product-brand" class="form-control" placeholder="Brand Name">
+                                                            <label for="product-author" class="form-label">Author</label>
+                                                            <input type="text" id="product-brand" class="form-control" placeholder="Author Name">
                                                        </div>
                                                   </form>
                                              </div>
-                                             <div class="col-lg-4">
+                                             <div class="col-lg-3">
                                                   <form>
                                                        <div class="mb-3">
-                                                            <label for="product-weight" class="form-label">Weight</label>
-                                                            <input type="text" id="product-weight" class="form-control" placeholder="In gm & kg">
+                                                            <label for="product-weight" class="form-label">Language</label>
+                                                            <input type="text" id="product-weight" class="form-control" placeholder="Language">
                                                        </div>
                                                   </form>
                                              </div>
-                                             <div class="col-lg-4">
+                                             <div class="col-lg-3">
                                                   <form>
-                                                       <label for="gender" class="form-label">Gender</label>
-                                                       <select class="form-control" id="gender" data-choices data-choices-groups data-placeholder="Select Gender">
-                                                            <option value="">Select Gender</option>
-                                                            <option value="Men">Men</option>
-                                                            <option value="Women">Women</option>
-                                                            <option value="Other">Other</option>
-                                                       </select>
+                                                       <label for="gender" class="form-label">Page</label>
+                                                      <input type="number" min="0" id="product-weight" class="form-control" placeholder="Page">
+                                                  </form>
+                                             </div>
+                                             <div class="col-lg-3">
+                                                  <form>
+                                                       <label for="gender" class="form-label">Publish Year</label>
+                                                      <input type="number" min="0" id="product-weight" class="form-control" placeholder="Publish Year">
                                                   </form>
                                              </div>
                                         </div>
-                                        <div class="row mb-4">
+                                        <!-- <div class="row mb-4">
                                              <div class="col-lg-4">
                                                   <div class="mt-3">
                                                        <h5 class="text-dark fw-medium">Size :</h5>
@@ -1961,7 +1955,7 @@
                                                        </div>
                                                   </div>
                                              </div>
-                                        </div>
+                                        </div> -->
                                         <div class="row">
                                              <div class="col-lg-12">
                                                   <div class="mb-3">

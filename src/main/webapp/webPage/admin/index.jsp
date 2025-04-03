@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/webPage/lib/tag.jsp"%>
 <!DOCTYPE html>
-<!-- saved from url=(0042)index.html -->
+<!-- saved from url=(0042)index -->
 <html lang="en" data-bs-theme="light" data-topbar-color="light" data-menu-color="dark" data-menu-size="sm-hover-active">
 
 <head>
@@ -1092,31 +1092,31 @@
                                    <div class="dropdown-menu dropdown-menu-end">
                                         <!-- item-->
                                         <h6 class="dropdown-header">Welcome Gaston!</h6>
-                                        <a class="dropdown-item" href="pages-profile.html">
+                                        <a class="dropdown-item" href="pages-profile">
                                              <i class="bx bx-user-circle text-muted fs-18 align-middle me-1"></i><span
                                                   class="align-middle">Profile</span>
                                         </a>
-                                        <a class="dropdown-item" href="apps-chat.html">
+                                        <a class="dropdown-item" href="apps-chat">
                                              <i class="bx bx-message-dots text-muted fs-18 align-middle me-1"></i><span
                                                   class="align-middle">Messages</span>
                                         </a>
 
-                                        <a class="dropdown-item" href="pages-pricing.html">
+                                        <a class="dropdown-item" href="pages-pricing">
                                              <i class="bx bx-wallet text-muted fs-18 align-middle me-1"></i><span
                                                   class="align-middle">Pricing</span>
                                         </a>
-                                        <a class="dropdown-item" href="pages-faqs.html">
+                                        <a class="dropdown-item" href="pages-faqs">
                                              <i class="bx bx-help-circle text-muted fs-18 align-middle me-1"></i><span
                                                   class="align-middle">Help</span>
                                         </a>
-                                        <a class="dropdown-item" href="auth-lock-screen.html">
+                                        <a class="dropdown-item" href="auth-lock-screen">
                                              <i class="bx bx-lock text-muted fs-18 align-middle me-1"></i><span
                                                   class="align-middle">Lock screen</span>
                                         </a>
 
                                         <div class="dropdown-divider my-1"></div>
 
-                                        <a class="dropdown-item text-danger" href="auth-signin.html">
+                                        <a class="dropdown-item text-danger" href="auth-signin">
                                              <i class="bx bx-log-out fs-18 align-middle me-1"></i><span
                                                   class="align-middle">Logout</span>
                                         </a>
@@ -1230,7 +1230,7 @@
                                                                                                class="d-flex align-items-center gap-2">
                                                                                                <i
                                                                                                     class="bx bxl-figma fs-20 text-red"></i>
-                                                                                               <a href="index.html#!"
+                                                                                               <a href="index#!"
                                                                                                     class="text-dark fw-medium">Concept.fig</a>
                                                                                           </div>
                                                                                      </div>
@@ -1239,7 +1239,7 @@
                                                                                                class="d-flex align-items-center gap-2">
                                                                                                <i
                                                                                                     class="bx bxl-file-doc fs-20 text-success"></i>
-                                                                                               <a href="index.html#!"
+                                                                                               <a href="index#!"
                                                                                                     class="text-dark fw-medium">larkon.docs</a>
                                                                                           </div>
                                                                                      </div>
@@ -1296,11 +1296,11 @@
                                                                                      Completed</span></p>
                                                                            <div
                                                                                 class="d-flex align-items-center gap-3 mt-1 bg-light bg-opacity-50 p-2 rounded-2">
-                                                                                <a href="index.html#!"
+                                                                                <a href="index#!"
                                                                                      class="fw-medium text-dark">UI/UX
                                                                                      Figma Design</a>
                                                                                 <div class="ms-auto">
-                                                                                     <a href="index.html#!"
+                                                                                     <a href="index#!"
                                                                                           class="fw-medium text-primary fs-18"
                                                                                           data-bs-toggle="tooltip"
                                                                                           data-bs-title="Download"
@@ -1342,7 +1342,7 @@
                                                                                 calendar, and pre-order E-commerce &amp;
                                                                                 Marketing pages.</p>
                                                                            <div class="mt-2">
-                                                                                <a href="index.html#!"
+                                                                                <a href="index#!"
                                                                                      class="btn btn-light btn-sm">Download
                                                                                      Zip</a>
                                                                            </div>
@@ -1365,21 +1365,21 @@
                                                                            </h5>
                                                                            <div class="row g-2 mt-2">
                                                                                 <div class="col-lg-4">
-                                                                                     <a href="index.html">
+                                                                                     <a href="admin/home">
                                                                                           <img src="../webPage/admin/assets/images/small/img-6.jpg"
                                                                                                alt=""
                                                                                                class="img-fluid rounded">
                                                                                      </a>
                                                                                 </div>
                                                                                 <div class="col-lg-4">
-                                                                                     <a href="index.html">
+                                                                                     <a href="admin/home">
                                                                                           <img src="../webPage/admin/assets/images/small/img-3.jpg"
                                                                                                alt=""
                                                                                                class="img-fluid rounded">
                                                                                      </a>
                                                                                 </div>
                                                                                 <div class="col-lg-4">
-                                                                                     <a href="index.html">
+                                                                                     <a href="admin/home">
                                                                                           <img src="../webPage/admin/assets/images/small/img-4.jpg"
                                                                                                alt=""
                                                                                                class="img-fluid rounded">
@@ -1477,7 +1477,7 @@
                                                                  </div>
                                                             </div>
                                                        </div>
-                                                       <a href="index.html#!" class="btn btn-outline-dark w-100">View
+                                                       <a href="index#!" class="btn btn-outline-dark w-100">View
                                                             All</a>
                                                   </div>
                                              </div>
@@ -1673,12 +1673,12 @@
           <div class="main-nav">
                <!-- Sidebar Logo -->
                <div class="logo-box">
-                    <a href="index.html" class="logo-dark">
+                    <a href="admin/home" class="logo-dark">
                          <img src="../webPage/admin/assets/images/logo-sm.png" class="logo-sm" alt="logo sm">
                          <img src="../webPage/admin/assets/images/logo-dark.png" class="logo-lg" alt="logo dark">
                     </a>
 
-                    <a href="index.html" class="logo-light">
+                    <a href="admin/home" class="logo-light">
                          <img src="../webPage/admin/assets/images/logo-sm.png" class="logo-sm" alt="logo sm">
                          <img src="../webPage/admin/assets/images/logo-light.png" class="logo-lg" alt="logo light">
                     </a>
@@ -1725,7 +1725,7 @@
                                                   <li class="menu-title">General</li>
 
                                                   <li class="nav-item active">
-                                                       <a class="nav-link active" href="index.html">
+                                                       <a class="nav-link active" href="admin/home">
                                                             <span class="nav-icon">
                                                                  <iconify-icon
                                                                       icon="solar:widget-5-bold-duotone"><template
@@ -1761,7 +1761,7 @@
                                                   </li>
 
                                                   <li class="nav-item">
-                                                       <a class="nav-link menu-arrow" href="index.html#sidebarProducts"
+                                                       <a class="nav-link menu-arrow" href="#sidebarProducts"
                                                             data-bs-toggle="collapse" role="button"
                                                             aria-expanded="false" aria-controls="sidebarProducts">
                                                             <span class="nav-icon">
@@ -1798,23 +1798,16 @@
                                                             <ul class="nav sub-navbar-nav">
                                                                  <li class="sub-nav-item">
                                                                       <a class="sub-nav-link"
-                                                                           href="product-list.html">List</a>
+                                                                           href="product-list">List</a>
+                                                                 </li>
+                                                                
+                                                                 <li class="sub-nav-item">
+                                                                      <a class="sub-nav-link"
+                                                                           href="product-edit">Edit</a>
                                                                  </li>
                                                                  <li class="sub-nav-item">
                                                                       <a class="sub-nav-link"
-                                                                           href="product-grid.html">Grid</a>
-                                                                 </li>
-                                                                 <li class="sub-nav-item">
-                                                                      <a class="sub-nav-link"
-                                                                           href="product-details.html">Details</a>
-                                                                 </li>
-                                                                 <li class="sub-nav-item">
-                                                                      <a class="sub-nav-link"
-                                                                           href="product-edit.html">Edit</a>
-                                                                 </li>
-                                                                 <li class="sub-nav-item">
-                                                                      <a class="sub-nav-link"
-                                                                           href="product-add.html">Create</a>
+                                                                           href="product-add">Create</a>
                                                                  </li>
                                                             </ul>
                                                        </div>
@@ -1825,7 +1818,7 @@
                                                   
 
                                                   <li class="nav-item">
-                                                       <a class="nav-link menu-arrow" href="index.html#sidebarOrders"
+                                                       <a class="nav-link menu-arrow" href="index#sidebarOrders"
                                                             data-bs-toggle="collapse" role="button"
                                                             aria-expanded="false" aria-controls="sidebarOrders">
                                                             <span class="nav-icon">
@@ -1862,19 +1855,19 @@
 
                                                                  <li class="sub-nav-item">
                                                                       <a class="sub-nav-link"
-                                                                           href="orders-list.html">List</a>
+                                                                           href="orders-list">List</a>
                                                                  </li>
                                                                  <li class="sub-nav-item">
                                                                       <a class="sub-nav-link"
-                                                                           href="order-detail.html">Details</a>
+                                                                           href="order-detail">Details</a>
                                                                  </li>
                                                                  <li class="sub-nav-item">
                                                                       <a class="sub-nav-link"
-                                                                           href="order-cart.html">Cart</a>
+                                                                           href="order-cart">Cart</a>
                                                                  </li>
                                                                  <li class="sub-nav-item">
                                                                       <a class="sub-nav-link"
-                                                                           href="order-checkout.html">Check
+                                                                           href="order-checkout">Check
                                                                            Out</a>
                                                                  </li>
                                                             </ul>
@@ -1890,7 +1883,7 @@
                                                   <li class="menu-title mt-2">Users</li>
 
                                                   <li class="nav-item">
-                                                       <a class="nav-link" href="pages-profile.html">
+                                                       <a class="nav-link" href="pages-profile">
                                                             <span class="nav-icon">
                                                                  <iconify-icon
                                                                       icon="solar:chat-square-like-bold-duotone"><template
@@ -1923,7 +1916,7 @@
                                                   </li>
 
                                                   <li class="nav-item">
-                                                       <a class="nav-link menu-arrow" href="index.html#sidebarRoles"
+                                                       <a class="nav-link menu-arrow" href="index#sidebarRoles"
                                                             data-bs-toggle="collapse" role="button"
                                                             aria-expanded="false" aria-controls="sidebarRoles">
                                                             <span class="nav-icon">
@@ -1967,15 +1960,15 @@
                                                                  <ul class="nav sub-navbar-nav">
                                                                       <li class="sub-nav-item">
                                                                            <a class="sub-nav-link"
-                                                                                href="role-list.html">List</a>
+                                                                                href="role-list">List</a>
                                                                       </li>
                                                                       <li class="sub-nav-item">
                                                                            <a class="sub-nav-link"
-                                                                                href="role-edit.html">Edit</a>
+                                                                                href="role-edit">Edit</a>
                                                                       </li>
                                                                       <li class="sub-nav-item">
                                                                            <a class="sub-nav-link"
-                                                                                href="role-add.html">Create</a>
+                                                                                href="role-add">Create</a>
                                                                       </li>
                                                                  </ul>
                                                             </ul>
@@ -1985,7 +1978,7 @@
                                                   
 
                                                   <li class="nav-item">
-                                                       <a class="nav-link menu-arrow" href="index.html#sidebarCustomers"
+                                                       <a class="nav-link menu-arrow" href="index#sidebarCustomers"
                                                             data-bs-toggle="collapse" role="button"
                                                             aria-expanded="false" aria-controls="sidebarCustomers">
                                                             <span class="nav-icon">
@@ -2012,11 +2005,11 @@
 
                                                                  <li class="sub-nav-item">
                                                                       <a class="sub-nav-link"
-                                                                           href="customer-list.html">List</a>
+                                                                           href="customer-list">List</a>
                                                                  </li>
                                                                  <li class="sub-nav-item">
                                                                       <a class="sub-nav-link"
-                                                                           href="customer-detail.html">Details</a>
+                                                                           href="customer-detail">Details</a>
                                                                  </li>
                                                             </ul>
                                                        </div>
@@ -2027,7 +2020,7 @@
                                                   <li class="menu-title mt-2">Other</li>
 
                                                   <li class="nav-item">
-                                                       <a class="nav-link menu-arrow" href="index.html#sidebarCoupons"
+                                                       <a class="nav-link menu-arrow" href="index#sidebarCoupons"
                                                             data-bs-toggle="collapse" role="button"
                                                             aria-expanded="false" aria-controls="sidebarCoupons">
                                                             <span class="nav-icon">
@@ -2052,18 +2045,18 @@
                                                             <ul class="nav sub-navbar-nav">
                                                                  <li class="sub-nav-item">
                                                                       <a class="sub-nav-link"
-                                                                           href="coupons-list.html">List</a>
+                                                                           href="coupons-list">List</a>
                                                                  </li>
                                                                  <li class="sub-nav-item">
                                                                       <a class="sub-nav-link"
-                                                                           href="coupons-add.html">Add</a>
+                                                                           href="coupons-add">Add</a>
                                                                  </li>
                                                             </ul>
                                                        </div>
                                                   </li>
 
                                                   <li class="nav-item">
-                                                       <a class="nav-link" href="pages-review.html">
+                                                       <a class="nav-link" href="pages-review">
                                                             <span class="nav-icon">
                                                                  <iconify-icon
                                                                       icon="solar:chat-square-like-bold-duotone"><template
@@ -2190,7 +2183,7 @@
                                                                       class="bx bxs-up-arrow fs-12"></i> 2.3%</span>
                                                             <span class="text-muted ms-1 fs-12">Last Week</span>
                                                        </div>
-                                                       <a href="index.html#!" class="text-reset fw-semibold fs-12">View
+                                                       <a href="index#!" class="text-reset fw-semibold fs-12">View
                                                             More</a>
                                                   </div>
                                              </div> <!-- end card body -->
@@ -2219,7 +2212,7 @@
                                                                       class="bx bxs-up-arrow fs-12"></i> 8.1%</span>
                                                             <span class="text-muted ms-1 fs-12">Last Month</span>
                                                        </div>
-                                                       <a href="index.html#!" class="text-reset fw-semibold fs-12">View
+                                                       <a href="index#!" class="text-reset fw-semibold fs-12">View
                                                             More</a>
                                                   </div>
                                              </div> <!-- end card body -->
@@ -2248,7 +2241,7 @@
                                                                       class="bx bxs-down-arrow fs-12"></i> 0.3%</span>
                                                             <span class="text-muted ms-1 fs-12">Last Month</span>
                                                        </div>
-                                                       <a href="index.html#!" class="text-reset fw-semibold fs-12">View
+                                                       <a href="index#!" class="text-reset fw-semibold fs-12">View
                                                             More</a>
                                                   </div>
                                              </div> <!-- end card body -->
@@ -2277,7 +2270,7 @@
                                                                       class="bx bxs-down-arrow fs-12"></i> 10.6%</span>
                                                             <span class="text-muted ms-1 fs-12">Last Month</span>
                                                        </div>
-                                                       <a href="index.html#!" class="text-reset fw-semibold fs-12">View
+                                                       <a href="index#!" class="text-reset fw-semibold fs-12">View
                                                             More</a>
                                                   </div>
                                              </div> <!-- end card body -->
@@ -4107,7 +4100,7 @@
                                    <div class="card-header d-flex align-items-center justify-content-between gap-2">
                                         <h4 class="card-title flex-grow-1">Top Pages</h4>
 
-                                        <a href="index.html#" class="btn btn-sm btn-soft-primary">View All</a>
+                                        <a href="index#" class="btn btn-sm btn-soft-primary">View All</a>
                                    </div>
                                    <div class="table-responsive">
                                         <table class="table table-hover table-nowrap table-centered m-0">
@@ -4120,44 +4113,44 @@
                                              </thead>
                                              <tbody>
                                                   <tr>
-                                                       <td class="ps-3"><a href="index.html#"
-                                                                 class="text-muted">larkon/ecommerce.html</a></td>
+                                                       <td class="ps-3"><a href="index#"
+                                                                 class="text-muted">larkon/ecommerce</a></td>
                                                        <td>465 </td>
                                                        <td><span class="badge badge-soft-success">4.4%</span></td>
                                                   </tr>
                                                   <tr>
-                                                       <td class="ps-3"><a href="index.html#"
-                                                                 class="text-muted">larkon/dashboard.html</a></td>
+                                                       <td class="ps-3"><a href="index#"
+                                                                 class="text-muted">larkon/dashboard</a></td>
                                                        <td> 426</td>
                                                        <td><span class="badge badge-soft-danger">20.4%</span></td>
                                                   </tr>
                                                   <tr>
-                                                       <td class="ps-3"><a href="index.html#"
-                                                                 class="text-muted">larkon/chat.html</a></td>
+                                                       <td class="ps-3"><a href="index#"
+                                                                 class="text-muted">larkon/chat</a></td>
                                                        <td>254 </td>
                                                        <td><span class="badge badge-soft-warning">12.25%</span></td>
                                                   </tr>
                                                   <tr>
-                                                       <td class="ps-3"><a href="index.html#"
-                                                                 class="text-muted">larkon/auth-login.html</a></td>
+                                                       <td class="ps-3"><a href="index#"
+                                                                 class="text-muted">larkon/auth-login</a></td>
                                                        <td> 3369</td>
                                                        <td><span class="badge badge-soft-success">5.2%</span></td>
                                                   </tr>
                                                   <tr>
-                                                       <td class="ps-3"><a href="index.html#"
-                                                                 class="text-muted">larkon/email.html</a></td>
+                                                       <td class="ps-3"><a href="index#"
+                                                                 class="text-muted">larkon/email</a></td>
                                                        <td>985 </td>
                                                        <td><span class="badge badge-soft-danger">64.2%</span></td>
                                                   </tr>
                                                   <tr>
-                                                       <td class="ps-3"><a href="index.html#"
-                                                                 class="text-muted">larkon/social.html</a></td>
+                                                       <td class="ps-3"><a href="index#"
+                                                                 class="text-muted">larkon/social</a></td>
                                                        <td>653 </td>
                                                        <td><span class="badge badge-soft-success">2.4%</span></td>
                                                   </tr>
                                                   <tr>
-                                                       <td class="ps-3"><a href="index.html#"
-                                                                 class="text-muted">larkon/blog.html</a></td>
+                                                       <td class="ps-3"><a href="index#"
+                                                                 class="text-muted">larkon/blog</a></td>
                                                        <td>478 </td>
                                                        <td><span class="badge badge-soft-danger">1.4%</span></td>
                                                   </tr>
@@ -4172,7 +4165,7 @@
                                    <div class="card-header d-flex justify-content-between align-items-center">
                                         <h4 class="card-title">Recent Transactions</h4>
                                         <div>
-                                             <a href="index.html#!" class="btn btn-sm btn-primary">
+                                             <a href="index#!" class="btn btn-sm btn-primary">
                                                   <i class="bx bx-plus me-1"></i>Add
                                              </a>
                                         </div>
@@ -4299,7 +4292,7 @@
                                                   Recent Orders
                                              </h4>
 
-                                             <a href="index.html#!" class="btn btn-sm btn-soft-primary">
+                                             <a href="index#!" class="btn btn-sm btn-soft-primary">
                                                   <i class="bx bx-plus me-1"></i>Create Order
                                              </a>
                                         </div>
@@ -4342,7 +4335,7 @@
                                              <tbody>
                                                   <tr>
                                                        <td class="ps-3">
-                                                            <a href="order-detail.html">#RB5625</a>
+                                                            <a href="order-detail">#RB5625</a>
                                                        </td>
                                                        <td>29 April 2024</td>
                                                        <td>
@@ -4350,7 +4343,7 @@
                                                                  alt="product-1(1)" class="img-fluid avatar-sm">
                                                        </td>
                                                        <td>
-                                                            <a href="index.html#!">Anna
+                                                            <a href="index#!">Anna
                                                                  M. Hines</a>
                                                        </td>
                                                        <td>anna.hines@mail.com</td>
@@ -4363,7 +4356,7 @@
                                                   </tr>
                                                   <tr>
                                                        <td class="ps-3">
-                                                            <a href="order-detail.html">#RB9652</a>
+                                                            <a href="order-detail">#RB9652</a>
                                                        </td>
                                                        <td>25 April 2024</td>
                                                        <td>
@@ -4371,7 +4364,7 @@
                                                                  alt="product-4" class="img-fluid avatar-sm">
                                                        </td>
                                                        <td>
-                                                            <a href="index.html#!">Judith
+                                                            <a href="index#!">Judith
                                                                  H. Fritsche</a>
                                                        </td>
                                                        <td>judith.fritsche.com</td>
@@ -4384,7 +4377,7 @@
                                                   </tr>
                                                   <tr>
                                                        <td class="ps-3">
-                                                            <a href="order-detail.html">#RB5984</a>
+                                                            <a href="order-detail">#RB5984</a>
                                                        </td>
                                                        <td>25 April 2024</td>
                                                        <td>
@@ -4392,7 +4385,7 @@
                                                                  alt="product-5" class="img-fluid avatar-sm">
                                                        </td>
                                                        <td>
-                                                            <a href="index.html#!">Peter
+                                                            <a href="index#!">Peter
                                                                  T. Smith</a>
                                                        </td>
                                                        <td>peter.smith@mail.com</td>
@@ -4405,7 +4398,7 @@
                                                   </tr>
                                                   <tr>
                                                        <td class="ps-3">
-                                                            <a href="order-detail.html">#RB3625</a>
+                                                            <a href="order-detail">#RB3625</a>
                                                        </td>
                                                        <td>21 April 2024</td>
                                                        <td>
@@ -4413,7 +4406,7 @@
                                                                  alt="product-6" class="img-fluid avatar-sm">
                                                        </td>
                                                        <td>
-                                                            <a href="index.html#!">Emmanuel
+                                                            <a href="index#!">Emmanuel
                                                                  J. Delcid</a>
                                                        </td>
                                                        <td>
@@ -4428,7 +4421,7 @@
                                                   </tr>
                                                   <tr>
                                                        <td class="ps-3">
-                                                            <a href="order-detail.html">#RB8652</a>
+                                                            <a href="order-detail">#RB8652</a>
                                                        </td>
                                                        <td>18 April 2024</td>
                                                        <td>
@@ -4436,7 +4429,7 @@
                                                                  alt="product-1(2)" class="img-fluid avatar-sm">
                                                        </td>
                                                        <td>
-                                                            <a href="index.html#!">William
+                                                            <a href="index#!">William
                                                                  J. Cook</a>
                                                        </td>
                                                        <td>william.cook@mail.com</td>
@@ -4469,20 +4462,20 @@
                                              <div class="col-sm-auto">
                                                   <ul class="pagination m-0">
                                                        <li class="page-item">
-                                                            <a href="index.html#" class="page-link"><i
+                                                            <a href="index#" class="page-link"><i
                                                                       class="bx bx-left-arrow-alt"></i></a>
                                                        </li>
                                                        <li class="page-item active">
-                                                            <a href="index.html#" class="page-link">1</a>
+                                                            <a href="index#" class="page-link">1</a>
                                                        </li>
                                                        <li class="page-item">
-                                                            <a href="index.html#" class="page-link">2</a>
+                                                            <a href="index#" class="page-link">2</a>
                                                        </li>
                                                        <li class="page-item">
-                                                            <a href="index.html#" class="page-link">3</a>
+                                                            <a href="index#" class="page-link">3</a>
                                                        </li>
                                                        <li class="page-item">
-                                                            <a href="index.html#" class="page-link"><i
+                                                            <a href="index#" class="page-link"><i
                                                                       class="bx bx-right-arrow-alt"></i></a>
                                                        </li>
                                                   </ul>
