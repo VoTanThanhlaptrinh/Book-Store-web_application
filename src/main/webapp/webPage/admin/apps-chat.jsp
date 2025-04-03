@@ -589,14 +589,7 @@
                                                                       <a class="sub-nav-link"
                                                                            href="product-list.html">List</a>
                                                                  </li>
-                                                                 <li class="sub-nav-item">
-                                                                      <a class="sub-nav-link"
-                                                                           href="product-grid.html">Grid</a>
-                                                                 </li>
-                                                                 <li class="sub-nav-item">
-                                                                      <a class="sub-nav-link"
-                                                                           href="product-details.html">Details</a>
-                                                                 </li>
+                                                                
                                                                  <li class="sub-nav-item">
                                                                       <a class="sub-nav-link"
                                                                            href="product-edit.html">Edit</a>

@@ -1434,14 +1434,7 @@
                                                                       <a class="sub-nav-link"
                                                                            href="product-list">List</a>
                                                                  </li>
-                                                                 <li class="sub-nav-item">
-                                                                      <a class="sub-nav-link"
-                                                                           href="product-grid">Grid</a>
-                                                                 </li>
-                                                                 <li class="sub-nav-item">
-                                                                      <a class="sub-nav-link"
-                                                                           href="product-details">Details</a>
-                                                                 </li>
+                                                                 
                                                                  <li class="sub-nav-item">
                                                                       <a class="sub-nav-link"
                                                                            href="product-edit">Edit</a>
@@ -1792,444 +1785,144 @@
                                              <table class="table align-middle mb-0 table-hover table-centered">
                                                   <thead class="bg-light-subtle">
                                                        <tr>
-                                                            <th style="width: 20px;">
+                                                            <!-- <th style="width: 20px;">
                                                                  <div class="form-check ms-1">
                                                                       <input type="checkbox" class="form-check-input" id="customCheck1">
                                                                       <label class="form-check-label" for="customCheck1"></label>
                                                                  </div>
-                                                            </th>
-                                                            <th>Product Name & Size</th>
-                                                            <th>Price</th>
-                                                            <th>Stock</th>
-                                                            <th>Category</th>
-                                                            <th>Rating</th>
-                                                            <th>Action</th>
+                                                            </th> -->
+                                                            <th>Tên sản phẩm</th>
+                                                            <th>Giá</th>
+                                                            <th>Tồn kho</th>
+                                                            <th>Loại</th>
+                                                            <th>Đánh giá</th>
+                                                            <th>Hành động</th>
                                                        </tr>
                                                   </thead>
                                                   <tbody>
+                                                  <c:forEach var="product" items="${products}">
+                                                   
                                                        <tr>
-                                                            <td>
+                                                            <!-- <td>
                                                                  <div class="form-check ms-1">
                                                                       <input type="checkbox" class="form-check-input" id="customCheck2">
                                                                       <label class="form-check-label" for="customCheck2">&nbsp;</label>
                                                                  </div>
-                                                            </td>
+                                                            </td> -->
                                                             <td>
                                                                  <div class="d-flex align-items-center gap-2">
                                                                       <div class="rounded bg-light avatar-md d-flex align-items-center justify-content-center">
-                                                                           <img src="../webPage/admin/assets/images/product/p-1.png" alt="" class="avatar-md">
+                                                                           <img src="../getImage?img_id=${product.getImgId()}" alt="${product.title}" class="avatar-md">
                                                                       </div>
                                                                       <div>
-                                                                           <a href="#!" class="text-dark fw-medium fs-15">Black T-shirt</a>
-                                                                           <p class="text-muted mb-0 mt-1 fs-13"><span>Size : </span>S , M , L , Xl </p>
+                                                                           <a href="#!" class="text-dark fw-medium fs-15">${product.title}</a>
+                                                                           <!-- <p class="text-muted mb-0 mt-1 fs-13"><span>Size : </span>S , M , L , Xl </p> -->
                                                                       </div>
                                                                  </div>
 
                                                             </td>
-                                                            <td>$80.00</td>
+                                                            <td>${product.price} VND</td>
                                                             <td>
-                                                                 <p class="mb-1 text-muted"><span class="text-dark fw-medium">486 Item</span> Left</p>
-                                                                 <p class="mb-0 text-muted">155 Sold</p>
+                                                                 <p class="mb-1 text-muted"><span class="text-dark fw-medium">${product.quantity} sản phẩm</span> sẵn sàng</p>
+                                                                 <p class="mb-0 text-muted">0 đã bán</p>
                                                             </td>
                                                             <td> Fashion</td>
                                                             <td> <span class="badge p-1 bg-light text-dark fs-12 me-1"><i class="bx bxs-star align-text-top fs-14 text-warning me-1"></i> 4.5</span> 55 Review</td>
                                                             <td>
                                                                  <div class="d-flex gap-2">
-                                                                      <a href="#!" class="btn btn-light btn-sm"><iconify-icon icon="solar:eye-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                      <a href="#!" class="btn btn-soft-primary btn-sm"><iconify-icon icon="solar:pen-2-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                      <a href="#!" class="btn btn-soft-danger btn-sm"><iconify-icon icon="solar:trash-bin-minimalistic-2-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                 </div>
+                                                                         <%--  <a href="product-details?productId=${product.productId}"
+                                                                                class="btn btn-light btn-sm"><iconify-icon
+                                                                                     icon="solar:eye-broken"
+                                                                                     class="align-middle fs-18"><template
+                                                                                          shadowrootmode="open">
+                                                                                          <style
+                                                                                               data-style="data-style">
+                                                                                               :host {
+                                                                                                    display: inline-block;
+                                                                                                    vertical-align: 0
+                                                                                               }
+
+                                                                                               span,
+                                                                                               svg {
+                                                                                                    display: block
+                                                                                               }
+                                                                                          </style><svg
+                                                                                               xmlns="http://www.w3.org/2000/svg"
+                                                                                               width="1em" height="1em"
+                                                                                               viewBox="0 0 24 24">
+                                                                                               <g fill="none"
+                                                                                                    stroke="currentColor"
+                                                                                                    stroke-width="1.5">
+                                                                                                    <path stroke-linecap="round"
+                                                                                                         d="M9 4.46A9.8 9.8 0 0 1 12 4c4.182 0 7.028 2.5 8.725 4.704C21.575 9.81 22 10.361 22 12c0 1.64-.425 2.191-1.275 3.296C19.028 17.5 16.182 20 12 20s-7.028-2.5-8.725-4.704C2.425 14.192 2 13.639 2 12c0-1.64.425-2.191 1.275-3.296A14.5 14.5 0 0 1 5 6.821">
+                                                                                                    </path>
+                                                                                                    <path
+                                                                                                         d="M15 12a3 3 0 1 1-6 0a3 3 0 0 1 6 0Z">
+                                                                                                    </path>
+                                                                                               </g>
+                                                                                          </svg>
+                                                                                     </template></iconify-icon></a> --%>
+                                                                           <a href="product-edit?productId=${product.productId}"
+                                                                                class="btn btn-soft-primary btn-sm"><iconify-icon
+                                                                                     icon="solar:pen-2-broken"
+                                                                                     class="align-middle fs-18"><template
+                                                                                          shadowrootmode="open">
+                                                                                          <style
+                                                                                               data-style="data-style">
+                                                                                               :host {
+                                                                                                    display: inline-block;
+                                                                                                    vertical-align: 0
+                                                                                               }
+
+                                                                                               span,
+                                                                                               svg {
+                                                                                                    display: block
+                                                                                               }
+                                                                                          </style><svg
+                                                                                               xmlns="http://www.w3.org/2000/svg"
+                                                                                               width="1em" height="1em"
+                                                                                               viewBox="0 0 24 24">
+                                                                                               <path fill="none"
+                                                                                                    stroke="currentColor"
+                                                                                                    stroke-linecap="round"
+                                                                                                    stroke-width="1.5"
+                                                                                                    d="M4 22h4m12 0h-8m1.888-18.337l.742-.742a3.146 3.146 0 1 1 4.449 4.45l-.742.74m-4.449-4.448s.093 1.576 1.483 2.966s2.966 1.483 2.966 1.483m-4.449-4.45L7.071 10.48c-.462.462-.693.692-.891.947a5.2 5.2 0 0 0-.599.969c-.139.291-.242.601-.449 1.22l-.875 2.626m14.08-8.13L14.93 11.52m-3.41 3.41c-.462.462-.692.692-.947.891q-.451.352-.969.599c-.291.139-.601.242-1.22.448l-2.626.876m0 0l-.641.213a.848.848 0 0 1-1.073-1.073l.213-.641m1.501 1.5l-1.5-1.5">
+                                                                                               </path>
+                                                                                          </svg>
+                                                                                     </template></iconify-icon></a>
+                                                                           <a href="product-delete?productId=${product.productId}"
+                                                                                class="btn btn-soft-danger btn-sm"><iconify-icon
+                                                                                     icon="solar:trash-bin-minimalistic-2-broken"
+                                                                                     class="align-middle fs-18"><template
+                                                                                          shadowrootmode="open">
+                                                                                          <style
+                                                                                               data-style="data-style">
+                                                                                               :host {
+                                                                                                    display: inline-block;
+                                                                                                    vertical-align: 0
+                                                                                               }
+
+                                                                                               span,
+                                                                                               svg {
+                                                                                                    display: block
+                                                                                               }
+                                                                                          </style><svg
+                                                                                               xmlns="http://www.w3.org/2000/svg"
+                                                                                               width="1em" height="1em"
+                                                                                               viewBox="0 0 24 24">
+                                                                                               <path fill="none"
+                                                                                                    stroke="currentColor"
+                                                                                                    stroke-linecap="round"
+                                                                                                    stroke-width="1.5"
+                                                                                                    d="M20.5 6h-17m5.67-2a3.001 3.001 0 0 1 5.66 0m3.544 11.4c-.177 2.654-.266 3.981-1.131 4.79s-2.195.81-4.856.81h-.774c-2.66 0-3.99 0-4.856-.81c-.865-.809-.953-2.136-1.13-4.79l-.46-6.9m13.666 0l-.2 3">
+                                                                                               </path>
+                                                                                          </svg>
+                                                                                     </template></iconify-icon></a>
+                                                                      </div>
                                                             </td>
                                                        </tr>
-
-                                                       <tr>
-                                                            <td>
-                                                                 <div class="form-check ms-1">
-                                                                      <input type="checkbox" class="form-check-input" id="customCheck2">
-                                                                      <label class="form-check-label" for="customCheck2">&nbsp;</label>
-                                                                 </div>
-                                                            </td>
-                                                            <td>
-                                                                 <div class="d-flex align-items-center gap-2">
-                                                                      <div class="rounded bg-light avatar-md d-flex align-items-center justify-content-center">
-                                                                           <img src="../webPage/admin/assets/images/product/p-2.png" alt="" class="avatar-md">
-                                                                      </div>
-                                                                      <div>
-                                                                           <a href="#!" class="text-dark fw-medium fs-15">Olive Green Leather Bag</a>
-                                                                           <p class="text-muted mb-0 mt-1 fs-13"><span>Size : </span>S , M </p>
-                                                                      </div>
-                                                                 </div>
-
-                                                            </td>
-                                                            <td>$136.00</td>
-                                                            <td>
-                                                                 <p class="mb-1 text-muted"><span class="text-dark fw-medium">784 Item</span> Left</p>
-                                                                 <p class="mb-0 text-muted">674 Sold</p>
-                                                            </td>
-                                                            <td> Hand Bag</td>
-                                                            <td> <span class="badge p-1 bg-light text-dark fs-12 me-1"><i class="bx bxs-star align-text-top fs-14 text-warning me-1"></i> 4.1</span> 143 Review</td>
-                                                            <td>
-                                                                 <div class="d-flex gap-2">
-                                                                      <a href="#!" class="btn btn-light btn-sm"><iconify-icon icon="solar:eye-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                      <a href="#!" class="btn btn-soft-primary btn-sm"><iconify-icon icon="solar:pen-2-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                      <a href="#!" class="btn btn-soft-danger btn-sm"><iconify-icon icon="solar:trash-bin-minimalistic-2-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                 </div>
-                                                            </td>
-                                                       </tr>
-                                                       <tr>
-                                                            <td>
-                                                                 <div class="form-check ms-1">
-                                                                      <input type="checkbox" class="form-check-input" id="customCheck2">
-                                                                      <label class="form-check-label" for="customCheck2">&nbsp;</label>
-                                                                 </div>
-                                                            </td>
-                                                            <td>
-                                                                 <div class="d-flex align-items-center gap-2">
-                                                                      <div class="rounded bg-light avatar-md d-flex align-items-center justify-content-center">
-                                                                           <img src="../webPage/admin/assets/images/product/p-3.png" alt="" class="avatar-md">
-                                                                      </div>
-                                                                      <div>
-                                                                           <a href="#!" class="text-dark fw-medium fs-15">Women Golden Dress</a>
-                                                                           <p class="text-muted mb-0 mt-1 fs-13"><span>Size : </span>S , M </p>
-                                                                      </div>
-                                                                 </div>
-
-                                                            </td>
-                                                            <td>$219.00</td>
-                                                            <td>
-                                                                 <p class="mb-1 text-muted"><span class="text-dark fw-medium">769 Item</span> Left</p>
-                                                                 <p class="mb-0 text-muted">180 Sold</p>
-                                                            </td>
-                                                            <td> Fashion</td>
-                                                            <td> <span class="badge p-1 bg-light text-dark fs-12 me-1"><i class="bx bxs-star align-text-top fs-14 text-warning me-1"></i> 4.4</span> 174 Review</td>
-                                                            <td>
-                                                                 <div class="d-flex gap-2">
-                                                                      <a href="#!" class="btn btn-light btn-sm"><iconify-icon icon="solar:eye-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                      <a href="#!" class="btn btn-soft-primary btn-sm"><iconify-icon icon="solar:pen-2-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                      <a href="#!" class="btn btn-soft-danger btn-sm"><iconify-icon icon="solar:trash-bin-minimalistic-2-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                 </div>
-                                                            </td>
-                                                       </tr>
-
-                                                       <tr>
-                                                            <td>
-                                                                 <div class="form-check ms-1">
-                                                                      <input type="checkbox" class="form-check-input" id="customCheck2">
-                                                                      <label class="form-check-label" for="customCheck2">&nbsp;</label>
-                                                                 </div>
-                                                            </td>
-                                                            <td>
-                                                                 <div class="d-flex align-items-center gap-2">
-                                                                      <div class="rounded bg-light avatar-md d-flex align-items-center justify-content-center">
-                                                                           <img src="../webPage/admin/assets/images/product/p-4.png" alt="" class="avatar-md">
-                                                                      </div>
-                                                                      <div>
-                                                                           <a href="#!" class="text-dark fw-medium fs-15">Gray Cap For Men</a>
-                                                                           <p class="text-muted mb-0 mt-1 fs-13"><span>Size : </span>S , M , L</p>
-                                                                      </div>
-                                                                 </div>
-
-                                                            </td>
-                                                            <td>$76.00</td>
-                                                            <td>
-                                                                 <p class="mb-1 text-muted"><span class="text-dark fw-medium">571 Item</span> Left</p>
-                                                                 <p class="mb-0 text-muted">87 Sold</p>
-                                                            </td>
-                                                            <td> Cap</td>
-                                                            <td> <span class="badge p-1 bg-light text-dark fs-12 me-1"><i class="bx bxs-star align-text-top fs-14 text-warning me-1"></i> 4.2</span> 23 Review</td>
-                                                            <td>
-                                                                 <div class="d-flex gap-2">
-                                                                      <a href="#!" class="btn btn-light btn-sm"><iconify-icon icon="solar:eye-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                      <a href="#!" class="btn btn-soft-primary btn-sm"><iconify-icon icon="solar:pen-2-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                      <a href="#!" class="btn btn-soft-danger btn-sm"><iconify-icon icon="solar:trash-bin-minimalistic-2-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                 </div>
-                                                            </td>
-                                                       </tr>
-
-
-                                                       <tr>
-                                                            <td>
-                                                                 <div class="form-check ms-1">
-                                                                      <input type="checkbox" class="form-check-input" id="customCheck2">
-                                                                      <label class="form-check-label" for="customCheck2">&nbsp;</label>
-                                                                 </div>
-                                                            </td>
-                                                            <td>
-                                                                 <div class="d-flex align-items-center gap-2">
-                                                                      <div class="rounded bg-light avatar-md d-flex align-items-center justify-content-center">
-                                                                           <img src="../webPage/admin/assets/images/product/p-5.png" alt="" class="avatar-md">
-                                                                      </div>
-                                                                      <div>
-                                                                           <a href="#!" class="text-dark fw-medium fs-15">Dark Green Cargo Pent</a>
-                                                                           <p class="text-muted mb-0 mt-1 fs-13"><span>Size : </span>S , M , L , Xl </p>
-                                                                      </div>
-                                                                 </div>
-
-                                                            </td>
-                                                            <td>$110.00</td>
-                                                            <td>
-                                                                 <p class="mb-1 text-muted"><span class="text-dark fw-medium">241 Item</span> Left</p>
-                                                                 <p class="mb-0 text-muted">342 Sold</p>
-                                                            </td>
-                                                            <td> Fashion</td>
-                                                            <td> <span class="badge p-1 bg-light text-dark fs-12 me-1"><i class="bx bxs-star align-text-top fs-14 text-warning me-1"></i> 4.4</span> 109 Review</td>
-                                                            <td>
-                                                                 <div class="d-flex gap-2">
-                                                                      <a href="#!" class="btn btn-light btn-sm"><iconify-icon icon="solar:eye-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                      <a href="#!" class="btn btn-soft-primary btn-sm"><iconify-icon icon="solar:pen-2-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                      <a href="#!" class="btn btn-soft-danger btn-sm"><iconify-icon icon="solar:trash-bin-minimalistic-2-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                 </div>
-                                                            </td>
-                                                       </tr>
-
-
-                                                       <tr>
-                                                            <td>
-                                                                 <div class="form-check ms-1">
-                                                                      <input type="checkbox" class="form-check-input" id="customCheck2">
-                                                                      <label class="form-check-label" for="customCheck2">&nbsp;</label>
-                                                                 </div>
-                                                            </td>
-                                                            <td>
-                                                                 <div class="d-flex align-items-center gap-2">
-                                                                      <div class="rounded bg-light avatar-md d-flex align-items-center justify-content-center">
-                                                                           <img src="../webPage/admin/assets/images/product/p-6.png" alt="" class="avatar-md">
-                                                                      </div>
-                                                                      <div>
-                                                                           <a href="#!" class="text-dark fw-medium fs-15">Orange Multi Color Headphone</a>
-                                                                           <p class="text-muted mb-0 mt-1 fs-13"><span>Size : </span>S , M </p>
-                                                                      </div>
-                                                                 </div>
-
-                                                            </td>
-                                                            <td>$231.00</td>
-                                                            <td>
-                                                                 <p class="mb-1 text-muted"><span class="text-dark fw-medium">821 Item</span> Left</p>
-                                                                 <p class="mb-0 text-muted">231 Sold</p>
-                                                            </td>
-                                                            <td> Electronics</td>
-                                                            <td> <span class="badge p-1 bg-light text-dark fs-12 me-1"><i class="bx bxs-star align-text-top fs-14 text-warning me-1"></i> 4.2</span> 200 Review</td>
-                                                            <td>
-                                                                 <div class="d-flex gap-2">
-                                                                      <a href="#!" class="btn btn-light btn-sm"><iconify-icon icon="solar:eye-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                      <a href="#!" class="btn btn-soft-primary btn-sm"><iconify-icon icon="solar:pen-2-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                      <a href="#!" class="btn btn-soft-danger btn-sm"><iconify-icon icon="solar:trash-bin-minimalistic-2-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                 </div>
-                                                            </td>
-                                                       </tr>
-
-
-                                                       <tr>
-                                                            <td>
-                                                                 <div class="form-check ms-1">
-                                                                      <input type="checkbox" class="form-check-input" id="customCheck2">
-                                                                      <label class="form-check-label" for="customCheck2">&nbsp;</label>
-                                                                 </div>
-                                                            </td>
-                                                            <td>
-                                                                 <div class="d-flex align-items-center gap-2">
-                                                                      <div class="rounded bg-light avatar-md d-flex align-items-center justify-content-center">
-                                                                           <img src="../webPage/admin/assets/images/product/p-7.png" alt="" class="avatar-md">
-                                                                      </div>
-                                                                      <div>
-                                                                           <a href="#!" class="text-dark fw-medium fs-15">Kid's Yellow Shoes</a>
-                                                                           <p class="text-muted mb-0 mt-1 fs-13"><span>Size : </span>18 , 19 , 20 , 21</p>
-                                                                      </div>
-                                                                 </div>
-
-                                                            </td>
-                                                            <td>$89.00</td>
-                                                            <td>
-                                                                 <p class="mb-1 text-muted"><span class="text-dark fw-medium">321 Item</span> Left</p>
-                                                                 <p class="mb-0 text-muted">681 Sold</p>
-                                                            </td>
-                                                            <td> Shoes</td>
-                                                            <td> <span class="badge p-1 bg-light text-dark fs-12 me-1"><i class="bx bxs-star align-text-top fs-14 text-warning me-1"></i> 4.5</span> 321 Review</td>
-                                                            <td>
-                                                                 <div class="d-flex gap-2">
-                                                                      <a href="#!" class="btn btn-light btn-sm"><iconify-icon icon="solar:eye-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                      <a href="#!" class="btn btn-soft-primary btn-sm"><iconify-icon icon="solar:pen-2-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                      <a href="#!" class="btn btn-soft-danger btn-sm"><iconify-icon icon="solar:trash-bin-minimalistic-2-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                 </div>
-                                                            </td>
-                                                       </tr>
-
-                                                       <tr>
-                                                            <td>
-                                                                 <div class="form-check ms-1">
-                                                                      <input type="checkbox" class="form-check-input" id="customCheck2">
-                                                                      <label class="form-check-label" for="customCheck2">&nbsp;</label>
-                                                                 </div>
-                                                            </td>
-                                                            <td>
-                                                                 <div class="d-flex align-items-center gap-2">
-                                                                      <div class="rounded bg-light avatar-md d-flex align-items-center justify-content-center">
-                                                                           <img src="../webPage/admin/assets/images/product/p-8.png" alt="" class="avatar-md">
-                                                                      </div>
-                                                                      <div>
-                                                                           <a href="#!" class="text-dark fw-medium fs-15">Men Dark Brown Wallet</a>
-                                                                           <p class="text-muted mb-0 mt-1 fs-13"><span>Size : </span>S , M</p>
-                                                                      </div>
-                                                                 </div>
-
-                                                            </td>
-                                                            <td>$132.00</td>
-                                                            <td>
-                                                                 <p class="mb-1 text-muted"><span class="text-dark fw-medium">190 Item</span> Left</p>
-                                                                 <p class="mb-0 text-muted">212 Sold</p>
-                                                            </td>
-                                                            <td> Wallet</td>
-                                                            <td> <span class="badge p-1 bg-light text-dark fs-12 me-1"><i class="bx bxs-star align-text-top fs-14 text-warning me-1"></i> 4.1</span> 190 Review</td>
-                                                            <td>
-                                                                 <div class="d-flex gap-2">
-                                                                      <a href="#!" class="btn btn-light btn-sm"><iconify-icon icon="solar:eye-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                      <a href="#!" class="btn btn-soft-primary btn-sm"><iconify-icon icon="solar:pen-2-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                      <a href="#!" class="btn btn-soft-danger btn-sm"><iconify-icon icon="solar:trash-bin-minimalistic-2-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                 </div>
-                                                            </td>
-                                                       </tr>
-
-                                                       <tr>
-                                                            <td>
-                                                                 <div class="form-check ms-1">
-                                                                      <input type="checkbox" class="form-check-input" id="customCheck2">
-                                                                      <label class="form-check-label" for="customCheck2">&nbsp;</label>
-                                                                 </div>
-                                                            </td>
-                                                            <td>
-                                                                 <div class="d-flex align-items-center gap-2">
-                                                                      <div class="rounded bg-light avatar-md d-flex align-items-center justify-content-center">
-                                                                           <img src="../webPage/admin/assets/images/product/p-9.png" alt="" class="avatar-md">
-                                                                      </div>
-                                                                      <div>
-                                                                           <a href="#!" class="text-dark fw-medium fs-15">Sky Blue Sunglass</a>
-                                                                           <p class="text-muted mb-0 mt-1 fs-13"><span>Size : </span>S , M </p>
-                                                                      </div>
-                                                                 </div>
-
-                                                            </td>
-                                                            <td>$77.00</td>
-                                                            <td>
-                                                                 <p class="mb-1 text-muted"><span class="text-dark fw-medium">784 Item</span> Left</p>
-                                                                 <p class="mb-0 text-muted">443 Sold</p>
-                                                            </td>
-                                                            <td> Sunglass</td>
-                                                            <td> <span class="badge p-1 bg-light text-dark fs-12 me-1"><i class="bx bxs-star align-text-top fs-14 text-warning me-1"></i> 3.5</span> 298 Review</td>
-                                                            <td>
-                                                                 <div class="d-flex gap-2">
-                                                                      <a href="#!" class="btn btn-light btn-sm"><iconify-icon icon="solar:eye-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                      <a href="#!" class="btn btn-soft-primary btn-sm"><iconify-icon icon="solar:pen-2-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                      <a href="#!" class="btn btn-soft-danger btn-sm"><iconify-icon icon="solar:trash-bin-minimalistic-2-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                 </div>
-                                                            </td>
-                                                       </tr>
-
-                                                       <tr>
-                                                            <td>
-                                                                 <div class="form-check ms-1">
-                                                                      <input type="checkbox" class="form-check-input" id="customCheck2">
-                                                                      <label class="form-check-label" for="customCheck2">&nbsp;</label>
-                                                                 </div>
-                                                            </td>
-                                                            <td>
-                                                                 <div class="d-flex align-items-center gap-2">
-                                                                      <div class="rounded bg-light avatar-md d-flex align-items-center justify-content-center">
-                                                                           <img src="../webPage/admin/assets/images/product/p-10.png" alt="" class="avatar-md">
-                                                                      </div>
-                                                                      <div>
-                                                                           <a href="#!" class="text-dark fw-medium fs-15">Kid's Yellow T-shirt</a>
-                                                                           <p class="text-muted mb-0 mt-1 fs-13"><span>Size : </span>S </p>
-                                                                      </div>
-                                                                 </div>
-
-                                                            </td>
-                                                            <td>$110.00</td>
-                                                            <td>
-                                                                 <p class="mb-1 text-muted"><span class="text-dark fw-medium">650 Item</span> Left</p>
-                                                                 <p class="mb-0 text-muted">365 Sold</p>
-                                                            </td>
-                                                            <td> Fashion</td>
-                                                            <td> <span class="badge p-1 bg-light text-dark fs-12 me-1"><i class="bx bxs-star align-text-top fs-14 text-warning me-1"></i> 4.1</span> 156 Review</td>
-                                                            <td>
-                                                                 <div class="d-flex gap-2">
-                                                                      <a href="#!" class="btn btn-light btn-sm"><iconify-icon icon="solar:eye-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                      <a href="#!" class="btn btn-soft-primary btn-sm"><iconify-icon icon="solar:pen-2-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                      <a href="#!" class="btn btn-soft-danger btn-sm"><iconify-icon icon="solar:trash-bin-minimalistic-2-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                 </div>
-                                                            </td>
-                                                       </tr>
-
-                                                       <tr>
-                                                            <td>
-                                                                 <div class="form-check ms-1">
-                                                                      <input type="checkbox" class="form-check-input" id="customCheck2">
-                                                                      <label class="form-check-label" for="customCheck2">&nbsp;</label>
-                                                                 </div>
-                                                            </td>
-                                                            <td>
-                                                                 <div class="d-flex align-items-center gap-2">
-                                                                      <div class="rounded bg-light avatar-md d-flex align-items-center justify-content-center">
-                                                                           <img src="../webPage/admin/assets/images/product/p-11.png" alt="" class="avatar-md">
-                                                                      </div>
-                                                                      <div>
-                                                                           <a href="#!" class="text-dark fw-medium fs-15">White Rubber Band Smart Watch </a>
-                                                                           <p class="text-muted mb-0 mt-1 fs-13"><span>Size : </span>S , M </p>
-                                                                      </div>
-                                                                 </div>
-
-                                                            </td>
-                                                            <td>$77.00</td>
-                                                            <td>
-                                                                 <p class="mb-1 text-muted"><span class="text-dark fw-medium">98 Item</span> Left</p>
-                                                                 <p class="mb-0 text-muted">241 Sold</p>
-                                                            </td>
-                                                            <td> Electronics</td>
-                                                            <td> <span class="badge p-1 bg-light text-dark fs-12 me-1"><i class="bx bxs-star align-text-top fs-14 text-warning me-1"></i> 3.4</span> 201 Review</td>
-                                                            <td>
-                                                                 <div class="d-flex gap-2">
-                                                                      <a href="#!" class="btn btn-light btn-sm"><iconify-icon icon="solar:eye-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                      <a href="#!" class="btn btn-soft-primary btn-sm"><iconify-icon icon="solar:pen-2-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                      <a href="#!" class="btn btn-soft-danger btn-sm"><iconify-icon icon="solar:trash-bin-minimalistic-2-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                 </div>
-                                                            </td>
-                                                       </tr>
-
-                                                       <tr>
-                                                            <td>
-                                                                 <div class="form-check ms-1">
-                                                                      <input type="checkbox" class="form-check-input" id="customCheck2">
-                                                                      <label class="form-check-label" for="customCheck2">&nbsp;</label>
-                                                                 </div>
-                                                            </td>
-                                                            <td>
-                                                                 <div class="d-flex align-items-center gap-2">
-                                                                      <div class="rounded bg-light avatar-md d-flex align-items-center justify-content-center">
-                                                                           <img src="../webPage/admin/assets/images/product/p-12.png" alt="" class="avatar-md">
-                                                                      </div>
-                                                                      <div>
-                                                                           <a href="#!" class="text-dark fw-medium fs-15">Men Brown Leather Shoes </a>
-                                                                           <p class="text-muted mb-0 mt-1 fs-13"><span>Size : </span>40 , 41 , 42 , 43 </p>
-                                                                      </div>
-                                                                 </div>
-
-                                                            </td>
-                                                            <td>$222.00</td>
-                                                            <td>
-                                                                 <p class="mb-1 text-muted"><span class="text-dark fw-medium">176 Item</span> Left</p>
-                                                                 <p class="mb-0 text-muted">658 Sold</p>
-                                                            </td>
-                                                            <td> Shoes</td>
-                                                            <td> <span class="badge p-1 bg-light text-dark fs-12 me-1"><i class="bx bxs-star align-text-top fs-14 text-warning me-1"></i> 4.1</span> 370 Review</td>
-                                                            <td>
-                                                                 <div class="d-flex gap-2">
-                                                                      <a href="#!" class="btn btn-light btn-sm"><iconify-icon icon="solar:eye-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                      <a href="#!" class="btn btn-soft-primary btn-sm"><iconify-icon icon="solar:pen-2-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                      <a href="#!" class="btn btn-soft-danger btn-sm"><iconify-icon icon="solar:trash-bin-minimalistic-2-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                                 </div>
-                                                            </td>
-                                                       </tr>
-
-
+												</c:forEach>
+                                                                                   
                                                   </tbody>
                                              </table>
                                         </div>
@@ -2238,17 +1931,94 @@
                                    <div class="card-footer border-top">
                                         <nav aria-label="Page navigation example">
                                              <ul class="pagination justify-content-end mb-0">
-                                                  <li class="page-item"><a class="page-link" href="javascript:void(0);">Previous</a></li>
-                                                  <li class="page-item active"><a class="page-link" href="javascript:void(0);">1</a></li>
-                                                  <li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
-                                                  <li class="page-item"><a class="page-link" href="javascript:void(0);">3</a></li>
-                                                  <li class="page-item"><a class="page-link" href="javascript:void(0);">Next</a></li>
-                                             </ul>
+											    <!-- Previous -->
+											    <c:choose>
+											        <c:when test="${currentPage > 1}">
+											            <li class="page-item">
+											                <a class="page-link" href="${pageContext.request.contextPath}/admin/product-list?pageNum=${currentPage - 1}">Previous</a>
+											            </li>
+											        </c:when>
+											        <c:otherwise>
+											            <li class="page-item disabled">
+											                <a class="page-link" href="#">Previous</a>
+											            </li>
+											        </c:otherwise>
+											    </c:choose>
+											
+											    <!-- Page Numbers (Hiển thị 5 trang gần nhất) -->
+											    <c:set var="startPage" value="${currentPage - 2}" />
+											    <c:set var="endPage" value="${currentPage + 2}" />
+											
+											    <!-- Điều chỉnh startPage và endPage để không vượt quá giới hạn -->
+											    <c:if test="${startPage < 1}">
+											        <c:set var="startPage" value="1" />
+											        <c:set var="endPage" value="${startPage + 4}" />
+											    </c:if>
+											    <c:if test="${endPage > totalPages}">
+											        <c:set var="endPage" value="${totalPages}" />
+											        <c:set var="startPage" value="${endPage - 4 > 0 ? endPage - 4 : 1}" />
+											    </c:if>
+											    <c:if test="${endPage - startPage + 1 < 5 && totalPages >= 5}">
+											        <c:set var="startPage" value="${endPage - 4}" />
+											        <c:if test="${startPage < 1}">
+											            <c:set var="startPage" value="1" />
+											        </c:if>
+											    </c:if>
+											
+											    <!-- Hiển thị dấu "..." nếu không phải trang đầu -->
+											    <c:if test="${startPage > 1}">
+											        <li class="page-item">
+											            <a class="page-link" href="${pageContext.request.contextPath}/admin/product-list?pageNum=1">1</a>
+											        </li>
+											        <li class="page-item disabled">
+											            <span class="page-link">...</span>
+											        </li>
+											    </c:if>
+											
+											    <!-- Hiển thị các trang trong khoảng startPage đến endPage -->
+											    <c:forEach begin="${startPage}" end="${endPage}" var="i">
+											        <c:choose>
+											            <c:when test="${i == currentPage}">
+											                <li class="page-item active">
+											                    <a class="page-link" href="#">${i}</a>
+											                </li>
+											            </c:when>
+											            <c:otherwise>
+											                <li class="page-item">
+											                    <a class="page-link" href="${pageContext.request.contextPath}/admin/product-list?pageNum=${i}">${i}</a>
+											                </li>
+											            </c:otherwise>
+											        </c:choose>
+											    </c:forEach>
+											
+											    <!-- Hiển thị dấu "..." nếu không phải trang cuối -->
+											    <c:if test="${endPage < totalPages}">
+											        <li class="page-item disabled">
+											            <span class="page-link">...</span>
+											        </li>
+											        <li class="page-item">
+											            <a class="page-link" href="${pageContext.request.contextPath}/admin/product-list?pageNum=${totalPages}">${totalPages}</a>
+											        </li>
+											    </c:if>
+											
+											    <!-- Next -->
+											    <c:choose>
+											        <c:when test="${currentPage < totalPages}">
+											            <li class="page-item">
+											                <a class="page-link" href="${pageContext.request.contextPath}/admin/product-list?pageNum=${currentPage + 1}">Next</a>
+											            </li>
+											        </c:when>
+											        <c:otherwise>
+											            <li class="page-item disabled">
+											                <a class="page-link" href="#">Next</a>
+											            </li>
+											        </c:otherwise>
+											    </c:choose>
+											</ul>
                                         </nav>
                                    </div>
                               </div>
                          </div>
-
                     </div>
 
                </div>

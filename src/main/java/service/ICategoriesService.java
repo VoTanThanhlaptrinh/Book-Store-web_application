@@ -12,4 +12,6 @@ public interface ICategoriesService {
 	void saveProduct(Product p);
 	
 	List<Product> getProducts();
+
+	int getTotalProducts();
 }

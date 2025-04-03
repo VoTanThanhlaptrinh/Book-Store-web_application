@@ -1434,14 +1434,7 @@
                                                                       <a class="sub-nav-link"
                                                                            href="product-list">List</a>
                                                                  </li>
-                                                                 <li class="sub-nav-item">
-                                                                      <a class="sub-nav-link"
-                                                                           href="product-grid">Grid</a>
-                                                                 </li>
-                                                                 <li class="sub-nav-item">
-                                                                      <a class="sub-nav-link"
-                                                                           href="product-details">Details</a>
-                                                                 </li>
+                                                                
                                                                  <li class="sub-nav-item">
                                                                       <a class="sub-nav-link"
                                                                            href="product-edit">Edit</a>
@@ -1764,8 +1757,8 @@
                <div class="container-xxl">
 
                     <div class="row">
-                         <div class="col-xl-3 col-lg-4">
-                              <div class="card">
+                         <!--<div class="col-xl-3 col-lg-4">
+                               <div class="card">
                                    <div class="card-body">
                                         <img src="../webPage/admin/assets/images/product/p-1.png" alt="" class="img-fluid rounded bg-light">
                                         <div class="mt-3">
@@ -1820,10 +1813,10 @@
                                              </div>
                                         </div>
                                    </div>
-                              </div>
-                         </div>
+                              </div> 
+                         </div>-->
 
-                         <div class="col-xl-9 col-lg-8 ">
+                         <div class="col-xl-12 col-lg-12">
                               <div class="card">
                                    <div class="card-header">
                                         <h4 class="card-title">Add Product Photo</h4>
@@ -1877,35 +1870,36 @@
                                              </div>
                                         </div>
                                         <div class="row">
-                                             <div class="col-lg-4">
+                                             <div class="col-lg-3">
                                                   <form>
                                                        <div class="mb-3">
-                                                            <label for="product-brand" class="form-label">Brand</label>
-                                                            <input type="text" id="product-brand" class="form-control" placeholder="Brand Name">
+                                                            <label for="product-author" class="form-label">Author</label>
+                                                            <input type="text" id="product-brand" class="form-control" placeholder="Author Name">
                                                        </div>
                                                   </form>
                                              </div>
-                                             <div class="col-lg-4">
+                                             <div class="col-lg-3">
                                                   <form>
                                                        <div class="mb-3">
-                                                            <label for="product-weight" class="form-label">Weight</label>
-                                                            <input type="text" id="product-weight" class="form-control" placeholder="In gm & kg">
+                                                            <label for="product-weight" class="form-label">Language</label>
+                                                            <input type="text" id="product-weight" class="form-control" placeholder="Language">
                                                        </div>
                                                   </form>
                                              </div>
-                                             <div class="col-lg-4">
+                                             <div class="col-lg-3">
                                                   <form>
-                                                       <label for="gender" class="form-label">Gender</label>
-                                                       <select class="form-control" id="gender" data-choices data-choices-groups data-placeholder="Select Gender">
-                                                            <option value="">Select Gender</option>
-                                                            <option value="Men">Men</option>
-                                                            <option value="Women">Women</option>
-                                                            <option value="Other">Other</option>
-                                                       </select>
+                                                       <label for="gender" class="form-label">Page</label>
+                                                      <input type="number" min="0" id="product-weight" class="form-control" placeholder="Page">
+                                                  </form>
+                                             </div>
+                                             <div class="col-lg-3">
+                                                  <form>
+                                                       <label for="gender" class="form-label">Publish Year</label>
+                                                      <input type="number" min="0" id="product-weight" class="form-control" placeholder="Publish Year">
                                                   </form>
                                              </div>
                                         </div>
-                                        <div class="row mb-4">
+                                        <!-- <div class="row mb-4">
                                              <div class="col-lg-4">
                                                   <div class="mt-3">
                                                        <h5 class="text-dark fw-medium">Size :</h5>
@@ -1961,7 +1955,7 @@
                                                        </div>
                                                   </div>
                                              </div>
-                                        </div>
+                                        </div> -->
                                         <div class="row">
                                              <div class="col-lg-12">
                                                   <div class="mb-3">

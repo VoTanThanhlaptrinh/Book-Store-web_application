@@ -800,14 +800,7 @@
                                                                       <a class="sub-nav-link"
                                                                            href="product-list">List</a>
                                                                  </li>
-                                                                 <li class="sub-nav-item">
-                                                                      <a class="sub-nav-link"
-                                                                           href="product-grid">Grid</a>
-                                                                 </li>
-                                                                 <li class="sub-nav-item">
-                                                                      <a class="sub-nav-link"
-                                                                           href="product-details">Details</a>
-                                                                 </li>
+                                                                
                                                                  <li class="sub-nav-item">
                                                                       <a class="sub-nav-link"
                                                                            href="product-edit">Edit</a>
