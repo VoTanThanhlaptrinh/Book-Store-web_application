@@ -14,4 +14,6 @@ public interface ICategoriesService {
 	List<Product> getProducts();
 
 	int getTotalProducts();
+
+	void updateProduct(Product product);
 }

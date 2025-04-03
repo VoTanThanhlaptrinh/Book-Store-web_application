@@ -1506,15 +1506,15 @@ span, svg {
 														icon="solar:widget-5-bold-duotone">
 													<template shadowrootmode="open">
 														<style data-style="data-style">
-:host {
-	display: inline-block;
-	vertical-align: 0
-}
-
-span, svg {
-	display: block
-}
-</style>
+															:host {
+																display: inline-block;
+																vertical-align: 0
+															}
+															
+															span, svg {
+																display: block
+															}
+															</style>
 														<svg xmlns="http://www.w3.org/2000/svg" width="1em"
 															height="1em" viewBox="0 0 24 24">
                                                                                 <path
@@ -1853,7 +1853,7 @@ span, svg {
 								<img src="../getImage?img_id=${product.getImgId()}"
 									alt="${product.title}" class="img-fluid rounded bg-light">
 								<div class="mt-3">
-									<h4>${product.title}<span class="fs-14 text-muted ms-1">(Fashion)</span>
+									<h4>${product.title}<span class="fs-14 text-muted ms-1"></span>
 									</h4>
 									<h5 class="text-dark fw-medium mt-3">Price :</h5>
 									<h4
@@ -1899,20 +1899,19 @@ span, svg {
 							</div>
 						</div>
 					</div>
+					<form class="dropzone" id="myAwesomeDropzone"
+						data-plugin="dropzone" data-previews-container="#file-previews"
+						data-upload-preview-template="#uploadPreviewTemplate">
+						<div class="col-xl-9 col-lg-8 ">
+							<div class="card">
+								<div class="card-header">
+									<h4 class="card-title">Add Product Photo</h4>
+								</div>
+								<div class="card-body">
+									<!-- File Upload -->
 
-					<div class="col-xl-9 col-lg-8 ">
-						<div class="card">
-							<div class="card-header">
-								<h4 class="card-title">Add Product Photo</h4>
-							</div>
-							<div class="card-body">
-								<!-- File Upload -->
-								<form action="/" method="post" class="dropzone"
-									id="myAwesomeDropzone" data-plugin="dropzone"
-									data-previews-container="#file-previews"
-									data-upload-preview-template="#uploadPreviewTemplate">
 									<div class="fallback">
-										<input name="file" type="file" multiple />
+										<input name="file" type="file" multiple id="file" required />
 									</div>
 									<div class="dz-message needsclick">
 										<i class="bx bx-cloud-upload fs-48 text-primary"></i>
@@ -1923,81 +1922,76 @@ span, svg {
 										<span class="text-muted fs-13"> 1600 x 1200 (4:3)
 											recommended. PNG, JPG and GIF files are allowed </span>
 									</div>
-								</form>
+								</div>
 							</div>
-						</div>
-						<div class="card">
-							<div class="card-header">
-								<h4 class="card-title">Product Information</h4>
-							</div>
-							<div class="card-body">
-								<div class="row">
-									<div class="col-lg-6">
-										<form>
+							<div class="card">
+								<div class="card-header">
+									<h4 class="card-title">Product Information</h4>
+								</div>
+								<div class="card-body">
+									<div class="row">
+										<div class="col-lg-6">
+
 											<div class="mb-3">
 												<label for="product-name" class="form-label">Product
 													Name</label> <input type="text" id="product-name"
 													class="form-control" placeholder="Items Name"
-													value="${product.title}">
+													value="${product.title}" required>
 											</div>
-										</form>
-									</div>
-									<div class="col-lg-6">
-										<form>
+
+										</div>
+										<div class="col-lg-6">
+
 											<label for="product-categories" class="form-label">Product
 												Categories</label> <select class="form-control"
 												id="product-categories" data-choices data-choices-groups
 												data-placeholder="Select Categories"
-												name="choices-single-groups">
-												<option value="">Choose a categories</option>
-												<option value="Fashion" selected>Fashion</option>
-												<option value="Electronics">Electronics</option>
-												<option value="Footwear">Footwear</option>
-												<option value="Sportswear">Sportswear</option>
-												<option value="Watches">Watches</option>
-												<option value="Furniture">Furniture</option>
-												<option value="Appliances">Appliances</option>
-												<option value="Headphones">Headphones</option>
-												<option value="Other Accessories">Other Accessories</option>
+												name="choices-single-groups" required>
+												<option value="${itsCategory.name}">${itsCategory.name}</option>
+												<c:forEach var="category" items="${categories}">
+													<option value="${category.name}">${category.name}</option>
+												</c:forEach>
 											</select>
-										</form>
+
+										</div>
 									</div>
-								</div>
-								<div class="row">
-									<div class="col-lg-3">
-										<form>
+									<div class="row">
+										<div class="col-lg-3">
+
 											<div class="mb-3">
 												<label for="product-brand" class="form-label">Author</label>
-												<input type="text" id="product-brand" class="form-control"
-													placeholder="Author Name" value="${product.author}">
+												<input type="text" id="product-author" class="form-control"
+													placeholder="Author Name" value="${product.author}" required>
 											</div>
-										</form>
-									</div>
-									<div class="col-lg-3">
-										<form>
+
+										</div>
+										<div class="col-lg-3">
+
 											<div class="mb-3">
 												<label for="product-weight" class="form-label">Language</label>
-												<input type="text" id="product-weight" class="form-control"
-													placeholder="Language" value="${product.language}">
+												<input type="text" id="product-language"
+													class="form-control" placeholder="Language"
+													value="${product.language}" required>
 											</div>
-										</form>
-									</div>
-									<div class="col-lg-3">
-										<form>
+
+										</div>
+										<div class="col-lg-3">
+
 											<label for="gender" class="form-label">Page</label> <input
 												type="number" min="0" id="product-page" class="form-control"
-												placeholder="Page" value="${product.page}">
-										</form>
+												placeholder="Page" value="${product.page}" required>
+
+										</div>
+										<div class="col-lg-3">
+
+											<label for="gender" class="form-label">Publish Year</label> <input
+												type="number" min="0" id="product-py" class="form-control"
+												placeholder="Publish Year" value="${product.publishYear}" required>
+
+										</div>
 									</div>
-									<div class="col-lg-3">
-                                                  <form>
-                                                       <label for="gender" class="form-label">Publish Year</label>
-                                                      <input type="number" min="0" id="product-weight" class="form-control" placeholder="Publish Year"value="${product.publishYear}">
-                                                  </form>
-                                     </div>
-								</div>
-								<div class="row mb-4">
-									<!-- <div class="col-lg-4">
+									<div class="row mb-4">
+										<!-- <div class="col-lg-4">
                                                   <div class="mt-3">
                                                        <h5 class="text-dark fw-medium">Size :</h5>
                                                        <div class="d-flex flex-wrap gap-2" role="group" aria-label="Basic checkbox toggle button group">
@@ -2021,8 +2015,8 @@ span, svg {
                                                        </div>
                                                   </div>
                                              </div> -->
-									<div class="col-lg-5">
-										<!-- <div class="mt-3">
+										<div class="col-lg-5">
+											<!-- <div class="mt-3">
                                                        <h5 class="text-dark fw-medium">Colors :</h5>
                                                        <div class="d-flex flex-wrap gap-2" role="group" aria-label="Basic checkbox toggle button group">
                                                             <input type="checkbox" class="btn-check" id="color-dark1" checked>
@@ -2051,41 +2045,42 @@ span, svg {
 
                                                        </div>
                                                   </div> -->
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-lg-12">
-										<div class="mb-3">
-											<label for="description" class="form-label">Description</label>
-											<textarea class="form-control bg-light-subtle"
-												id="description" rows="7"
-												placeholder="Short description about the product">${product.description}</textarea>
 										</div>
 									</div>
-								</div>
-								<div class="row">
-									<div class="col-lg-4">
-										<form>
+									<div class="row">
+										<div class="col-lg-12">
+											<div class="mb-3">
+												<label for="description" class="form-label">Description</label>
+												<textarea class="form-control bg-light-subtle"
+													id="description" rows="7"
+													placeholder="Short description about the product" required>${product.description}</textarea>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-lg-4">
+
 											<div class="mb-3">
 												<label for="product-id" class="form-label">Tag
-													Number</label> <input type="number" id="product-id"
-													class="form-control" placeholder="#******" value="36294007">
+													Number</label> <input type="number"
+													class="form-control" placeholder="#******"
+													value="1235634">
 											</div>
 
-										</form>
-									</div>
-									<div class="col-lg-4">
-										<form>
+
+										</div>
+										<div class="col-lg-4">
+
 											<div class="mb-3">
 												<label for="product-stock" class="form-label">Stock</label>
 												<input type="number" id="product-stock" class="form-control"
-													placeholder="Quantity" value="${product.quantity}">
+													placeholder="Quantity" value="${product.quantity}" required>
 											</div>
 
-										</form>
-									</div>
-									<div class="col-lg-4">
-										<label for="product-stock" class="form-label">Tag</label> <select
+
+										</div>
+										<div class="col-lg-4">
+											<!-- <label for="product-stock" class="form-label">Tag</label> <select
 											class="form-control" id="choices-multiple-remove-button"
 											data-choices data-choices-removeItem
 											name="choices-multiple-remove-button" multiple>
@@ -2093,41 +2088,41 @@ span, svg {
 											<option value="Electronics">Electronics</option>
 											<option value="Watches">Watches</option>
 											<option value="Headphones">Headphones</option>
-										</select>
+										</select> -->
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="card">
-							<div class="card-header">
-								<h4 class="card-title">Pricing Details</h4>
-							</div>
-							<div class="card-body">
-								<div class="row">
-									<div class="col-lg-4">
-										<form>
+							<div class="card">
+								<div class="card-header">
+									<h4 class="card-title">Pricing Details</h4>
+								</div>
+								<div class="card-body">
+									<div class="row">
+										<div class="col-lg-4">
+
 											<label for="product-price" class="form-label">Price</label>
 											<div class="input-group mb-3">
 												<span class="input-group-text fs-20"><i
 													class='bx bx-dollar'></i></span> <input type="number"
 													id="product-price" class="form-control" placeholder="000"
-													value="${product.price}">
+													value="${product.price}" required>
 											</div>
-										</form>
-									</div>
-									<div class="col-lg-4">
-										<form>
-											<label for="product-discount" class="form-label">Discount</label>
-											<div class="input-group mb-3">
-												<span class="input-group-text fs-20"><i
-													class='bx bxs-discount'></i></span> <input type="number"
-													id="product-discount" class="form-control"
-													placeholder="000" value="0">
-											</div>
-										</form>
-									</div>
-									<div class="col-lg-4">
-										<form>
+
+										</div>
+										<div class="col-lg-4">
+											
+												<label for="product-discount" class="form-label">Discount</label>
+												<div class="input-group mb-3">
+													<span class="input-group-text fs-20"><i
+														class='bx bxs-discount'></i></span> <input type="number"
+														id="product-discount" class="form-control"
+														placeholder="000" value="0">
+												</div>
+											
+										</div>
+										<div class="col-lg-4">
+
 											<label for="product-tex" class="form-label">Tex</label>
 											<div class="input-group mb-3">
 												<span class="input-group-text fs-20"><i
@@ -2135,23 +2130,26 @@ span, svg {
 													id="product-tex" class="form-control" placeholder="000"
 													value="0">
 											</div>
-										</form>
+
+										</div>
+									</div>
+								</div>
+							</div>
+							<input type="hidden" value = "${product.productId}" id="product-id">
+							<div class="p-3 bg-light mb-3 rounded">
+								<div class="row justify-content-end g-2">
+									<div class="col-lg-2">
+										<!-- <a href="#!" class="btn btn-outline-secondary w-100">Reset</a> -->
+									</div>
+									<div class="col-lg-2">
+										<a class="btn btn-primary w-100"><button type="submit">Save</button></a>
 									</div>
 								</div>
 							</div>
 						</div>
-						<div class="p-3 bg-light mb-3 rounded">
-							<div class="row justify-content-end g-2">
-								<div class="col-lg-2">
-									<a href="#!" class="btn btn-outline-secondary w-100">Reset</a>
-								</div>
-								<div class="col-lg-2">
-									<a href="#!" class="btn btn-primary w-100">Save</a>
-								</div>
-							</div>
-						</div>
-					</div>
+					</form>
 				</div>
+
 
 			</div>
 			<!-- End Container Fluid -->
@@ -2189,7 +2187,8 @@ span, svg {
 
 	<!-- App Javascript (Require in all Page) -->
 	<script src="../webPage/admin/assets/js/app.js"></script>
-
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<script src="../webPage/admin/assets/js/main.js"></script>
 </body>
 
 </html>

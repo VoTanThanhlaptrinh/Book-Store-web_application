@@ -148,7 +148,7 @@ public class ProductDAOImp implements IProductDao {
 			con = DatabaseConnection.getConnection();
 			PreparedStatement preparedStatement = con.prepareStatement(
 					"update Product_1 set added_by_user = ?, title = ?,price = ?,description = ?,img_id = ?, update_date = ?, pdQuantity= ?"
-							+ ",category_parent=?,category_id=? where product_id = ?" + product.getProductId());
+							+ ",category_parent=?,category_id=? where product_id = ?");
 			preparedStatement.setInt(1, product.getAddedByUser());
 			preparedStatement.setString(2, product.getTitle());
 			preparedStatement.setDouble(3, product.getPrice());
@@ -159,6 +159,7 @@ public class ProductDAOImp implements IProductDao {
 			preparedStatement.setInt(9, product.getQuantity());
 			preparedStatement.setInt(10, product.getCategory_parent());
 			preparedStatement.setInt(11, product.getCategory_id());
+			preparedStatement.setInt(12, product.getProductId());
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
 		} catch (SQLException e) {
