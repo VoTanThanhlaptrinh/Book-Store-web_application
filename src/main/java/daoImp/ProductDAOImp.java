@@ -40,8 +40,8 @@ public class ProductDAOImp implements IProductDao {
 				String author = resultSet.getNString(14);
 				int publishYear = resultSet.getInt(15);
 				products.add(new Product(id, adminId, title, price, description, imgId, createDate, updateDate,
-						quantity, cate_parent, cate_id,language,page,author,publishYear));
-				
+						quantity, cate_parent, cate_id, language, page, author, publishYear));
+
 				// System.out.println(id + adminId+title+ price+ description+ type+ imgId+
 				// createDate+ updateDate);
 			}
@@ -84,8 +84,8 @@ public class ProductDAOImp implements IProductDao {
 				int page = resultSet.getInt(13);
 				String author = resultSet.getNString(14);
 				int publishYear = resultSet.getInt(15);
-				product = new Product(id, adminId, title, price, description, imgId, createDate, updateDate,
-						quantity, cate_parent, cate_id,language,page,author,publishYear);
+				product = new Product(id, adminId, title, price, description, imgId, createDate, updateDate, quantity,
+						cate_parent, cate_id, language, page, author, publishYear);
 			}
 			resultSet.close();
 			statement.close();
@@ -104,38 +104,34 @@ public class ProductDAOImp implements IProductDao {
 	@Override
 	public int saveProduct(Product product) {
 		// TODO Auto-generated method stub
-		Connection con = null;
 		int productId = 0;
-		try {
-			con = DatabaseConnection.getConnection();
+		try (Connection con = DatabaseConnection.getConnection();
 			PreparedStatement preparedStatement = con.prepareStatement(
 					"insert into Product_1 (added_by_user,title,price,description,img_id,create_date, update_date,pdQuantity, "
-							+ "category_parent, category_id) values(?,?,?,?,?,?,?,?,?,?)",
-					PreparedStatement.RETURN_GENERATED_KEYS);
+							+ "category_parent_id, category_id,author,language,page,publishYear) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+					PreparedStatement.RETURN_GENERATED_KEYS)){
+			
 			preparedStatement.setInt(1, product.getAddedByUser());
 			preparedStatement.setString(2, product.getTitle());
 			preparedStatement.setDouble(3, product.getPrice());
 			preparedStatement.setNString(4, product.getDescription());
-			preparedStatement.setInt(6, product.getImgId());
+			preparedStatement.setInt(5, product.getImgId());
+			preparedStatement.setDate(6, new Date(System.currentTimeMillis()));
 			preparedStatement.setDate(7, new Date(System.currentTimeMillis()));
-			preparedStatement.setDate(8, new Date(System.currentTimeMillis()));
-			preparedStatement.setInt(9, product.getQuantity());
-			preparedStatement.setInt(10, product.getCategory_parent());
-			preparedStatement.setInt(11, product.getCategory_id());
+			preparedStatement.setInt(8, product.getQuantity());
+			preparedStatement.setInt(9, product.getCategory_parent());
+			preparedStatement.setInt(10, product.getCategory_id());
+			preparedStatement.setNString(11, product.getAuthor());
+			preparedStatement.setNString(12, product.getAuthor());
+			preparedStatement.setInt(13, product.getPage());
+			preparedStatement.setInt(14, product.getPublishYear());
 			preparedStatement.executeUpdate();
 			ResultSet re = preparedStatement.getGeneratedKeys();
 			if (re.next()) {
 				productId = re.getInt(1);
 			}
-			preparedStatement.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-			try {
-				con.close();
-			} catch (SQLException e2) {
-				e.printStackTrace();
-			}
 		}
 		return productId;
 	}
@@ -143,33 +139,28 @@ public class ProductDAOImp implements IProductDao {
 	@Override
 	public void updateProduct(Product product) {
 		// TODO Auto-generated method stub
-		Connection con = null;
-		try {
-			con = DatabaseConnection.getConnection();
+		try(Connection con = DatabaseConnection.getConnection();
 			PreparedStatement preparedStatement = con.prepareStatement(
 					"update Product_1 set added_by_user = ?, title = ?,price = ?,description = ?,img_id = ?, update_date = ?, pdQuantity= ?"
-							+ ",category_parent=?,category_id=? where product_id = ?");
+					+ ",category_parent_id=?,category_id=?,page=?,author=?,language=?,publishYear=? where product_id = ?");) {
+			
 			preparedStatement.setInt(1, product.getAddedByUser());
 			preparedStatement.setString(2, product.getTitle());
 			preparedStatement.setDouble(3, product.getPrice());
 			preparedStatement.setNString(4, product.getDescription());
-			preparedStatement.setInt(6, product.getImgId());
-			preparedStatement.setDate(7, new Date(System.currentTimeMillis()));
-			preparedStatement.setDate(8, new Date(System.currentTimeMillis()));
-			preparedStatement.setInt(9, product.getQuantity());
-			preparedStatement.setInt(10, product.getCategory_parent());
-			preparedStatement.setInt(11, product.getCategory_id());
-			preparedStatement.setInt(12, product.getProductId());
-			preparedStatement.executeUpdate();
-			preparedStatement.close();
+			preparedStatement.setInt(5, product.getImgId());
+			preparedStatement.setDate(6, new Date(System.currentTimeMillis()));
+			preparedStatement.setInt(7, product.getQuantity());
+			preparedStatement.setInt(8, product.getCategory_parent());
+			preparedStatement.setInt(9, product.getCategory_id());
+			preparedStatement.setInt(10, product.getPage());
+			preparedStatement.setNString(11, product.getAuthor());
+			preparedStatement.setNString(12, product.getLanguage());
+			preparedStatement.setInt(13, product.getPublishYear());
+			preparedStatement.setInt(14, product.getProductId());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			try {
-				con.close();
-			} catch (SQLException e2) {
-				e.printStackTrace();
-			}
 		}
 	}
 
@@ -224,7 +215,7 @@ public class ProductDAOImp implements IProductDao {
 					String author = resultSet.getNString(14);
 					int publishYear = resultSet.getInt(15);
 					products.add(new Product(id, adminId, title, price, description, imgId, createDate, updateDate,
-							quantity1, cate_parent, cate_id,language,page,author,publishYear));
+							quantity1, cate_parent, cate_id, language, page, author, publishYear));
 
 				}
 			}
@@ -300,7 +291,7 @@ public class ProductDAOImp implements IProductDao {
 				String author = resultSet.getNString(14);
 				int publishYear = resultSet.getInt(15);
 				products.add(new Product(id, adminId, title, price, description, imgId, createDate, updateDate,
-						quantity1, cate_parent, cate_id,language,page,author,publishYear));
+						quantity1, cate_parent, cate_id, language, page, author, publishYear));
 
 			}
 			resultSet.close();
@@ -347,7 +338,7 @@ public class ProductDAOImp implements IProductDao {
 				String author = resultSet.getNString(14);
 				int publishYear = resultSet.getInt(15);
 				products.add(new Product(id, adminId, title, price, description, imgId, createDate, updateDate,
-						quantity1, cate_parent, cate_id,language,page,author,publishYear));
+						quantity1, cate_parent, cate_id, language, page, author, publishYear));
 
 			}
 			resultSet.close();
@@ -393,7 +384,7 @@ public class ProductDAOImp implements IProductDao {
 				String author = resultSet.getNString(14);
 				int publishYear = resultSet.getInt(15);
 				products.add(new Product(id, adminId, title, price, description, imgId, createDate, updateDate,
-						quantity1, cate_parent, cate_id,language,page,author,publishYear));
+						quantity1, cate_parent, cate_id, language, page, author, publishYear));
 
 			}
 			resultSet.close();
@@ -440,7 +431,7 @@ public class ProductDAOImp implements IProductDao {
 				String author = resultSet.getNString(14);
 				int publishYear = resultSet.getInt(15);
 				products.add(new Product(id, adminId, title, price, description, imgId, createDate, updateDate,
-						quantity1, cate_parent, cate_id,language,page,author,publishYear));
+						quantity1, cate_parent, cate_id, language, page, author, publishYear));
 
 			}
 			resultSet.close();
@@ -518,7 +509,7 @@ public class ProductDAOImp implements IProductDao {
 				String author = resultSet.getNString(14);
 				int publishYear = resultSet.getInt(15);
 				products.add(new Product(id, adminId, title, price, description, imgId, createDate, updateDate,
-						quantity1, cate_parent, cate_id,language,page,author,publishYear));
+						quantity1, cate_parent, cate_id, language, page, author, publishYear));
 
 			}
 			resultSet.close();
@@ -568,7 +559,7 @@ public class ProductDAOImp implements IProductDao {
 				String author = resultSet.getNString(14);
 				int publishYear = resultSet.getInt(15);
 				products.add(new Product(id, adminId, title, price, description, imgId, createDate, updateDate,
-						quantity1, cate_parent, cate_id,language,page,author,publishYear));
+						quantity1, cate_parent, cate_id, language, page, author, publishYear));
 
 			}
 			resultSet.close();

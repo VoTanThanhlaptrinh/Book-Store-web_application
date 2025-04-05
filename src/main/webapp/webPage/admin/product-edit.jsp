@@ -33,6 +33,7 @@
 
 <!-- Theme Config js (Require in all Page) -->
 <script src="../webPage/admin/assets/js/config.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -1443,12 +1444,12 @@ span, svg {
 		<div class="main-nav">
 			<!-- Sidebar Logo -->
 			<div class="logo-box">
-				<a href="admin/home" class="logo-dark"> <img
+				<a href="../admin/home" class="logo-dark"> <img
 					src="../webPage/admin/assets/images/logo-sm.png" class="logo-sm"
 					alt="logo sm"> <img
 					src="../webPage/admin/assets/images/logo-dark.png" class="logo-lg"
 					alt="logo dark">
-				</a> <a href="admin/home" class="logo-light"> <img
+				</a> <a href="../admin/home" class="logo-light"> <img
 					src="../webPage/admin/assets/images/logo-sm.png" class="logo-sm"
 					alt="logo sm"> <img
 					src="../webPage/admin/assets/images/logo-light.png" class="logo-lg"
@@ -1506,15 +1507,15 @@ span, svg {
 														icon="solar:widget-5-bold-duotone">
 													<template shadowrootmode="open">
 														<style data-style="data-style">
-															:host {
-																display: inline-block;
-																vertical-align: 0
-															}
-															
-															span, svg {
-																display: block
-															}
-															</style>
+:host {
+	display: inline-block;
+	vertical-align: 0
+}
+
+span, svg {
+	display: block
+}
+</style>
 														<svg xmlns="http://www.w3.org/2000/svg" width="1em"
 															height="1em" viewBox="0 0 24 24">
                                                                                 <path
@@ -1899,10 +1900,11 @@ span, svg {
 							</div>
 						</div>
 					</div>
-					<form class="dropzone" id="myAwesomeDropzone"
-						data-plugin="dropzone" data-previews-container="#file-previews"
-						data-upload-preview-template="#uploadPreviewTemplate">
-						<div class="col-xl-9 col-lg-8 ">
+
+					<div class="col-xl-9 col-lg-8 ">
+						<form class="dropzone" id="myAwesomeDropzone"
+							data-plugin="dropzone" data-previews-container="#file-previews"
+							data-upload-preview-template="#uploadPreviewTemplate">
 							<div class="card">
 								<div class="card-header">
 									<h4 class="card-title">Add Product Photo</h4>
@@ -1930,43 +1932,25 @@ span, svg {
 								</div>
 								<div class="card-body">
 									<div class="row">
-										<div class="col-lg-6">
-
+										<div class="col-lg-7">
 											<div class="mb-3">
 												<label for="product-name" class="form-label">Product
 													Name</label> <input type="text" id="product-name"
 													class="form-control" placeholder="Items Name"
 													value="${product.title}" required>
 											</div>
-
 										</div>
-										<div class="col-lg-6">
-
-											<label for="product-categories" class="form-label">Product
-												Categories</label> <select class="form-control"
-												id="product-categories" data-choices data-choices-groups
-												data-placeholder="Select Categories"
-												name="choices-single-groups" required>
-												<option value="${itsCategory.name}">${itsCategory.name}</option>
-												<c:forEach var="category" items="${categories}">
-													<option value="${category.name}">${category.name}</option>
-												</c:forEach>
-											</select>
-
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-lg-3">
-
+										<div class="col-lg-5">
 											<div class="mb-3">
 												<label for="product-brand" class="form-label">Author</label>
 												<input type="text" id="product-author" class="form-control"
-													placeholder="Author Name" value="${product.author}" required>
+													placeholder="Author Name" value="${product.author}"
+													required>
 											</div>
-
 										</div>
-										<div class="col-lg-3">
-
+									</div>
+									<div class="row">
+										<div class="col-lg-4">
 											<div class="mb-3">
 												<label for="product-weight" class="form-label">Language</label>
 												<input type="text" id="product-language"
@@ -1975,76 +1959,48 @@ span, svg {
 											</div>
 
 										</div>
-										<div class="col-lg-3">
-
+										<div class="col-lg-4">
 											<label for="gender" class="form-label">Page</label> <input
 												type="number" min="0" id="product-page" class="form-control"
 												placeholder="Page" value="${product.page}" required>
 
 										</div>
-										<div class="col-lg-3">
-
+										<div class="col-lg-4">
 											<label for="gender" class="form-label">Publish Year</label> <input
 												type="number" min="0" id="product-py" class="form-control"
-												placeholder="Publish Year" value="${product.publishYear}" required>
+												placeholder="Publish Year" value="${product.publishYear}"
+												required>
 
 										</div>
 									</div>
 									<div class="row mb-4">
-										<!-- <div class="col-lg-4">
-                                                  <div class="mt-3">
-                                                       <h5 class="text-dark fw-medium">Size :</h5>
-                                                       <div class="d-flex flex-wrap gap-2" role="group" aria-label="Basic checkbox toggle button group">
-                                                            <input type="checkbox" class="btn-check" id="size-xs1">
-                                                            <label class="btn btn-light avatar-sm rounded d-flex justify-content-center align-items-center" for="size-xs1">XS</label>
-
-                                                            <input type="checkbox" class="btn-check" id="size-s1" checked>
-                                                            <label class="btn btn-light avatar-sm rounded d-flex justify-content-center align-items-center" for="size-s1">S</label>
-
-                                                            <input type="checkbox" class="btn-check" id="size-m1" checked>
-                                                            <label class="btn btn-light avatar-sm rounded d-flex justify-content-center align-items-center" for="size-m1">M</label>
-
-                                                            <input type="checkbox" class="btn-check" id="size-xl1" checked>
-                                                            <label class="btn btn-light avatar-sm rounded d-flex justify-content-center align-items-center" for="size-xl1">Xl</label>
-
-                                                            <input type="checkbox" class="btn-check" id="size-xxl1" checked>
-                                                            <label class="btn btn-light avatar-sm rounded d-flex justify-content-center align-items-center" for="size-xxl1">XXL</label>
-                                                            <input type="checkbox" class="btn-check" id="size-3xl1">
-                                                            <label class="btn btn-light avatar-sm rounded d-flex justify-content-center align-items-center" for="size-3xl1">3XL</label>
-
-                                                       </div>
-                                                  </div>
-                                             </div> -->
 										<div class="col-lg-5">
-											<!-- <div class="mt-3">
-                                                       <h5 class="text-dark fw-medium">Colors :</h5>
-                                                       <div class="d-flex flex-wrap gap-2" role="group" aria-label="Basic checkbox toggle button group">
-                                                            <input type="checkbox" class="btn-check" id="color-dark1" checked>
-                                                            <label class="btn btn-light avatar-sm rounded d-flex justify-content-center align-items-center" for="color-dark1"> <i class="bx bxs-circle fs-18 text-dark"></i></label>
-
-                                                            <input type="checkbox" class="btn-check" id="color-yellow1" checked>
-                                                            <label class="btn btn-light avatar-sm rounded d-flex justify-content-center align-items-center" for="color-yellow1"> <i class="bx bxs-circle fs-18 text-warning"></i></label>
-
-                                                            <input type="checkbox" class="btn-check" id="color-white1" checked>
-                                                            <label class="btn btn-light avatar-sm rounded d-flex justify-content-center align-items-center" for="color-white1"> <i class="bx bxs-circle fs-18 text-white"></i></label>
-
-                                                            <input type="checkbox" class="btn-check" id="color-red1" checked>
-                                                            <label class="btn btn-light avatar-sm rounded d-flex justify-content-center align-items-center" for="color-red1"> <i class="bx bxs-circle fs-18 text-primary"></i></label>
-
-                                                            <input type="checkbox" class="btn-check" id="color-green1">
-                                                            <label class="btn btn-light avatar-sm rounded d-flex justify-content-center align-items-center" for="color-green1"> <i class="bx bxs-circle fs-18 text-success"></i></label>
-
-                                                            <input type="checkbox" class="btn-check" id="color-blue1">
-                                                            <label class="btn btn-light avatar-sm rounded d-flex justify-content-center align-items-center" for="color-blue1"> <i class="bx bxs-circle fs-18 text-danger"></i></label>
-
-                                                            <input type="checkbox" class="btn-check" id="color-sky1">
-                                                            <label class="btn btn-light avatar-sm rounded d-flex justify-content-center align-items-center" for="color-sky1"> <i class="bx bxs-circle fs-18 text-info"></i></label>
-
-                                                            <input type="checkbox" class="btn-check" id="color-gray1">
-                                                            <label class="btn btn-light avatar-sm rounded d-flex justify-content-center align-items-center" for="color-gray1"> <i class="bx bxs-circle fs-18 text-secondary"></i></label>
-
-                                                       </div>
-                                                  </div> -->
+											<div class="mt-3">
+												<label for="product-categories" class="form-label">Product
+													Categories</label> <select class="form-control"
+													id="product-categories" data-choices data-choices-groups
+													data-placeholder="Select Categories"
+													name="choices-single-groups" required>
+													<option value="${itsCategory.id}">${itsCategory.name}</option>
+													<c:forEach var="category" items="${categories}">
+														<option value="${category.id}">${category.name}</option>
+													</c:forEach>
+												</select>
+											</div>
+										</div>
+										<div class="col-lg-5">
+											<div class="mt-3">
+												<label for="product-subject" class="form-label">Product
+													Subject</label> <select class="form-control" id="product-subject"
+													data-choices data-choices-groups
+													data-placeholder="Select Categories"
+													name="choices-single-groups" required>
+													<option value="${itsSubCategory.id}">${itsSubCategory.name}</option>
+													<c:forEach var="category" items="${subCategories}">
+														<option value="${category.id}">${category.name}</option>
+													</c:forEach>
+												</select>
+											</div>
 										</div>
 									</div>
 									<div class="row">
@@ -2062,9 +2018,8 @@ span, svg {
 
 											<div class="mb-3">
 												<label for="product-id" class="form-label">Tag
-													Number</label> <input type="number"
-													class="form-control" placeholder="#******"
-													value="1235634">
+													Number</label> <input type="number" class="form-control"
+													placeholder="#******" value="1235634">
 											</div>
 
 
@@ -2111,15 +2066,15 @@ span, svg {
 
 										</div>
 										<div class="col-lg-4">
-											
-												<label for="product-discount" class="form-label">Discount</label>
-												<div class="input-group mb-3">
-													<span class="input-group-text fs-20"><i
-														class='bx bxs-discount'></i></span> <input type="number"
-														id="product-discount" class="form-control"
-														placeholder="000" value="0">
-												</div>
-											
+
+											<label for="product-discount" class="form-label">Discount</label>
+											<div class="input-group mb-3">
+												<span class="input-group-text fs-20"><i
+													class='bx bxs-discount'></i></span> <input type="number"
+													id="product-discount" class="form-control"
+													placeholder="000" value="0">
+											</div>
+
 										</div>
 										<div class="col-lg-4">
 
@@ -2135,19 +2090,19 @@ span, svg {
 									</div>
 								</div>
 							</div>
-							<input type="hidden" value = "${product.productId}" id="product-id">
+							<input type="hidden" value="${product.productId}" id="product-id">
 							<div class="p-3 bg-light mb-3 rounded">
 								<div class="row justify-content-end g-2">
 									<div class="col-lg-2">
 										<!-- <a href="#!" class="btn btn-outline-secondary w-100">Reset</a> -->
 									</div>
 									<div class="col-lg-2">
-										<a class="btn btn-primary w-100"><button type="submit">Save</button></a>
+										<button type="submit" class="btn btn-primary w-100">Save</button>
 									</div>
 								</div>
 							</div>
-						</div>
-					</form>
+						</form>
+					</div>
 				</div>
 
 
@@ -2183,12 +2138,17 @@ span, svg {
 	<!-- END Wrapper -->
 
 	<!-- Vendor Javascript (Require in all Page) -->
-	<script src="../webPage/admin/assets/js/vendor.js"></script>
+	<!-- <script src="../webPage/admin/assets/js/vendor.js"></script> -->
 
 	<!-- App Javascript (Require in all Page) -->
 	<script src="../webPage/admin/assets/js/app.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-	<script src="../webPage/admin/assets/js/main.js"></script>
+	<!-- JQuery -->
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<!-- Thêm toastr JS từ CDN -->
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+	<script src="../webPage/admin/assets/js/product_edit_main.js"></script>
 </body>
 
 </html>

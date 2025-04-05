@@ -247,6 +247,15 @@ public class Product {
 	public void setPublishYear(int publishYear) {
 		this.publishYear = publishYear;
 	}
+
+	@Override
+	public String toString() {
+		return "Product [productId=" + productId + ", addedByUser=" + addedByUser + ", title=" + title + ", price="
+				+ price + ", description=" + description + ", imgId=" + imgId + ", createDate=" + createDate
+				+ ", updateDate=" + updateDate + ", quantity=" + quantity + ", category_parent=" + category_parent
+				+ ", category_id=" + category_id + ", language=" + language + ", page=" + page + ", author=" + author
+				+ ", publishYear=" + publishYear + "]";
+	}
 	
 	
 }
