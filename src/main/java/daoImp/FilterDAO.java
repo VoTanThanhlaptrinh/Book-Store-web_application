@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import models.Category;
-import models.FilterModel;
 import service.DatabaseConnection;
 
 

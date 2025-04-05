@@ -124,15 +124,13 @@ public class ImageDAOImp implements IImageDao {
 			preparedStatement.executeUpdate();
 
 			try (ResultSet re = preparedStatement.getGeneratedKeys();) {
-				while (re.next()) {
+				if (re.next()) {
 					imageId = re.getInt(1);
 				}
 			} catch (Exception e) {
 				// TODO: handle exception
 				e.printStackTrace();
 			}
-
-			preparedStatement.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

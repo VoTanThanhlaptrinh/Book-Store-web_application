@@ -34,12 +34,22 @@ public class ProductEditAdminController extends HttpServlet {
 		// lấy danh sách các category
 		List<Category> categories = filterDAO.getTopCategories();
 		// gửi category của product
-		req.setAttribute("itsCategory", findCategory(p.getCategory_parent(), categories));
+		Category category = findCategory(p.getCategory_parent(), categories);
+		req.setAttribute("itsCategory", category);
 		// xoá category của product trong danh sách
-		categories.remove(findCategory(p.getCategory_parent(), categories));
+		categories.remove(category);
 		// gửi danh sách category mới
 		req.setAttribute("categories", categories);
 		req.setAttribute("product", p);
+
+		// list sub-category
+		List<Category> subCategories = filterDAO.getSubCategories(category.getId());
+		// tìm sub-category của product
+		Category subCategory = findCategory(p.getCategory_id(), subCategories);
+		// xoá và gửi sub-category mới
+		subCategories.remove(subCategory);
+		req.setAttribute("subCategories", subCategories);
+		req.setAttribute("itsSubCategory", subCategory);
 		req.getRequestDispatcher("/webPage/admin/product-edit.jsp").forward(req, resp);
 	}
 
@@ -55,6 +65,6 @@ public class ProductEditAdminController extends HttpServlet {
 			if (category.getId() == id)
 				return category;
 		}
-		return null;
+		return categories.get(0);
 	}
 }
