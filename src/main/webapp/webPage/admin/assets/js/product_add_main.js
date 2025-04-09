@@ -51,7 +51,7 @@ function add(event) {
 	// Thêm tệp ảnh vào FormData
 	formData.append("image", file.files[0]);  // file.files[0] là tệp ảnh*/
 
-	axios.post('../api/add', formData,
+	axios.post('../admin/api/add', formData,
 		{
 			headers: {
 				"Content-Type": "multipart/form-data"
@@ -88,7 +88,7 @@ function checkDecimal(input, fieldName) {
 
 document.addEventListener("DOMContentLoaded", function() {
 	const selectElement = document.getElementById("product-categories");
-	axios.get('../api/getSubCategory', {
+	axios.get('../admin/api/getSubCategory', {
 				params: {
 					categoryId: selectElement.options[0].value
 				}
@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", function() {
 				})
 	selectElement.addEventListener("change", function() {
 		const selectedCategoryId = this.value;
-		axios.get('../api/getSubCategory', {
+		axios.get('../admin/api/getSubCategory', {
 			params: {
 				categoryId: selectedCategoryId
 			}

@@ -1,7 +1,6 @@
 package models;
 
 import java.sql.Date;
-import java.util.List;
 import java.util.Set;
 
 public class User {
@@ -15,7 +14,7 @@ public class User {
 	private boolean isSocialLogin;
 	private String status;
 	private boolean isActivate;
-	private List<Resource> resources;
+	private Set<Resource> resources;
 
 	public User(int userId, String username, String password, String email, Date createDate, Date updaDate) {
 		super();
@@ -50,7 +49,7 @@ public class User {
 	}
 
 	public User(String username, String password, String email, Date createDate, Date updateDate, Set<String> roles,
-			boolean isSocialLogin, String status, boolean isActivate, List<Resource> resources) {
+			boolean isSocialLogin, String status, boolean isActivate, Set<Resource> resources) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -156,11 +155,11 @@ public class User {
 		this.updateDate = updateDate;
 	}
 
-	public List<Resource> getResources() {
+	public Set<Resource> getResources() {
 		return resources;
 	}
 
-	public void setResources(List<Resource> resources) {
+	public void setResources(Set<Resource> resources) {
 		this.resources = resources;
 	}
 

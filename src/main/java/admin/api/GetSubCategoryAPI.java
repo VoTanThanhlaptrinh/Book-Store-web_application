@@ -18,7 +18,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import models.Category;
 
-@WebServlet("/api/getSubCategory")
+@WebServlet("/admin/api/getSubCategory")
 public class GetSubCategoryAPI extends HttpServlet {
 	/**
 	 * 
