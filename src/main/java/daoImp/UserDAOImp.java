@@ -7,7 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import daoInterface.IUserDao;
 import models.User;
@@ -163,8 +165,8 @@ public class UserDAOImp implements IUserDao {
 		return user;
 	}
 
-	public List<String> getRolesByUserId(int userId) {
-		List<String> roles = new ArrayList<String>();
+	public Set<String> getRolesByUserId(int userId) {
+		Set<String> roles = new HashSet<String>();
 		String sql = "select r.content from Role r join Role_User ru on r.role_id = ru.role_id where ru.user_id = ?";
 		try (Connection con = DatabaseConnection.getConnection();
 				PreparedStatement preparedStatement = con.prepareStatement(sql)) {
