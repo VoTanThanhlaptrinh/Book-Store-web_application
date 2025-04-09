@@ -2,9 +2,10 @@ package controller.account;
 
 import java.io.IOException;
 import java.sql.Date;
-import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 import org.apache.commons.lang3.RandomStringUtils;
 
@@ -128,13 +129,15 @@ public class RegisterController extends HttpServlet {
 
 	private User createUser(String username, String password, String email) {
 		User user = new User();
+		Set<String> roles = new HashSet<>();
+		roles.add("user");
 		user.setUsername(username);
 		user.setPassword(password);
 		user.setEmail(email);
 		user.setStatus("Alive");
 		user.setCreateDate(new Date(System.currentTimeMillis()));
 		user.setUpdateDate(new Date(System.currentTimeMillis()));
-		user.setRoles(Arrays.asList("user"));
+		user.setRoles(roles);
 		return user;
 	}
 }

@@ -2149,6 +2149,7 @@ span, svg {
 	<!-- Thêm toastr JS từ CDN -->
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+		<script src="../webPage/admin/assets/js/toastr.js"></script>
 	<script src="../webPage/admin/assets/js/product_add_main.js"></script>
 	
 </body>

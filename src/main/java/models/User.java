@@ -2,6 +2,7 @@ package models;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Set;
 
 public class User {
 	private int userId;
@@ -10,10 +11,12 @@ public class User {
 	private String email;
 	private Date createDate;
 	private Date updateDate;
-	private List<String> roles;
+	private Set<String> roles;
 	private boolean isSocialLogin;
 	private String status;
 	private boolean isActivate;
+	private List<Resource> resources;
+
 	public User(int userId, String username, String password, String email, Date createDate, Date updaDate) {
 		super();
 		this.userId = userId;
@@ -31,8 +34,8 @@ public class User {
 		this.createDate = createDate;
 		this.updateDate = updateDate;
 	}
-	
-	public User(String username, String password, String email, Date createDate, Date updateDate, List<String> roles,
+
+	public User(String username, String password, String email, Date createDate, Date updateDate, Set<String> roles,
 			boolean isSocialLogin, String status, boolean isActivate) {
 		super();
 		this.username = username;
@@ -46,9 +49,23 @@ public class User {
 		this.isActivate = isActivate;
 	}
 
+	public User(String username, String password, String email, Date createDate, Date updateDate, Set<String> roles,
+			boolean isSocialLogin, String status, boolean isActivate, List<Resource> resources) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.email = email;
+		this.createDate = createDate;
+		this.updateDate = updateDate;
+		this.roles = roles;
+		this.isSocialLogin = isSocialLogin;
+		this.status = status;
+		this.isActivate = isActivate;
+		this.resources = resources;
+	}
+
 	public User() {
 	}
-	
 
 	public int getUserId() {
 		return userId;
@@ -91,11 +108,11 @@ public class User {
 		return updateDate;
 	}
 
-	public List<String> getRoles() {
+	public Set<String> getRoles() {
 		return roles;
 	}
 
-	public void setRoles(List<String> roles) {
+	public void setRoles(Set<String> roles) {
 		this.roles = roles;
 	}
 
@@ -139,4 +156,25 @@ public class User {
 		this.updateDate = updateDate;
 	}
 
+	public List<Resource> getResources() {
+		return resources;
+	}
+
+	public void setResources(List<Resource> resources) {
+		this.resources = resources;
+	}
+
+	public boolean isAdmin() {
+		return roles.contains("admin");
+	}
+
+	public boolean isRoot() {
+		// TODO Auto-generated method stub
+		return roles.contains("root");
+	}
+
+	public boolean hasPermissionWithUrl(String path) {
+		// TODO Auto-generated method stub
+		return resources.stream().filter(r -> r.checkPath(path)).count() > 0;
+	}
 }

@@ -11,9 +11,10 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.sql.Date;
 import java.sql.SQLException;
-import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 import daoImp.SocialLoginDAOImpl;
 import daoInterface.ISocialLoginDAO;
@@ -151,12 +152,14 @@ public class FacebookLoginCallBack extends HttpServlet {
 	// Hàm tạo người dùng
 	private User createUser(String username) throws SQLException {
 		User user = new User();
+		Set<String> roles = new HashSet<>();
+		roles.add("user");
 		user.setUsername(username);
 		user.setEmail(username);
 		user.setStatus("Alive");
 		user.setCreateDate(new Date(System.currentTimeMillis()));
 		user.setUpdateDate(new Date(System.currentTimeMillis()));
-		user.setRoles(Arrays.asList("user"));
+		user.setRoles(roles);
 		user.setActivate(true);
 		user.setSocialLogin(true);
 		loginService.register(user);
