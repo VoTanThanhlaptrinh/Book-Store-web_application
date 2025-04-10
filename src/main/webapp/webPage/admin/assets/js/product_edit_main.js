@@ -54,7 +54,7 @@ function update(event) {
 	// Thêm tệp ảnh vào FormData
 	formData.append("image", file.files[0]);  // file.files[0] là tệp ảnh*/
 
-	axios.post('../api/edit', formData,
+	axios.post('../admin/api/edit', formData,
 		{
 			headers: {
 				"Content-Type": "multipart/form-data"
@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	const selectElement = document.getElementById("product-categories");
 	selectElement.addEventListener("change", function() {
 		const selectedCategoryId = this.value;
-		axios.get('../api/getSubCategory', {
+		axios.get('../admin/api/getSubCategory', {
 			params: {
 				categoryId: selectedCategoryId
 			}

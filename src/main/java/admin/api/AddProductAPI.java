@@ -29,7 +29,7 @@ import service.LoginService;
 		maxFileSize = 1024 * 1024 * 10, // 10MB
 		maxRequestSize = 1024 * 1024 * 50 // 50MB
 )
-@WebServlet("/api/add")
+@WebServlet("/admin/api/add")
 public class AddProductAPI extends HttpServlet {
 
 	/**

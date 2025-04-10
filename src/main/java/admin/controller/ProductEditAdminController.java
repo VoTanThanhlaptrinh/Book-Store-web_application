@@ -28,7 +28,7 @@ public class ProductEditAdminController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		// lấy id của product
-		int productId = Integer.valueOf(req.getParameter("productId"));
+		int productId = Integer.valueOf((req.getParameter("productId") == null) ? "1" : req.getParameter("productId"));
 		// lấy thông tin product từ db
 		Product p = categoriesService.getProductByProductId(productId);
 		// lấy danh sách các category
@@ -59,7 +59,6 @@ public class ProductEditAdminController extends HttpServlet {
 		categoriesService = new CategoriesServiceImp();
 		filterDAO = new FilterDAO();
 	}
-
 	private Category findCategory(int id, List<Category> categories) {
 		for (Category category : categories) {
 			if (category.getId() == id)
