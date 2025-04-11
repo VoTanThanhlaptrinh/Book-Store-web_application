@@ -40,35 +40,42 @@
      <div class="container">
 
             <div class="category-filter">
-					 <div class="current-category">
-					 		<p class="all-cate" onclick="loadParentCategory()">ALL CATEGORIES</p>
-					 		
-					 		 <div class="category-filter-li" id="category-parent-list">
-						        <!-- Danh sách thể loại nhỏ sẽ được cập nhật động -->
-						        
-						         <div class="category-filter-child-list" id="category-list1">  
-						    	</div>
-						    </div>
-						      
-						    <div class="see-more" onclick="toggleMore()">
-						        Xem Thêm <span class="arrow">▼</span>
-						    </div>
-						</div>
-                    <div class="line"></div>
-                    <div class="price-filter">
-                        <h4>GIÁ</h4>
-                        <div class="category-filter-li">
-                        <label><input type="checkbox" value="0-150000"> 0đ - 150,000đ</label>
-                        <label><input type="checkbox" value="150000-300000"> 150,000đ - 300,000đ</label>
-                        <label><input type="checkbox" value="300000-500000"> 300,000đ - 500,000đ</label>
-                        <label><input type="checkbox" value="500000-700000"> 500,000đ - 700,000đ</label>
-                        <label><input type="checkbox" value="700000+"> 700,000đ - Trở Lên</label>
-                    </div>
-                    </div>
+			<div class="current-category">
+				<p class="all-cate" onclick="loadParentCategory()">ALL
+					CATEGORIES</p>
 
+				<div class="category-filter-li" id="category-parent-list">
+					<!-- Danh sách thể loại nhỏ sẽ được cập nhật động -->
 
+					<div class="category-filter-child-list" id="category-list1">
+					</div>
+				</div>
 
-                     </div>
+				<div class="see-more" onclick="toggleMore()">
+					Xem Thêm <span class="arrow">▼</span>
+				</div>
+			</div>
+			<div class="line"></div>
+			  <div class="price-range-container">
+		        <label for="range-slider">Hoặc chọn mức giá phù hợp</label>
+		        <div class="input-group">
+		            <input type="number" id="min-price" value="0" placeholder="0 đ">
+		            <span>-</span>
+		            <input type="number" id="max-price" value="1000000" placeholder="0 đ">
+		        </div>
+		        <div class="slider-container">
+		            <div class="slider-track">
+		                <div class="slider-fill"></div>
+		                <input type="range" id="range-slider-min" min="0" max="1000000" step="1000" value="0">
+		                <input type="range" id="range-slider-max" min="0" max="1000000" step="1000" value="1000000">
+		            </div>
+		        </div>
+		        <div class="result-message">
+		            Không có sản phẩm 0 đ - 0 đ
+		        </div>
+		    </div>
+
+		</div>
 
             <div class = "item-filter">
                 <div class="item-filter-img">
@@ -170,8 +177,85 @@
             initializeDropdown();
         })
         .catch(error => console.error('Error loading header:', error));
-    </script>
-  <script>
+  
+    document.addEventListener('DOMContentLoaded', () => {
+        const minPriceInput = document.getElementById('min-price');
+        const maxPriceInput = document.getElementById('max-price');
+        const rangeSliderMin = document.getElementById('range-slider-min');
+        const rangeSliderMax = document.getElementById('range-slider-max');
+        const sliderFill = document.querySelector('.slider-fill');
+        const resultMessage = document.querySelector('.result-message');
+
+        function updateInputs() {
+            minPriceInput.value = rangeSliderMin.value;
+            maxPriceInput.value = rangeSliderMax.value;
+
+            // Cập nhật thông báo kết quả
+            updateResultMessage();
+
+            // Cập nhật phần tô màu giữa hai nút
+            updateSliderFill();
+        }
+
+        function updateSliders() {
+            rangeSliderMin.value = minPriceInput.value;
+            rangeSliderMax.value = maxPriceInput.value;
+
+            // Cập nhật thông báo kết quả
+            updateResultMessage();
+
+            // Cập nhật phần tô màu giữa hai nút
+            updateSliderFill();
+        }
+
+        function updateResultMessage() {
+            const minValue = parseInt(minPriceInput.value) || 0;
+            const maxValue = parseInt(maxPriceInput.value) || 0;
+
+            resultMessage.textContent = 'Không có sản phẩm ' + minValue + ' đ - ' + maxValue + ' đ';
+        }
+
+        function updateSliderFill() {
+            const minPercent = (rangeSliderMin.value - rangeSliderMin.min) / (rangeSliderMin.max - rangeSliderMin.min) * 100;
+            const maxPercent = (rangeSliderMax.value - rangeSliderMax.min) / (rangeSliderMax.max - rangeSliderMax.min) * 100;
+
+            sliderFill.style.left = `${minPercent}%`;
+            sliderFill.style.right = `${100 - maxPercent}%`;
+        }
+
+        // Ngăn chặn việc nút Min vượt quá Max và ngược lại
+        rangeSliderMin.addEventListener('input', () => {
+            if (parseInt(rangeSliderMin.value) > parseInt(rangeSliderMax.value)) {
+                rangeSliderMin.value = rangeSliderMax.value;
+            }
+            updateInputs();
+        });
+
+        rangeSliderMax.addEventListener('input', () => {
+            if (parseInt(rangeSliderMax.value) < parseInt(rangeSliderMin.value)) {
+                rangeSliderMax.value = rangeSliderMin.value;
+            }
+            updateInputs();
+        });
+
+        // Đồng bộ hóa từ ô nhập liệu sang thanh trượt
+        minPriceInput.addEventListener('input', () => {
+            if (parseInt(minPriceInput.value) > parseInt(maxPriceInput.value)) {
+                minPriceInput.value = maxPriceInput.value;
+            }
+            updateSliders();
+        });
+
+        maxPriceInput.addEventListener('input', () => {
+            if (parseInt(maxPriceInput.value) < parseInt(minPriceInput.value)) {
+                maxPriceInput.value = minPriceInput.value;
+            }
+            updateSliders();
+        });
+
+        // Khởi tạo ban đầu
+        updateInputs();
+    });
   // Hàm tải danh sách thể loại nhỏ
 
   function loadParentCategory() {
@@ -212,49 +296,57 @@
 		  xhr.send();
   }
   
-function loadSubCategories(categoryParentId) {
-  const xhr = new XMLHttpRequest();
-  xhr.open("GET", "AjaxCategoryServlet?categoryParentId=" + categoryParentId, true);
-  
-  xhr.onload = function () {
-    if (xhr.status === 200) {
-      const subCategories = JSON.parse(xhr.responseText);
-      console.log("Dữ liệu từ server:", subCategories); // Debug dữ liệu
-      
-      // Khai báo biến categoryListElement
-          const categoryListElement = document.getElementById("category-list" + categoryParentId);
-      if (!categoryListElement) {
-        console.error("Thẻ category-list không tồn tại!");
-        return;
-      }
-      var html = "";
-      
-      subCategories.forEach((category, index) => {
-    	    // Không cần JSON.stringify và JSON.parse nếu category đã là object
-    	  const {id, name} = category;
-    	  console.log(name); 
-			console.log(id);  
-  
-			html += '<li class="' + (index >= 3 ? 'hidden' : 'displayli') + '">' +
-	        '<a href="#" onclick="filterByCategory(' + id + ')">' + name + '</a>' +
-	        '</li>';
-			 console.log(html);
-
-    	});
-      // Sử dụng biến categoryListElement
-      categoryListElement.innerHTML = html;
-    } else {
-      console.error("Lỗi khi tải dữ liệu từ server.");
-    }
-  };
-  
-  xhr.send();
-}
+	function loadSubCategories(categoryParentId) {
+	  const xhr = new XMLHttpRequest();
+	  const minPriceInput = document.getElementById('min-price');
+      const maxPriceInput = document.getElementById('max-price');
+      xhr.open("GET", "AjaxCategoryServlet?categoryParentId=" + categoryParentId 
+              + "&minPrice=" + minPriceInput.value 
+              + "&maxPrice=" + maxPriceInput.value , true);
+	  
+	  xhr.onload = function () {
+	    if (xhr.status === 200) {
+	      const subCategories = JSON.parse(xhr.responseText);
+	      console.log("Dữ liệu từ server:", subCategories); // Debug dữ liệu
+	      
+	      // Khai báo biến categoryListElement
+	          const categoryListElement = document.getElementById("category-list" + categoryParentId);
+	      if (!categoryListElement) {
+	        console.error("Thẻ category-list không tồn tại!");
+	        return;
+	      }
+	      var html = "";
+	      
+	      subCategories.forEach((category, index) => {
+	    	    // Không cần JSON.stringify và JSON.parse nếu category đã là object
+	    	  const {id, name} = category;
+	    	  console.log(name); 
+				console.log(id);  
+	  
+				html += '<li class="' + (index >= 3 ? 'hidden' : 'displayli') + '">' +
+		        '<a href="#" onclick="filterByCategory(' + id + ')">' + name + '</a>' +
+		        '</li>';
+				 console.log(html);
+	
+	    	});
+	      // Sử dụng biến categoryListElement
+	      categoryListElement.innerHTML = html;
+	    } else {
+	      console.error("Lỗi khi tải dữ liệu từ server.");
+	    }
+	  };
+	  
+	  xhr.send();
+	
+	}
 
 	
 	// Hàm lọc sản phẩm
 	function filterByCategory(categoryId) {
-	    window.location.href = "FilterServlet?page=1&categoryId=" + categoryId;
+		const minPriceInput = document.getElementById('min-price');
+	    const maxPriceInput = document.getElementById('max-price');   
+	    window.location.href = "FilterServlet?page=1&categoryId=" + categoryId + "&minPrice=" +
+	    		minPriceInput.value + "&maxPrice=" + maxPriceInput.value;
 	}
 
 
@@ -277,9 +369,6 @@ function loadSubCategories(categoryParentId) {
   }
 
 
-</script>
-
-      <script>
         document.addEventListener("DOMContentLoaded", function () {
             const dropdown = document.querySelector(".item-filter-dropdown");
             const button = dropdown.querySelector(".item-filter-dropdown-button");
@@ -304,9 +393,7 @@ function loadSubCategories(categoryParentId) {
               }
             });
           }); 
-        </script>
-
-        <script>
+ 
             document.querySelectorAll(".page-number").forEach((page) => {
                 page.addEventListener("click", function () {
                   // Xóa class 'active' khỏi tất cả các trang

@@ -7,20 +7,21 @@ public class Product {
 	private int addedByUser;
 	private String title;
 	private double price;
-	
 	private String description;
-	
 	private int imgId;
 	private Date createDate;
 	private Date updateDate;
 	private int quantity;
 	private int category_parent;
 	private int category_id;
-	
+	private String language;
+	private int page;
+	private String author;
+	private int publishYear;
 
-	
 	public Product(int productId, int addedByUser, String title, double price, String description, int imgId,
-			Date createDate, Date updateDate, int quantity, int category_parent, int category_id) {
+			Date createDate, Date updateDate, int quantity, int category_parent, int category_id, String language,
+			int page, String author, int publishYear) {
 		super();
 		this.productId = productId;
 		this.addedByUser = addedByUser;
@@ -33,12 +34,15 @@ public class Product {
 		this.quantity = quantity;
 		this.category_parent = category_parent;
 		this.category_id = category_id;
+		this.language = language;
+		this.page = page;
+		this.author = author;
+		this.publishYear = publishYear;
 	}
 
-
-
 	public Product(int addedByUser, String title, double price, String description, int imgId, Date createDate,
-			Date updateDate, int quantity, int category_parent, int category_id) {
+			Date updateDate, int quantity, int category_parent, int category_id, String language, int page,
+			String author, int publishYear) {
 		super();
 		this.addedByUser = addedByUser;
 		this.title = title;
@@ -50,12 +54,18 @@ public class Product {
 		this.quantity = quantity;
 		this.category_parent = category_parent;
 		this.category_id = category_id;
+		this.language = language;
+		this.page = page;
+		this.author = author;
+		this.publishYear = publishYear;
 	}
 
 
 
-	public Product() {
 
+
+
+	public Product() {
 	}
 
 
@@ -190,5 +200,62 @@ public class Product {
 		this.category_id = category_id;
 	}
 
+
+
+	public String getLanguage() {
+		return language;
+	}
+
+
+
+	public void setLanguage(String language) {
+		this.language = language;
+	}
+
+
+
+	public int getPage() {
+		return page;
+	}
+
+
+
+	public void setPage(int page) {
+		this.page = page;
+	}
+
+
+
+	public String getAuthor() {
+		return author;
+	}
+
+
+
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+
+
+
+	public int getPublishYear() {
+		return publishYear;
+	}
+
+
+
+	public void setPublishYear(int publishYear) {
+		this.publishYear = publishYear;
+	}
+
+	@Override
+	public String toString() {
+		return "Product [productId=" + productId + ", addedByUser=" + addedByUser + ", title=" + title + ", price="
+				+ price + ", description=" + description + ", imgId=" + imgId + ", createDate=" + createDate
+				+ ", updateDate=" + updateDate + ", quantity=" + quantity + ", category_parent=" + category_parent
+				+ ", category_id=" + category_id + ", language=" + language + ", page=" + page + ", author=" + author
+				+ ", publishYear=" + publishYear + "]";
+	}
+	
 	
 }

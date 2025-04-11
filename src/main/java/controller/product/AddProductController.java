@@ -93,8 +93,12 @@ public class AddProductController extends HttpServlet {
 			}
 
 			// Create the Product object
-			Product p = new Product(user.getUserId(), title, price, description,  imgId,
-					new Date(System.currentTimeMillis()), new Date(System.currentTimeMillis()), quantity,5,1);
+			Product p = new Product();
+					/*
+						 * new Product(user.getUserId(), title, price, description, imgId, new
+						 * Date(System.currentTimeMillis()), new Date(System.currentTimeMillis()),
+						 * quantity,5,1);
+						 */
 
 			// Save the product
 			categoriesService.saveProduct(p);
