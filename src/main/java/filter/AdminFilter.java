@@ -44,7 +44,7 @@ public class AdminFilter extends HttpFilter {
 			session.setAttribute("mess", bundle.getObject("error.access_denied"));
 			session.removeAttribute("user");
 			session.setAttribute("previousUrl", uri);
-			res.sendRedirect("../login");
+			res.sendRedirect("../admin/login");
 			return;
 		}
 		chain.doFilter(req, res);

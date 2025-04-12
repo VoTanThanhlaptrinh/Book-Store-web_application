@@ -1154,7 +1154,7 @@
                     </div>
                </div>
           </header>
-
+<!-- ========== Topbar Start ========== -->
           <!-- Activity Timeline -->
           <div>
                <div class="offcanvas offcanvas-end border-0" tabindex="-1" id="theme-activity-offcanvas"
@@ -1673,12 +1673,12 @@
           <div class="main-nav">
                <!-- Sidebar Logo -->
                <div class="logo-box">
-                    <a href="admin/home" class="logo-dark">
+                    <a href="../admin/home" class="logo-dark">
                          <img src="../webPage/admin/assets/images/logo-sm.png" class="logo-sm" alt="logo sm">
                          <img src="../webPage/admin/assets/images/logo-dark.png" class="logo-lg" alt="logo dark">
                     </a>
 
-                    <a href="admin/home" class="logo-light">
+                    <a href="../admin/home" class="logo-light">
                          <img src="../webPage/admin/assets/images/logo-sm.png" class="logo-sm" alt="logo sm">
                          <img src="../webPage/admin/assets/images/logo-light.png" class="logo-lg" alt="logo light">
                     </a>
