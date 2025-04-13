@@ -312,6 +312,13 @@
 	  const xhr = new XMLHttpRequest();
 	  const minPriceInput = document.getElementById('min-price');
 	  const maxPriceInput = document.getElementById('max-price');
+	  
+	    const url = new URL(window.location.href);
+	    url.searchParams.set("categoryParentId", categoryParentId);
+	    url.searchParams.set("minPrice", minPriceInput);
+	    url.searchParams.set("maxPrice", maxPriceInput);
+	    window.history.pushState({}, "", url);
+	    
 	    document.querySelectorAll('#category-parent-list li').forEach((li) => {
 	        li.classList.remove('active');
 	    });
@@ -350,6 +357,15 @@
   function loadFilteredParentProducts(categoryParentId) {
 		const minPrice = document.getElementById('min-price').value;
 		const maxPrice = document.getElementById('max-price').value;
+		
+	    const url = new URL(window.location.href);
+	    url.searchParams.set("categoryParentId", categoryParentId);
+	    url.searchParams.set("minPrice", minPrice);
+	    url.searchParams.set("maxPrice", maxPrice);
+
+	    window.history.pushState({}, "", url);
+	    
+	    
 		const xhr = new XMLHttpRequest();
 		xhr.open("GET", "FilterServlet?page=1&categoryParentId=" + categoryParentId + "&minPrice=" + minPrice + "&maxPrice=" + maxPrice, true);
 		xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest"); // 👈 Báo hiệu là AJAX
@@ -367,6 +383,14 @@
 	   event.preventDefault();
 		const minPrice = document.getElementById('min-price').value;
 		const maxPrice = document.getElementById('max-price').value;
+		
+	    const url = new URL(window.location.href);
+	    url.searchParams.set("categoryId", categoryId);
+	    url.searchParams.set("minPrice", minPrice);
+	    url.searchParams.set("maxPrice", maxPrice);
+	  
+	    window.history.pushState({}, "", url);
+	    
 		const xhr = new XMLHttpRequest();
 		xhr.open("GET", "FilterServlet?page=1&categoryId=" + categoryId + "&minPrice=" + minPrice + "&maxPrice=" + maxPrice, true);
 		xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest"); // 👈 Báo hiệu là AJAX
@@ -386,7 +410,14 @@
 		    // Lấy giá trị minPrice và maxPrice từ input
 	    const minPrice = document.getElementById('min-price').value;
 	    const maxPrice = document.getElementById('max-price').value;
-
+	    const url = new URL(window.location.href);
+	    url.searchParams.set("categoryParentId", parent);
+	    url.searchParams.set("categoryId", sub);
+	    
+	    url.searchParams.set("minPrice", minPrice);
+	    url.searchParams.set("maxPrice", maxPrice);
+	    window.history.pushState({}, "", url);
+	    
 	    // Tạo một đối tượng XMLHttpRequest để gọi AJAX
 	    const xhr = new XMLHttpRequest();
 	    xhr.open("GET", "FilterServlet?page=" + currentPage 

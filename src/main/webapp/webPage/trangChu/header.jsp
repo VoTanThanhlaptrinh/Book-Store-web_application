@@ -28,20 +28,21 @@
         <div class="center_header">
            
         <div class="search-container">
-        <div class="search-box">
-            <input type="text" placeholder="Tìm kiếm..." id="search-input" >
-            <div class="dropdown-list" id="dropdown-list">
-                <div class="dropdown-item">Item 1</div>
-                <div class="dropdown-item">Item 2</div>
-                <div class="dropdown-item">Item 3</div>
-            </div>
-            <button><lord-icon
-                src="https://cdn.lordicon.com/wjyqkiew.json"
-                trigger="hover"
-                colors="primary:#000000,secondary:#1b1091"
-                style="width:25px;height:25px">
-            </lord-icon></button>
-        </div>
+           <div class="search-container">
+                <form id="search-form" action="SearchServlet" method="GET" class="search-box">
+                  <input type="text" name="keyword" id="search-input" placeholder="Tìm kiếm..." required>
+    
+              
+                  <button type="submit">
+                    <lord-icon
+                      src="https://cdn.lordicon.com/wjyqkiew.json"
+                      trigger="hover"
+                      colors="primary:#000000,secondary:#1b1091"
+                      style="width:25px;height:25px">
+                    </lord-icon>
+                  </button>
+                </form>
+              </div>
     </div> 
         <!-- Lớp phủ -->
         <div class="overlay" id="overlay"></div>
