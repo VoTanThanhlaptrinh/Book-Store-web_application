@@ -68,7 +68,7 @@ public class SearchController extends HttpServlet {
 
 		// Gọi DAO với client
 		SearchProductDAO productDAO = new SearchProductDAO(client);
-		productDAO.createProductsIndexIfNotExists();
+	//	productDAO.createProductsIndexIfNotExists();
 		int totalProducts = productDAO.getTotalSearchProducts(categoryId, categoryParentId, minPrice, maxPrice, keyword);
 		int totalPages = (int) Math.ceil((double) totalProducts / productsPerPage);
 

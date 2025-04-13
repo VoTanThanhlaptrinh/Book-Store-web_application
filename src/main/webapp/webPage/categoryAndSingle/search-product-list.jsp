@@ -8,11 +8,10 @@
 <title>Insert title here</title>
 </head>
 
-			<div class="item-filter-img">
-				<img
-					src="https://cdn1.fahasa.com/media/magentothem/banner7/CanhCutThanToc_840x320.png"
-					alt="">
-			</div>
+         <div class="search-result-log">
+                        <h3>KẾT QUẢ TÌM KIẾM:</h3>
+                        <h3>10 sản phẩm</h3>
+                         </div>
 			<div class="item-filter-sort-type">
 				<h4>Sắp xếp theo:</h4>
 				<div class="item-filter-dropdown">

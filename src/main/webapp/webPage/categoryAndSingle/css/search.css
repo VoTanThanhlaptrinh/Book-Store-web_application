@@ -67,7 +67,7 @@ body {
     background-color: rgb(168, 168, 168); /* Màu sắc */
 }
 .displayli {
-    display: block;
+    display: list-item;
     margin-left: 20px;
     margin-bottom: 12px;
     font-size: 14px;
@@ -80,6 +80,7 @@ body {
     color: #333;
     display: none; /* Ẩn các mục ban đầu */
   } 
+
 .see-more {
     color: #FF8000;
     font-weight: bold;
@@ -108,33 +109,86 @@ body {
     font-weight:  normal;
     line-height:  inherit;
 }
-.price-filter {
+.price-range-container {
     width: 328px;
-    padding: 10px;
-    margin-top: 20px;
-    background-color: white;
-  }
-  
-.price-filter h4 {
-    font-size: 16px;
-    font-weight: bold;
-    color: #ff5d30;
-  }
+    margin-left: 50px;
+    margin-top: 30px;
+}
 
- .price-filter label {
+label {
     display: block;
-    margin-bottom: 12px;
-    margin-left: 20px;
-    font-size: 14px;
-    cursor: pointer; /* Thêm con trỏ chuột */
-    color: #333;
-  }
-  .price-filter label:hover {
-    color: #ff5d30;
-  }
-  .price-filter input[type="checkbox"] {
-    margin-right: 8px;
-  }
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.input-group input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100px;
+    text-align: center;
+}
+
+.slider-container {
+    position: relative;
+    margin-top: 10px;
+}
+
+.slider-track {
+	width: 50%;
+    position: relative;
+    height: 4px;
+    background: #ddd;
+    border-radius: 2px;
+}
+
+.slider-fill {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    background: #007bff;
+    z-index: 1;
+    pointer-events: none; /* Không cho phép tương tác với phần này */
+}
+
+.slider-container input[type="range"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 4px;
+    background: transparent;
+    outline: none;
+    pointer-events: none; /* Vô hiệu hóa tương tác trực tiếp với thanh trượt chính */
+    z-index: 2;
+}
+
+.slider-container input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background: #ff4500;
+    cursor: pointer;
+    border-radius: 50%;
+    pointer-events: auto; /* Cho phép tương tác với nút điều khiển */
+    z-index: 3;
+}
+
+.slider-container input[type="range"]#range-slider-min::-webkit-slider-thumb {
+    background: #007bff; /* Màu cho nút min */
+}
+
+.slider-container input[type="range"]#range-slider-max::-webkit-slider-thumb {
+    background: #28a745; /* Màu cho nút max */
+}
 .item-filter {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Hiệu ứng đổ bóng */
     width: 880px;

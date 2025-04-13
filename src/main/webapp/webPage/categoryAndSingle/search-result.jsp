@@ -40,11 +40,6 @@
 		<p>> Danh mục sản phẩm</p>
 	</div>
 
-	<div class="banner-filter">
-		<img
-			src="https://cdn1.fahasa.com/media/wysiwyg/Thang-02-2025/CT_T3_tag9.png"
-			alt="">
-	</div>
 
 
 	<div class="container">
@@ -313,11 +308,13 @@
 	  const xhr = new XMLHttpRequest();
 	  const minPriceInput = document.getElementById('min-price');
 	  const maxPriceInput = document.getElementById('max-price');
+	  const keyword = document.getElementById("keyword-hidden")?.value;
 	  
 	    const url = new URL(window.location.href);
 	    url.searchParams.set("categoryParentId", categoryParentId);
 	    url.searchParams.set("minPrice", minPriceInput);
 	    url.searchParams.set("maxPrice", maxPriceInput);
+
 	    window.history.pushState({}, "", url);
 	    
 	    document.querySelectorAll('#category-parent-list li').forEach((li) => {
@@ -348,7 +345,7 @@
 	      categoryListElement.innerHTML = html;
 
 	      // 2. Load sản phẩm lọc bằng AJAX khác
-	      loadFilteredParentProducts(categoryParentId, minPriceInput.value, maxPriceInput.value);
+	      loadFilteredParentProducts(categoryParentId);
 	    }
 	  };
 
@@ -363,13 +360,13 @@
 	    url.searchParams.set("categoryParentId", categoryParentId);
 	    url.searchParams.set("minPrice", minPrice);
 	    url.searchParams.set("maxPrice", maxPrice);
-	    url.searchParams.set("keywork", keyword);
+	  
 	    window.history.pushState({}, "", url);
 	    
 	    
 		const xhr = new XMLHttpRequest();
 		xhr.open("GET", "SearchServlet?page=1&categoryParentId=" + categoryParentId + "&minPrice=" +
-				minPrice + "&maxPrice=" + maxPrice+ "&keywork=" + keyword, true);
+				minPrice + "&maxPrice=" + maxPrice+ "&keyword=" + keyword, true);
 		xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest"); // 👈 Báo hiệu là AJAX
 
 		xhr.onload = function () {
@@ -390,11 +387,11 @@
 	    url.searchParams.set("categoryId", categoryId);
 	    url.searchParams.set("minPrice", minPrice);
 	    url.searchParams.set("maxPrice", maxPrice);
-	    url.searchParams.set("keywork", keyword);
+	
 	    window.history.pushState({}, "", url);
 	    
 		const xhr = new XMLHttpRequest();
-		xhr.open("GET", "SearchServlet?page=1&categoryId=" + categoryId + "&minPrice=" + minPrice + "&maxPrice=" + maxPrice+ "&keywork=" + keyword, true);
+		xhr.open("GET", "SearchServlet?page=1&categoryId=" + categoryId + "&minPrice=" + minPrice + "&maxPrice=" + maxPrice+ "&keyword=" + keyword, true);
 		xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest"); // 👈 Báo hiệu là AJAX
 
 		xhr.onload = function () {
@@ -419,7 +416,7 @@
 	    
 	    url.searchParams.set("minPrice", minPrice);
 	    url.searchParams.set("maxPrice", maxPrice);
-	    url.searchParams.set("keywork", keyword);
+	
 	    window.history.pushState({}, "", url);
 	    
 	    // Tạo một đối tượng XMLHttpRequest để gọi AJAX
@@ -429,7 +426,7 @@
 	    				+ "&categoryId=" + sub
 	                  + "&minPrice=" + minPrice 
 	                  + "&maxPrice=" + maxPrice
-	                  + "&keywork=" + keyword, true);
+	                  + "&keyword=" + keyword, true);
 	    xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest"); // Báo hiệu là AJAX
 
 	    xhr.onload = function () {
