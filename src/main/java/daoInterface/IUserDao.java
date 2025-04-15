@@ -4,7 +4,7 @@ import java.util.List;
 
 import models.User;
 public interface IUserDao {
-	List<User> getUsers();
+	List<User> getUsers(int page, int pageSize);
 
 	User findByUserId(int userId);
 
@@ -22,4 +22,8 @@ public interface IUserDao {
 	User getUserByMail(String mail);
 
 	void activateUser(User user);
+
+	int getTotalUsers();
+
+	List<Integer> getListImgIds(List<User> users);
 }

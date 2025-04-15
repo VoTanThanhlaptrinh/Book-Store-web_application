@@ -5,11 +5,24 @@ import java.util.Objects;
 public class Resource {
 	private String url;
 	private int permission;
-
+	private String name;
 	public Resource(String url, int permission) {
 		super();
 		this.url = (url == null) ? "" : url;
 		this.permission = permission;
+	}
+
+	public Resource(String url, String name) {
+		super();
+		this.url = url;
+		this.name = name;
+	}
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getUrl() {

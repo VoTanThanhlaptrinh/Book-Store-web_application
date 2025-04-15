@@ -2138,9 +2138,6 @@ span, svg {
 	</div>
 	<!-- END Wrapper -->
 
-	<!-- Vendor Javascript (Require in all Page) -->
-	<script src="../webPage/admin/assets/js/vendor.js"></script>
-
 	<!-- App Javascript (Require in all Page) -->
 	<script src="../webPage/admin/assets/js/app.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

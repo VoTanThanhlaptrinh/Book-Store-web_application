@@ -8,7 +8,7 @@ import com.zaxxer.hikari.HikariDataSource;
 
 public class DatabaseConnection {
     private static final String DRIVER_CLASS = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-    private static final String URL = "jdbc:sqlserver://localhost\\SQLEXPRESS;databaseName=book_store;encrypt=true;trustServerCertificate=true";
+    private static final String URL = "jdbc:sqlserver://127.0.0.1\\SQLEXPRESS;databaseName=book_store;encrypt=true;trustServerCertificate=true";
     private static final String USERNAME = "user_login";
     private static final String PASSWORD = "123";
     private static final int MAX_POOL_SIZE = 100;
@@ -49,4 +49,5 @@ public class DatabaseConnection {
             dataSource.close();
         }
     }
+   
 }
