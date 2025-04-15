@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.StringTokenizer;
 
 import daoInterface.IUserDao;
 import models.Resource;
@@ -19,22 +20,86 @@ import service.DatabaseConnection;
 public class UserDAOImp implements IUserDao {
 // sử dụng try-with-resource
 	@Override
-	public List<User> getUsers() {
-		List<User> users = new ArrayList<>();
+	public List<User> getUsers(int page, int pageSize) {
+		List<User> users = new ArrayList<User>();
+		int offset = pageSize * (page - 1);
+		String sql = """
+					SELECT
+				    u.user_id,
+				    u.username,
+				    u.password,
+				    u.create_date,
+				    u.email,
+				    u.update_date,
+				    u.is_social_login,
+				    u.status,
+				    u.is_activate,
+				    urls.urls,
+				    urls.levels,
+				    roles.roles
+				FROM User_1 u
+				LEFT JOIN (
+				    SELECT u_r_p.user_id,
+				           STRING_AGG(r.url, ',') AS urls,
+				           STRING_AGG(p.level, ',') AS levels
+				    FROM User_Resource_Permission u_r_p
+				    JOIN Resource r ON u_r_p.resource_id = r.id
+				    JOIN Permission p ON u_r_p.permission_id = p.id
+				    GROUP BY u_r_p.user_id
+				) urls ON u.user_id = urls.user_id
+				LEFT JOIN (
+				    SELECT r_u.user_id, STRING_AGG(role.content, ',') AS roles
+				    FROM Role_User r_u
+				    JOIN Role role ON r_u.role_id = role.role_id
+				    GROUP BY r_u.user_id
+				) roles ON u.user_id = roles.user_id
+				ORDER BY u.user_id
+				OFFSET ? ROWS FETCH NEXT ? ROWS ONLY;
+								""";
+
 		try (Connection con = DatabaseConnection.getConnection();
-				PreparedStatement statement = con.prepareStatement("select * from User_1");
-				ResultSet resultSet = statement.executeQuery();) {
-			while (resultSet.next()) {
-				int id = resultSet.getInt(1);
-				String userName = resultSet.getNString(2);
-				String password = resultSet.getNString(3);
-				Date createDate = resultSet.getDate(4);
-				String email = resultSet.getNString(5);
-				Date updatedate = resultSet.getDate(6);
-				users.add(new User(id, userName, password, email, createDate, updatedate));
+				PreparedStatement statement = con.prepareStatement(sql)) {
+			statement.setInt(1, offset);
+			statement.setInt(2, pageSize);
+			try (ResultSet rs = statement.executeQuery()) {
+				while (rs.next()) {
+					int userId = rs.getInt(1);
+					String username = rs.getNString(2);
+					String password = rs.getNString(3);
+					Date date = rs.getDate(4);
+					String email = rs.getNString(5);
+					Date updateDate = rs.getDate(6);
+					User user = new User(userId, username, password, email, date, updateDate);
+					user.setSocialLogin(rs.getBoolean(7));
+					user.setStatus(rs.getNString(8));
+					user.setActivate(rs.getBoolean(9));
+					// xử lý cho resource
+					String url = rs.getString(10);
+					Set<Resource> resources = new HashSet<Resource>();
+					if (url != null) {
+						StringTokenizer levels = new StringTokenizer(rs.getString(11), ",");
+						StringTokenizer urls = new StringTokenizer(url, ",");
+						while (urls.hasMoreTokens()) {
+							resources.add(new Resource(urls.nextToken(), Integer.valueOf(levels.nextToken().trim())));
+						}
+					}
+					user.setResources(resources);
+					// xử lý cho roles
+					String role = rs.getString(12);
+					Set<String> roleContents = new HashSet<String>();
+					if (role != null) {
+						StringTokenizer roles = new StringTokenizer(role, ",");
+						while (roles.hasMoreTokens()) {
+							roleContents.add(roles.nextToken());
+						}
+					}
+
+					user.setRoles(roleContents);
+					users.add(user);
+				}
 			}
+
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return users;
@@ -43,35 +108,76 @@ public class UserDAOImp implements IUserDao {
 	@Override
 	public User findByUserId(int userId) {
 		User user = null;
-		Set<String> roles = new HashSet<>();
-		Set<Resource> resources = new HashSet<>();
+		String sql = """
+					SELECT
+				    u.user_id,
+				    u.username,
+				    u.password,
+				    u.create_date,
+				    u.email,
+				    u.update_date,
+				    u.is_social_login,
+				    u.status,
+				    u.is_activate,
+				    urls.urls,
+				    urls.levels,
+				    roles.roles
+				FROM User_1 u
+				LEFT JOIN (
+				    SELECT u_r_p.user_id,
+				           STRING_AGG(r.url, ',') AS urls,
+				           STRING_AGG(p.level, ',') AS levels
+				    FROM User_Resource_Permission u_r_p
+				    JOIN Resource r ON u_r_p.resource_id = r.id
+				    JOIN Permission p ON u_r_p.permission_id = p.id
+				    GROUP BY u_r_p.user_id
+				) urls ON u.user_id = urls.user_id
+				LEFT JOIN (
+				    SELECT r_u.user_id, STRING_AGG(role.content, ',') AS roles
+				    FROM Role_User r_u
+				    JOIN Role role ON r_u.role_id = role.role_id
+				    GROUP BY r_u.user_id
+				) roles ON u.user_id = roles.user_id
+				where u.user_id = ?
+								""";
+
 		try (Connection con = DatabaseConnection.getConnection();
-				PreparedStatement statement = con.prepareStatement("select u.*,r.url,p.level,role.content from User_1 u"
-						+ " left join User_Resource_Permission u_r_p on u.user_id = u_r_p.user_id"
-						+ " left join Resource r on u_r_p.resource_id = r.id"
-						+ " left join Permission p on u_r_p.permission_id = p.id"
-						+ " left join Role_User r_u on r_u.user_id = u.user_id"
-						+ " left join Role role on role.role_id = r_u.role_id"
-						+ " where u.user_id = ?")) {
+				PreparedStatement statement = con.prepareStatement(sql);) {
 			statement.setInt(1, userId);
-			try (ResultSet resultSet = statement.executeQuery();) {
-				while (resultSet.next()) {
-					if(user == null) {
-						String username = resultSet.getNString(2);
-						String password = resultSet.getNString(3);
-						Date date = resultSet.getDate(4);
-						String email = resultSet.getNString(5);
-						Date updateDate = resultSet.getDate(6);
-						user = new User(userId, username, password, email, date, updateDate);
-						user.setSocialLogin(resultSet.getBoolean(7));
-						user.setStatus(resultSet.getNString(8));
-						user.setActivate(resultSet.getBoolean(9));
+			try (ResultSet rs = statement.executeQuery();) {
+				if (rs.next()) {
+					String username = rs.getNString(2);
+					String password = rs.getNString(3);
+					Date date = rs.getDate(4);
+					String email = rs.getNString(5);
+					Date updateDate = rs.getDate(6);
+					user = new User(userId, username, password, email, date, updateDate);
+					user.setSocialLogin(rs.getBoolean(7));
+					user.setStatus(rs.getNString(8));
+					user.setActivate(rs.getBoolean(9));
+					// xử lý cho resource
+					String url = rs.getString(10);
+					Set<Resource> resources = new HashSet<Resource>();
+					if (url != null) {
+						StringTokenizer levels = new StringTokenizer(rs.getString(11), ",");
+						StringTokenizer urls = new StringTokenizer(url, ",");
+						while (urls.hasMoreTokens()) {
+							resources.add(new Resource(urls.nextToken(), Integer.valueOf(levels.nextToken().trim())));
+						}
 					}
-					resources.add(new Resource(resultSet.getString(10), resultSet.getInt(11)));
-					roles.add(resultSet.getString(12));
+					user.setResources(resources);
+					// xử lý cho roles
+					String role = rs.getString(12);
+					Set<String> roleContents = new HashSet<String>();
+					if (role != null) {
+						StringTokenizer roles = new StringTokenizer(role, ",");
+						while (roles.hasMoreTokens()) {
+							roleContents.add(roles.nextToken());
+						}
+					}
+
+					user.setRoles(roleContents);
 				}
-				user.setRoles(roles);
-				user.setResources(resources);
 			} catch (Exception e) {
 				// TODO: handle exception
 				e.printStackTrace();
@@ -88,7 +194,7 @@ public class UserDAOImp implements IUserDao {
 		// TODO Auto-generated method stub
 		int userId = 0;
 		Connection con = null;
-		try  {
+		try {
 			con = DatabaseConnection.getConnection();
 			PreparedStatement preparedStatement = con.prepareStatement(
 					"insert into User_1 (username,password,create_date,email,update_date,is_social_login,status,is_activate) values(?,?,?,?,?,?,?,?,?) ",
@@ -104,7 +210,8 @@ public class UserDAOImp implements IUserDao {
 			preparedStatement.setBoolean(8, user.isActivate());
 			preparedStatement.executeUpdate();
 			try (ResultSet resultSet = preparedStatement.getGeneratedKeys();
-				PreparedStatement preStatement = con.prepareStatement("insert into Role_User(role_id,user_id) values(2,?)")) {
+					PreparedStatement preStatement = con
+							.prepareStatement("insert into Role_User(role_id,user_id) values(2,?)")) {
 				if (resultSet.next()) {
 					userId = resultSet.getInt(1);
 					preStatement.setInt(1, userId);
@@ -117,23 +224,23 @@ public class UserDAOImp implements IUserDao {
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-		    if (con != null) {
-		        try {
-		            con.rollback(); // Rollback nếu có lỗi
-		        } catch (SQLException rollbackEx) {
-		            rollbackEx.printStackTrace();
-		        }
-		    }
-		    e.printStackTrace();
-		}finally {
 			if (con != null) {
-		        try {
-		            con.setAutoCommit(true); // Trả lại trạng thái mặc định
-		            con.close(); // Đóng connection
-		        } catch (SQLException closeEx) {
-		            closeEx.printStackTrace();
-		        }
-		    }
+				try {
+					con.rollback(); // Rollback nếu có lỗi
+				} catch (SQLException rollbackEx) {
+					rollbackEx.printStackTrace();
+				}
+			}
+			e.printStackTrace();
+		} finally {
+			if (con != null) {
+				try {
+					con.setAutoCommit(true); // Trả lại trạng thái mặc định
+					con.close(); // Đóng connection
+				} catch (SQLException closeEx) {
+					closeEx.printStackTrace();
+				}
+			}
 		}
 		return userId;
 	}
@@ -170,37 +277,76 @@ public class UserDAOImp implements IUserDao {
 	@Override
 	public User findByUserName(String username) {
 		User user = null;
-		Set<String> roles = new HashSet<>();
-		Set<Resource> resources = new HashSet<>();
+		String sql = """
+					SELECT
+				    u.user_id,
+				    u.username,
+				    u.password,
+				    u.create_date,
+				    u.email,
+				    u.update_date,
+				    u.is_social_login,
+				    u.status,
+				    u.is_activate,
+				    urls.urls,
+				    urls.levels,
+				    roles.roles
+				FROM User_1 u
+				LEFT JOIN (
+				    SELECT u_r_p.user_id,
+				           STRING_AGG(r.url, ',') AS urls,
+				           STRING_AGG(p.level, ',') AS levels
+				    FROM User_Resource_Permission u_r_p
+				    JOIN Resource r ON u_r_p.resource_id = r.id
+				    JOIN Permission p ON u_r_p.permission_id = p.id
+				    GROUP BY u_r_p.user_id
+				) urls ON u.user_id = urls.user_id
+				LEFT JOIN (
+				    SELECT r_u.user_id, STRING_AGG(role.content, ',') AS roles
+				    FROM Role_User r_u
+				    JOIN Role role ON r_u.role_id = role.role_id
+				    GROUP BY r_u.user_id
+				) roles ON u.user_id = roles.user_id
+				where u.username = ?
+								""";
 		try (Connection con = DatabaseConnection.getConnection();
-				PreparedStatement statement = con.prepareStatement("select u.*,r.url,p.level,role.content from User_1 u"
-						+ " left join User_Resource_Permission u_r_p on u.user_id = u_r_p.user_id"
-						+ " left join Resource r on u_r_p.resource_id = r.id"
-						+ " left join Permission p on u_r_p.permission_id = p.id"
-						+ " left join Role_User r_u on r_u.user_id = u.user_id"
-						+ " left join Role role on role.role_id = r_u.role_id"
-						+ " where u.username = ?")) {
+				PreparedStatement statement = con.prepareStatement(sql);) {
 			statement.setNString(1, username);
-			try (ResultSet resultSet = statement.executeQuery();) {
-				while (resultSet.next()) {
-					if(user == null) {
-						int userId = resultSet.getInt(1);
-						String password = resultSet.getNString(3);
-						Date date = resultSet.getDate(4);
-						String email = resultSet.getNString(5);
-						Date updateDate = resultSet.getDate(6);
-						user = new User(userId, username, password, email, date, updateDate);
-						user.setSocialLogin(resultSet.getBoolean(7));
-						user.setStatus(resultSet.getNString(8));
-						user.setActivate(resultSet.getBoolean(9));
+			try (ResultSet rs = statement.executeQuery();) {
+				if (rs.next()) {
+					int userId = rs.getInt(1);
+					String password = rs.getNString(3);
+					Date date = rs.getDate(4);
+					String email = rs.getNString(5);
+					Date updateDate = rs.getDate(6);
+					user = new User(userId, username, password, email, date, updateDate);
+					user.setSocialLogin(rs.getBoolean(7));
+					user.setStatus(rs.getNString(8));
+					user.setActivate(rs.getBoolean(9));
+					// xử lý cho resource
+					String url = rs.getString(10);
+					Set<Resource> resources = new HashSet<Resource>();
+					if (url != null) {
+						StringTokenizer levels = new StringTokenizer(rs.getString(11), ",");
+						StringTokenizer urls = new StringTokenizer(url, ",");
+						while (urls.hasMoreTokens()) {
+							resources.add(new Resource(urls.nextToken(), Integer.valueOf(levels.nextToken().trim())));
+						}
 					}
-					
-					resources.add(new Resource(resultSet.getString(10), resultSet.getInt(11)));
-					roles.add(resultSet.getString(12));
-					
+					user.setResources(resources);
+					// xử lý cho roles
+					String role = rs.getString(12);
+					Set<String> roleContents = new HashSet<String>();
+					if (role != null) {
+						StringTokenizer roles = new StringTokenizer(role, ",");
+						while (roles.hasMoreTokens()) {
+							roleContents.add(roles.nextToken());
+						}
+					}
+
+					user.setRoles(roleContents);
+					user.setResources(resources);
 				}
-				user.setRoles(roles);
-				user.setResources(resources);
 			} catch (Exception e) {
 				// TODO: handle exception
 				e.printStackTrace();
@@ -211,8 +357,6 @@ public class UserDAOImp implements IUserDao {
 		}
 		return user;
 	}
-
-	
 
 	@Override
 	public boolean checkEmail(String email) {
@@ -236,44 +380,86 @@ public class UserDAOImp implements IUserDao {
 	@Override
 	public User getUserByMail(String email) {
 		User user = null;
-		Set<String> roles = new HashSet<>();
-		Set<Resource> resources = new HashSet<>();
+		String sql = """
+					SELECT
+				    u.user_id,
+				    u.username,
+				    u.password,
+				    u.create_date,
+				    u.email,
+				    u.update_date,
+				    u.is_social_login,
+				    u.status,
+				    u.is_activate,
+				    urls.urls,
+				    urls.levels,
+				    roles.roles
+				FROM User_1 u
+				LEFT JOIN (
+				    SELECT u_r_p.user_id,
+				           STRING_AGG(r.url, ',') AS urls,
+				           STRING_AGG(p.level, ',') AS levels
+				    FROM User_Resource_Permission u_r_p
+				    JOIN Resource r ON u_r_p.resource_id = r.id
+				    JOIN Permission p ON u_r_p.permission_id = p.id
+				    GROUP BY u_r_p.user_id
+				) urls ON u.user_id = urls.user_id
+				LEFT JOIN (
+				    SELECT r_u.user_id, STRING_AGG(role.content, ',') AS roles
+				    FROM Role_User r_u
+				    JOIN Role role ON r_u.role_id = role.role_id
+				    GROUP BY r_u.user_id
+				) roles ON u.user_id = roles.user_id
+				where u.email = ?
+								""";
+
 		try (Connection con = DatabaseConnection.getConnection();
-				PreparedStatement statement = con.prepareStatement("select u.*,r.url,p.level,role.content from User_1 u"
-						+ " left join User_Resource_Permission u_r_p on u.user_id = u_r_p.user_id"
-						+ " left join Resource r on u_r_p.resource_id = r.id"
-						+ " left join Permission p on u_r_p.permission_id = p.id"
-						+ " left join Role_User r_u on r_u.user_id = u.user_id"
-						+ " left join Role role on role.role_id = r_u.role_id"
-						+ " where u.email = ?")) {
+				PreparedStatement statement = con.prepareStatement(sql);) {
 			statement.setNString(1, email);
-			try (ResultSet resultSet = statement.executeQuery();) {
-				while (resultSet.next()) {
-					if(user == null) {
-						int userId = resultSet.getInt(1);
-						String username = resultSet.getNString(2);
-						String password = resultSet.getNString(3);
-						Date date = resultSet.getDate(4);
-						Date updateDate = resultSet.getDate(6);
-						user = new User(userId, username, password, email, date, updateDate);
-						user.setSocialLogin(resultSet.getBoolean(7));
-						user.setStatus(resultSet.getNString(8));
-						user.setActivate(resultSet.getBoolean(9));
+			try (ResultSet rs = statement.executeQuery();) {
+				if (rs.next()) {
+					int userId = rs.getInt(1);
+					String username = rs.getNString(2);
+					String password = rs.getNString(3);
+					Date date = rs.getDate(4);
+
+					Date updateDate = rs.getDate(6);
+					user = new User(userId, username, password, email, date, updateDate);
+					user.setSocialLogin(rs.getBoolean(7));
+					user.setStatus(rs.getNString(8));
+					user.setActivate(rs.getBoolean(9));
+					// xử lý cho resource
+					String url = rs.getString(10);
+					Set<Resource> resources = new HashSet<Resource>();
+					if (url != null) {
+						StringTokenizer levels = new StringTokenizer(rs.getString(11), ",");
+						StringTokenizer urls = new StringTokenizer(url, ",");
+						while (urls.hasMoreTokens()) {
+							resources.add(new Resource(urls.nextToken(), Integer.valueOf(levels.nextToken().trim())));
+						}
 					}
-					resources.add(new Resource(resultSet.getString(10), resultSet.getInt(11)));
-					roles.add(resultSet.getString(12));
+					user.setResources(resources);
+					// xử lý cho roles
+					String role = rs.getString(12);
+					Set<String> roleContents = new HashSet<String>();
+					if (role != null) {
+						StringTokenizer roles = new StringTokenizer(role, ",");
+						while (roles.hasMoreTokens()) {
+							roleContents.add(roles.nextToken());
+						}
+					}
+
+					user.setRoles(roleContents);
+					user.setResources(resources);
 				}
-				user.setRoles(roles);
-				user.setResources(resources);
-			} catch (Exception e) {
-				// TODO: handle exception
-				e.printStackTrace();
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+
 		}
 		return user;
+
 	}
 
 	@Override
@@ -290,5 +476,62 @@ public class UserDAOImp implements IUserDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public int getTotalUsers() {
+		int total = 0;
+		try (Connection con = DatabaseConnection.getConnection();
+				PreparedStatement preparedStatement = con.prepareStatement("select count(user_id) from User_1");) {
+			ResultSet rs = preparedStatement.executeQuery();
+			if (rs.next())
+				total = rs.getInt(1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return total;
+	}
+
+	@Override
+	public List<Integer> getListImgIds(List<User> users) {
+		List<Integer> imgIds = new ArrayList<Integer>();
+		StringBuilder sql = new StringBuilder("""
+				    SELECT info.img_id
+				    FROM User_1 u
+				    left join Information info on u.user_id = info.user_id
+				    WHERE u.user_id in
+				""");
+
+		sql.append("(");
+		for (int i = 0; i < users.size() - 1; i++) {
+			sql.append("?,");
+		}
+		sql.append("?)");
+
+		try (Connection con = DatabaseConnection.getConnection();
+				PreparedStatement statement = con.prepareStatement(sql.toString());) {
+			int i = 0;
+			for (User user : users) {
+				statement.setInt(++i, user.getUserId());
+			}
+
+			try (ResultSet resultSet = statement.executeQuery();) {
+				while (resultSet.next()) {
+					int imgId = resultSet.getInt(1);
+					if (imgId == 0)
+						imgIds.add(37);
+					else
+						imgIds.add(imgId);
+				}
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return imgIds;
 	}
 }

@@ -15,7 +15,7 @@ public class User {
 	private String status;
 	private boolean isActivate;
 	private Set<Resource> resources;
-
+	
 	public User(int userId, String username, String password, String email, Date createDate, Date updaDate) {
 		super();
 		this.userId = userId;
@@ -176,4 +176,13 @@ public class User {
 		// TODO Auto-generated method stub
 		return resources.stream().filter(r -> r.checkPath(path)).count() > 0;
 	}
+
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", username=" + username + ", password=" + password + ", email=" + email
+				+ ", createDate=" + createDate + ", updateDate=" + updateDate + ", roles=" + roles + ", isSocialLogin="
+				+ isSocialLogin + ", status=" + status + ", isActivate=" + isActivate + ", resources=" + resources
+				+ "]";
+	}
+	
 }

@@ -2,6 +2,7 @@ package service;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
 
 import models.Image;
 import models.Information;
@@ -39,5 +40,12 @@ public interface ILoginService {
 	void activateUser(User user);
 
 	int register(User user);
+	
+	List<User> getListUser(int page, int pageSize);
 
+	int getTotalUsers();
+
+	List<Integer> getListImgIds(List<User> users);
+	
+	User getUserByUserId(int userId);
 }
