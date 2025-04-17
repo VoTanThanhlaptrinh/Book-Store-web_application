@@ -17,7 +17,6 @@ public class HienThiDonTrongGioHangImplement implements GioHangInterface{
 	CartItemDAOImp cartItemDao = new CartItemDAOImp();
 	CartDAOImp cartDao = new CartDAOImp();
 	User user;
-
 	Cart cart;
 	
 	public HienThiDonTrongGioHangImplement(User user) {

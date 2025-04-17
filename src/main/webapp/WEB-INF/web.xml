@@ -41,29 +41,32 @@
     <url-pattern>/checkout</url-pattern>
     <url-pattern>/reset</url-pattern>
   </filter-mapping>
-
-	<!-- start Filter -->
-
-	<filter-mapping>
-		<filter-name>loginFilter</filter-name>
-		<url-pattern>/checkout</url-pattern>
-		<url-pattern>/confirm</url-pattern>
-	</filter-mapping>
-
-	<filter-mapping>
-		<filter-name>activateFilter</filter-name>
-		<url-pattern>/checkout</url-pattern>
-		<url-pattern>/reset</url-pattern>
-	</filter-mapping>
-	
-	<!-- end Filter -->
-	<context-param>
-	    <param-name>FACEBOOK_APP_ID</param-name>
-	    <param-value>1862835147867306</param-value>
-	</context-param>
-	<context-param>
-	    <param-name>FACEBOOK_APP_SECRET</param-name>
-	    <param-value>776df64d498b035596d3269f58f68942</param-value>
-	</context-param>
+  <filter-mapping>
+    <filter-name>loginFilter</filter-name>
+    <url-pattern>/checkout</url-pattern>
+    <url-pattern>/confirm</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>activateFilter</filter-name>
+    <url-pattern>/checkout</url-pattern>
+    <url-pattern>/reset</url-pattern>
+  </filter-mapping>
+  <context-param>
+    <param-name>FACEBOOK_APP_ID</param-name>
+    <param-value>1862835147867306</param-value>
+  </context-param>
+  <context-param>
+    <param-name>FACEBOOK_APP_SECRET</param-name>
+    <param-value>776df64d498b035596d3269f58f68942</param-value>
+  </context-param>
+  <servlet>
+    <description></description>
+    <display-name>FishingController</display-name>
+    <servlet-name>FishingController</servlet-name>
+    <servlet-class>controller.category_checkout.FishingController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FishingController</servlet-name>
+    <url-pattern>/FishingController</url-pattern>
+  </servlet-mapping>
 </web-app>
-

@@ -234,9 +234,11 @@ public class CartItemDAOImp implements ICartItemDao {
 
 
 
-//	public static void main(String[] args) {
-//		CartItemDAOImp dao = new CartItemDAOImp();
+	public static void main(String[] args) {
+		CartItemDAOImp dao = new CartItemDAOImp();
 //		Date currentDate = new Date(System.currentTimeMillis()); 
-//	//	System.out.println(dao.updateQuantityProduct(55, 33)); 
-//	}
+	//	System.out.println(dao.updateQuantityProduct(55, 33)); 
+		int stock = dao.getProductQuantityByProductId(1);
+		System.out.println(stock);
+	}
 }

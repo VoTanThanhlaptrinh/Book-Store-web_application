@@ -8,7 +8,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import models.Cart;
+import models.CartData;
 import models.CartItem;
+import models.CartProductDetail;
 import models.OrderItem;
 
 import java.io.IOException;
@@ -38,41 +40,50 @@ public class OrderController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		String orderDataJson = request.getParameter("orderData");
 		CartItemDAOImp daoCart = new CartItemDAOImp();
-		  
+		if(orderDataJson==null || orderDataJson.isEmpty()) {
+			System.out.println("không có dữ liệu đơn hàng");
+		}
 
 		if (orderDataJson != null && !orderDataJson.isEmpty()) {
+			System.out.println("Có dữ liệu đơn hàng");
 			Gson gson = new Gson();
-			List<CartItem> cartItems = gson.fromJson(orderDataJson, new TypeToken<List<CartItem>>() {
-			}.getType());
+			CartData cartData = gson.fromJson(orderDataJson, CartData.class);
 
-			if (!cartItems.isEmpty()) {
-				List<String> errors = new ArrayList<>();
-
-				for (CartItem item : cartItems) {
-					int productId = item.getProductId();
-					int quantity = item.getQuantity();
-
-					int availableStock = daoCart.getProductQuantityByProductId(productId);
-					
-					
-					System.out.println(productId);
-					System.out.println(quantity);
-					System.out.println(availableStock);
-					if (availableStock < quantity) {
-						errors.add("Sản phẩm ID " + productId + " không đủ hàng (cần " + quantity + ", còn "
-								+ availableStock + ")");
-					    request.setAttribute("errors", errors);
-					    request.getRequestDispatcher("webPage/giohang/cart.jsp").forward(request, response);
-					    return;
-					}
-				}
-				
-				request.getRequestDispatcher("webPage/order/order.jsp").forward(request, response);
+			List<CartProductDetail> cDetails = cartData.getCartProductDetails();
+			
+			if (cDetails == null) {
+				System.out.println("null");
+				request.getRequestDispatcher("webPage/giohang/cart.jsp").forward(request, response);
+				return;
 			}
+			
+			double total = cartData.getTotal();
+			for (CartProductDetail c : cDetails) {
+				int quantity = c.getQuantity();
+				int pbQuantity = daoCart.getProductQuantityByProductId(c.getProductId());
+				System.out.println(quantity+" "+pbQuantity+" "+c.getImgId());
+				if (quantity > pbQuantity) {
+					System.out.println("so lượng mua nhiều hơn tồn kho");
+					request.getRequestDispatcher("webPage/giohang/cart.jsp").forward(request, response);
+					return;
+				}
 
+			}
+						
+			HttpSession session = request.getSession();
+			session.setAttribute("cDetails", cDetails);
+			session.setAttribute("cDetailsSize", cDetails.size());
+			session.setAttribute("total", total);
+			request.getRequestDispatcher("webPage/order/order.jsp").forward(request, response);
 		}
+
 	}
 
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doPost(request, response);
+	}
 }

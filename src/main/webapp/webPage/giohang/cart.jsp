@@ -38,8 +38,7 @@
 				<!--tieu de  -->
 				<div class="cart_table">
 					<ul class="left">
-						<li>
-							Sản phẩm</li>
+						<li>Sản phẩm</li>
 					</ul>
 					<ul class="right">
 						<li>Đơn giá</li>
@@ -55,9 +54,11 @@
 						<div class="cart_product_info">
 							<div class="list">
 								<ul>
-									<li><input type="checkbox" class="cart_list-checkbox" data-product-id="${item.getProductId()}" data-cart-id="${item.getCartItemId()}"></li>
+									<li><input type="checkbox" class="cart_list-checkbox"
+										data-product-id="${item.getProductId()}"
+										data-cart-id="${item.getCartItemId()}"></li>
 									<li><img src="getImage?img_id=${item.getImgId()}" alt=""
-										class="img"></li>
+										class="img" data-img-id="${item.getImgId()}"></li>
 									<li class="productname">${item.getName()}</li>
 								</ul>
 								<ul class="right">
@@ -92,17 +93,18 @@
 				<!-- dat hang -->
 				<div class="cart_table cart_order">
 					<ul class="left">
-						<li><input type="checkbox" class="cart_list-checkbox" data-product-id="${item.getProductId()}"></li>
-						<li>Chọn tất cả</li>
+						<li><input type="checkbox" class="cart_list-checkbox"
+							data-product-id="${item.getProductId()}">Chọn tất cả</li>
 					</ul>
 					<ul class="right">
-						<li>Tổng tiền: </li>
+						<li>Tổng tiền:</li>
 						<li>
-            <form id="orderForm" action="order" method="post">
-               <input type="hidden" name="orderData" id="orderData">
-                <button type="submit" class="order">Mua hàng</button>
-            </form>
-        </li>
+							<form id="orderForm" action="order" method="post">
+								<input type="hidden" name="orderData" id="orderData">
+								<button type="submit" class="order">Mua hàng</button>
+							</form>
+
+						</li>
 					</ul>
 				</div>
 		</div>
@@ -122,10 +124,10 @@
 		</c:if>
 		<footer class="footer"> </footer>
 	</div>
-	
+
 	<!--script -->
 	<script src="webPage/giohang/js/cart.js"></script>
-	
+
 </body>
 
 </html>
