@@ -21,12 +21,17 @@
 <title>Trang chủ</title>
 </head>
 <body>
+
     <c:if test="${user != null}">
         <div id="header-placeholder"><jsp:include page="/webPage/trangChu/re-header.jsp"></jsp:include></div>
     </c:if>
     <c:if test="${user == null}">
         <div id="header-placeholder"><jsp:include page="/webPage/trangChu/header.jsp"></jsp:include></div>
     </c:if>
+    
+    
+    
+    
 
      <div class="banner_div">
             <div class="banner_1">
@@ -360,6 +365,8 @@
     <div id="footer-placeholder">
         <jsp:include page="/webPage/trangChu/footer.jsp"></jsp:include>
     </div>
+    
+    
     <script src="webPage/trangChu/js/footer.js"></script>
     <script src="webPage/trangChu/js/header.js"></script>
 </body>

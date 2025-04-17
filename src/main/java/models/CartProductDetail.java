@@ -25,7 +25,16 @@ public class CartProductDetail {
 		this.pd_Quantity = pd_Quantity;
 	}
 
-
+	public CartProductDetail(int cartItemId, int productId, String name, int quantity, double price,
+			int imgId) {
+		super();
+		this.cartItemId = cartItemId;
+		this.productId = productId;
+		this.name = name;
+		this.quantity = quantity;
+		this.price = price;
+		this.imgId = imgId;
+	}
 	public CartProductDetail() {
 		// TODO Auto-generated constructor stub
 	}

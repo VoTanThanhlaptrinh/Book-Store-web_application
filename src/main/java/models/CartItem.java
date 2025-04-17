@@ -31,6 +31,8 @@ public class CartItem {
 		
 	}
 
+	
+	
 	public CartItem() {
 		
 	}
