@@ -31,119 +31,74 @@ public class SearchProductDAO {
   
     public List<FilterProduct> getSearchProducts(int limit, int offset, Integer categoryId, Integer categoryParentId, Double minPrice, Double maxPrice, String searchKeyword) {
         List<FilterProduct> products = new ArrayList<>();
-        Connection con = null;
-
         try {
-            // 1. Tìm product_id bằng Elasticsearch dựa vào searchKeyword
-            List<Integer> matchedIds = new ArrayList<>();
+            // Bắt đầu xây dựng query
+            BoolQuery.Builder boolQueryBuilder = new BoolQuery.Builder();
+
+            // Tìm kiếm theo từ khóa (có thể sai chính tả, không dấu, thiếu chữ...)
             if (searchKeyword != null && !searchKeyword.trim().isEmpty()) {
-                SearchResponse<FilterProduct> response = client.search(s -> s
-                        .index("products")
-                        .query(q -> q.match(m -> m
-                            .field("title")
-                            .query(searchKeyword.trim())
-                        ))
-                        .size(1000), // lấy tối đa 1000 kết quả để lọc tiếp
-                    FilterProduct.class
+                MatchQuery matchQuery = MatchQuery.of(m -> m
+                    .field("title")
+                    .query(searchKeyword.trim())  // Tìm kiếm từ khóa không dấu
+                    .fuzziness("AUTO")  // Tìm kiếm với fuzziness để xử lý sai chính tả
+                );
+                boolQueryBuilder.must(matchQuery._toQuery());
+            }
+
+            // Lọc theo categoryId
+            if (categoryId != null) {
+                boolQueryBuilder.must(Query.of(q -> q
+                    .term(t -> t
+                        .field("category_id")
+                        .value(categoryId)
+                    )
+                ));
+            }
+
+            // Lọc theo categoryParentId
+            if (categoryParentId != null) {
+                boolQueryBuilder.must(Query.of(q -> q
+                    .term(t -> t
+                        .field("category_parent_id")
+                        .value(categoryParentId)
+                    )
+                ));
+            }
+
+            // Lọc theo giá tiền
+            if (minPrice != null || maxPrice != null) {
+                NumberRangeQuery priceRange = NumberRangeQuery.of(nr -> nr
+                    .gte(minPrice)
+                    .lte(maxPrice)
                 );
 
-                for (Hit<FilterProduct> hit : response.hits().hits()) {
-                    FilterProduct product = hit.source();
-                    if (product != null) {
-                        matchedIds.add(product.getProductId());
-                    }
-                }
+                Query priceQuery = Query.of(q -> q
+                    .range(r -> r
+                        .number(priceRange)
+                    )
+                );
 
-                // Nếu không có sản phẩm nào khớp, trả về danh sách trống
-                if (matchedIds.isEmpty()) {
-                    return products;
-                }
+                boolQueryBuilder.must(priceQuery);
             }
 
-            // 2. Dùng SQL để lọc thêm các điều kiện còn lại
-            StringBuilder queryBuilder = new StringBuilder();
-            queryBuilder.append("SELECT p.product_id, p.img_id, p.title, p.price ");
-            queryBuilder.append("FROM Product_1 p ");
-            queryBuilder.append("WHERE 1=1 ");
+            // Thực hiện tìm kiếm
+            SearchResponse<FilterProduct> response = client.search(s -> s
+                .index("products")
+                .query(q -> q.bool(boolQueryBuilder.build()))
+                .from(offset)
+                .size(limit),
+                FilterProduct.class
+            );
 
-            if (!matchedIds.isEmpty()) {
-                // Tạo chuỗi IN (?, ?, ?, ...)
-                String inClause = matchedIds.stream().map(id -> "?").collect(Collectors.joining(","));
-                queryBuilder.append(" AND p.product_id IN (" + inClause + ") ");
-            }
+            // Lấy kết quả
+            response.hits().hits().forEach(hit -> products.add(hit.source()));
 
-            if (categoryId != null) {
-                queryBuilder.append(" AND p.category_id = ? ");
-            }
-
-            if (categoryParentId != null) {
-                queryBuilder.append(" AND p.category_parent_id = ? ");
-            }
-
-            if (minPrice != null && maxPrice != null) {
-                queryBuilder.append(" AND p.price BETWEEN ? AND ? ");
-            } else if (minPrice != null) {
-                queryBuilder.append(" AND p.price >= ? ");
-            } else if (maxPrice != null) {
-                queryBuilder.append(" AND p.price <= ? ");
-            }
-
-            queryBuilder.append("ORDER BY p.product_id ");
-            queryBuilder.append("OFFSET ? ROWS FETCH NEXT ? ROWS ONLY");
-
-            con = DatabaseConnection.getConnection();
-            PreparedStatement statement = con.prepareStatement(queryBuilder.toString());
-
-            int paramIndex = 1;
-
-            // Set danh sách ID từ elastic
-            for (Integer id : matchedIds) {
-                statement.setInt(paramIndex++, id);
-            }
-
-            if (categoryId != null) {
-                statement.setInt(paramIndex++, categoryId);
-            }
-            if (categoryParentId != null) {
-                statement.setInt(paramIndex++, categoryParentId);
-            }
-            if (minPrice != null && maxPrice != null) {
-                statement.setDouble(paramIndex++, minPrice);
-                statement.setDouble(paramIndex++, maxPrice);
-            } else if (minPrice != null) {
-                statement.setDouble(paramIndex++, minPrice);
-            } else if (maxPrice != null) {
-                statement.setDouble(paramIndex++, maxPrice);
-            }
-
-            statement.setInt(paramIndex++, offset);
-            statement.setInt(paramIndex++, limit);
-
-            ResultSet resultSet = statement.executeQuery();
-
-            while (resultSet.next()) {
-                FilterProduct product = new FilterProduct();
-                product.setProductId(resultSet.getInt("product_id"));
-                product.setImgId(resultSet.getString("img_id"));
-                product.setTitle(resultSet.getString("title"));
-                product.setPrice(resultSet.getDouble("price"));
-                products.add(product);
-            }
-
-            resultSet.close();
-            statement.close();
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (con != null) con.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
-
         return products;
     }
+
     public int getTotalSearchProducts(Integer categoryId, Integer categoryParentId, Double minPrice, Double maxPrice, String searchKeyword) {
         int total = 0;
         Connection con = null;
@@ -151,27 +106,17 @@ public class SearchProductDAO {
         try {
             // 1. Tìm product_id bằng Elasticsearch dựa vào searchKeyword
             List<Integer> matchedIds = new ArrayList<>();
+            // Bắt đầu xây dựng query
+            BoolQuery.Builder boolQueryBuilder = new BoolQuery.Builder();
+
+            // Tìm kiếm theo từ khóa (có thể sai chính tả, không dấu, thiếu chữ...)
             if (searchKeyword != null && !searchKeyword.trim().isEmpty()) {
-                SearchResponse<FilterProduct> response = client.search(s -> s
-                        .index("products")
-                        .query(q -> q.match(m -> m
-                            .field("title")
-                            .query(searchKeyword.trim())
-                        ))
-                        .size(1000), // Lấy tối đa 1000 ID để lọc tiếp
-                    FilterProduct.class
+                MatchQuery matchQuery = MatchQuery.of(m -> m
+                    .field("title")
+                    .query(searchKeyword.trim())  // Tìm kiếm từ khóa không dấu
+                    .fuzziness("AUTO")  // Tìm kiếm với fuzziness để xử lý sai chính tả
                 );
-
-                for (Hit<FilterProduct> hit : response.hits().hits()) {
-                    FilterProduct product = hit.source();
-                    if (product != null) {
-                        matchedIds.add(product.getProductId());
-                    }
-                }
-
-                if (matchedIds.isEmpty()) {
-                    return 0;
-                }
+                boolQueryBuilder.must(matchQuery._toQuery());
             }
 
             // 2. Đếm số lượng sản phẩm khớp bằng SQL
