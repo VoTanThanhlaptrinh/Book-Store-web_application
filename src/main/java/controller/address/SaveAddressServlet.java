@@ -66,8 +66,18 @@ public class SaveAddressServlet extends HttpServlet {
 
 		try {
 			AddressDaoImp addressDao = new AddressDaoImp();
-			addressDao.saveAddress(new Address(user.getUserId(), fullName, phone, districtId, wardCode, addressDetail, addressType, false));
+			Address address =new Address(user.getUserId(), fullName, phone, districtId, wardCode, addressDetail, addressType, false);
+			int idAddress = addressDao.saveAddressAndGetID(address);
+			
 
+			  // Tạo đối tượng phản hồi
+            JsonObject responseData = new JsonObject();
+            responseData.addProperty("status", "success");
+            responseData.addProperty("message", "Lưu địa chỉ thành công!");
+            responseData.addProperty("address_id", idAddress);
+			
+			
+			
 			
 			// Thiết lập phản hồi response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");

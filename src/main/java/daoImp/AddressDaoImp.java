@@ -2,7 +2,9 @@ package daoImp;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import daoInterface.IAddressDao;
 import models.Address;
@@ -11,14 +13,14 @@ import service.DatabaseConnection;
 public class AddressDaoImp implements IAddressDao{
 
 	@Override
-	public void saveAddress(Address address) {
+	public int saveAddressAndGetID(Address address) {
 		Connection conn = null;
 		String sql ="insert into addresses (user_id, full_name, phone, address_detail, district_id, ward_code, address_type, is_default) " +
                 "values (?, ?, ?, ?, ?, ?, ?, ?)";
-		
+		int id =0;
 		try {
 			conn = DatabaseConnection.getConnection();
-			PreparedStatement ps = conn.prepareStatement(sql);
+			PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			
 			  ps.setInt(1, address.getUserID());
 	            ps.setString(2, address.getFull_name());
@@ -29,7 +31,15 @@ public class AddressDaoImp implements IAddressDao{
 	            ps.setString(7, address.getAddress_type());
 	            ps.setBoolean(8, address.isIs_default());
 
-	            ps.executeUpdate();
+	            int update = ps.executeUpdate();
+	            if(update>0) {
+	            	ResultSet generatedKeys = ps.getGeneratedKeys();
+	            	if(generatedKeys.next()) {
+	            		id= generatedKeys.getInt(1);
+	            	}
+	            }
+	            
+	            
 	            ps.close();
 	        } catch (Exception e) {
 	            e.printStackTrace();
@@ -39,6 +49,7 @@ public class AddressDaoImp implements IAddressDao{
 	                ex.printStackTrace();
 	            }
 	        }
+		return id;
 	    }
 
 	@Override
@@ -50,6 +61,7 @@ public class AddressDaoImp implements IAddressDao{
 			PreparedStatement pre = conn.prepareStatement(sql);
 			pre.setInt(1, addressID);
 			pre.setInt(2, userID);
+			pre.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

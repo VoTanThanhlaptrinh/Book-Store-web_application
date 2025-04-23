@@ -135,7 +135,6 @@ document.getElementById("newAddressForm").addEventListener("submit",function(e){
 	let address_type = document.querySelector("input[name='address_type']:checked").value;
 	
 	const addressData = {full_name, phone, address_detail, district_id, ward_code, address_type};
-	console.log(addressData)
 	fetch("/BOOK_STORE/saveAddress",{
 		method: "POST",
 		headers: {	

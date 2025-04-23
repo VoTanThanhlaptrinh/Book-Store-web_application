@@ -182,10 +182,21 @@
 				<button onclick="openNewAddressForm()"
 					class="btn btn-sm btn-outline-primary">Thêm địa chỉ mới</button>
 			</div>
+			
+			
+			
 			<!-- Danh sách địa chỉ mặc định -->
-
-
 			<div class="p-3 default-address">
+			  <div id="addressList"></div>
+			  
+			  
+			  
+			  
+			  
+			  
+			  
+			  
+			<!--   
 				<div class="border p-3 rounded mb-3">
 					<div class="fw-bold mb-2">Trịnh Quốc Huy 0867008717</div>
 					<div>
@@ -201,7 +212,7 @@
 						<button class="btn btn-outline-info btn-sm">Địa chỉ thanh
 							toán mặc định</button>
 					</div>
-				</div>
+				</div> -->
 
 
 
