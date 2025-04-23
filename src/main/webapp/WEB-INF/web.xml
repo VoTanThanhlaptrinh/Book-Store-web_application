@@ -31,34 +31,51 @@
     <servlet-name>DeleteController</servlet-name>
     <url-pattern>/delete</url-pattern>
   </servlet-mapping>
-  <filter-mapping>
-    <filter-name>loginFilter</filter-name>
-    <url-pattern>/checkout</url-pattern>
-    <url-pattern>/confirm</url-pattern>
-  </filter-mapping>
-  <filter-mapping>
-    <filter-name>activateFilter</filter-name>
-    <url-pattern>/checkout</url-pattern>
-    <url-pattern>/reset</url-pattern>
-  </filter-mapping>
-  <filter-mapping>
-    <filter-name>loginFilter</filter-name>
-    <url-pattern>/checkout</url-pattern>
-    <url-pattern>/confirm</url-pattern>
-  </filter-mapping>
-  <filter-mapping>
-    <filter-name>activateFilter</filter-name>
-    <url-pattern>/checkout</url-pattern>
-    <url-pattern>/reset</url-pattern>
-  </filter-mapping>
-  <context-param>
-    <param-name>FACEBOOK_APP_ID</param-name>
-    <param-value>1862835147867306</param-value>
-  </context-param>
-  <context-param>
-    <param-name>FACEBOOK_APP_SECRET</param-name>
-    <param-value>776df64d498b035596d3269f58f68942</param-value>
-  </context-param>
+
+
+	<!-- start Filter -->
+
+	<filter-mapping>
+		<filter-name>loginFilter</filter-name>
+		<url-pattern>/checkout</url-pattern>
+		<url-pattern>/confirm</url-pattern>
+	</filter-mapping>
+
+	<filter-mapping>
+		<filter-name>activateFilter</filter-name>
+		<url-pattern>/checkout</url-pattern>
+		<url-pattern>/reset</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>adminFilter</filter-name>
+		<url-pattern>/admin/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>apiFilter</filter-name>
+		<url-pattern>/api/*</url-pattern>
+	</filter-mapping>
+	
+	<filter-mapping>
+		<filter-name>changePassFilter</filter-name>
+		<url-pattern>/changePass</url-pattern>
+	</filter-mapping>
+
+	<filter-mapping>
+		<filter-name>rootFilter</filter-name>
+		<url-pattern>/root/*</url-pattern>
+	</filter-mapping>
+	
+	<!-- end Filter -->
+	<context-param>
+	    <param-name>FACEBOOK_APP_ID</param-name>
+	    <param-value>1862835147867306</param-value>
+	</context-param>
+	<context-param>
+	    <param-name>FACEBOOK_APP_SECRET</param-name>
+	    <param-value>776df64d498b035596d3269f58f68942</param-value>
+	</context-param>
+</web-app>
+
   <servlet>
     <description></description>
     <display-name>FishingController</display-name>
@@ -90,3 +107,4 @@
     <url-pattern>/SaveAddressServlet</url-pattern>
   </servlet-mapping>
 </web-app>
+
