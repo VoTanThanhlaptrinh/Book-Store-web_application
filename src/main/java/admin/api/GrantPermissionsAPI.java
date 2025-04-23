@@ -62,7 +62,7 @@ public class GrantPermissionsAPI extends HttpServlet {
 		            int value = Integer.valueOf(parts[1].trim());
 
 		            // Lấy list từ map, nếu không có thì tạo mới
-		            List<Integer> actions = permissionMap.computeIfAbsent(key, _ -> new ArrayList<>());
+		            List<Integer> actions = permissionMap.computeIfAbsent(key, e -> new ArrayList<>());
 		            actions.add(value);
 		        }
 			}

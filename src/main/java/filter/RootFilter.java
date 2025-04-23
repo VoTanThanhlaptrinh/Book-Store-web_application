@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import models.User;
 
-@WebFilter(displayName = "rootFilter", urlPatterns = "/root/*")
+@WebFilter(filterName = "rootFilter")
 public class RootFilter extends HttpFilter {
 
 	/**

@@ -31,16 +31,6 @@
     <servlet-name>DeleteController</servlet-name>
     <url-pattern>/delete</url-pattern>
   </servlet-mapping>
-  <filter-mapping>
-    <filter-name>loginFilter</filter-name>
-    <url-pattern>/checkout</url-pattern>
-    <url-pattern>/confirm</url-pattern>
-  </filter-mapping>
-  <filter-mapping>
-    <filter-name>activateFilter</filter-name>
-    <url-pattern>/checkout</url-pattern>
-    <url-pattern>/reset</url-pattern>
-  </filter-mapping>
 
 	<!-- start Filter -->
 
@@ -54,6 +44,24 @@
 		<filter-name>activateFilter</filter-name>
 		<url-pattern>/checkout</url-pattern>
 		<url-pattern>/reset</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>adminFilter</filter-name>
+		<url-pattern>/admin/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>apiFilter</filter-name>
+		<url-pattern>/api/*</url-pattern>
+	</filter-mapping>
+	
+	<filter-mapping>
+		<filter-name>changePassFilter</filter-name>
+		<url-pattern>/changePass</url-pattern>
+	</filter-mapping>
+
+	<filter-mapping>
+		<filter-name>rootFilter</filter-name>
+		<url-pattern>/root/*</url-pattern>
 	</filter-mapping>
 	
 	<!-- end Filter -->
