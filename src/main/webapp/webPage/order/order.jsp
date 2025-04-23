@@ -18,7 +18,9 @@
 	crossorigin="anonymous" referrerpolicy="no-referrer" />
 <title>Thanh toán</title>
 <link rel="stylesheet" href="webPage\order\css\order.css">
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<link
+	href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+	rel="stylesheet" />
 </head>
 
 <body>
@@ -180,8 +182,21 @@
 				<button onclick="openNewAddressForm()"
 					class="btn btn-sm btn-outline-primary">Thêm địa chỉ mới</button>
 			</div>
+			
+			
+			
 			<!-- Danh sách địa chỉ mặc định -->
 			<div class="p-3 default-address">
+			  <div id="addressList"></div>
+			  
+			  
+			  
+			  
+			  
+			  
+			  
+			  
+			<!--   
 				<div class="border p-3 rounded mb-3">
 					<div class="fw-bold mb-2">Trịnh Quốc Huy 0867008717</div>
 					<div>
@@ -191,120 +206,143 @@
 					<div class="text-muted small mt-1">Mã vùng: Hồ Chí Minh -
 						Thành Phố Thủ Đức - Phường Linh Trung</div>
 					<div class="mt-3">
+				
 						<button class="btn btn-outline-info btn-sm">Địa chỉ nhận
 							hàng mặc định</button>
 						<button class="btn btn-outline-info btn-sm">Địa chỉ thanh
 							toán mặc định</button>
 					</div>
-				</div>
+				</div> -->
+
+
+
 				<div class="text-center mt-4">
 					<button class="btn btn-secondary mr-2" onclick="closePanel()">Hủy</button>
 					<button class="btn btn-info text-white" onclick="saveNewAddress()">Lưu</button>
 				</div>
 			</div>
 
+
+
+
+
+
+
 			<!-- Popup form: Thêm địa chỉ mới -->
 			<div id="newAddressForm" class="popup-form overlay-element"
 				style="display: none;">
 				<h2>Thêm địa chỉ nhận hàng mới</h2>
-				<div class="row">
-					<div class="col-6">
-						<label>Họ tên</label> 
-						<input type="text" class="form-control mb-4" placeholder="Họ tên"> 
-						
-						<label>Số điện thoại</label>
-						<input type="text" class="form-control mb-4"placeholder="Nhập số điện thoại">
+				<form id="addressForm" action="SaveAddressServlet" method="post">
+					<div class="row">
+						<div class="col-6">
+							<label>Họ tên</label> <input type="text"
+								class="form-control mb-4" name="full_name" placeholder="Họ tên"
+								required> <label>Số điện thoại</label> <input
+								type="text" class="form-control mb-4" name="phone"
+								placeholder="Nhập số điện thoại" required>
+						</div>
+						<div class="col-6">
+							<label>Địa chỉ chi tiết</label> <input type="text"
+								class="form-control mb-4" name="address_detail"
+								placeholder="Số nhà, tên đường" required> <label>Tỉnh/Thành
+								phố</label> <select class="form-control mb-4" id="tinh" required>
+								<option value="">Chọn tỉnh/thành phố</option>
+							</select> <label>Quận/Huyện</label> <select class="form-control mb-4"
+								id="quan" name="district_id" required>
+								<option value="">Chọn quận/huyện</option>
+							</select> <label>Phường/Xã</label> <select class="form-control mb-4"
+								id="phuong" name="ward_code" required>
+								<option value="">Chọn phường/xã</option>
+							</select>
+						</div>
 					</div>
-					<div class="col-6">
-						<label>Địa chỉ nhận hàng</label>
-						<input type="text"class="form-control mb-4" placeholder="Nhập địa chỉ">
-						
-						<label>Tỉnh/Thành phố</label>						
-						<select class="form-control mb-4" id=tinh>
-						</select> 
-						
-						<label>Quận/Huyện</label> 
-						<select class="form-control mb-4" id=quan>
-						</select> 
-						
-						<label>Phường/Xã</label> 
-						<select class="form-control mb-4" id=phuong>
-						</select>
+					<div class="mb-3">
+						<label>Lựa chọn tên cho địa chỉ thường dùng:</label><br> <input
+							type="radio" name="address_type" value="NHÀ RIÊNG" id="home"
+							required> <label for="home"
+							class="btn btn-outline-danger">NHÀ RIÊNG</label> <input
+							type="radio" name="address_type" value="VĂN PHÒNG" id="office">
+						<label for="office" class="btn btn-outline-info">VĂN PHÒNG</label>
 					</div>
+					<div class="text-center">
+						<button type="button"
+							class="btn btn-secondary mr-2 pl-4 pr-4 pt-3 pb-3"
+							onclick="cancelNewAddress()">Hủy</button>
+						<button type="submit"
+							class="btn btn-info text-white pl-4 pr-4 pt-3 pb-3">Lưu</button>
+					</div>
+				</form>
+			</div>
+
+
+
+
+
+
+
+
+
+			<!-- Panel phương thức thanh toán: Hiển thị danh sách các phương thức thanh toán -->
+			<div id="paymentPanel" class="side-panel shadow">
+				<div
+					class="panel-header d-flex justify-content-between align-items-center mt-3">
+					<h3 class="mb-0 ml-3">Phương thức thanh toán</h3>
 				</div>
-				<div class="mb-3">
-					<label>Lựa chọn tên cho địa chỉ thường dùng:</label><br>
-					<button class="btn btn-outline-info">VĂN PHÒNG</button>
-					<button class="btn btn-outline-danger">NHÀ RIÊNG</button>
-				</div>
-				<div class="text-center">
-					<button class="btn btn-secondary mr-2 pl-4 pr-4 pt-3 pb-3"
-						onclick="cancelNewAddress()">Hủy</button>
-					<button class="btn btn-info text-white pl-4 pr-4 pt-3 pb-3">Lưu</button>
+				<hr>
+
+				<div class="p-3">
+					<!-- Danh sách phương thức thanh toán -->
+					<div
+						class="border rounded p-3 mb-2 d-flex align-items-center justify-content-between">
+						<div>
+							<div class="fw-medium">Thanh toán khi nhận hàng</div>
+							<small class="text-muted">Thanh toán khi nhận hàng</small>
+						</div>
+						<input type="radio" name="payment" id="p1" class="custom-radio"
+							checked> <label for="p1" class="custom-radio-label"><i
+							class="fa-solid fa-check"></i></label>
+					</div>
+					<div
+						class="border rounded p-3 mb-2 d-flex align-items-center justify-content-between">
+						<div>
+							<div class="fw-medium">Ví MoMo</div>
+							<small class="text-muted">Vui lòng kích hoạt tài khoản
+								MoMo để tiếp tục</small>
+						</div>
+						<input type="radio" name="payment" id="p2" class="custom-radio"
+							checked> <label for="p2" class="custom-radio-label"><i
+							class="fa-solid fa-check"></i></label>
+					</div>
+					<div
+						class="border rounded p-3 mb-2 d-flex align-items-center justify-content-between">
+						<div>
+							<div class="fw-medium">Thẻ tín dụng/Thẻ ghi nợ</div>
+							<small class="text-muted">Thẻ tín dụng/Thẻ ghi nợ</small>
+						</div>
+						<input type="radio" name="payment" id="p3" class="custom-radio"
+							checked> <label for="p3" class="custom-radio-label"><i
+							class="fa-solid fa-check"></i></label>
+					</div>
+					<div class="text-center mt-4">
+						<button onclick="closePaymentPanel()"
+							class="btn btn-sm btn-secondary mr-3">Đóng</button>
+						<button class="btn btn-info text-white"
+							onclick="closePaymentPanel()">Lưu</button>
+
+					</div>
 				</div>
 			</div>
+
 		</div>
-
-		<!-- Panel phương thức thanh toán: Hiển thị danh sách các phương thức thanh toán -->
-		<div id="paymentPanel" class="side-panel shadow">
-			<div
-				class="panel-header d-flex justify-content-between align-items-center mt-3">
-				<h3 class="mb-0 ml-3">Phương thức thanh toán</h3>
-			</div>
-			<hr>
-
-			<div class="p-3">
-				<!-- Danh sách phương thức thanh toán -->
-				<div
-					class="border rounded p-3 mb-2 d-flex align-items-center justify-content-between">
-					<div>
-						<div class="fw-medium">Thanh toán khi nhận hàng</div>
-						<small class="text-muted">Thanh toán khi nhận hàng</small>
-					</div>
-					<input type="radio" name="payment" id="p1" class="custom-radio"
-						checked> <label for="p1" class="custom-radio-label"><i
-						class="fa-solid fa-check"></i></label>
-				</div>
-				<div
-					class="border rounded p-3 mb-2 d-flex align-items-center justify-content-between">
-					<div>
-						<div class="fw-medium">Ví MoMo</div>
-						<small class="text-muted">Vui lòng kích hoạt tài khoản
-							MoMo để tiếp tục</small>
-					</div>
-					<input type="radio" name="payment" id="p2" class="custom-radio"
-						checked> <label for="p2" class="custom-radio-label"><i
-						class="fa-solid fa-check"></i></label>
-				</div>
-				<div
-					class="border rounded p-3 mb-2 d-flex align-items-center justify-content-between">
-					<div>
-						<div class="fw-medium">Thẻ tín dụng/Thẻ ghi nợ</div>
-						<small class="text-muted">Thẻ tín dụng/Thẻ ghi nợ</small>
-					</div>
-					<input type="radio" name="payment" id="p3" class="custom-radio"
-						checked> <label for="p3" class="custom-radio-label"><i
-						class="fa-solid fa-check"></i></label>
-				</div>
-				<div class="text-center mt-4">
-					<button onclick="closePaymentPanel()"
-						class="btn btn-sm btn-secondary mr-3">Đóng</button>
-					<button class="btn btn-info text-white"
-						onclick="closePaymentPanel()">Lưu</button>
-
-				</div>
-			</div>
-		</div>
-
-	</div>
-	<!-- Script: Thư viện và logic JavaScript -->
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
-		crossorigin="anonymous"></script>
-	<script src="webPage/order/js/order.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+		<!-- Script: Thư viện và logic JavaScript -->
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+			crossorigin="anonymous"></script>
+		<script src="webPage/order/js/order.js"></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 </body>
 
 </html>
