@@ -32,6 +32,7 @@
     <url-pattern>/delete</url-pattern>
   </servlet-mapping>
 
+
 	<!-- start Filter -->
 
 	<filter-mapping>
@@ -73,5 +74,37 @@
 	    <param-name>FACEBOOK_APP_SECRET</param-name>
 	    <param-value>776df64d498b035596d3269f58f68942</param-value>
 	</context-param>
+</web-app>
+
+  <servlet>
+    <description></description>
+    <display-name>FishingController</display-name>
+    <servlet-name>FishingController</servlet-name>
+    <servlet-class>controller.category_checkout.FishingController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FishingController</servlet-name>
+    <url-pattern>/FishingController</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ShippingRatesController</display-name>
+    <servlet-name>ShippingRatesController</servlet-name>
+    <servlet-class>controller.category_checkout.ShippingRatesController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ShippingRatesController</servlet-name>
+    <url-pattern>/ShippingRatesController</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SaveAddressServlet</display-name>
+    <servlet-name>SaveAddressServlet</servlet-name>
+    <servlet-class>controller.address.SaveAddressServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SaveAddressServlet</servlet-name>
+    <url-pattern>/SaveAddressServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
 

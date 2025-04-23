@@ -1,0 +1,31 @@
+@charset "UTF-8";
+
+:root {
+	--primary-color: #EE4D2D;
+	--white-color: #fff;
+	--white--color: #fff;
+	--black--color: #000;
+	--text-color: #333;
+	--navbar-height: 28px;
+	--header-height: 120px;
+	--header-with-search-height: calc(var(--header-height)- var(--navbar-height));
+}
+
+* {
+	box-sizing: inherit;
+}
+
+html {
+	font-size: 10px;
+	line-height: 1.6;
+	font-family: "Roboto", sans-serif;
+	box-sizing: border-box;
+}
+
+a {
+	text-decoration: none !important;
+}
+
+li {
+	list-style: none !important;
+}

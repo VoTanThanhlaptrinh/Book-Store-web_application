@@ -1,0 +1,178 @@
+@charset "UTF-8";
+
+body {
+    font-family: "Roboto", sans-serif;
+}
+html,.section-one{
+    background-color: #F4F4F4;
+}
+
+.address,.product-detail,.abate, .side-panel{
+    font-size: 14px;
+}
+
+/* Khoảng cách cho phần tên người nhận trong địa chỉ */
+.address .customer {
+    margin-right: 10px;
+}
+
+/* Style chung cho các panel trượt */
+.side-panel {
+    position: fixed;
+    top: 0;
+    right: -450px;
+    width: 450px;
+    height: 100%;
+    background: white;
+    z-index: 1050;
+    transition: right 0.4s ease-in-out;
+    overflow: visible;
+    box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+}
+
+/* Hiệu ứng trượt vào khi panel được mở */
+.side-panel.active {
+    right: 0;
+}
+
+/* Style chung cho overlay và popup form */
+.overlay-element {
+    position: fixed;
+    display: none;
+}
+
+/* Overlay: Lớp phủ mờ nền */
+#overlay {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+}
+
+/* Popup form: Form thêm địa chỉ mới */
+.popup-form {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999;
+    background: #fff;
+    border-radius: 10px;
+    padding: 30px;
+    width: 90%;
+    max-width: 1000px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+
+/*  */
+.text-truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.wrapper {
+    min-width: 1200px;
+  }
+  
+  /* thay đổi giao diện radio button */
+  .custom-radio {
+    display: none;
+  }
+  
+  .custom-radio-label {
+    width: 20px;
+    height: 20px;
+    border:1px solid #636363;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .custom-radio:checked + .custom-radio-label {
+    border: 1px solid #0097B8;
+  }
+  
+  .custom-radio:checked + .custom-radio-label i {
+    display: block;
+    color: white;
+    font-size: 14px;
+    background-color: #0097B8;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    line-height: 20px;
+    border-radius: 50%;
+  }
+  
+  .custom-radio-label i {
+    display: none;
+  }
+  /* tăng kích thước dòng chữ trong placeholder */
+  ::placeholder {
+    font-size: 14px;
+  }
+
+  /* btn-orange */
+.btn-orange {
+  background-color: #F57224;
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.btn-orange:hover {
+  background-color: #d85e1b;
+}
+
+/* chỉnh kích thước cho addressPanel*/
+#addressPanel button,#paymentPanel button{
+    font-size: 14px;
+    border: none;
+}
+#newAddressForm label{
+    margin-bottom: 2px;
+}
+#newAddressForm input,#newAddressForm select {
+    height: 50px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+  }
+  
+  /* chỉnh label option tỉnh quận xã select2*/
+  .select2-container--default .select2-selection--single {
+    height: 50px !important;
+    border: 2px solid #ccc !important;
+    border-radius: 8px !important;
+    font-size: 14px !important;
+    font-family:inherit !important;
+    display: flex;
+    align-items: center;
+
+}
+
+
+.select2-container--default {
+	margin-bottom: 1.5rem !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    padding-left: 10px;
+    color: #ff0080;
+    line-height: 50px !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 50px !important;
+    top: 0px;
+}
+
+.select2-container--default .select2-results__option--highlighted.select2-results__option--selectable {
+    background-color: #EFF0F5 !important;
+    color:black !important;
+    
+}
