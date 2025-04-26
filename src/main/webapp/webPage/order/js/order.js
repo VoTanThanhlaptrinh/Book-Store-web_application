@@ -24,7 +24,7 @@ function cancelNewAddress() {
     // Không mở lại #addressPanel
 }
 
-function saveNewAddress() {
+function saveSelectedAddress() {
     // Đóng popup form và overlay, không hiện lại panel địa chỉ
     document.getElementById('overlay').style.display = 'none';
     document.getElementById('newAddressForm').style.display = 'none';
@@ -122,6 +122,53 @@ $(document).ready(function() {
 });
 
 
+// Load danh sách địa chỉ khi trang được load
+document.addEventListener('DOMContentLoaded', loadAddresses);
+
+// Hàm load danh sách địa chỉ
+function loadAddresses() {
+    fetch('/BOOK_STORE/GetAddressesServlet', {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json'
+        }
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Lỗi mạng: ' + response.status);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Dữ liệu địa chỉ:', data);
+            const addressList = document.getElementById('addressList');
+            addressList.innerHTML = '';
+
+            data.forEach(address => {
+                const addressItem = `
+                    <div class="row d-flex align-items-center border p-3 rounded mb-3">
+                        <div class="col-11">
+                            <div class="fw-bold mb-2">${address.full_name || 'Không xác định'} ${address.phone || ''}</div>
+                            <div>
+                                <span class="badge badge-warning mr-2">${address.address_type || 'Không xác định'}</span>
+                                ${address.address_detail || 'Không có địa chỉ'}
+                            </div>
+                            <div class="text-muted small mt-1">Mã vùng: ${address.districtID || 'Không xác định'} - ${address.ward_code || 'Không xác định'}</div>
+                        </div>
+                        <div class="col-1">
+                            <input type="radio" name="address" value="${address.addressID}" id="addr_${address.addressID}" class="custom-radio">
+                            <label for="addr_${address.addressID}" class="custom-radio-label"><i class="fa-solid fa-check"></i></label>
+                        </div>
+                    </div>
+                `;
+                addressList.insertAdjacentHTML('beforeend', addressItem);
+            });
+        })
+        .catch(error => {
+            console.error('Lỗi khi load địa chỉ:', error);
+            alert('Không thể tải danh sách địa chỉ: ' + error.message);
+        });
+}
 
 /*lấy dữ liệu trong form đưa qua servlet*/
 document.getElementById("newAddressForm").addEventListener("submit",function(e){
@@ -154,6 +201,49 @@ document.getElementById("newAddressForm").addEventListener("submit",function(e){
 	});
 
 });
+
+
+
+
+// Hàm lưu địa chỉ được chọn
+function saveSelectedAddress() {
+    const selectedAddress = document.querySelector('input[name="address"]:checked');
+    if (!selectedAddress) {
+        alert('Vui lòng chọn một địa chỉ!');
+        return;
+    }
+
+    const addressId = selectedAddress.value;
+    console.log('Địa chỉ được chọn, ID:', addressId);
+
+    fetch('/BOOK_STORE/selectAddress', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Accept': 'application/json'
+        },
+        body: new URLSearchParams({ address_id: addressId })
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Lỗi mạng: ' + response.status);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Phản hồi từ server:', data);
+            if (data.status === 'success') {
+                alert('Đã lưu địa chỉ với ID: ' + addressId);
+                closePanel();
+            } else {
+                alert('Lưu địa chỉ thất bại: ' + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Lỗi khi lưu địa chỉ:', error);
+            alert('Có lỗi xảy ra khi lưu địa chỉ: ' + error.message);
+        });
+}
 
 
 

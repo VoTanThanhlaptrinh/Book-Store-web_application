@@ -89,4 +89,24 @@
     <servlet-name>SaveAddressServlet</servlet-name>
     <url-pattern>/SaveAddressServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>dfsls</display-name>
+    <servlet-name>dfsls</servlet-name>
+    <servlet-class>controller.address.dfsls</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>dfsls</servlet-name>
+    <url-pattern>/dfsls</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SelectAddressServlet</display-name>
+    <servlet-name>SelectAddressServlet</servlet-name>
+    <servlet-class>controller.address.SelectAddressServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SelectAddressServlet</servlet-name>
+    <url-pattern>/SelectAddressServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
