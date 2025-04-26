@@ -992,12 +992,12 @@
           <div class="main-nav">
                <!-- Sidebar Logo -->
                <div class="logo-box">
-                    <a href="admin/home" class="logo-dark">
+                    <a href="../admin/home" class="logo-dark">
                          <img src="../webPage/admin/assets/images/logo-sm.png" class="logo-sm" alt="logo sm">
                          <img src="../webPage/admin/assets/images/logo-dark.png" class="logo-lg" alt="logo dark">
                     </a>
 
-                    <a href="admin/home" class="logo-light">
+                    <a href="../admin/home" class="logo-light">
                          <img src="../webPage/admin/assets/images/logo-sm.png" class="logo-sm" alt="logo sm">
                          <img src="../webPage/admin/assets/images/logo-light.png" class="logo-lg" alt="logo light">
                     </a>
@@ -1044,7 +1044,7 @@
                                                   <li class="menu-title">General</li>
 
                                                   <li class="nav-item active">
-                                                       <a class="nav-link active" href="admin/home">
+                                                       <a class="nav-link active" href="../admin/home">
                                                             <span class="nav-icon">
                                                                  <iconify-icon
                                                                       icon="solar:widget-5-bold-duotone"><template

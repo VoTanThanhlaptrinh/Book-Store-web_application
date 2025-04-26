@@ -2,6 +2,7 @@ package service;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
 
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -132,6 +133,30 @@ public class LoginService implements ILoginService {
 		String passHash = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
 		user.setPassword(passHash);
 		return daoImp.saveUser(user);
+	}
+
+	@Override
+	public List<User> getListUser(int page, int pageSize) {
+		// TODO Auto-generated method stub
+		return daoImp.getUsers(page,pageSize);
+	}
+
+	@Override
+	public int getTotalUsers() {
+		// TODO Auto-generated method stub
+		return daoImp.getTotalUsers();
+	}
+
+	@Override
+	public List<Integer> getListImgIds(List<User> users) {
+		// TODO Auto-generated method stub
+		return daoImp.getListImgIds(users);
+	}
+
+	@Override
+	public User getUserByUserId(int userId) {
+		// TODO Auto-generated method stub
+		return daoImp.findByUserId(userId);
 	}
 
 }

@@ -55,10 +55,10 @@
 						<div class="col-lg-6 py-lg-5">
 							<div class="d-flex flex-column h-100 justify-content-center">
 								<div class="auth-logo mb-4">
-									<a href="admin/home" class="logo-dark"> <img
+									<a href="../admin/home" class="logo-dark"> <img
 										src="../webPage/admin/assets/images/logo-dark.png" height="24"
 										alt="logo dark">
-									</a> <a href="admin/home" class="logo-light"> <img
+									</a> <a href="../admin/home" class="logo-light"> <img
 										src="../webPage/admin/assets/images/logo-light.png"
 										height="24" alt="logo light">
 									</a>
