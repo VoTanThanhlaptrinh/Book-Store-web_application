@@ -1,3 +1,4 @@
+
 package controller.address;
 
 import jakarta.servlet.ServletException;
@@ -49,11 +50,11 @@ public class SaveAddressServlet extends HttpServlet {
 			}
 		}
 
-		// Chuyển JSON thành đối tượng Java
-		Gson gson = new Gson();
+		// Chuyển JSON thành đối tượng Java 
+		Gson gson = new Gson(); 
 		JsonObject jsonObject = gson.fromJson(jsonBuffer.toString(), JsonObject.class);
 
-		// Lấy dữ liệu từ JSON
+		// Lấy dữ liệu từ JSON 
 		String fullName = jsonObject.get("full_name").getAsString();
 		String phone = jsonObject.get("phone").getAsString();
 		String addressDetail = jsonObject.get("address_detail").getAsString();
@@ -66,19 +67,16 @@ public class SaveAddressServlet extends HttpServlet {
 
 		try {
 			AddressDaoImp addressDao = new AddressDaoImp();
-			Address address =new Address(user.getUserId(), fullName, phone, districtId, wardCode, addressDetail, addressType, false);
+			Address address = new Address(user.getUserId(), fullName, phone, districtId, wardCode, addressDetail,
+					addressType, false);
 			int idAddress = addressDao.saveAddressAndGetID(address);
-			
 
-			  // Tạo đối tượng phản hồi
-            JsonObject responseData = new JsonObject();
-            responseData.addProperty("status", "success");
-            responseData.addProperty("message", "Lưu địa chỉ thành công!");
-            responseData.addProperty("address_id", idAddress);
-			
-			
-			
-			
+			// Tạo đối tượng phản hồi 
+			JsonObject responseData = new JsonObject();
+			responseData.addProperty("status", "success");
+			responseData.addProperty("message", "Lưu địa chỉ thành công!");
+			responseData.addProperty("address_id", idAddress);
+
 			// Thiết lập phản hồi response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");
 			PrintWriter out = response.getWriter();

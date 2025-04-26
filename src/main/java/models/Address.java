@@ -9,14 +9,25 @@ public class Address {
 	private String ward_code;
 	private String address_detail;
 	private String address_type;
+	private String provinceName;
+	private String districtName;
+	private String wardName;
 	private boolean is_default;
+	
+	
 
-	public String getAddress_type() {
-		return address_type;
-	}
-
-	public void setAddress_type(String address_type) {
+	public Address(int addressID, int userID, String full_name, String phone, int districtID, String ward_code,
+			String address_detail, String address_type, boolean is_default) {
+		super();
+		this.addressID = addressID;
+		this.userID = userID;
+		this.full_name = full_name;
+		this.phone = phone;
+		this.districtID = districtID;
+		this.ward_code = ward_code;
+		this.address_detail = address_detail;
 		this.address_type = address_type;
+		this.is_default = is_default;
 	}
 
 	public Address(int userID, String full_name, String phone, int districtID, String ward_code, String address_detail,
@@ -30,6 +41,46 @@ public class Address {
 		this.address_detail = address_detail;
 		this.address_type = address_type;
 		this.is_default = is_default;
+	}
+
+	public Address(int userID, String full_name, String phone, int districtID, String ward_code, String address_detail,
+			String address_type, String provinceName, String districtName, String wardName, boolean is_default) {
+		super();
+		this.userID = userID;
+		this.full_name = full_name;
+		this.phone = phone;
+		this.districtID = districtID;
+		this.ward_code = ward_code;
+		this.address_detail = address_detail;
+		this.address_type = address_type;
+		this.provinceName = provinceName;
+		this.districtName = districtName;
+		this.wardName = wardName;
+		this.is_default = is_default;
+	}
+
+	public String getProvinceName() {
+		return provinceName;
+	}
+
+	public void setProvinceName(String provinceName) {
+		this.provinceName = provinceName;
+	}
+
+	public String getDistrictName() {
+		return districtName;
+	}
+
+	public void setDistrictName(String districtName) {
+		this.districtName = districtName;
+	}
+
+	public String getWardName() {
+		return wardName;
+	}
+
+	public void setWardName(String wardName) {
+		this.wardName = wardName;
 	}
 
 	public int getAddressID() {
@@ -96,4 +147,20 @@ public class Address {
 		this.is_default = is_default;
 	}
 
+	public String getAddress_type() {
+		return address_type;
+	}
+
+	public void setAddress_type(String address_type) {
+		this.address_type = address_type;
+	}
+
+	@Override
+	public String toString() {
+		return "Address [addressID=" + addressID + ", userID=" + userID + ", full_name=" + full_name + ", phone="
+				+ phone + ", districtID=" + districtID + ", ward_code=" + ward_code + ", address_detail="
+				+ address_detail + ", address_type=" + address_type + ", provinceName=" + provinceName
+				+ ", districtName=" + districtName + ", wardName=" + wardName + ", is_default=" + is_default + "]";
+	}
 }
+
