@@ -181,43 +181,20 @@
 				<button onclick="openNewAddressForm()"
 					class="btn btn-sm btn-outline-primary">Thêm địa chỉ mới</button>
 			</div>
-			
-			
-			
+
+
+
 			<!-- Danh sách địa chỉ mặc định -->
 			<div class="p-3 default-address">
-			  <div id="addressList"></div>
-			  
-			  
-			  
-			  
-			  
-			  
-			  
-			  
-			<!--   
-				<div class="border p-3 rounded mb-3">
-					<div class="fw-bold mb-2">Trịnh Quốc Huy 0867008717</div>
-					<div>
-						<span class="badge badge-warning mr-2">NHÀ RIÊNG</span>Trường Đại
-						học Nông Lâm TP. Hồ Chí Minh ktx khu C
-					</div>
-					<div class="text-muted small mt-1">Mã vùng: Hồ Chí Minh -
-						Thành Phố Thủ Đức - Phường Linh Trung</div>
-					<div class="mt-3">
-				
-						<button class="btn btn-outline-info btn-sm">Địa chỉ nhận
-							hàng mặc định</button>
-						<button class="btn btn-outline-info btn-sm">Địa chỉ thanh
-							toán mặc định</button>
-					</div>
-				</div> -->
+				<div id="addressList"></div>
 
+
+				
 
 
 				<div class="text-center mt-4">
 					<button class="btn btn-secondary mr-2" onclick="closePanel()">Hủy</button>
-					<button class="btn btn-info text-white" onclick="saveNewAddress()">Lưu</button>
+					<button class="btn btn-info text-white" onclick="saveSelectedAddress()">Lưu</button>
 				</div>
 			</div>
 

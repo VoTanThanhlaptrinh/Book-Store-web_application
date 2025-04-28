@@ -129,6 +129,9 @@ html,.section-one{
 }
 
 /* chỉnh kích thước cho addressPanel*/
+#addressPanel{
+	overflow-y: auto;
+}
 #addressPanel button,#paymentPanel button{
     font-size: 14px;
     border: none;

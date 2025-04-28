@@ -8,15 +8,17 @@ import com.zaxxer.hikari.HikariDataSource;
 
 public class DatabaseConnection {
 	// connect cho máy ảo
-//    private static final String DRIVER_CLASS = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-//    private static final String URL = "jdbc:sqlserver://sqlserver:1433;databaseName=book_store;encrypt=true;trustServerCertificate=true";
-//    private static final String USERNAME = "sa";
-//    private static final String PASSWORD = "Sql@Server1";
-//    private static final int MAX_POOL_SIZE = 100;
-//    private static final int MIN_IDLE = 10;
-//    private static final long CONNECTION_TIMEOUT = 30000;
-//    private static final long IDLE_TIMEOUT = 600000;
-//    private static final long MAX_LIFETIME = 1800000;
+	/*
+	 * private static final String DRIVER_CLASS =
+	 * "com.microsoft.sqlserver.jdbc.SQLServerDriver"; private static final String
+	 * URL =
+	 * "jdbc:sqlserver://sqlserver:1433;databaseName=book_store;encrypt=true;trustServerCertificate=true";
+	 * private static final String USERNAME = "sa"; private static final String
+	 * PASSWORD = "Sql@Server1"; private static final int MAX_POOL_SIZE = 100;
+	 * private static final int MIN_IDLE = 10; private static final long
+	 * CONNECTION_TIMEOUT = 30000; private static final long IDLE_TIMEOUT = 600000;
+	 * private static final long MAX_LIFETIME = 1800000;
+	 */
 
     private static final String DRIVER_CLASS = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
     private static final String URL = "jdbc:sqlserver://127.0.0.1\\SQLEXPRESS;databaseName=book_store;encrypt=true;trustServerCertificate=true";
