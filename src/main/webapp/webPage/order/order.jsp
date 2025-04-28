@@ -43,8 +43,7 @@
 									class="text-primary fw-medium">Chỉnh sửa</a>
 							</div>
 							<div class="d-flex flex-wrap align-items-center mb-3">
-								<span class="customer"><strong>Người nhận:</strong> Trịnh
-									Quốc Huy</span> <span><strong>SĐT:</strong> 0867008717</span>
+								<span class="customer"><strong>Người nhận:</strong>Ông a</span> <span><strong>SĐT:</strong> 0123456789</span>
 							</div>
 							<div class="d-flex align-items-center flex-wrap mb-3">
 								<span

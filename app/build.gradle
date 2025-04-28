@@ -13,7 +13,7 @@ plugins {
 }
 remotes {
     connect {
-        host = '192.168.113.130' // địa chỉ ip của ens khi bật ip addr
+        host = '192.168.113.128' // địa chỉ ip của ens khi bật ip addr
         user = 'user' // username 
         password = 'user12345' //password
     }
@@ -26,12 +26,14 @@ task docker_app_start {
         println 'Start docker_app_start...'
         ssh.run {
             session(remotes.connect) {
-            	execute 'docker network create connect'
+                // nếu không chạy được gradle thì bỏ qua lệnh này
             	execute 'docker stop tomcat_container', ignoreError: true
                 // Xóa container cũ nếu tồn tại
+                // nếu không chạy được gradle thì bỏ qua lệnh này
                 execute 'docker rm -f tomcat_container', ignoreError: true
                 // Khởi động container mới
-                execute 'docker run -it -d --name tomcat_container --network connect -v /usr/deploy:/usr/local/tomcat/webapps -p 8080:8080 tomcat:10.1'
+                // nếu gradle chạy không được thì gọi lệnh bên trong execute vào putty
+                execute 'docker run -it -d --name tomcat_container -v /usr/deploy:/usr/local/tomcat/webapps -p 8080:8080 tomcat:10.1'
             }
         }
 }
@@ -39,9 +41,12 @@ task docker_run_sqlserver {
 		println 'begin docker_run_sqlserver'
 		ssh.run {
             session(remotes.connect) {
+             // nếu không chạy được gradle thì bỏ qua lệnh này
             execute 'docker stop sqlserver', ignoreError: true
+             // nếu không chạy được gradle thì bỏ qua lệnh này
             execute 'docker rm -f sqlserver', ignoreError: true
-			execute """docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=Sql@Server1" -p 1433:1433 --name sqlserver --network connect -d mcr.microsoft.com/mssql/server:2022-latest"""
+            // nếu gradle chạy không được thì gọi lệnh bên trong execute vào putty
+			execute """docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=Sql@Server1" -p 1433:1433 --name sqlserver -d mcr.microsoft.com/mssql/server:2022-latest"""
 	 		}
 	 	}
 }
@@ -56,6 +61,8 @@ task docker_upload_file_to_server {
                 execute 'docker cp /usr/deploy/book_store.war tomcat_container:/usr/local/tomcat/webapps/BOOK_STORE.war'
                 put from: "C:/Users/VO TAN THANH/eclipse-workspace/BOOK_STORE2/src/resources/data",into: "/home/user/sql_files/backup.bak"
                 execute 'docker cp /home/user/sql_files/backup.bak sqlserver:/var/opt/mssql/data/backup.bak'
+                // nếu gradle không chạy được thì không chạy task này
+                // chạy 2 lệnh scp bên trong word
         }
     }
 }
@@ -99,3 +106,73 @@ java {
 war {
     archiveFileName = 'app.war'
 }
+/*Tổng hợp lệnh khi chạy
+Cài putty, pscp
+Cài docker
+	Đầu tiên là: which docker (kiểm tra xem có docker sẵn chưa).
+	Nếu chưa:
+		sudo dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+		sudo dnf install docker-ce docker-ce-cli containerd.io -y
+		sudo systemctl start docker
+		sudo systemctl enable docker
+		docker –version
+	Nếu đã cài thì:
+		sudo yum remove docker \
+		docker-client \
+		docker-client-latest \
+		docker-common \
+		docker-latest \
+		docker-latest-logrotate \
+		docker-logrotate \
+		docker-engine
+
+Tải xong thì tải tomcat:
+	Nếu không tải được thì gõ : docker login
+	Lấy mã mà nó gửi login vào.
+	Nó sẽ hiện một cái link để đi vào.
+	docker pull tomcat:10.1
+Tải sqlserver từ docker:
+	docker pull mcr.microsoft.com/mssql/server:2022-latest
+	Tải sqlcmd:
+	sudo curl https://packages.microsoft.com/keys/microsoft.asc | sudo tee /etc/apt/trusted.gpg.d/microsoft.asc
+	sudo curl https://packages.microsoft.com/config/rhel/9/prod.repo | sudo tee /etc/yum.repos.d/mssql-release.repo
+	sudo yum install -y mssql-tools unixODBC-devel
+	‘Có dấu | thì viết lệnh phía sau chung vào lệnh trước luôn’
+Tạo user và cấp quyền:
+	sudo adduser user
+	sudo passwd user
+	Nhập pass lần pass trên 8 ký tự
+	sudo usermod -aG docker user
+	usermod -aG wheel user
+	Vào putty đăng nhập thử xem có vào được không
+	Nếu vào được thì gõ: groups user xem có quyền docker với wheel không.
+Tạo folder để chuyển file war từ máy thật sang máy ảo:
+	sudo mkdir -p /usr/deploy
+	sudo chown user:user /usr/deploy
+	sudo mkdir -p /home/user/sql_files/
+	sudo chown -R user:user /home/user/sql_files/
+Chạy lệnh này trên build.gradle
+	./gradlew docker_deploy --no-configuration-cache
+	Nếu không chạy được build.gradle:
+	chạy từng lệnh bên trong file build.gradle.
+	Lệnh gửi file sang máy ảo, mở powershell lên chạy:
+	scp D:\BOOK_STORE2\app\build\libs\app.war user@192.168.121.128:/usr/deploy/book_store.war
+	scp D:\BOOK_STORE2\src\resources\data user@192.168.121.128:/home/user/sql_files/backup.bak
+Sau khi chạy build.gradle thì chạy lệnh để đưa file war và file backup vào thư mục cần thiết
+
+chạy putty
+	1. docker cp /usr/deploy/book_store.war tomcat_container:/usr/local/tomcat/webapps/BOOK_STORE.war
+
+	2. docker cp /home/user/sql_files/backup.bak sqlserver:/var/opt/mssql/data/backup.bak
+	
+	/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P 'Sql@Server1' -Q "CREATE DATABASE book_store;"
+	
+	/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P 'Sql@Server1' \
+	-Q "RESTORE DATABASE book_store FROM DISK = N'/var/opt/mssql/data/backup.bak' \
+	WITH MOVE 'book_store' TO '/var/opt/mssql/data/book_store.mdf', \
+	MOVE 'book_store_log' TO '/var/opt/mssql/data/book_store_log.ldf', REPLACE;"
+	
+	docker network create bookNetwork
+	docker network connect bookNetwork sqlserver
+	docker network connect bookNetwork tomcat_container
+*/
