@@ -27,9 +27,9 @@ public class ImageController extends HttpServlet {
 
 		LoginService loginService = new LoginService();
 		Image img = loginService.getImageByImgId(imgId);
-
 		if (img != null) {
-			resp.setContentType("image/jpeg");
+
+			resp.setContentType(img.getFileType());
 			resp.setContentLength(img.getData().length);
 
 			try (BufferedOutputStream out = new BufferedOutputStream(resp.getOutputStream())) {

@@ -10,5 +10,22 @@
           input.attr("type", "text");
         }
       });
-
+	  window.addEventListener('DOMContentLoaded', () => {
+	      showServerMessage();
+	  });
 })(jQuery);
+
+
+function showServerMessage() {
+    const messageInput = document.getElementById('server-message');
+    if (messageInput) {
+        const message = messageInput.value;
+        const type = messageInput.dataset.type;
+        
+        if (type === "success") {
+            toastr.success(message, "Thông báo");
+        } else if (type === "error") {
+            toastr.warning(message, "Thông báo");
+        }
+    }
+}

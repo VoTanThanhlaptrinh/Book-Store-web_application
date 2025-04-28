@@ -37,7 +37,7 @@
 		</div>
 	</c:if>
 	<div class="main">
-		<section class="signup" style="padding-top: 50px;">
+		<section class="signup" style="margin: 50px;">
 			<div class="container">
 				<div class="signup-content border">
 					<form method="POST" action="confirm" id="signin"
@@ -64,7 +64,9 @@
 		</section>
 
 	</div>
-
+	<div id="footer-placeholder">
+		<jsp:include page="/webPage/trangChu/footer.jsp"></jsp:include>
+	</div>
 	<!-- JS -->
 	<script src="webPage/login/vendor/jquery/jquery.min.js"></script>
 	<script src="webPage/login/js/main.js"></script>

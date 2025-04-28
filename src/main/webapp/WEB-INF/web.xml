@@ -1,106 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd" id="WebApp_ID" version="6.0">
-  <display-name>BOOK_STORE</display-name>
-  <servlet>
-    <description></description>
-    <display-name>CategoryController</display-name>
-    <servlet-name>CategoryController</servlet-name>
-    <servlet-class>controller.CategoryController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>CategoryController</servlet-name>
-    <url-pattern>/tim-sach</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>BookDetailController</display-name>
-    <servlet-name>BookDetailController</servlet-name>
-    <servlet-class>controller.BookDetailController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>BookDetailController</servlet-name>
-    <url-pattern>/chi-tiet-sach</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>DeleteController</display-name>
-    <servlet-name>DeleteController</servlet-name>
-    <servlet-class>controller.DeleteController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>DeleteController</servlet-name>
-    <url-pattern>/delete</url-pattern>
-  </servlet-mapping>
-  <filter-mapping>
-    <filter-name>loginFilter</filter-name>
-    <url-pattern>/checkout</url-pattern>
-    <url-pattern>/confirm</url-pattern>
-  </filter-mapping>
-  <filter-mapping>
-    <filter-name>activateFilter</filter-name>
-    <url-pattern>/checkout</url-pattern>
-    <url-pattern>/reset</url-pattern>
-  </filter-mapping>
-  <filter-mapping>
-    <filter-name>loginFilter</filter-name>
-    <url-pattern>/checkout</url-pattern>
-    <url-pattern>/confirm</url-pattern>
-  </filter-mapping>
-  <filter-mapping>
-    <filter-name>activateFilter</filter-name>
-    <url-pattern>/checkout</url-pattern>
-    <url-pattern>/reset</url-pattern>
-  </filter-mapping>
-  <context-param>
-    <param-name>FACEBOOK_APP_ID</param-name>
-    <param-value>1862835147867306</param-value>
-  </context-param>
-  <context-param>
-    <param-name>FACEBOOK_APP_SECRET</param-name>
-    <param-value>776df64d498b035596d3269f58f68942</param-value>
-  </context-param>
-  <servlet>
-    <description></description>
-    <display-name>FishingController</display-name>
-    <servlet-name>FishingController</servlet-name>
-    <servlet-class>controller.category_checkout.FishingController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>FishingController</servlet-name>
-    <url-pattern>/FishingController</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>ShippingRatesController</display-name>
-    <servlet-name>ShippingRatesController</servlet-name>
-    <servlet-class>controller.category_checkout.ShippingRatesController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ShippingRatesController</servlet-name>
-    <url-pattern>/ShippingRatesController</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>SaveAddressServlet</display-name>
-    <servlet-name>SaveAddressServlet</servlet-name>
-    <servlet-class>controller.address.SaveAddressServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>SaveAddressServlet</servlet-name>
-    <url-pattern>/SaveAddressServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>SelectAddressServlet</display-name>
-    <servlet-name>SelectAddressServlet</servlet-name>
-    <servlet-class>controller.address.SelectAddressServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>SelectAddressServlet</servlet-name>
-    <url-pattern>/SelectAddressServlet</url-pattern>
-  </servlet-mapping>
-
-
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns="https://jakarta.ee/xml/ns/jakartaee"
 	xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
@@ -139,11 +37,16 @@
 
 
 	<!-- start Filter -->
-
+	<filter-mapping>
+		<filter-name>charset</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 	<filter-mapping>
 		<filter-name>loginFilter</filter-name>
 		<url-pattern>/checkout</url-pattern>
 		<url-pattern>/confirm</url-pattern>
+		<url-pattern>/upload</url-pattern>
+		<url-pattern>/infor</url-pattern>
 	</filter-mapping>
 
 	<filter-mapping>
@@ -179,35 +82,46 @@
 		<param-name>FACEBOOK_APP_SECRET</param-name>
 		<param-value>776df64d498b035596d3269f58f68942</param-value>
 	</context-param>
-<servlet>
-	<description></description>
-	<display-name>FishingController</display-name>
-	<servlet-name>FishingController</servlet-name>
-	<servlet-class>controller.category_checkout.FishingController</servlet-class>
-</servlet>
-<servlet-mapping>
-	<servlet-name>FishingController</servlet-name>
-	<url-pattern>/FishingController</url-pattern>
-</servlet-mapping>
-<servlet>
-	<description></description>
-	<display-name>ShippingRatesController</display-name>
-	<servlet-name>ShippingRatesController</servlet-name>
-	<servlet-class>controller.category_checkout.ShippingRatesController</servlet-class>
-</servlet>
-<servlet-mapping>
-	<servlet-name>ShippingRatesController</servlet-name>
-	<url-pattern>/ShippingRatesController</url-pattern>
-</servlet-mapping>
-<servlet>
-	<description></description>
-	<display-name>SaveAddressServlet</display-name>
-	<servlet-name>SaveAddressServlet</servlet-name>
-	<servlet-class>controller.address.SaveAddressServlet</servlet-class>
-</servlet>
-<servlet-mapping>
-	<servlet-name>SaveAddressServlet</servlet-name>
-	<url-pattern>/SaveAddressServlet</url-pattern>
-</servlet-mapping>
+
+  <servlet>
+    <description></description>
+    <display-name>FishingController</display-name>
+    <servlet-name>FishingController</servlet-name>
+    <servlet-class>controller.category_checkout.FishingController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FishingController</servlet-name>
+    <url-pattern>/FishingController</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ShippingRatesController</display-name>
+    <servlet-name>ShippingRatesController</servlet-name>
+    <servlet-class>controller.category_checkout.ShippingRatesController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ShippingRatesController</servlet-name>
+    <url-pattern>/ShippingRatesController</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SaveAddressServlet</display-name>
+    <servlet-name>SaveAddressServlet</servlet-name>
+    <servlet-class>controller.address.SaveAddressServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SaveAddressServlet</servlet-name>
+    <url-pattern>/SaveAddressServlet</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <description></description>
+    <display-name>SelectAddressServlet</display-name>
+    <servlet-name>SelectAddressServlet</servlet-name>
+    <servlet-class>controller.address.SelectAddressServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SelectAddressServlet</servlet-name>
+    <url-pattern>/SelectAddressServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
 
