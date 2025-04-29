@@ -1,6 +1,7 @@
+
 window.addEventListener('DOMContentLoaded', (event) => {
 	update();
-	previewImage(event);
+	changePass();
 });
 const links = document.querySelectorAll('.sidebar a');
 const forms = document.querySelectorAll('.form-box');
@@ -62,11 +63,35 @@ function update(){
             }
         })
         .catch(error => {
-            alert('lỗi!');
+           toastr.error(error)
         });
     });
 }
+function changePass(){
+    let form = document.getElementById('changePass');
+    form.addEventListener("submit", (event) => {
+        event.preventDefault(); // Ngăn form tự động gửi GET
 
+        const formData = new FormData(form);
+
+        axios.post('/BOOK_STORE/changePass', formData, {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        .then(response => {
+            if (response.data.status === 'success') {
+                toastr.success(response.data.message, "Thông báo");
+				form.reset();
+            } else {
+                toastr.warning(response.data.message, "Thông báo");
+            }
+        })
+        .catch(error => {
+            toastr.error(error)
+        });
+    });
+}
 /**
  * 
  */
