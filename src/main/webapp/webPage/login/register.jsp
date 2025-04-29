@@ -39,7 +39,7 @@
 			<fmt:message key="${mess}" />
 		</div>
 	</c:if>
-	<div class="main" style="margin-top: 50px">
+	<div class="main" style="margin: 50px;">
 		<section class="signup">
 			<div class="container">
 				<div class="signup-content border">
@@ -91,7 +91,9 @@
 		</section>
 
 	</div>
-
+	<div id="footer-placeholder">
+		<jsp:include page="/webPage/trangChu/footer.jsp"></jsp:include>
+	</div>
 	<!-- JS -->
 	<script src="webPage/login/vendor/jquery/jquery.min.js"></script>
 	<script src="webPage/login/js/main.js"></script>

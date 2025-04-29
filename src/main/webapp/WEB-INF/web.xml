@@ -37,11 +37,16 @@
 
 
 	<!-- start Filter -->
-
+	<filter-mapping>
+		<filter-name>charset</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 	<filter-mapping>
 		<filter-name>loginFilter</filter-name>
 		<url-pattern>/checkout</url-pattern>
 		<url-pattern>/confirm</url-pattern>
+		<url-pattern>/upload</url-pattern>
+		<url-pattern>/infor</url-pattern>
 	</filter-mapping>
 
 	<filter-mapping>
@@ -78,36 +83,45 @@
 		<param-value>776df64d498b035596d3269f58f68942</param-value>
 	</context-param>
 
-
-<servlet>
-	<description></description>
-	<display-name>FishingController</display-name>
-	<servlet-name>FishingController</servlet-name>
-	<servlet-class>controller.category_checkout.FishingController</servlet-class>
-</servlet>
-<servlet-mapping>
-	<servlet-name>FishingController</servlet-name>
-	<url-pattern>/FishingController</url-pattern>
-</servlet-mapping>
-<servlet>
-	<description></description>
-	<display-name>ShippingRatesController</display-name>
-	<servlet-name>ShippingRatesController</servlet-name>
-	<servlet-class>controller.category_checkout.ShippingRatesController</servlet-class>
-</servlet>
-<servlet-mapping>
-	<servlet-name>ShippingRatesController</servlet-name>
-	<url-pattern>/ShippingRatesController</url-pattern>
-</servlet-mapping>
-<servlet>
-	<description></description>
-	<display-name>SaveAddressServlet</display-name>
-	<servlet-name>SaveAddressServlet</servlet-name>
-	<servlet-class>controller.address.SaveAddressServlet</servlet-class>
-</servlet>
-<servlet-mapping>
-	<servlet-name>SaveAddressServlet</servlet-name>
-	<url-pattern>/SaveAddressServlet</url-pattern>
-</servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FishingController</display-name>
+    <servlet-name>FishingController</servlet-name>
+    <servlet-class>controller.category_checkout.FishingController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FishingController</servlet-name>
+    <url-pattern>/FishingController</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ShippingRatesController</display-name>
+    <servlet-name>ShippingRatesController</servlet-name>
+    <servlet-class>controller.category_checkout.ShippingRatesController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ShippingRatesController</servlet-name>
+    <url-pattern>/ShippingRatesController</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SaveAddressServlet</display-name>
+    <servlet-name>SaveAddressServlet</servlet-name>
+    <servlet-class>controller.address.SaveAddressServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SaveAddressServlet</servlet-name>
+    <url-pattern>/SaveAddressServlet</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <description></description>
+    <display-name>SelectAddressServlet</display-name>
+    <servlet-name>SelectAddressServlet</servlet-name>
+    <servlet-class>controller.address.SelectAddressServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SelectAddressServlet</servlet-name>
+    <url-pattern>/SelectAddressServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
 

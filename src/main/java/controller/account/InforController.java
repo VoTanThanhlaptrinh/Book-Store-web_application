@@ -19,7 +19,7 @@ public class InforController extends HttpServlet {
 	 *
 	 */
 	private static final long serialVersionUID = 1L;
-
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -27,18 +27,20 @@ public class InforController extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		HttpSession session = req.getSession();
 		User user = (User) session.getAttribute("user");
+		LoginService loginService = (LoginService) session.getAttribute("loginService");
+		if(loginService == null) {
+			loginService = new LoginService();
+		}
 		if (user == null) {
 			resp.sendRedirect("home");
 		} else {
-			LoginService loginService = (LoginService) session.getAttribute("loginService");
+			
 			Information information = loginService.getInforOfUser(user.getUserId());
 			String path;
 			if (information == null) {
 				path = "webPage/img/avatar/avatar.jpg";
-				session.setAttribute("command", "insert");
 			} else {
 				path = "getImage?img_id=" + information.getImgId();
-				session.setAttribute("command", "update");
 			}
 			req.setAttribute("accountImg", path);
 			req.setAttribute("infor", information);

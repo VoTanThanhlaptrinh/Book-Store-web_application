@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import daoInterface.IAddressDao;
 import models.Address;
@@ -67,5 +69,40 @@ public class AddressDaoImp implements IAddressDao{
 			e.printStackTrace();
 		}
 		
+	}
+
+	public List<Address> getAddressesByUserId(int userId) {
+	    List<Address> addresses = new ArrayList<>();
+	    String sql = "SELECT * FROM addresses WHERE user_id = ?";
+	    try (Connection conn =DatabaseConnection.getConnection(); 
+	    	PreparedStatement stmt = conn.prepareStatement(sql)) {
+	        stmt.setInt(1, userId);
+	        ResultSet rs = stmt.executeQuery();
+	        while (rs.next()) {
+	            Address addr = new Address(
+	            	rs.getInt("id"),
+	                rs.getInt("user_id"),
+	                rs.getString("full_name"),
+	                rs.getString("phone"),
+	                rs.getInt("district_id"),
+	                rs.getString("ward_code"),
+	                rs.getString("address_detail"),
+	                rs.getString("address_type"),
+	                rs.getBoolean("is_default")
+	            );
+	            // Nếu có provinceName, districtName, wardName, thêm vào đây
+	            addresses.add(addr);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return addresses;
+	}
+	public static void main(String[] args) {
+		AddressDaoImp add = new AddressDaoImp();
+		List<Address> address = add.getAddressesByUserId(18);
+		for (Address address2 : address) {
+			System.out.println(address2);
+		}
 	}
 	}

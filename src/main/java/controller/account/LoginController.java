@@ -67,7 +67,6 @@ public class LoginController extends HttpServlet {
 		session.setAttribute("user", user);
 
 		String previousURL = (String) session.getAttribute("previousURL");
-		System.out.println(previousURL);
 		if (previousURL != null) {
 			resp.sendRedirect(previousURL);
 			session.removeAttribute("previousURL");
