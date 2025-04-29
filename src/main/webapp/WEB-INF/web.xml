@@ -18,7 +18,7 @@
 		<description></description>
 		<display-name>BookDetailController</display-name>
 		<servlet-name>BookDetailController</servlet-name>
-		<servlet-class>controller.BookDetailController</servlet-class>
+		<servlet-class>controller.product.BookDetailController</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>BookDetailController</servlet-name>
