@@ -25,6 +25,8 @@
 <!-- Main css -->
 <link rel="stylesheet" href="webPage/trangChu/CSS/header.css">
 <link rel="stylesheet" href="webPage/trangChu/CSS/footer.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 <link href="webPage/login/css/style.css" rel="stylesheet">
 <link
 	href="webPage/login/fonts/font-awesome-4.7.0/css/font-awesome.min.css"
@@ -95,6 +97,13 @@
 		<jsp:include page="/webPage/trangChu/footer.jsp"></jsp:include>
 	</div>
 	<!-- JS -->
+		<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<!-- Thêm toastr JS từ CDN -->
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+	<script src="webPage/login/js/toastr.js"></script>
 	<script src="webPage/login/vendor/jquery/jquery.min.js"></script>
 	<script src="webPage/login/js/main.js"></script>
 </body>
