@@ -1,3 +1,4 @@
+<%@page import="models.Address"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/webPage/lib/tag.jsp"%>
@@ -41,18 +42,17 @@
 								<span class="fw-semibold">Địa chỉ giao hàng</span> <a href="#"
 									onclick="openPanel();return false;"
 									class="text-primary fw-medium">Chỉnh sửa</a>
-							</div>
+							</div>						
+							
 							<div class="d-flex flex-wrap align-items-center mb-3">
-								<span class="customer"><strong>Người nhận:</strong> Trịnh
-									Quốc Huy</span> <span><strong>SĐT:</strong> 0867008717</span>
+								<span class="customer"><strong>Người nhận:</strong> <span id ="addressFullName"> ${sessionScope.addressDefault.full_name}</span></span> <span><strong>Số điện thoại: </strong> <span id = "addressPhone"> ${sessionScope.addressDefault.phone}</span></span>
 							</div>
 							<div class="d-flex align-items-center flex-wrap mb-3">
 								<span
-									class="badge rounded-pill bg-warning text-dark me-3 px-3 py-2">NHÀ
-									RIÊNG</span> <span>Trường Đại học Nông Lâm TP. Hồ Chí Minh, KTX
-									khu C, Phường Linh Trung, TP. Thủ Đức, HCM</span>
+									class="badge rounded-pill bg-warning text-dark mr-3 px-3 py-2" id = "addressType">${sessionScope.addressDefault.address_type}
+									</span> <span id ="addressDetail">${sessionScope.addressDefault.address_detail}, ${sessionScope.addressDefault.provinceName}, ${sessionScope.addressDefault.districtName}, ${sessionScope.addressDefault.wardName}</span>
 							</div>
-						</div>
+						</div> 
 
 						<!-- Kiện hàng theo giao diện trong ảnh -->
 						<div class="border rounded p-3 mb-4 bg-white product-detail">
@@ -156,13 +156,13 @@
 										₫</span>
 								</div>
 								<div class="d-flex justify-content-between mb-2">
-									<span class="text-muted">Phí vận chuyển</span> <span>37.200
+									<span class="text-muted">Phí vận chuyển</span> <span>${sessionScope.shippingFee}
 										₫</span>
 								</div>
 								<div
 									class="d-flex justify-content-between fw-bold text-danger mt-2 mb-2"
 									style="font-size: 20px;">
-									<span>Tổng cộng:</span> <span>245.200 ₫</span>
+									<span>Tổng cộng:</span> <span><fmt:formatNumber value="${sessionScope.total + sessionScope.shippingFee}" type="number" groupingUsed="true" /></span>
 								</div>
 								<!-- Nút đặt hàng -->
 								<button class="btn btn-orange text-white w-100">ĐẶT
@@ -185,12 +185,26 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 			<!-- Danh sách địa chỉ mặc định -->
 			<div class="p-3 default-address">
 				<div id="addressList"></div>
 
-
-				
 
 
 				<div class="text-center mt-4">
@@ -198,6 +212,26 @@
 					<button class="btn btn-info text-white" onclick="saveSelectedAddress()">Lưu</button>
 				</div>
 			</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -1,6 +1,8 @@
 package models;
 
-public class Address {
+import java.io.Serializable;
+
+public class Address implements Serializable{
 	private int addressID;
 	private int userID;
 	private String full_name;
@@ -14,10 +16,13 @@ public class Address {
 	private String wardName;
 	private boolean is_default;
 	
-	
+
+
+
 
 	public Address(int addressID, int userID, String full_name, String phone, int districtID, String ward_code,
-			String address_detail, String address_type, boolean is_default) {
+			String address_detail, String address_type, String provinceName, String districtName, String wardName,
+			boolean is_default) {
 		super();
 		this.addressID = addressID;
 		this.userID = userID;
@@ -27,6 +32,9 @@ public class Address {
 		this.ward_code = ward_code;
 		this.address_detail = address_detail;
 		this.address_type = address_type;
+		this.provinceName = provinceName;
+		this.districtName = districtName;
+		this.wardName = wardName;
 		this.is_default = is_default;
 	}
 
@@ -58,6 +66,7 @@ public class Address {
 		this.wardName = wardName;
 		this.is_default = is_default;
 	}
+
 
 	public String getProvinceName() {
 		return provinceName;

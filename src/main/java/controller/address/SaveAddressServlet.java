@@ -61,14 +61,17 @@ public class SaveAddressServlet extends HttpServlet {
 		int districtId = jsonObject.get("district_id").getAsInt();
 		String wardCode = jsonObject.get("ward_code").getAsString();
 		String addressType = jsonObject.get("address_type").getAsString();
+		String provinceName = jsonObject.get("province_name").getAsString();
+		String districtName = jsonObject.get("district_name").getAsString();
+		String wardName = jsonObject.get("ward_name").getAsString();
 
 		System.out.println(fullName + "  " + phone + "   " + addressDetail + "     " + addressType + "    " + districtId
-				+ "     " + wardCode);
+				+ "     " + wardCode+ "  " + provinceName + "   " + districtName + "     " + wardName);
 
 		try {
 			AddressDaoImp addressDao = new AddressDaoImp();
 			Address address = new Address(user.getUserId(), fullName, phone, districtId, wardCode, addressDetail,
-					addressType, false);
+					addressType,provinceName,districtName,wardName, false);
 			int idAddress = addressDao.saveAddressAndGetID(address);
 
 			// Tạo đối tượng phản hồi 

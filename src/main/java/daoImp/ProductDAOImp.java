@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import daoInterface.IProductDao;
 import models.Product;
@@ -106,11 +107,11 @@ public class ProductDAOImp implements IProductDao {
 		// TODO Auto-generated method stub
 		int productId = 0;
 		try (Connection con = DatabaseConnection.getConnection();
-			PreparedStatement preparedStatement = con.prepareStatement(
-					"insert into Product_1 (added_by_user,title,price,description,img_id,create_date, update_date,pdQuantity, "
-							+ "category_parent_id, category_id,author,language,page,publishYear) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
-					PreparedStatement.RETURN_GENERATED_KEYS)){
-			
+				PreparedStatement preparedStatement = con.prepareStatement(
+						"insert into Product_1 (added_by_user,title,price,description,img_id,create_date, update_date,pdQuantity, "
+								+ "category_parent_id, category_id,author,language,page,publishYear) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+						PreparedStatement.RETURN_GENERATED_KEYS)) {
+
 			preparedStatement.setInt(1, product.getAddedByUser());
 			preparedStatement.setString(2, product.getTitle());
 			preparedStatement.setDouble(3, product.getPrice());
@@ -139,11 +140,11 @@ public class ProductDAOImp implements IProductDao {
 	@Override
 	public void updateProduct(Product product) {
 		// TODO Auto-generated method stub
-		try(Connection con = DatabaseConnection.getConnection();
-			PreparedStatement preparedStatement = con.prepareStatement(
-					"update Product_1 set added_by_user = ?, title = ?,price = ?,description = ?,img_id = ?, update_date = ?, pdQuantity= ?"
-					+ ",category_parent_id=?,category_id=?,page=?,author=?,language=?,publishYear=? where product_id = ?");) {
-			
+		try (Connection con = DatabaseConnection.getConnection();
+				PreparedStatement preparedStatement = con.prepareStatement(
+						"update Product_1 set added_by_user = ?, title = ?,price = ?,description = ?,img_id = ?, update_date = ?, pdQuantity= ?"
+								+ ",category_parent_id=?,category_id=?,page=?,author=?,language=?,publishYear=? where product_id = ?");) {
+
 			preparedStatement.setInt(1, product.getAddedByUser());
 			preparedStatement.setString(2, product.getTitle());
 			preparedStatement.setDouble(3, product.getPrice());
@@ -595,6 +596,65 @@ public class ProductDAOImp implements IProductDao {
 			e.printStackTrace();
 		}
 		return total;
+	}
+
+	// cập nhật lại các giá trị lenght, width, weight, height ngẫu nhiên cho bảng
+	// product_1
+	public void updateProduct() {
+		try (Connection conn = DatabaseConnection.getConnection()) {
+			String sql = "SELECT product_id, title FROM Product_1";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				int id = rs.getInt("product_id");
+				String title = rs.getString("title");
+				Random rand = new Random(title.hashCode());
+				int length = rand.nextInt(20 - 10 + 1) + 10;
+				int width = rand.nextInt(20 - 10 + 1) + 10;
+				int height = rand.nextInt(5 - 1 + 1) + 1;
+				int weight = rand.nextInt(700 - 100 + 1) + 100;
+
+				PreparedStatement updateStmt = conn.prepareStatement(
+						"UPDATE Product_1 SET length=?, width=?, height=?, weights=? WHERE product_id=?");
+				updateStmt.setInt(1, length);
+				updateStmt.setInt(2, width);
+				updateStmt.setInt(3, height);
+				updateStmt.setInt(4, weight);
+				updateStmt.setInt(5, id);
+				updateStmt.executeUpdate();
+				updateStmt.close();
+			}
+			System.out.println("Cập nhật thành công tất cả sản phẩm!");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public Product getDimension(int productID) {
+		Product p = null;
+		String sql = "select * from Product_1 where product_id =?";
+		try {
+			Connection con = DatabaseConnection.getConnection();
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setInt(1, productID);
+			ResultSet resultSet = stmt.executeQuery();
+			while (resultSet.next()) {
+				p = new Product(resultSet.getString(2), resultSet.getInt(19), resultSet.getInt(17),
+						resultSet.getInt(18), resultSet.getInt(16));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return p;
+	}
+
+	public static void main(String[] args) {
+		ProductDAOImp dao = new ProductDAOImp();
+		Product p = dao.getDimension(1);
+		System.out.println(p.getHeight());
 	}
 
 }

@@ -92,6 +92,7 @@ $(document).ready(function() {
                                 // Khi chọn quận huyện
                                 $("#quan").change(function() {
                                     var districtId = $(this).val();
+								
                                     // Lấy danh sách phường xã
                                     $.ajax({
                                         url: 'https://online-gateway.ghn.vn/shiip/public-api/master-data/ward',
@@ -108,6 +109,8 @@ $(document).ready(function() {
                                                 });
                                                 // Cập nhật Select2 sau khi thêm option
                                                 $("#phuong").trigger('change.select2');
+												
+											
                                             }
                                         }
                                     });
@@ -122,11 +125,18 @@ $(document).ready(function() {
 });
 
 
+
+
+
+
+
+
 // Load danh sách địa chỉ khi trang được load
 document.addEventListener('DOMContentLoaded', loadAddresses);
 
 // Hàm load danh sách địa chỉ
 function loadAddresses() {
+	
     fetch('/BOOK_STORE/GetAddressesServlet', {
         method: 'GET',
         headers: {
@@ -153,7 +163,7 @@ function loadAddresses() {
                                 <span class="badge badge-warning mr-2">${address.address_type || 'Không xác định'}</span>
                                 ${address.address_detail || 'Không có địa chỉ'}
                             </div>
-                            <div class="text-muted small mt-1">Mã vùng: ${address.districtID || 'Không xác định'} - ${address.ward_code || 'Không xác định'}</div>
+                            <div class="text-muted small mt-1">Mã vùng: ${address.provinceName} - ${address.districtName} - ${address.wardName}</div>
                         </div>
                         <div class="col-1">
                             <input type="radio" name="address" value="${address.addressID}" id="addr_${address.addressID}" class="custom-radio">
@@ -165,7 +175,6 @@ function loadAddresses() {
             });
         })
         .catch(error => {
-            console.error('Lỗi khi load địa chỉ:', error);
             alert('Không thể tải danh sách địa chỉ: ' + error.message);
         });
 }
@@ -180,8 +189,12 @@ document.getElementById("newAddressForm").addEventListener("submit",function(e){
 	let district_id = document.querySelector("select[name='district_id']").value;
 	let ward_code = document.querySelector("select[name='ward_code']").value;
 	let address_type = document.querySelector("input[name='address_type']:checked").value;
+	let province_name =$("#tinh option:selected").text();
+	let district_name= $("#quan option:selected").text();
+	let ward_name =$("#phuong option:selected").text();
 	
-	const addressData = {full_name, phone, address_detail, district_id, ward_code, address_type};
+	
+	const addressData = {full_name, phone, address_detail, district_id, ward_code, address_type,province_name,district_name,ward_name};
 	fetch("/BOOK_STORE/saveAddress",{
 		method: "POST",
 		headers: {	
@@ -195,6 +208,7 @@ document.getElementById("newAddressForm").addEventListener("submit",function(e){
 	    alert("Lưu địa chỉ thành công!");
 		cancelNewAddress();
 		openPanel();
+		loadAddresses();
 	})
 	.catch(error => {             
 	    alert("Có lỗi xảy ra khi lưu địa chỉ." + error);
@@ -209,14 +223,14 @@ document.getElementById("newAddressForm").addEventListener("submit",function(e){
 function saveSelectedAddress() {
     const selectedAddress = document.querySelector('input[name="address"]:checked');
     if (!selectedAddress) {
-        alert('Vui lòng chọn một địa chỉ!');
-        return;
+        showAlert('Vui lòng chọn một địa chỉ!');
+        return null;
     }
 
     const addressId = selectedAddress.value;
-    console.log('Địa chỉ được chọn, ID:', addressId);
+    console.log("Địa chỉ được chọn:", addressId);
 
-    fetch('/BOOK_STORE/selectAddress', {
+    return fetch('/BOOK_STORE/selectAddress', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -224,26 +238,37 @@ function saveSelectedAddress() {
         },
         body: new URLSearchParams({ address_id: addressId })
     })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Lỗi mạng: ' + response.status);
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Phản hồi từ server:', data);
-            if (data.status === 'success') {
-                alert('Đã lưu địa chỉ với ID: ' + addressId);
-                closePanel();
-            } else {
-                alert('Lưu địa chỉ thất bại: ' + data.message);
-            }
-        })
-        .catch(error => {
-            console.error('Lỗi khi lưu địa chỉ:', error);
-            alert('Có lỗi xảy ra khi lưu địa chỉ: ' + error.message);
-        });
+    .then(response => {
+        if (!response.ok) throw new Error('Lỗi mạng: ' + response.status);
+        return response.json();
+    })
+    .then(data => {
+        if (data.status === 'success') {
+            showAlert('Đã lưu địa chỉ với ID: ' + addressId);
+            if (data.selectedAddress) updateAddressDisplay(data.selectedAddress);
+            closePanel();
+            return addressId;
+        } else {
+            showAlert('Lưu địa chỉ thất bại: ' + data.message);
+            return null;
+        }
+    })
+    .catch(error => {
+        showAlert('Có lỗi xảy ra khi lưu địa chỉ: ' + error.message);
+        return null;
+    });
 }
 
+function updateAddressDisplay(address) {
+	document.getElementById("addressType").textContent= address.address_type;
+    document.getElementById('addressFullName').textContent = address.full_name;
+    document.getElementById('addressPhone').textContent = address.phone;
+    document.getElementById('addressDetail').textContent =
+        `${address.address_detail},${address.provinceName}, ${address.districtName}, ${address.wardName}`;
+}
+
+function showAlert(message) {
+    alert(message);
+}
 
 
