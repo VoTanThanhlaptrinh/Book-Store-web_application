@@ -7,6 +7,7 @@
 <c:if test="${param.lang != null}">
 	<c:set var="lang" value="${param.lang}" scope="session" />
 </c:if>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,17 +18,28 @@
 <title>Quên mật khẩu</title>
 
 <!-- Font Icon -->
-<link rel="stylesheet"
-	href="webPage/login/fonts/material-icon/css/material-design-iconic-font.min.css">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
 	rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 <!-- Main css -->
+
+<link href="webPage/login/css/style.css" rel="stylesheet">
 <link rel="stylesheet" href="webPage/trangChu/CSS/header.css">
 <link rel="stylesheet" href="webPage/trangChu/CSS/footer.css">
-<link href="webPage/login/css/style.css" rel="stylesheet">
 </head>
-
+   <style>
+        .signup-content {
+            width: 100%;
+            max-width: 35rem;
+            padding: 30px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
 <body>
 	<div id="header-placeholder"><jsp:include
 			page="/webPage/trangChu/header.jsp"></jsp:include></div>
@@ -39,41 +51,40 @@
 	<div class="loader-container" style="display: none" id="loader">
 		<div class="loader"></div>
 	</div>
-	<div class="main">
-		<section class="signup" style="padding-top: 50px;">
-			<div class="container">
-				<div class="signup-content border">
-					<form method="POST" id="signin" class="signup-form"
-						action="forgotPass">
-						<h2 class="form-title">
-							<fmt:message key="email_verification" />
-						</h2>
-						<div class="form-group">
-							<input type="email" class="form-input" name="email" id="email"
-								placeholder="<fmt:message key='email_placeholder' />" required
-								maxlength="255" />
-						</div>
-						<div class="form-group row">
-							<div class="col-8">
-								<input type="text" class="form-input" name="code" id="text"
-									placeholder="<fmt:message key='enter_code' />" required />
-							</div>
-							<div class="col-4">
-								<button type="button" class="form-submit" onclick="getCode()">
-									<fmt:message key="get_code" />
-								</button>
-							</div>
-						</div>
-						<div class="form-group">
-							<input type="submit" name="submit" id="submit"
-								class="form-submit" value="<fmt:message key='confirm' />" />
-						</div>
-					</form>
-				</div>
-			</div>
-		</section>
+    <div class="main" style="margin: 3rem">
+        <section class="signup">
+            <div class="container">
+                <div class="signup-content border">
+                    <form method="POST" id="signin" class="signup-form" action="forgotPass">
+                        <h2 class="form-title">
+                            <fmt:message key="email_verification" />
+                        </h2>
+                        <div class="form-group">
+                            <input type="email" class="form-input" name="email" id="email"
+                                   placeholder="<fmt:message key='email_placeholder' />" required maxlength="255" />
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-8">
+                                <input type="text" class="form-input" name="code" id="text"
+                                       placeholder="<fmt:message key='enter_code' />" required />
+                            </div>
+                            <div class="col-4">
+                                <button type="button" class="form-submit" onclick="getCode()">
+                                    <fmt:message key="get_code" />
+                                </button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" name="submit" id="submit" class="form-submit" value="<fmt:message key='confirm' />" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+	<div id="footer-placeholder">
+		<jsp:include page="/webPage/trangChu/footer.jsp"></jsp:include>
 	</div>
-
 	<!-- JS -->
 	<script src="webPage/login/vendor/jquery/jquery.min.js"></script>
 	<script src="webPage/login/js/main.js"></script>

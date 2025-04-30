@@ -5,46 +5,47 @@ import java.sql.Date;
 public class Information {
 	private int infoId;
 	private String name;
-	private String address;
 	private String phoneNumber;
-	private String cccd;
 	private Date birth;
 	private String email;
+	private String gender;
 	private Date createDate;
 	private Date updateDate;
 	private int imgId;
 	private int userId;
 
-	public Information(int infoId, String name, String address, String phoneNumber, String cccd, Date birth,
-			String email, Date createDate, Date updateDate, int imgId, int userId) {
+	
+
+	public Information(int infoId, String name, String phoneNumber, Date birth, String email, String gender,
+			Date createDate, Date updateDate, int imgId, int userId) {
 		super();
 		this.infoId = infoId;
 		this.name = name;
-		this.address = address;
 		this.phoneNumber = phoneNumber;
-		this.cccd = cccd;
 		this.birth = birth;
 		this.email = email;
+		this.gender = gender;
 		this.createDate = createDate;
 		this.updateDate = updateDate;
 		this.imgId = imgId;
 		this.userId = userId;
 	}
 
-	public Information(String name, String address, String phoneNumber, String cccd, Date birth, String email,
-			Date createDate, Date updateDate, int imgId, int userId) {
+	public Information(String name, String phoneNumber, Date birth, String email, String gender, Date createDate,
+			Date updateDate, int imgId, int userId) {
 		super();
 		this.name = name;
-		this.address = address;
 		this.phoneNumber = phoneNumber;
-		this.cccd = cccd;
 		this.birth = birth;
 		this.email = email;
+		this.gender = gender;
 		this.createDate = createDate;
 		this.updateDate = updateDate;
 		this.imgId = imgId;
 		this.userId = userId;
 	}
+
+
 
 	public Information() {
 		super();
@@ -66,14 +67,6 @@ public class Information {
 		this.name = name;
 	}
 
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
@@ -81,13 +74,14 @@ public class Information {
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
+	
 
-	public String getCccd() {
-		return cccd;
+	public String getGender() {
+		return gender;
 	}
 
-	public void setCccd(String cccd) {
-		this.cccd = cccd;
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 
 	public Date getBirth() {
@@ -137,5 +131,5 @@ public class Information {
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-	
+
 }

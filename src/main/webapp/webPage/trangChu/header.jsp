@@ -8,202 +8,146 @@
 <c:if test="${param.lang != null}">
     <c:set var="lang" value="${param.lang}" scope="session" />
 </c:if>
-
-<script src="https://cdn.lordicon.com/lordicon.js"></script>
-<script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <body>
     <header>
-        <div class="web-ad">
-                <p class="web-ad1">Hotline</p>
-                <p class="web-ad2"> 0968 193 432 - 097 418 8429</p>
-                <p class="web-ad1">Địa chỉ:</p>
-                <p class="web-ad2"> CS1: 83-85 Thái Hà - Đống Đa - Hà Nội</p>
-                <p class="web-ad1">CS2:</p>
-                <p class="web-ad2"> 83A Cửu Long - Q10 - TP.HCM</p>
-                
-        </div>
-        <div class="header-1">
-        <div class="logo"><h2>BOOKSTORE</h2></div>
-        <div class="center_header">
-           
-        <div class="search-container">
-        <div class="search-box">
-            <input type="text" placeholder="Tìm kiếm..." id="search-input" >
-            <div class="dropdown-list" id="dropdown-list">
-                <div class="dropdown-item">Item 1</div>
-                <div class="dropdown-item">Item 2</div>
-                <div class="dropdown-item">Item 3</div>
-            </div>
-            <button><lord-icon
-                src="https://cdn.lordicon.com/wjyqkiew.json"
-                trigger="hover"
-                colors="primary:#000000,secondary:#1b1091"
-                style="width:25px;height:25px">
-            </lord-icon></button>
-        </div>
-    </div> 
-        <!-- Lớp phủ -->
-        <div class="overlay" id="overlay"></div>
-        <div class="choose_lan_box">
 
-        </div>
-
-    </div>
-    
-        <div class="icons">
-            <div class="language-selector">
-                <img id="main_lang"  src="https://cdn0.fahasa.com/skin/frontend/ma_vanese/fahasa/images/default.svg" alt="Tiếng việt">
-                <img  src="https://cdn0.fahasa.com/skin/frontend/ma_vanese/fahasa/images/icon_seemore_gray.svg" alt="">
-                <div class="language-popup">
-                    <ul id="language-list">
-                        <li data-src="https://cdn0.fahasa.com/skin/frontend/ma_vanese/fahasa/images/default.svg"><img  src="https://cdn0.fahasa.com/skin/frontend/ma_vanese/fahasa/images/default.svg" alt="Tiếng việt">
-                            </li>
-                        
-                            <li data-src="https://cdn0.fahasa.com/skin/frontend/ma_vanese/fahasa/images/store/english.svg"><img   src="https://cdn0.fahasa.com/skin/frontend/ma_vanese/fahasa/images/store/english.svg" alt="Tiếng Anh">
-                              </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="login_div" onclick="openLogin()">
-            <div class="login_div_icon" >  <lord-icon
-                src="https://cdn.lordicon.com/kdduutaw.json"
-                trigger="hover"
-                state="hover-looking-around"
-                colors="primary:#000000,secondary:#1b1091"
-                style="width:35px;height:45px">
-            </lord-icon>
-        </div>
-            <div class="login_div_text">
-                <a href="login" class="login_div_text_1">Đăng nhập/Đăng kí</a>
-                <p class = "login_div_text_2">Tài khoản của tôi</p>
-            </div>
+        <div class="top-header">
+            <div class="logo">Bookstore</div>
             
-        </div>
-        <div class= "cart_div"> 
-          <div class="cart_div_icon" onclick="openLogin()">
-            <lord-icon
-            src="https://cdn.lordicon.com/ggirntso.json"
-            trigger="hover"
-            colors="primary:#000000,secondary:#1b1091"
-            style="width:35px;height:45px">
-        </lord-icon>
+            <div class="search-bar">
+              <select>
+                <option>All Categories</option>
+              </select>
+              <input type="text" placeholder="Enter Search Products">
+              <button>🔍</button>
             </div>
-            <div class="cart_div_text">
-                <p class = "cart_div_text_1">Giỏ hàng</p>
-                <p class = "cart_div_text_2">Có xx sản phẩm</p>
+          
+            <div class="top-right">
+                <div class="top-right-icon">👤</div>
+              <div class="user-info-main">
+            
+                  <a href="#">Đăng nhập </a>
+                  <p> | </p>
+                  <a href="#">Đăng ký</a>
+              </div>
+              
             </div>
-        </div>
-        </div>
-    </div>
-    <div class="header-2">
-        <div class="filter_div">     
-            <p>Danh mục sản phẩm</p>
-            <dotlottie-player
-            src="https://lottie.host/6dee1dd0-e7ff-4182-87fd-c62df8c1ac33/n269AzLlRg.lottie"
-            background="transparent"
-            speed="1"
-            style="width: 35px; height: 40px"
-            loop
-            autoplay
-          ></dotlottie-player>
-          <div class="dropdown">
-            <h2>Sách trong nước</h2>
-            <div class="vertical-line"></div>
-            <div class="drd_line">
-            <div class="drd_line_1">
-            <div class="link_dropdown_1"><a class="link_dropdown_1_a1" href="FilterServlet">Văn học</a>
-                <a class="link_dropdown_1_a2" href="/webPage/categoryAndSingle/filter.jsp">Tiểu thuyết</a>
-                <a class="link_dropdown_1_a2" href="/webPage/categoryAndSingle/filter.jsp">Truyện ngắn</a>
-                <a class="link_dropdown_1_a2" href="/webPage/categoryAndSingle/filter.jsp">Light-novel</a>
-                <a class="link_dropdown_1_a2" href="/webPage/categoryAndSingle/filter.jsp">Ngôn tình</a>
-                <a class="link_dropdown_1_a3" href="/webPage/categoryAndSingle/filter.jsp">Xem tất cả</a>
+          
+            <div class="mobile-menu-icon">☰</div>
+          </div>
+          
+          <!-- Yellow Menu Bar -->
+          <div class="yellow-bar">
+            <div class="logo-hidden">Bookstore</div>
+            <div class="left-menu">
+              <button class="left-menu-button">☰ Products Category</button>
+              <div class="dropdown">
+                <div class="dropdown-category">
+                  <img src="https://img.cand.com.vn/resize/800x800/NewFiles/Images/2023/03/09/image001-1678344452723.jpg" alt=""> 
+                  <p>Văn học</p>
+                </div>
+                <div class="dropdown-category">
+                  <img src="https://phenikaa-uni.edu.vn:3600/fidt/vi/posts/kinh-te-so-2331054.png" alt=""> 
+                  <p>Kinh tế</p>
+                </div>
+                <div class="dropdown-category">
+                  <img src="https://lcv.com.vn/wp-content/uploads/2023/06/phat-trien-ban-than-la-gi.jpg" alt=""> 
+                  <p>Phát triển bản thân</p>
+                </div>
+                <div class="dropdown-category">
+                  <img src="https://huongnghiep.hocmai.vn/wp-content/uploads/2021/12/150-1200x701.png" alt=""> 
+                  <p>Tâm lý kỹ năng</p>
+                </div>
+
+                <div class="dropdown-category">
+                  <img src="https://hockiquandoi.net/wp-content/uploads/2020/10/20200728_072002_716551_nuoi-day-con-dung-c.max-1800x1800.jpg" alt=""> 
+                  <p>Nuôi dạy con</p>
+                </div>
+              </div>
             </div>
-            <div class="link_dropdown_1"><a class="link_dropdown_1_a1" href="#">Kinh tế</a>
-                <a class="link_dropdown_1_a2" href="/webPage/categoryAndSingle/filter.jsp">Nhân Vật - Bài Học Kinh Doanh</a>
-                <a class="link_dropdown_1_a2" href="/webPage/categoryAndSingle/filter.jsp">Quản Trị - Lãnh Đạo</a>
-                <a class="link_dropdown_1_a2" href="/webPage/categoryAndSingle/filter.jsp">Light-novel</a>
-                <a class="link_dropdown_1_a2" href="/webPage/categoryAndSingle/filter.jsp">Marketing - Bán Hàng</a>
-                <a class="link_dropdown_1_a3" href="/webPage/categoryAndSingle/filter.jsp">Xem tất cả</a>
-            </div>      
-            <div class="link_dropdown_1"><a class="link_dropdown_1_a1" href="#">Tâm Lý - Kĩ Năng Sống</a>
-                <a class="link_dropdown_1_a2" href="/webPage/categoryAndSingle/filter.jsp">Kỹ Năng Sống</a>
-                <a class="link_dropdown_1_a2" href="#">Rèn Luyện Nhân Cách</a>
-                <a class="link_dropdown_1_a2" href="#">Tâm Lý</a>
-                <a class="link_dropdown_1_a2" href="#">Sách Cho Tuổi Mới Lớn</a>
-                <a class="link_dropdown_1_a3" href="#">Xem tất cả</a>
+            <div class="main-menu-link">
+              <a href="#">Home</a>
+              <a href="#">Shop</a>
+              <a href="#">Blog</a>
+              <a href="#">Pages</a>
+              <a href="#">Contact</a>
             </div>
-        </div>    
-    
-        
-        <div class="drd_line_1">
-            <div class="link_dropdown_1"><a class="link_dropdown_1_a1" href="#">Nuôi Dạy Con</a>
-                <a class="link_dropdown_1_a2" href="#">Cẩm Nang Làm Cha Mẹ</a>
-                <a class="link_dropdown_1_a2" href="#">Phương Pháp Giáo Dục Trẻ</a>
-                <a class="link_dropdown_1_a2" href="#">Phát Triển Trí Tuệ Cho Trẻ</a>
-                <a class="link_dropdown_1_a2" href="#">Phát Triển Kỹ Năng Cho Trẻ</a>
-                <a class="link_dropdown_1_a3" href="#">Xem tất cả</a>
+            <div class="main-menu-cart">
+              <a href="#"><i class="fa-solid fa-heart fa-xl" style="color: #000000;"></i></a>
+              <a href="#"> </a>
+              <a href="#"><i class="fa-solid fa-cart-shopping fa-xl" style="color: #000000;"></i></a>
             </div>
-            <div class="link_dropdown_1"><a class="link_dropdown_1_a1" href="#">Sách Thiếu Nhi</a>
-                <a class="link_dropdown_1_a2" href="#">Manga - Comic</a>
-                <a class="link_dropdown_1_a2" href="#">Kiến Thức Bách Khoa</a>
-                <a class="link_dropdown_1_a2" href="#">Sách Tranh Kỹ Năng Sống</a>
-                <a class="link_dropdown_1_a2" href="#">Vừa Học - Vừa Chơi</a>
-                <a class="link_dropdown_1_a3" href="#">Xem tất cả</a>
-            </div>      
-            <div class="link_dropdown_1"><a class="link_dropdown_1_a1" href="#">Tiểu Sử - Hồi Ký</a>
-                <a class="link_dropdown_1_a2" href="#">Câu Chuyện Cuộc Đời</a>
-                <a class="link_dropdown_1_a2" href="#">Chính Trị</a>
-                <a class="link_dropdown_1_a2" href="#">Kinh Tế</a>
-                <a class="link_dropdown_1_a2" href="#">Nghệ Thuật - Giải Trí</a>
-                <a class="link_dropdown_1_a3" href="#">Xem tất cả</a>
-            </div>
-        </div>  
-        </div>    
-    </div>               
-         </div>  
-         <div class="box-policy">
-            <ul>
-                <li class="box-item">
-                    <div class="box-icon">
-                        <img src="//theme.hstatic.net/1000288298/1001020793/14/header_03_policy_1_ico.png?v=1422" alt="Chất lượng đảm bảo">
+            <!-- Khi mobile -->
+            <div class="yellow-right">
+                <div class="menu-after">
+                    <div class="user-info">
+            
+                        <a href="#">Đăng nhập </a>
+                        <p> | </p>
+                        <a href="#">Đăng ký</a>
                     </div>
-                    <div class="box-text">Chất lượng đảm bảo</div>
-                </li>
-                <li class="box-item">
-                    <div class="box-icon">
-                        <img src="//theme.hstatic.net/1000288298/1001020793/14/header_03_policy_2_ico.png?v=1422" alt="Vận chuyển siêu tốc">
+                    <div class="search-bar-container">
+                    <div class="search-bar">
+                        <input type="text" placeholder="Enter Search Products">
+                        <button>🔍</button>
+                      </div>
                     </div>
-                    <div class="box-text">Vận chuyển siêu tốc</div>
-                </li>
-                <li class="box-item">
-                    <div class="box-icon">
-                        <img src="//theme.hstatic.net/1000288298/1001020793/14/header_03_policy_3_ico.png?v=1422" alt="Tư vấn Build PC: 0986552233">
+
+                    <div class="m-button">
+                        <button onclick="">Thông tin</button>
+                        <button >Sản phẩm</button>
                     </div>
-                    <div class="box-text">Tư vấn Build PC: 0986552233</div>
-                </li>
-            </ul>
-        </div>
-    </div>
+
+                    <div class="user-des">
+                        <div class="user-des-item">
+
+                           <div>👤</div>
+                            <h3>Thông tin</h3>
+                        </div>
+                        <div class="user-des-item">
+
+                            <div>🛒</div>
+                             <h3>Giỏ hàng</h3>
+                         </div>
+
+                         <div class="user-des-item">
+
+                            <div>⭐</div>
+                             <h3>Thanh toán</h3>
+                         </div>
+                    </div>
+
+                    <div class="product-des">
+
+                        <div class="product-des-item">
+
+                            
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+                <div class="mobile-menu-icon" onclick="openMenu()">☰</div>
+            </div>
+          </div>
+
     </header>
     <script>
-            
-      // Lấy các phần tử DOM
-            const searchInput = document.getElementById('search-input');
-            const dropdownList = document.getElementById('dropdown-list');
+        function openMenu() {
+            const menu = document.querySelector('.menu-after');
+            menu.classList.toggle('active');
+          }
+          Function 
+          function toggleSubmenu(item) {
+            let icon = item.querySelector('span');
+            if (icon) {
+              icon.classList.toggle('rotate');
+            }
+          }
 
-            // Hiển thị dropdown khi focus vào ô tìm kiếm
-            searchInput.addEventListener('focus', () => {
-                dropdownList.style.display = 'block';
-            });
-
-            // Ẩn dropdown khi mất focus khỏi ô tìm kiếm
-            searchInput.addEventListener('blur', () => {
-                setTimeout(() => {
-                    dropdownList.style.display = 'none';
-                }, 200); // Delay để đảm bảo người dùng có thể chọn item trước khi ẩn
-            });
-    
     </script>
 </body>
 

@@ -229,105 +229,23 @@
                 alt="">
             <h1>Xu Hướng Mua Sắm</h1>
         </div>
-        <div class="display-list-grid">
-            <div class="sale-books-element">
-                <img src="https://cdn1.fahasa.com/media/catalog/product/n/d/ndivia-co-may-tu-duy-vi-dai--full------t2-2025----outline-02.jpg"
-                    alt="">
-                <p>NVIDIA-Cỗ máy tư duy vĩ đại</p>
-                <h4>186.000</h4>
-                <h6>200.000</h6>
-                <h5>36%</h5>
-                <p>Đã bán: 50</p>
-            </div>
-            <div class="sale-books-element">
-                <img src="https://cdn1.fahasa.com/media/catalog/product/n/d/ndivia-co-may-tu-duy-vi-dai--full------t2-2025----outline-02.jpg"
-                    alt="">
-                <p>NVIDIA-Cỗ máy tư duy vĩ đại</p>
-                <h4>186.000</h4>
-                <h6>200.000</h6>
-                <h5>36%</h5>
-                <p>Đã bán: 50</p>
-            </div>
-
-            <div class="sale-books-element">
-                <img src="https://cdn1.fahasa.com/media/catalog/product/n/d/ndivia-co-may-tu-duy-vi-dai--full------t2-2025----outline-02.jpg"
-                    alt="">
-                <p>NVIDIA-Cỗ máy tư duy vĩ đại</p>
-                <h4>186.000</h4>
-                <h6>200.000</h6>
-                <h5>36%</h5>
-                <p>Đã bán: 50</p>
-            </div>
-            <div class="sale-books-element">
-                <img src="https://cdn1.fahasa.com/media/catalog/product/n/d/ndivia-co-may-tu-duy-vi-dai--full------t2-2025----outline-02.jpg"
-                    alt="">
-                <p>NVIDIA-Cỗ máy tư duy vĩ đại</p>
-                <h4>186.000</h4>
-                <h6>200.000</h6>
-                <h5>36%</h5>
-                <p>Đã bán: 50</p>
-            </div>
- 
-            <div class="sale-books-element">
-                <img src="https://cdn1.fahasa.com/media/catalog/product/n/d/ndivia-co-may-tu-duy-vi-dai--full------t2-2025----outline-02.jpg"
-                    alt="">
-                <p>NVIDIA-Cỗ máy tư duy vĩ đại</p>
-                <h4>186.000</h4>
-                <h6>200.000</h6>
-                <h5>36%</h5>
-                <p>Đã bán: 50</p>
-            </div>
-            <div class="sale-books-element">
-                <img src="https://cdn1.fahasa.com/media/catalog/product/n/d/ndivia-co-may-tu-duy-vi-dai--full------t2-2025----outline-02.jpg"
-                    alt="">
-                <p>NVIDIA-Cỗ máy tư duy vĩ đại</p>
-                <h4>186.000</h4>
-                <h6>200.000</h6>
-                <h5>36%</h5>
-                <p>Đã bán: 50</p>
-            </div>
-            
-            <div class="sale-books-element">
-                <img src="https://cdn1.fahasa.com/media/catalog/product/n/d/ndivia-co-may-tu-duy-vi-dai--full------t2-2025----outline-02.jpg"
-                    alt="">
-                <p>NVIDIA-Cỗ máy tư duy vĩ đại</p>
-                <h4>186.000</h4>
-                <h6>200.000</h6>
-                <h5>36%</h5>
-                <p>Đã bán: 50</p>
-            </div>
-            <div class="sale-books-element">
-                <img src="https://cdn1.fahasa.com/media/catalog/product/n/d/ndivia-co-may-tu-duy-vi-dai--full------t2-2025----outline-02.jpg"
-                    alt="">
-                <p>NVIDIA-Cỗ máy tư duy vĩ đại</p>
-                <h4>186.000</h4>
-                <h6>200.000</h6>
-                <h5>36%</h5>
-                <p>Đã bán: 50</p>
-            </div>
-            
-            <div class="sale-books-element">
-                <img src="https://cdn1.fahasa.com/media/catalog/product/n/d/ndivia-co-may-tu-duy-vi-dai--full------t2-2025----outline-02.jpg"
-                    alt="">
-                <p>NVIDIA-Cỗ máy tư duy vĩ đại</p>
-                <h4>186.000</h4>
-                <h6>200.000</h6>
-                <h5>36%</h5>
-                <p>Đã bán: 50</p>
-            </div>
-            <div class="sale-books-element">
-                <img src="https://cdn1.fahasa.com/media/catalog/product/n/d/ndivia-co-may-tu-duy-vi-dai--full------t2-2025----outline-02.jpg"
-                    alt="">
-                <p>NVIDIA-Cỗ máy tư duy vĩ đại</p>
-                <h4>186.000</h4>
-                <h6>200.000</h6>
-                <h5>36%</h5>
-                <p>Đã bán: 50</p>
-            </div>    
-               
-        </div>
-
-       <div class="button-xem-them"> Xem Thêm </div>
+		   <div class="display-list-grid">
+		    <c:forEach var="product" items="${homepageBooks}" varStatus="status">
+		        <a href="chi-tiet-sach?id=${product.getProductId()}" class="product-item <c:if test='${status.index >= 10}'>hidden</c:if>">
+		            <div class="sale-books-element">
+		                <img src="getImage?img_id=${product.getImgId()}" alt="${product.getTitle()}" loading="lazy">
+		                <p>${product.getTitle()}</p>
+		                <h4>${product.getPrice()}</h4>
+		                <p>Đã bán: ${1000 - product.getQuantity()}</p>
+		            </div>
+		        </a>
+		    </c:forEach>
+		</div>
+		
+		<!-- Nút Xem thêm -->
+		<div style="text-align: center; margin-top: 20px;">
+		    <button id="loadMoreBtn">Xem thêm</button>
+		</div>
     </div>
     
                 
@@ -359,16 +277,20 @@
         }
 
         startCountdown();
+    
     </script>
+	<script >
+	    document.getElementById("loadMoreBtn").addEventListener("click", function() {
+	        var hiddenProducts = document.querySelectorAll(".product-item.hidden");
+	        hiddenProducts.forEach(function(item) {
+	            item.classList.remove("hidden");
+	        });
+	        this.style.display = "none"; // Ẩn nút sau khi đã load xong
+	    });
+	</script>
 
-    <!-- Footer will be included here -->
-    <div id="footer-placeholder">
-        <jsp:include page="/webPage/trangChu/footer.jsp"></jsp:include>
-    </div>
-    
-    
     <script src="webPage/trangChu/js/footer.js"></script>
-    <script src="webPage/trangChu/js/header.js"></script>
+
 </body>
 </html>
 </html>
