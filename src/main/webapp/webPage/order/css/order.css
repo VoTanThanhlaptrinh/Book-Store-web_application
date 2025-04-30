@@ -3,10 +3,12 @@
 body {
     font-family: "Roboto", sans-serif;
 }
+a:hover{
+	text-decoration: none !important;
+}
 html,.section-one{
     background-color: #F4F4F4;
 }
-
 .address,.product-detail,.abate, .side-panel{
     font-size: 14px;
 }

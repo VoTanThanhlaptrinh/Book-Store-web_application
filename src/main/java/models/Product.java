@@ -1,6 +1,7 @@
 package models;
 
 import java.util.Date;
+import java.util.Random;
 
 public class Product {
 	private int productId;
@@ -18,6 +19,13 @@ public class Product {
 	private int page;
 	private String author;
 	private int publishYear;
+	private int height;
+	private int length;
+	private int width;
+	private int weight;
+	private Random rand;
+
+
 
 	public Product(int productId, int addedByUser, String title, double price, String description, int imgId,
 			Date createDate, Date updateDate, int quantity, int category_parent, int category_id, String language,
@@ -38,6 +46,12 @@ public class Product {
 		this.page = page;
 		this.author = author;
 		this.publishYear = publishYear;
+		/*
+		 * this.rand= new Random(title.hashCode() + publishYear); this.height =
+		 * rand.nextInt(5 - 1 + 1) + 1; this.length = rand.nextInt(20 - 10 + 1) + 10;
+		 * this.width = rand.nextInt(20 - 10 + 1) + 10; this.weight = rand.nextInt(700 -
+		 * 100 + 1) + 100;
+		 */
 	}
 
 	public Product(int addedByUser, String title, double price, String description, int imgId, Date createDate,
@@ -58,22 +72,34 @@ public class Product {
 		this.page = page;
 		this.author = author;
 		this.publishYear = publishYear;
+		
+		
+		/*
+		 * this.rand = new Random(title.hashCode() + publishYear); this.height =
+		 * rand.nextInt(5 - 1 + 1) + 1; this.length = rand.nextInt(20 - 10 + 1) + 10;
+		 * this.width = rand.nextInt(20 - 10 + 1) + 10; this.weight = rand.nextInt(700 -
+		 * 100 + 1) + 100;
+		 */
 	}
-
-
-
-
-
 
 	public Product() {
 	}
 
+	
 
+
+	public Product(String title, int height, int length, int width, int weight) {
+		super();
+		this.title = title;
+		this.height = height;
+		this.length = length;
+		this.width = width;
+		this.weight = weight;
+	}
 
 	public int getProductId() {
 		return productId;
 	}
-
 
 
 	public void setProductId(int productId) {
@@ -248,6 +274,21 @@ public class Product {
 		this.publishYear = publishYear;
 	}
 
+	public int getHeight() {
+		return height;
+	}
+
+	public int getLength() {
+		return length;
+	}
+
+	public int getWidth() {
+		return width;
+	}
+
+	public int getWeight() {
+		return weight;
+	}
 	@Override
 	public String toString() {
 		return "Product [productId=" + productId + ", addedByUser=" + addedByUser + ", title=" + title + ", price="
