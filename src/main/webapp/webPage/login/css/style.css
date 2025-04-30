@@ -422,4 +422,36 @@ input[type=checkbox]:not(old):checked + label > span:before {
 .btn-google:hover {
   color: #fff;
 }
+/* Bo góc và đổ bóng cho toastr */
+#toast-container > .toast {
+  border-radius: 12px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+  padding: 16px !important;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 14px;
+}
+
+/* Thay đổi màu cho toastr success */
+#toast-container > .toast-success {
+  background: linear-gradient(45deg, #4CAF50, #81C784) !important;
+  color: white !important;
+}
+
+/* Thay đổi màu cho toastr error */
+#toast-container > .toast-error {
+  background: linear-gradient(45deg, #F44336, #E57373) !important;
+  color: white !important;
+}
+
+/* Thay đổi màu cho toastr info */
+#toast-container > .toast-info {
+  background: linear-gradient(45deg, #2196F3, #64B5F6) !important;
+  color: white !important;
+}
+
+/* Thay đổi màu cho toastr warning */
+#toast-container > .toast-warning {
+  background: linear-gradient(45deg, #FF9800, #FFB74D) !important;
+  color: white !important;
+}
 

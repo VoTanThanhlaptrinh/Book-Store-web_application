@@ -39,7 +39,6 @@ public class SendMailImp implements ISendMailService {
 
 		// create the mail Session object
 		Session session = Session.getInstance(props);
-		session.setDebug(true);
 		try {
 			// create a MimeMessage object
 			Message message = new MimeMessage(session);
@@ -55,7 +54,6 @@ public class SendMailImp implements ISendMailService {
 			transport.connect(host, from, pass);
 			transport.sendMessage(message, message.getAllRecipients());
 			transport.close();
-
 		} catch (AddressException ae) {
 			ae.printStackTrace();
 		} catch (MessagingException me) {

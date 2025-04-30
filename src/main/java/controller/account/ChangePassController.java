@@ -47,7 +47,8 @@ public class ChangePassController extends HttpServlet {
 		}
 		Locale locale = Locale.forLanguageTag(lang);
 		ResourceBundle bundle = ResourceBundle.getBundle("messages", locale);
-		try (InputStream ips = req.getInputStream(); JsonReader reader = Json.createReader(ips);) {
+		try (InputStream ips = req.getInputStream(); 
+			JsonReader reader = Json.createReader(ips);) {
 			JsonObject jsonObject = reader.readObject();
 			// lấy ra thông tin mật khẩu cũ, mới và xác nhận
 			String oldPass = jsonObject.getString("currentPassword");

@@ -14,6 +14,7 @@ import models.Cart;
 import models.User;
 import service.ILoginService;
 import service.LoginService;
+import service.LoginSpamService;
 import serviceImplement.HienThiDanhSachImp;
 import serviceImplement.HienThiDonTrongGioHangImplement;
 
@@ -39,11 +40,6 @@ public class LoginController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String username = req.getParameter("username");
-		String password = req.getParameter("password");
-		String productId = req.getParameter("productId");
-
-		User user = loginService.checkUser(username, password);
 		HttpSession session = req.getSession();
 
 		String lang = (String) session.getAttribute("lang");
@@ -52,12 +48,42 @@ public class LoginController extends HttpServlet {
 		}
 		Locale locale = Locale.forLanguageTag(lang);
 		ResourceBundle bundle = ResourceBundle.getBundle("messages", locale);
+		
+		String username = req.getParameter("username");
+		String password = req.getParameter("password");
+		String productId = req.getParameter("productId");
+		
+		// kiểm tra username có rỗng không
+		if(username == null || username.trim().isEmpty()) {
+			String mess = bundle.getString("email.null");
+			req.setAttribute("mess", mess);
+			doGet(req, resp);
+			return;
+		}
+		// kiểm tra password có rỗng không
+		if(password == null || password.trim().isEmpty()) {
+			String mess = bundle.getString("password.null");
+			req.setAttribute("mess", mess);
+			doGet(req, resp);
+			return;
+		}
+		// kiểm tra spam đăng nhập
+		if(LoginSpamService.checkSpam(username)) {
+			String mess = bundle.getString("login.spam");
+			req.setAttribute("mess", mess);
+			doGet(req, resp);
+			return;
+		}
+		User user = loginService.checkUser(username, password);
+		
+		// kiểm tra username và password có khớp hay không
 		if (user == null) {
 			String mess = bundle.getString("incorrect.password");
 			req.setAttribute("mess", mess);
 			doGet(req, resp);
 			return;
 		}
+		LoginSpamService.removeUser(username);
 
 		HienThiDonTrongGioHangImplement htGioHang = new HienThiDonTrongGioHangImplement(user);
 		htGioHang.taoGioHang(user.getUserId());

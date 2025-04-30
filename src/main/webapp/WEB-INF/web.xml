@@ -47,11 +47,16 @@
 		<url-pattern>/confirm</url-pattern>
 		<url-pattern>/upload</url-pattern>
 		<url-pattern>/infor</url-pattern>
+		<url-pattern>/reset</url-pattern>
 	</filter-mapping>
 
 	<filter-mapping>
 		<filter-name>activateFilter</filter-name>
 		<url-pattern>/checkout</url-pattern>
+		<url-pattern>/reset</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>verifyFilter</filter-name>
 		<url-pattern>/reset</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
