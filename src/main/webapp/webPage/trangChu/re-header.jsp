@@ -86,7 +86,7 @@
         </lord-icon>
             </div>
             <div class="cart_div_text">
-                <p class = "cart_div_text_1">Giỏ hàng</p>
+            <a href="cart"><p class = "cart_div_text_1">Giỏ hàng</p></a>
                 <p class = "cart_div_text_2">Có xx sản phẩm</p>
             </div>
         </div>

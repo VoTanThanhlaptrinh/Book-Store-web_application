@@ -222,7 +222,7 @@ body {
 }
 .xu_huong_mua_sam {
     width: 1243px;
-    height: 700px;
+    height: auto;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Hiệu ứng đổ bóng */
     margin-top: 40px;
     background-color: white;
@@ -259,3 +259,20 @@ body {
     grid-template-columns: repeat(5, 1fr); 
     gap: 10px;
     max-width: 100%;}
+.display-list-grid a {
+    text-decoration: none; /* Bỏ gạch chân */
+    color: inherit; /* Giữ màu chữ như bình thường */
+    }
+.sale-books-element {
+    text-align: center; /* Căn giữa toàn bộ nội dung */
+}
+
+.sale-books-element p {
+    white-space: nowrap;        /* Không xuống dòng */
+    overflow: hidden;           /* Ẩn phần tràn ra */
+    text-overflow: ellipsis;     /* Thêm dấu "..." */
+    width: 180px;                /* (hoặc set theo nhu cầu) */
+}    
+.hidden {
+        display: none;
+    }    
