@@ -289,10 +289,11 @@ label {
     row-gap: 20px; /* Khoảng cách giữa các dòng */
 
 }
-.sale-books-element {
+.display-list-grid a {
     background-color: white;
     justify-content: center;
     align-items: center;
+    text-decoration: none;
     display: grid;
     place-items: center; /* Căn giữa cả ngang và dọc */
     width: 200px;

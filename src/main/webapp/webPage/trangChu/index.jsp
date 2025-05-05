@@ -34,9 +34,16 @@
     
 
      <div class="banner_div">
-            <div class="banner_1">
-                    <img src="https://cdn1.fahasa.com/media/magentothem/banner7/ThaiHa_Bac_Resize_840x320.png" alt="">
+          <div class="slider" id="slider">
+            <div class="slides" id="slideContainer">
+              <img src="https://cdn1.fahasa.com/media/magentothem/banner7/ThaiHa_Bac_Resize_840x320.png" alt="Slide 1">
+              <img src="https://cdn1.fahasa.com/media/wysiwyg/Thang-03-2025/LichSuVanHoa_Mainbanner_1920x600.png" alt="Slide 2">
+              <img src="https://cdn1.fahasa.com/media/magentothem/banner7/TrangThuBongT2g_840x320.jpg" alt="Slide 3">
             </div>
+          
+            <button class="nav-button prev" onclick="prevSlide()">❮</button>
+            <button class="nav-button next" onclick="nextSlide()">❯</button>
+          </div>
             <div class="banner_list_1">
                 <img src="https://cdn1.fahasa.com/media/wysiwyg/Thang-03-2025/Subpark_Way.png" alt="">
                 <img src="https://cdn1.fahasa.com/media/wysiwyg/Thang-03-2025/Fahasa_OnineT3_392x156_1.jpg" alt="">
@@ -96,9 +103,7 @@
     </div>
 
     <div class="sale-content">
-        <video autoplay loop muted playsinline id="background-video">
-            <source src="https://cdn.pixabay.com/video/2023/07/04/170065-842720168_large.mp4" type="video/mp4">
-        </video>
+  
 
         <div class="content">
             <div class="content-left">
@@ -277,7 +282,8 @@
         }
 
         startCountdown();
-    
+
+   
     </script>
 	<script >
 	    document.getElementById("loadMoreBtn").addEventListener("click", function() {
@@ -287,6 +293,27 @@
 	        });
 	        this.style.display = "none"; // Ẩn nút sau khi đã load xong
 	    });
+	    
+	     const slides = document.getElementById('slideContainer');
+	        const totalSlides = slides.children.length;
+	        let currentIndex = 0;
+	      
+	        function updateSlide() {
+	        	slides.style.transform = 'translateX(-' + (currentIndex * 100) + '%)';
+	        }
+	      
+	        function nextSlide() {
+	          currentIndex = (currentIndex + 1) % totalSlides;
+	          updateSlide();
+	        }
+	      
+	        function prevSlide() {
+	          currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+	          updateSlide();
+	        }
+	      
+	        setInterval(nextSlide, 3000); // Tự động chuyển mỗi 3 giây
+	    
 	</script>
 
     <script src="webPage/trangChu/js/footer.js"></script>

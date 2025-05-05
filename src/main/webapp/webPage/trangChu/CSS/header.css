@@ -15,11 +15,28 @@ body {
     border-bottom: 1px solid #ccc;
 }
 .logo {
-    margin-left: 30px;
-    font-size: 36px;
-    font-weight: bold;
-    color: #000;
-}
+    	margin-left: 30px;
+      font-size: 30px;
+      font-weight: bold;
+      background: linear-gradient(
+        270deg,
+        #ff0080,
+        #7928ca,
+        #2afadf,
+        #ff8c00,
+        #ff0080
+      );
+      background-size: 1000% 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientShift 10s ease infinite;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
 .logo-hidden {
      display: none;
     margin-left: 30px;
