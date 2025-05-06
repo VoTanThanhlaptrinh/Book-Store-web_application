@@ -24,8 +24,8 @@ public class Product {
 	private int width;
 	private int weight;
 	private Random rand;
-
-
+	
+	private String unsignedTitle;
 
 	public Product(int productId, int addedByUser, String title, double price, String description, int imgId,
 			Date createDate, Date updateDate, int quantity, int category_parent, int category_id, String language,
@@ -297,6 +297,15 @@ public class Product {
 				+ ", category_id=" + category_id + ", language=" + language + ", page=" + page + ", author=" + author
 				+ ", publishYear=" + publishYear + "]";
 	}
+
+	public String getUnsignedTitle() {
+		return unsignedTitle;
+	}
+
+	public void setUnsignedTitle(String unsignedTitle) {
+		this.unsignedTitle = unsignedTitle;
+	}
+
 	
 	
 }

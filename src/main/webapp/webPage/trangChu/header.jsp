@@ -19,17 +19,19 @@
               <select>
                 <option>All Categories</option>
               </select>
-              <input type="text" placeholder="Enter Search Products">
-              <button>🔍</button>
+                  <form action="search" method="get" >
+					  <input type="text" name="query" placeholder="Enter Search Products">
+					  <button type="submit">🔍</button>
+					</form>
             </div>
           
             <div class="top-right">
                 <div class="top-right-icon">👤</div>
               <div class="user-info-main">
             
-                  <a href="#">Đăng nhập </a>
-                  <p> | </p>
-                  <a href="#">Đăng ký</a>
+                  <div class="user-info-main-login-regis" onclick="openLogin()">Đăng nhập | </div>
+                  
+                  <div class="user-info-main-login-regis" onclick="openLogin()"> Đăng ký</div>
               </div>
               
             </div>
@@ -44,23 +46,23 @@
               <button class="left-menu-button">☰ Products Category</button>
            <div class="dropdown">
 			  <a class="dropdown-category" href="FilterServlet?page=1&categoryParentId=1">
-			    <img src="https://img.cand.com.vn/resize/800x800/NewFiles/Images/2023/03/09/image001-1678344452723.jpg" alt=""> 
+			    <img src="https://img.cand.com.vn/resize/800x800/NewFiles/Images/2023/03/09/image001-1678344452723.jpg" alt="" loading="lazy"> 
 			    <p>Văn học</p>
 			  </a>
-			  <a class="dropdown-category" href="FilterServlet?page=1&categoryParentId=2">
-			    <img src="https://phenikaa-uni.edu.vn:3600/fidt/vi/posts/kinh-te-so-2331054.png" alt=""> 
+			  <a class="dropdown-category" href="FilterServlet?page=1&categoryParentId=2" >
+			    <img src="https://phenikaa-uni.edu.vn:3600/fidt/vi/posts/kinh-te-so-2331054.png" alt="" loading="lazy"> 
 			    <p>Kinh tế</p>
 			  </a>
 			  <a class="dropdown-category" href="FilterServlet?page=1&categoryParentId=3">
-			    <img src="https://lcv.com.vn/wp-content/uploads/2023/06/phat-trien-ban-than-la-gi.jpg" alt=""> 
+			    <img src="https://lcv.com.vn/wp-content/uploads/2023/06/phat-trien-ban-than-la-gi.jpg" alt="" loading="lazy">  
 			    <p>Phát triển bản thân</p>
 			  </a>
 			  <a class="dropdown-category" href="FilterServlet?page=1&categoryParentId=4">
-			    <img src="https://huongnghiep.hocmai.vn/wp-content/uploads/2021/12/150-1200x701.png" alt=""> 
+			    <img src="https://huongnghiep.hocmai.vn/wp-content/uploads/2021/12/150-1200x701.png" alt="" loading="lazy"> 
 			    <p>Tâm lý kỹ năng</p>
 			  </a>
 			  <a class="dropdown-category" href="FilterServlet?page=1&categoryParentId=5">
-			    <img src="https://hockiquandoi.net/wp-content/uploads/2020/10/20200728_072002_716551_nuoi-day-con-dung-c.max-1800x1800.jpg" alt=""> 
+			    <img src="https://hockiquandoi.net/wp-content/uploads/2020/10/20200728_072002_716551_nuoi-day-con-dung-c.max-1800x1800.jpg" alt="" loading="lazy"> 
 			    <p>Nuôi dạy con</p>
 			  </a>
 			</div>
@@ -87,10 +89,10 @@
                         <a href="#">Đăng ký</a>
                     </div>
                     <div class="search-bar-container">
-                    <div class="search-bar">
-                        <input type="text" placeholder="Enter Search Products">
-                        <button>🔍</button>
-                      </div>
+                   <form action="search" method="get" class="search-bar">
+					  <input type="text" name="query" placeholder="Enter Search Products">
+					  <button type="submit">🔍</button>
+					</form>
                     </div>
 
                     <div class="m-button">

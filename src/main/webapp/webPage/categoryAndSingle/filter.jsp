@@ -76,10 +76,11 @@
 				</div>
 				<div class="slider-container">
 					<div class="slider-track">
-						<div class="slider-fill"></div>
+				
 						<input type="range" id="range-slider-min" min="0" max="1000000"
-							step="1000" value="0"> <input type="range"
-							id="range-slider-max" min="0" max="1000000" step="1000"
+							step="1000" value="0"> 
+					<input type="range"
+								id="range-slider-max" min="0" max="1000000" step="1000"
 							value="1000000">
 					</div>
 				</div>
@@ -224,7 +225,7 @@
             const minValue = parseInt(minPriceInput.value) || 0;
             const maxValue = parseInt(maxPriceInput.value) || 0;
 
-            resultMessage.textContent = 'Không có sản phẩm ' + minValue + ' đ - ' + maxValue + ' đ';
+            resultMessage.textContent = 'Khoảng giá ' + minValue + ' đ - ' + maxValue + ' đ';
         }
 
         function updateSliderFill() {
@@ -354,6 +355,12 @@
 		xhr.open("GET", "FilterServlet?page=1&categoryParentId=" + categoryParentId + "&minPrice=" + minPrice + "&maxPrice=" + maxPrice, true);
 		xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest"); // 👈 Báo hiệu là AJAX
 
+		const url = "FilterServlet?page=" + 1
+		          + "&categoryParentId=" + categoryParentId	 
+		          + "&minPrice=" + minPrice
+		          + "&maxPrice=" + maxPrice;
+		history.pushState(null, '', url);
+		
 		xhr.onload = function () {
 			if (xhr.status === 200) {
 				document.getElementById("product-list").innerHTML = xhr.responseText;
@@ -367,6 +374,13 @@
 	   event.preventDefault();
 		const minPrice = document.getElementById('min-price').value;
 		const maxPrice = document.getElementById('max-price').value;
+		
+		const url = "FilterServlet?page=" + 1
+				+ "&categoryId=" + categoryId
+		      + "&minPrice=" + minPrice 
+		      + "&maxPrice=" + maxPrice;
+		history.pushState(null, '', url);
+		
 		const xhr = new XMLHttpRequest();
 		xhr.open("GET", "FilterServlet?page=1&categoryId=" + categoryId + "&minPrice=" + minPrice + "&maxPrice=" + maxPrice, true);
 		xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest"); // 👈 Báo hiệu là AJAX
@@ -386,7 +400,12 @@
 		    // Lấy giá trị minPrice và maxPrice từ input
 	    const minPrice = document.getElementById('min-price').value;
 	    const maxPrice = document.getElementById('max-price').value;
-
+		const url = "FilterServlet?page=" + currentPage 
+					+ "&categoryParentId=" + parent
+					+ "&categoryId=" + sub
+			      + "&minPrice=" + minPrice 
+			      + "&maxPrice=" + maxPrice;
+		history.pushState(null, '', url);
 	    // Tạo một đối tượng XMLHttpRequest để gọi AJAX
 	    const xhr = new XMLHttpRequest();
 	    xhr.open("GET", "FilterServlet?page=" + currentPage 

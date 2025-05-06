@@ -15,7 +15,6 @@ import service.CategoriesServiceImp;
 import service.ICategoriesService;
 import serviceImplement.HienThiDanhSachImp;
 
-@WebServlet("/search")
 public class CategoryController extends HttpServlet {
 	private ICategoriesService categoriesService;
 	/**

@@ -235,16 +235,16 @@
             <h1>Xu Hướng Mua Sắm</h1>
         </div>
 		   <div class="display-list-grid">
-		    <c:forEach var="product" items="${homepageBooks}" varStatus="status">
-		        <a href="chi-tiet-sach?id=${product.getProductId()}" class="product-item <c:if test='${status.index >= 10}'>hidden</c:if>">
-		            <div class="sale-books-element">
-		                <img src="getImage?img_id=${product.getImgId()}" alt="${product.getTitle()}" loading="lazy">
-		                <p>${product.getTitle()}</p>
-		                <h4>${product.getPrice()}</h4>
-		                <p>Đã bán: ${1000 - product.getQuantity()}</p>
-		            </div>
-		        </a>
-		    </c:forEach>
+			<c:forEach var="product" items="${homepageBooks}" varStatus="status">
+			    <a href="chi-tiet-sach?id=${product.getProductId()}">
+			        <div class="sale-books-element product-item ${status.index >= 10 ? 'hidden-item' : ''}">
+			            <img src="getImage?img_id=${product.getImgId()}" alt="${product.getTitle()}" loading="lazy">
+			            <p>${product.getTitle()}</p>
+			            <h4>${product.getPrice()}</h4>
+			            <p>Đã bán: ${1000 - product.getQuantity()}</p>
+			        </div>
+			    </a>
+			</c:forEach>
 		</div>
 		
 		<!-- Nút Xem thêm -->
@@ -286,13 +286,11 @@
    
     </script>
 	<script >
-	    document.getElementById("loadMoreBtn").addEventListener("click", function() {
-	        var hiddenProducts = document.querySelectorAll(".product-item.hidden");
-	        hiddenProducts.forEach(function(item) {
-	            item.classList.remove("hidden");
-	        });
-	        this.style.display = "none"; // Ẩn nút sau khi đã load xong
-	    });
+		    document.getElementById("loadMoreBtn").addEventListener("click", function () {
+		        const hiddenItems = document.querySelectorAll(".hidden-item");
+		        hiddenItems.forEach(item => item.classList.remove("hidden-item"));
+		        this.style.display = "none"; // Ẩn nút sau khi bấm
+		    });
 	    
 	     const slides = document.getElementById('slideContainer');
 	        const totalSlides = slides.children.length;

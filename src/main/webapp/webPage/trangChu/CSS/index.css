@@ -267,6 +267,7 @@ body {
     gap: 20px;
 }
 .danh-muc-sp-element-1 {
+	width: 100%;
     display: grid;
     cursor: pointer;
     padding: 5px;
@@ -276,7 +277,8 @@ body {
     height: max-content;
 }
 .danh-muc-sp-element-1 img {
-    width: 100px;
+	width: 100%;
+    max-width: 100px;
     height: 100px;
 
 }
@@ -316,4 +318,6 @@ body {
     font-weight:  bold;
     line-height:  inherit;
 }
-
+.hidden-item {
+    display: none;
+}

@@ -1,8 +1,11 @@
 package controller;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
+import controller.product.ProductCache;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -11,6 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import models.Product;
 import models.User;
+import service.DatabaseConnection;
 import serviceImplement.HienThiDanhSachImp;
 
 @WebServlet("/home")
@@ -24,7 +28,14 @@ public class HomeController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
 		User user = (User) session.getAttribute("user");
-
+		
+		try {
+			Connection conn = DatabaseConnection.getConnection();
+			ProductCache.loadAllProducts(conn);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		HienThiDanhSachImp imp = new HienThiDanhSachImp();
 		List<Product> homepageBooks = (List<Product>) getServletContext().getAttribute("homepageBooks");
 		if (homepageBooks == null) {

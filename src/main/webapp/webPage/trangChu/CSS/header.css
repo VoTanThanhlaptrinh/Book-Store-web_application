@@ -85,14 +85,14 @@ body {
     height: 51px;
     align-items: center;
 }
-.user-info-main a {
-    text-decoration: none;
+.user-info-main-login-regis{
+   cursor: pointer;
     font-size: 15px;
     color: black;
     font-weight:  bold;
     line-height:  inherit;
 }
-.user-info-main a:hover {
+.user-info-main-login-regis:hover {
     color: crimson;
 }
 .top-right-icon {
@@ -146,7 +146,8 @@ body {
   }
   /* Style cho các mục trong dropdown */
   .dropdown a {
-    display: block;
+    display: flex;
+    flex-direction: row;
     padding: 10px;
     text-decoration: none;
     color: black;
@@ -257,14 +258,7 @@ body {
     padding: 35px;
     align-items: center;
 }
-.user-info a {
-    text-decoration: none;
-    font-size: 20px;
-    color: black;
-    font-weight:  bold;
-    line-height:  inherit;
-}
-.user-info a {
+.user-info-div {
     text-decoration: none;
     font-size: 20px;
     color: black;
