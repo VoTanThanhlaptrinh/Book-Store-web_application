@@ -28,6 +28,12 @@
 	<div class="wrapper">
 		<!-- Overlay: Lớp phủ mờ nền khi mở popup -->
 		<div class="overlay overlay-element" id="overlay"></div>
+		<!--thêm phần tử ẩn kiểm tra địa chỉ mặc định  -->
+
+
+
+      
+    
 
 		<!-- Phần chính: Thông tin địa chỉ và thanh toán -->
 		<section class="section-one">
@@ -35,8 +41,52 @@
 				<div class="row">
 					<!-- Phần địa chỉ giao hàng -->
 					<div class="col-8 mx-auto pr-2 address">
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+			
+					
+  <c:choose>
+        <c:when test="${not empty sessionScope.addressDefault}">
+            <div class="border rounded bg-white p-4 mb-4 shadow-sm">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <span class="fw-semibold">Địa chỉ giao hàng</span>
+                    <a href="#" onclick="openPanel();return false;" class="text-primary fw-medium">Chỉnh sửa</a>
+                </div>
+                <div class="d-flex flex-wrap align-items-center mb-3">
+                    <span class="customer"><strong>Người nhận:</strong> <span id="addressFullName">${sessionScope.addressDefault.full_name}</span></span>
+                    <span><strong>Số điện thoại: </strong> <span id="addressPhone">${sessionScope.addressDefault.phone}</span></span>
+                </div>
+                <div class="d-flex align-items-center flex-wrap mb-3">
+                    <span class="badge rounded-pill bg-warning text-dark mr-3 px-3 py-2" id="addressType">${sessionScope.addressDefault.address_type}</span>
+                    <span id="addressDetail">${sessionScope.addressDefault.address_detail}, ${sessionScope.addressDefault.provinceName}, ${sessionScope.addressDefault.districtName}, ${sessionScope.addressDefault.wardName}</span>
+                </div>
+            </div>
+        </c:when>
+        <c:otherwise>
+            <div class="border rounded bg-white p-4 mb-4 shadow-sm text-center">
+                <p class="text-muted">Bạn chưa có địa chỉ giao hàng. Vui lòng thêm địa chỉ mới.</p>
+                <button onclick="openNewAddressForm()" class="btn btn-info text-white">Thêm địa chỉ</button>
+            </div>
+        </c:otherwise>
+    </c:choose>
+   
+					
+		
 						<!-- Khung hiển thị địa chỉ -->
-						<div class="border rounded bg-white p-4 mb-4 shadow-sm">
+						
+					<%-- 	<div class="border rounded bg-white p-4 mb-4 shadow-sm">
 							<div
 								class="d-flex justify-content-between align-items-center mb-4">
 								<span class="fw-semibold">Địa chỉ giao hàng</span> <a href="#"
@@ -52,7 +102,7 @@
 									class="badge rounded-pill bg-warning text-dark mr-3 px-3 py-2" id = "addressType">${sessionScope.addressDefault.address_type}
 									</span> <span id ="addressDetail">${sessionScope.addressDefault.address_detail}, ${sessionScope.addressDefault.provinceName}, ${sessionScope.addressDefault.districtName}, ${sessionScope.addressDefault.wardName}</span>
 							</div>
-						</div> 
+						</div>  --%>
 
 						<!-- Kiện hàng theo giao diện trong ảnh -->
 						<div class="border rounded p-3 mb-4 bg-white product-detail">
@@ -173,6 +223,12 @@
 				</div>
 			</div>
 		</section>
+
+
+
+
+
+
 
 		<!-- Panel địa chỉ: Hiển thị danh sách địa chỉ và form thêm địa chỉ mới -->
 		<div id="addressPanel" class="side-panel shadow">
@@ -343,6 +399,9 @@
 					</div>
 				</div>
 			</div>
+
+	
+
 
 		</div>
 		<!-- Script: Thư viện và logic JavaScript -->

@@ -153,6 +153,11 @@ function loadAddresses() {
             console.log('Dữ liệu địa chỉ:', data);
             const addressList = document.getElementById('addressList');
             addressList.innerHTML = '';
+			
+		/*	if(data.lenght === 0){
+				openNewAddressForm();
+				return;
+			}*/
 
             data.forEach(address => {
                 const addressItem = `
@@ -270,5 +275,4 @@ function updateAddressDisplay(address) {
 function showAlert(message) {
     alert(message);
 }
-
 
