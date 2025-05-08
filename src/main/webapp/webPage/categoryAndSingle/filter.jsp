@@ -83,10 +83,35 @@
 								id="range-slider-max" min="0" max="1000000" step="1000"
 							value="1000000">
 					</div>
+					
 				</div>
-				<div class="result-message">Không có sản phẩm 0 đ - 0 đ</div>
+			    <!-- Nút xác nhận -->
+				    <div class="price-confirm-container">
+				        <button type="button" id="confirm-price-btn" onclick="loadFilteredPageProducts(1, event)">Áp dụng mức giá</button>
+				    </div>
 			</div>
-
+        <div class="line"></div>
+                    <div class="year-filter-container">
+                        <label>Năm sản xuất</label>
+                        <div class="checkbox-group">
+                          <label class="custom-checkbox">
+                            <input type="checkbox" name="yearFilter" value="after2020"  class="year-checkbox" onclick="loadYear()">
+                            <span class="square"></span> Sau 2020
+                          </label>
+                          <label class="custom-checkbox">
+                            <input type="checkbox" name="yearFilter" value="2010to2020"  class="year-checkbox" onclick="loadYear()">
+                            <span class="square"></span> Từ 2010 đến 2020
+                          </label>
+                          <label class="custom-checkbox">
+                            <input type="checkbox" name="yearFilter" value="2000to2010"  class="year-checkbox" onclick="loadYear()">
+                            <span class="square"></span> Từ 2000 đến 2010
+                          </label>
+                          <label class="custom-checkbox">
+                            <input type="checkbox" name="yearFilter" value="before2000"  class="year-checkbox" onclick="loadYear()">
+                            <span class="square"></span> Trước 2000
+                          </label>
+                        </div>
+                      </div>
 		</div>
 
 		<div class="item-filter" id="product-list">
@@ -269,8 +294,54 @@
         // Khởi tạo ban đầu
         updateInputs();
     });
-  // Hàm tải danh sách thể loại nhỏ
+    function loadYear() {
+        const minPrice = document.getElementById('min-price').value;
+        const maxPrice = document.getElementById('max-price').value;
+	    const parent = document.getElementById('parent-category')?.value;
+	    const sub = document.getElementById('sub-category')?.value;
+        // B1: Lấy tất cả checkbox năm
+        const checkboxes = document.querySelectorAll('.year-checkbox');
+        let selectedYears = [];
 
+        checkboxes.forEach(checkbox => {
+            if (checkbox.checked) {
+                selectedYears.push(checkbox.value);
+            }
+        });
+
+        // B2: Tạo query string từ mảng năm
+        const yearParams = selectedYears.map(y => "yearFilter=" + encodeURIComponent(y)).join("&");
+
+        // B3: Gửi AJAX GET
+        const xhr = new XMLHttpRequest();
+    	let url = "FilterServlet?page=1" 
+		+ "&categoryParentId=" + parent
+		+ "&categoryId=" + sub
+		+ "&minPrice=" + minPrice 
+		+ "&maxPrice=" + maxPrice;
+	
+        if (yearParams.length > 0) {
+            url += "&" + yearParams;
+        }
+    	history.pushState(null, '', url);
+        xhr.open("GET", url, true);
+        xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest"); // 👈 Để Servlet biết đây là request từ JS
+
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                // Chèn HTML kết quả vào 1 div nào đó, ví dụ:
+            	document.getElementById("product-list").innerHTML = xhr.responseText;
+            } else {
+                console.error("Lỗi khi gọi FilterServlet:", xhr.statusText);
+            }
+        };
+
+        xhr.send();
+    }
+
+    
+    
+  // Hàm tải danh sách thể loại nhỏ
   function loadParentCategory() {
 	  const xhr = new XMLHttpRequest();
 	  xhr.open("GET", "AjaxCategoryServlet?categoryParentId=" + 0, true);
@@ -313,6 +384,7 @@
 	  const xhr = new XMLHttpRequest();
 	  const minPriceInput = document.getElementById('min-price');
 	  const maxPriceInput = document.getElementById('max-price');
+	  
 	    document.querySelectorAll('#category-parent-list li').forEach((li) => {
 	        li.classList.remove('active');
 	    });
@@ -351,16 +423,18 @@
   function loadFilteredParentProducts(categoryParentId) {
 		const minPrice = document.getElementById('min-price').value;
 		const maxPrice = document.getElementById('max-price').value;
+		const years = document.getElementById('yearFilters')?.value;
 		const xhr = new XMLHttpRequest();
-		xhr.open("GET", "FilterServlet?page=1&categoryParentId=" + categoryParentId + "&minPrice=" + minPrice + "&maxPrice=" + maxPrice, true);
-		xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest"); // 👈 Báo hiệu là AJAX
-
+		
 		const url = "FilterServlet?page=" + 1
 		          + "&categoryParentId=" + categoryParentId	 
 		          + "&minPrice=" + minPrice
 		          + "&maxPrice=" + maxPrice;
+	   			 + "&yearFilter=" + years;
 		history.pushState(null, '', url);
-		
+		xhr.open("GET", "FilterServlet?page=1&categoryParentId=" + categoryParentId + "&minPrice=" + minPrice + "&maxPrice=" + maxPrice     + "&yearFilter=" + years, true);
+		xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest"); // 👈 Báo hiệu là AJAX
+
 		xhr.onload = function () {
 			if (xhr.status === 200) {
 				document.getElementById("product-list").innerHTML = xhr.responseText;
@@ -372,6 +446,7 @@
 
    function loadFilteredSubProducts(categoryId) {
 	   event.preventDefault();
+	   const years = document.getElementById('yearFilters')?.value;
 		const minPrice = document.getElementById('min-price').value;
 		const maxPrice = document.getElementById('max-price').value;
 		
@@ -379,10 +454,11 @@
 				+ "&categoryId=" + categoryId
 		      + "&minPrice=" + minPrice 
 		      + "&maxPrice=" + maxPrice;
+			    + "&yearFilter=" + years;
 		history.pushState(null, '', url);
 		
 		const xhr = new XMLHttpRequest();
-		xhr.open("GET", "FilterServlet?page=1&categoryId=" + categoryId + "&minPrice=" + minPrice + "&maxPrice=" + maxPrice, true);
+		xhr.open("GET", "FilterServlet?page=1&categoryId=" + categoryId + "&minPrice=" + minPrice + "&maxPrice=" + maxPrice     + "&yearFilter=" + years, true);
 		xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest"); // 👈 Báo hiệu là AJAX
 
 		xhr.onload = function () {
@@ -395,16 +471,18 @@
 	}
    function loadFilteredPageProducts(currentPage, event) {
 	    event.preventDefault();
+	    const years = document.getElementById('yearFilters')?.value;
 	    const parent = document.getElementById('parent-category')?.value;
 	    const sub = document.getElementById('sub-category')?.value;
 		    // Lấy giá trị minPrice và maxPrice từ input
 	    const minPrice = document.getElementById('min-price').value;
 	    const maxPrice = document.getElementById('max-price').value;
-		const url = "FilterServlet?page=" + currentPage 
+		let url = "FilterServlet?page=" + currentPage 
 					+ "&categoryParentId=" + parent
 					+ "&categoryId=" + sub
 			      + "&minPrice=" + minPrice 
-			      + "&maxPrice=" + maxPrice;
+			      + "&maxPrice=" + maxPrice
+			      + "&yearFilter=" + years;
 		history.pushState(null, '', url);
 	    // Tạo một đối tượng XMLHttpRequest để gọi AJAX
 	    const xhr = new XMLHttpRequest();
@@ -412,7 +490,8 @@
 	    				+ "&categoryParentId=" + parent
 	    				+ "&categoryId=" + sub
 	                  + "&minPrice=" + minPrice 
-	                  + "&maxPrice=" + maxPrice, true);
+	                  + "&maxPrice=" + maxPrice
+	                  + "&yearFilter=" + years, true);
 	    xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest"); // Báo hiệu là AJAX
 
 	    xhr.onload = function () {

@@ -19,7 +19,7 @@
               <select>
                 <option>All Categories</option>
               </select>
-                  <form action="search" method="get" >
+                  <form class="search-form" action="search" method="get" >
 					  <input type="text" name="query" placeholder="Enter Search Products">
 					  <button type="submit">🔍</button>
 					</form>

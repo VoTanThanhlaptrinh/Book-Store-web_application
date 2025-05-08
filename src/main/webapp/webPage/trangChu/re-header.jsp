@@ -19,8 +19,10 @@
               <select>
                 <option>All Categories</option>
               </select>
-              <input type="text" placeholder="Enter Search Products">
-              <button>🔍</button>
+             <form action="search" method="get" >
+					  <input type="text" name="query" placeholder="Enter Search Products">
+					  <button type="submit">🔍</button>
+					</form>
             </div>
           
             <div class="top-right">
@@ -86,8 +88,10 @@
                     </div>
                     <div class="search-bar-container">
                     <div class="search-bar">
-                        <input type="text" placeholder="Enter Search Products">
-                        <button>🔍</button>
+                        <form action="search" method="get" >
+					  <input type="text" name="query" placeholder="Enter Search Products">
+					  <button type="submit">🔍</button>
+					</form>
                       </div>
                     </div>
 

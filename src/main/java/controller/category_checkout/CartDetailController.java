@@ -96,8 +96,8 @@ public class CartDetailController extends HttpServlet {
 			String successMessage = bundle.getString("success.addToCart").replace("{0}", title).replace("{1}",
 					quantity);
 			session.setAttribute("message1", successMessage);
-
-			response.sendRedirect("search");
+			response.sendRedirect("FilterServlet");
+			
 		}
 	}
 }
