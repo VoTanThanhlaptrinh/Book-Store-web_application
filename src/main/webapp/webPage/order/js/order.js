@@ -198,7 +198,6 @@ document.getElementById("newAddressForm").addEventListener("submit",function(e){
 	let district_name= $("#quan option:selected").text();
 	let ward_name =$("#phuong option:selected").text();
 	
-	
 	const addressData = {full_name, phone, address_detail, district_id, ward_code, address_type,province_name,district_name,ward_name};
 	fetch("/BOOK_STORE/saveAddress",{
 		method: "POST",
@@ -218,8 +217,8 @@ document.getElementById("newAddressForm").addEventListener("submit",function(e){
 	.catch(error => {             
 	    alert("Có lỗi xảy ra khi lưu địa chỉ." + error);
 	});
-
 });
+
 
 
 
@@ -250,7 +249,10 @@ function saveSelectedAddress() {
     .then(data => {
         if (data.status === 'success') {
             showAlert('Đã lưu địa chỉ với ID: ' + addressId);
-            if (data.selectedAddress) updateAddressDisplay(data.selectedAddress);
+            if (data.selectedAddress)
+				
+				updateAddressDisplay(data.selectedAddress);
+				updateShippingFee();
             closePanel();
             return addressId;
         } else {
@@ -259,20 +261,85 @@ function saveSelectedAddress() {
         }
     })
     .catch(error => {
-        showAlert('Có lỗi xảy ra khi lưu địa chỉ: ' + error.message);
+        showAlert('Có lỗi xảy ra khi lưu địa chỉ : ' + error.message);
         return null;
     });
 }
 
+
+
 function updateAddressDisplay(address) {
-	document.getElementById("addressType").textContent= address.address_type;
-    document.getElementById('addressFullName').textContent = address.full_name;
-    document.getElementById('addressPhone').textContent = address.phone;
-    document.getElementById('addressDetail').textContent =
-        `${address.address_detail},${address.provinceName}, ${address.districtName}, ${address.wardName}`;
+    const addressContainer = document.getElementById("addressContainer");
+    if (!addressContainer) {
+        console.error("Không tìm thấy addressContainer");
+        return;
+    }
+
+    // Tạo HTML mới cho địa chỉ
+    const addressHtml = `
+        <div class="border rounded bg-white p-4 mb-4 shadow-sm">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <span class="fw-semibold">Địa chỉ giao hàng</span>
+                <a href="#" onclick="openPanel();return false;" class="text-primary fw-medium">Chỉnh sửa</a>
+            </div>
+            <div class="d-flex flex-wrap align-items-center mb-3">
+                <span class="customer"><strong>Người nhận:</strong> <span id="addressFullName">${address.full_name}</span></span>
+                <span><strong>Số điện thoại: </strong> <span id="addressPhone">${address.phone}</span></span>
+            </div>
+            <div class="d-flex align-items-center flex-wrap mb-3">
+                <span class="badge rounded-pill bg-warning text-dark mr-3 px-3 py-2" id="addressType">${address.address_type}</span>
+                <span id="addressDetail">${address.address_detail}, ${address.provinceName}, ${address.districtName}, ${address.wardName}</span>
+            </div>
+        </div>
+    `;
+
+ 
+    addressContainer.innerHTML = addressHtml;
 }
 
 function showAlert(message) {
     alert(message);
+}
+
+
+function updateShippingFee() {
+    // Gửi yêu cầu cập nhật phí vận chuyển
+    fetch('/BOOK_STORE/order?updateShippingFeeOnly=true', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Accept': 'application/json'
+        },
+        body: new URLSearchParams({}) // Không cần gửi orderData vì đã có trong session
+    })
+    .then(response => {
+        if (!response.ok) throw new Error('Lỗi mạng: ' + response.status);
+        return response.json();
+    })
+    .then(data => {
+        if (data.status === 'success') {
+            // Cập nhật phí vận chuyển trên giao diện
+            const shippingFeeElement = document.getElementById('shippingFeeDisplay');
+            if (shippingFeeElement) {
+                shippingFeeElement.textContent = data.shippingFee.toLocaleString('vi-VN')+"đ";
+            }
+            // Cập nhật tổng tiền
+            updateTotalPrice(data.shippingFee);
+        } else {
+            showAlert('Không thể cập nhật phí vận chuyển: ' + data.message);
+        }
+    })
+    .catch(error => {
+        showAlert('Lỗi khi cập nhật phí vận chuyển: ' + error.message);
+    });
+}
+
+function updateTotalPrice(shippingFee) {
+    const totalElement = document.getElementById('totalPriceDisplay');
+    const subtotal = parseFloat(document.getElementById('subtotal')?.dataset.subtotal || 0);
+    if (totalElement) {
+        const total = subtotal + shippingFee;
+        totalElement.textContent = total.toLocaleString('vi-VN')+"đ";
+    }
 }
 
