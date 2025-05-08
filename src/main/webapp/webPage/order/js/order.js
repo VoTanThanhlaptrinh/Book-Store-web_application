@@ -334,12 +334,15 @@ function updateShippingFee() {
     });
 }
 
+
 function updateTotalPrice(shippingFee) {
     const totalElement = document.getElementById('totalPriceDisplay');
-    const subtotal = parseFloat(document.getElementById('subtotal')?.dataset.subtotal || 0);
+    const subtotalElement = document.getElementById('subtotal');
+    const subtotal = subtotalElement && subtotalElement.dataset ? parseFloat(subtotalElement.dataset.subtotal || 0) : 0;
     if (totalElement) {
         const total = subtotal + shippingFee;
-        totalElement.textContent = total.toLocaleString('vi-VN')+"đ";
+        totalElement.textContent = total.toLocaleString('vi-VN') + "đ";
     }
 }
+
 
