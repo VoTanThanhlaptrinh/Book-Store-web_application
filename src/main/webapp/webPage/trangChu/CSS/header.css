@@ -15,11 +15,28 @@ body {
     border-bottom: 1px solid #ccc;
 }
 .logo {
-    margin-left: 30px;
-    font-size: 36px;
-    font-weight: bold;
-    color: #000;
-}
+    	margin-left: 30px;
+      font-size: 30px;
+      font-weight: bold;
+      background: linear-gradient(
+        270deg,
+        #ff0080,
+        #7928ca,
+        #2afadf,
+        #ff8c00,
+        #ff0080
+      );
+      background-size: 1000% 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientShift 10s ease infinite;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
 .logo-hidden {
      display: none;
     margin-left: 30px;
@@ -68,14 +85,14 @@ body {
     height: 51px;
     align-items: center;
 }
-.user-info-main a {
-    text-decoration: none;
+.user-info-main-login-regis{
+   cursor: pointer;
     font-size: 15px;
     color: black;
     font-weight:  bold;
     line-height:  inherit;
 }
-.user-info-main a:hover {
+.user-info-main-login-regis:hover {
     color: crimson;
 }
 .top-right-icon {
@@ -129,7 +146,8 @@ body {
   }
   /* Style cho các mục trong dropdown */
   .dropdown a {
-    display: block;
+    display: flex;
+    flex-direction: row;
     padding: 10px;
     text-decoration: none;
     color: black;
@@ -240,14 +258,7 @@ body {
     padding: 35px;
     align-items: center;
 }
-.user-info a {
-    text-decoration: none;
-    font-size: 20px;
-    color: black;
-    font-weight:  bold;
-    line-height:  inherit;
-}
-.user-info a {
+.user-info-div {
     text-decoration: none;
     font-size: 20px;
     color: black;

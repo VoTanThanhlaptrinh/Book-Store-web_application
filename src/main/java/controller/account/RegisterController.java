@@ -9,6 +9,8 @@ import java.util.Set;
 
 import org.apache.commons.lang3.RandomStringUtils;
 
+import jakarta.json.Json;
+import jakarta.json.JsonObjectBuilder;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -17,14 +19,12 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import models.User;
 import service.ILoginService;
-import service.ISendMailService;
 import service.LoginService;
-import service.SendMailImp;
+import service.SendMailQueueService;
 
 @WebServlet("/register")
 public class RegisterController extends HttpServlet {
 	private ILoginService loginService;
-	private ISendMailService mailService;
 	/**
 	 *
 	 */
@@ -107,24 +107,36 @@ public class RegisterController extends HttpServlet {
 
 		session.setAttribute("user", user); // bỏ user vào session để chuyển đi nơi khác
 
-		loginService.register(user);
+		loginService.register(user); // lưu user xuống db
 
 		String code = RandomStringUtils.randomAlphanumeric(6); // tạo random mã để gửi email xác thực
-		session.setAttribute("confirmCode", code);
-
+		
+		// gửi mail
+		mess = bundle.getString("email.send");
+		session.setAttribute("checkEmail", email);
+		String content = bundle.getString("verification.code") + code;
+		SendMailQueueService.getInstance().sendMail(email, content,
+				bundle.getString("account.registration.verification"), code);
+		sendResponse(resp, mess, "success");
+		
 		resp.sendRedirect("confirm"); // di chuyển sang trang confirm
 
-		String content = bundle.getString("verification.code") + code;
-
-		// gọi service gửi email là mã xác thực cho user
-		mailService.sendMail(email, content, bundle.getString("account.registration.verification"));
 	}
 
 	@Override
 	public void init() throws ServletException {
 		// TODO Auto-generated method stub
-		mailService = new SendMailImp();
 		loginService = new LoginService();
+	}
+
+	private void sendResponse(HttpServletResponse response, String message, String status) throws IOException {
+		JsonObjectBuilder errorResponse = Json.createObjectBuilder();
+		errorResponse.add("status", status);
+		errorResponse.add("message", message);
+
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+		response.getWriter().write(errorResponse.build().toString());
 	}
 
 	private User createUser(String username, String password, String email) {

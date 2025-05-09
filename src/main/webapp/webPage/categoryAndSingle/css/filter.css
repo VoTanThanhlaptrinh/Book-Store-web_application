@@ -83,11 +83,19 @@ body {
     background-color: rgb(168, 168, 168); /* Màu sắc */
 }
 .displayli {
+	list-style-type: none;
     display: list-item;
     margin-left: 20px;
     margin-bottom: 12px;
     font-size: 14px;
+    
     color: #333;
+}
+.displayli button {
+	font-weight: bold;
+	}
+.displayli button:hover {
+	color: #FF8000;
 }
 .hidden {
     margin-left: 20px;
@@ -115,11 +123,14 @@ body {
 .see-more.active .arrow {
     transform: rotate(180deg); /* Xoay mũi tên khi mở */
 }  
+
 .current-category li a:hover {
-    color: #ff5d30;
+    color: #8080ff;
 }
 .current-category li a {
+
     text-decoration: none;
+    margin-left: 20px;
     font-size: 15px;
     color: #333;
     font-weight:  normal;
@@ -157,7 +168,7 @@ label {
 }
 
 .slider-track {
-	width: 50%;
+	width: 70%;
     position: relative;
     height: 4px;
     background: #ddd;
@@ -172,8 +183,11 @@ label {
     z-index: 1;
     pointer-events: none; /* Không cho phép tương tác với phần này */
 }
-
+.result-message {
+	margin-top: 20px;
+}
 .slider-container input[type="range"] {
+	width: 100%;
     position: absolute;
     top: 0;
     left: 0;
@@ -289,10 +303,11 @@ label {
     row-gap: 20px; /* Khoảng cách giữa các dòng */
 
 }
-.sale-books-element {
+.display-list-grid a {
     background-color: white;
     justify-content: center;
     align-items: center;
+    text-decoration: none;
     display: grid;
     place-items: center; /* Căn giữa cả ngang và dọc */
     width: 200px;
@@ -372,4 +387,10 @@ label {
     color: #ccc;
     cursor: not-allowed;
   }
+  
+.category-parent-list li {
+	text-decoration: none;
+	font-size: 20px;
+	font-weight: bold;
+}
     

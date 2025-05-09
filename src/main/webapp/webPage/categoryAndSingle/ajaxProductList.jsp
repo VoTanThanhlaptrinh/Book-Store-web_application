@@ -34,7 +34,7 @@
 			<div class="xu_huong_mua_sam">
 				<div class="display-list-grid" >
 					<c:forEach var="product" items="${products}">
-						<div class="sale-books-element">
+						<a class="sale-books-element" href="chi-tiet-sach?id=${product.getProductId()}">
 							<img src="getImage?img_id=${product.getImgId()}"
 								alt="${product.title}">
 							<p class="text-limited">${product.title}</p>
@@ -45,7 +45,7 @@
 							</div>
 							<h6>200.000 VND</h6>
 							<!-- Giá gốc giả định -->
-						</div>
+						</a>
 					</c:forEach>
 				</div>
 				<input type="hidden" id="parent-category" value="${parentcategory}">

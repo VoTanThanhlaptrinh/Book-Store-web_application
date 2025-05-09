@@ -44,8 +44,8 @@ public class ActivateFilter extends HttpFilter {
 		Locale locale = Locale.forLanguageTag(lang);
 		ResourceBundle bundle = ResourceBundle.getBundle("messages", locale);
 		String previousURL = req.getRequestURL().toString();
-
-		if (user == null || !user.isActivate()) {
+		
+		if (!user.isActivate()) {
 			// gửi thông báo người dùng cần kích hoạt tài khoản để sử dụng dịch vụ này
 			String mess = bundle.getString("activate.message");
 			req.setAttribute("mess", mess);

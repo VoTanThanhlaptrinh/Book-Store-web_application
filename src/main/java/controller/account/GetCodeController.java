@@ -1,22 +1,23 @@
 package controller.account;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
 import org.apache.commons.lang3.RandomStringUtils;
 
+import jakarta.json.Json;
+import jakarta.json.JsonObjectBuilder;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import service.EmailSpamService;
 import service.ILoginService;
-import service.ISendMailService;
 import service.LoginService;
-import service.SendMailImp;
+import service.SendMailQueueService;
 
 @WebServlet("/getCode")
 public class GetCodeController extends HttpServlet {
@@ -24,7 +25,6 @@ public class GetCodeController extends HttpServlet {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private ISendMailService mailService;
 	private ILoginService loginService;
 
 	@Override
@@ -35,39 +35,54 @@ public class GetCodeController extends HttpServlet {
 		resp.setContentType("application/json");
 		String email = req.getParameter("email");
 		HttpSession session = req.getSession();
+
+		String lang = (String) session.getAttribute("lang");
+		if (lang == null) {
+			lang = "vi";
+		}
+		Locale locale = Locale.forLanguageTag(lang);
+		ResourceBundle bundle = ResourceBundle.getBundle("messages", locale);
 		
-		  String lang = (String) session.getAttribute("lang");
-		    if (lang == null) {
-		        lang = "vi";
-		    }
-		    Locale locale = Locale.forLanguageTag(lang);
-		    ResourceBundle bundle = ResourceBundle.getBundle("messages", locale);
-		PrintWriter writer = resp.getWriter();
+		String mess;
+		// kiểm tra mail rỗng
 		if (email == null || email.trim().isEmpty()) {
-			writer.print("{\"status\": \"error\",\"message\": \"Email không được để trống.\"}");
-			writer.flush();
+			mess = bundle.getString("email.required");
+			sendResponse(resp,mess , "error");
 			return;
 		}
-		if (loginService.checkEmail(email)) {
-			String code = RandomStringUtils.randomAlphanumeric(6);
-			String content = bundle.getString("verification.code") + code;
-			mailService.sendMail(email, content, bundle.getString("account.registration.verification"));
-		
-			session.setAttribute("checkCode", code);
-			session.setAttribute("checkEmail", email);
-			String re = (" \"" + code + "\"" + "}");
-			writer.print(
-					"{\"status\": \"success\",\"message\": \"Mã xác nhận đã được gửi đến email của bạn.\",\"code\":"+re);
-		} else {
-			writer.print("{\"status\": \"error\",\"message\": \"Email không tồn tại trong hệ thống.\"}");
+		// kiểm tra mail tồn tại trong hệ thống không
+		if (!loginService.checkEmail(email)) {
+			mess = bundle.getString("email.not.exist");
+			sendResponse(resp, mess, "error");
+			return;
 		}
-		writer.flush();
+		if(EmailSpamService.checkSpam(email)) {
+			mess = bundle.getString("email.spam");
+			sendResponse(resp, mess, "error");
+			return;
+		}
+		// gửi mail
+		mess = bundle.getString("email.send");
+		// tạo ra code
+		session.setAttribute("checkEmail", email);
+		String code = RandomStringUtils.randomAlphanumeric(6);
+		String content = bundle.getString("verification.code") + code;
+		SendMailQueueService.getInstance().sendMail(email, content, bundle.getString("account.registration.verification"), code);
+		sendResponse(resp, mess, "success");
 	}
 
 	@Override
 	public void init() throws ServletException {
 		// TODO Auto-generated method stub
-		mailService = new SendMailImp();
 		loginService = new LoginService();
+	}
+	private void sendResponse(HttpServletResponse response, String message, String status) throws IOException {
+		JsonObjectBuilder errorResponse = Json.createObjectBuilder();
+		errorResponse.add("status", status);
+		errorResponse.add("message", message);
+
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+		response.getWriter().write(errorResponse.build().toString());
 	}
 }

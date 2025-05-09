@@ -12,6 +12,46 @@
 body {
     background-color: rgb(237, 237, 237);
 }
+.slider {
+    position: relative;
+    width: 900px;
+    height: 440px;
+    overflow: hidden;
+  }
+
+  .slides {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s ease-in-out;
+  }
+
+  .slides img {
+    width: 100%;
+    height: 100%;
+    border: none;
+    object-fit: fill;
+    flex-shrink: 0;
+  }
+
+  .nav-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 30px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+  }
+
+  .nav-button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+
+  .prev { left: 10px; }
+  .next { right: 10px; }
 .banner_1 img {
     width: 900px;
     height: 450px;
@@ -32,7 +72,8 @@ body {
 }
 .content_div_1 {
     display: flex;
-    width: 1243px;
+    width: 100%;
+    max-width: 1243px;
     height: fit-content;
     background-color: white;
    
@@ -47,8 +88,8 @@ body {
     flex-direction: column; /* Xếp phần tử theo cột */
     margin-left: 30px;
     margin-top: 50px;
-    
-    width: 120px;
+    max-width: 120px;
+    width: 100%;
     height:120px;
 
     gap: 10px;
@@ -65,16 +106,11 @@ body {
     color: rgb(104, 104, 104);
 }
 .sale-content {
+
     margin-top: 30px;
     width: 100%;
     height: 500px;
     background-color: crimson;
-}
-.sale-content video {
-    position: absolute;
-    width: 100%;
-    object-fit: fill;
-    height: 500px;
 }
 .content {
     display: flex;
@@ -83,7 +119,8 @@ body {
 
     background-color: white;
     height: max-content;
-    width: 1243px;
+    width: 100%;
+    max-width: 1243px;
     margin-left: 140px;
     top: 40px;
     z-index: 1;
@@ -126,7 +163,8 @@ body {
 
     position: relative;
     display: flex;
-    width: 1243px;
+    width: 100%;
+    max-width: 1243px;
     gap: 3%;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Hiệu ứng đổ bóng */
     margin-top: 90px;
@@ -141,14 +179,18 @@ body {
 .sale-books-element {
     background-color: white;
     display: grid;
- 
-    place-items: center; /* Căn giữa cả ngang và dọc */
-    width: 240px;
-    height: 300px;
+    place-items: center;
+    width: 100%;               /* Co theo cột grid */
+    max-width: 240px;          /* Không vượt quá kích thước tối đa */
+    box-sizing: border-box;
+    padding: 10px;
+    height: auto;
 }
 .sale-books-element img {
-    width: 190px;
-    height: 190px;
+    width: 100%;               /* Co theo khung */
+    max-width: 190px;          /* Không vượt quá 190px */
+    height: auto;              /* Duy trì tỉ lệ ảnh */
+    object-fit: contain;
 }
 .sale-books-element h4 {
     color: red;
@@ -157,7 +199,7 @@ body {
     display: inline-block; /* Giúp khung chỉ bao quanh nội dung */
     background-color: red;
     color: white;
-    border: 2px solid red/* Độ dày và màu của khung */
+    border: 2px solid red;/* Độ dày và màu của khung */
 }
 .sale-books-element h6 {
     text-decoration: line-through;
@@ -166,17 +208,38 @@ body {
 .sale-books-element:hover {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4); /* Hiệu ứng đổ bóng */
 }
+.display-list-grid {
+    position: relative;
+    display: grid;
+    margin-top: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 10px;
+    max-width: 100%;
+}
+@media (max-width: 480px) {
+    .display-list-grid {
+        position: relative;
+        grid-template-columns: 1fr;
+        justify-items: center;
+    }
+}
+.display-list-grid a {
+	text-decoration: none;
+	color: black;
+}
 .danh_muc_logo {
     display: flex;
 }
 .danh_muc_logo img {
-    width: 30px;
+    width: 100%;
+    max-width: 30px;
     margin-left: 24px;
     margin-top: 16px;
     height: 30px;
 }
 .danh-muc-sp {
-    width: 1243px;
+    width: 100%;
+    max-width: 1243px;
     height: 250px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Hiệu ứng đổ bóng */
     margin-top: 40px;
@@ -204,6 +267,7 @@ body {
     gap: 20px;
 }
 .danh-muc-sp-element-1 {
+	width: 100%;
     display: grid;
     cursor: pointer;
     padding: 5px;
@@ -213,7 +277,8 @@ body {
     height: max-content;
 }
 .danh-muc-sp-element-1 img {
-    width: 100px;
+	width: 100%;
+    max-width: 100px;
     height: 100px;
 
 }
@@ -221,22 +286,22 @@ body {
     color: blueviolet;
 }
 .xu_huong_mua_sam {
-    width: 1243px;
-    height: auto;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Hiệu ứng đổ bóng */
+    width: 100%;
+    max-width: 1243px;
+    height: auto; /* cho linh hoạt chiều cao khi responsive */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     margin-top: 40px;
     background-color: white;
-    margin-left: 140px;
+    margin-left: auto;
+    margin-right: auto; /* căn giữa */
 }
 .xu_huong_mua_sam_header {
     display: flex;
-    width: 1243px;
+    width: 100%;
     height: 70px;
     margin-top: 40px;
     gap: 2px;
-    background: linear-gradient(to right, #02623a, #1fbd66); /* Gradient chuyển từ xanh nhạt sang xanh dương */
-    
-  
+    background: linear-gradient(to right, #02623a, #1fbd66);
 }
 .xu_huong_mua_sam_header img {
     width: 30px;
@@ -253,26 +318,6 @@ body {
     font-weight:  bold;
     line-height:  inherit;
 }
-.display-list-grid {
-    display: grid;
-    margin-top: 20px;
-    grid-template-columns: repeat(5, 1fr); 
-    gap: 10px;
-    max-width: 100%;}
-.display-list-grid a {
-    text-decoration: none; /* Bỏ gạch chân */
-    color: inherit; /* Giữ màu chữ như bình thường */
-    }
-.sale-books-element {
-    text-align: center; /* Căn giữa toàn bộ nội dung */
+.hidden-item {
+    display: none;
 }
-
-.sale-books-element p {
-    white-space: nowrap;        /* Không xuống dòng */
-    overflow: hidden;           /* Ẩn phần tràn ra */
-    text-overflow: ellipsis;     /* Thêm dấu "..." */
-    width: 180px;                /* (hoặc set theo nhu cầu) */
-}    
-.hidden {
-        display: none;
-    }    

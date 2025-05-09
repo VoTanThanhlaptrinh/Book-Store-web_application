@@ -14,17 +14,19 @@ import daoInterface.IInfoDao;
 import daoInterface.IUserDao;
 import models.Image;
 import models.Information;
+import models.Log;
 import models.User;
 
 public class LoginService implements ILoginService {
 	private IUserDao daoImp;
 	private IInfoDao infoDao;
 	private IImageDao imageDao;
-
+	private ILogService logService; 
 	public LoginService() {
 		daoImp = new UserDAOImp();
 		infoDao = new InfoDAOImp();
 		imageDao = new ImageDAOImp();
+		logService = new LogServiceImpl();
 	}
 
 	@Override
@@ -37,6 +39,8 @@ public class LoginService implements ILoginService {
 		if (BCrypt.checkpw(password, storedHash)) {
 			return user;
 		}
+		logService.info(new Log(user.getUserId(), "info", "User", "/login", "Đăng nhập thất bại. Lý do: sai mật khẩu"));
+		LoginSpamService.putUsername(username);
 		return null;
 	}
 

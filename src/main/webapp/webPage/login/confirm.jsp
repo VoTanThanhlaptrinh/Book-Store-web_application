@@ -29,19 +29,28 @@
 </head>
 
 <body>
-	<div id="header-placeholder"><jsp:include
-			page="/webPage/trangChu/header.jsp"></jsp:include></div>
+	<c:if test="${user != null}">
+		<div id="header-placeholder"><jsp:include
+				page="/webPage/trangChu/re-header.jsp"></jsp:include></div>
+	</c:if>
+	<c:if test="${user == null}">
+		<div id="header-placeholder"><jsp:include
+				page="/webPage/trangChu/header.jsp"></jsp:include></div>
+	</c:if>
 	<c:if test="${mess != null}">
-		<div class="alert alert-danger text-center alert-css" role="alert">
-			<fmt:message key="${mess}" />
-		</div>
+		<input type="hidden" id="server-message"
+			value="<fmt:message key='${mess}' />" data-type="error" />
+	</c:if>
+	<c:if test="${loginMessage != null}">
+		<input type="hidden" id="server-message"
+			value="<fmt:message key='${loginMessage}' />" data-type="error" />
 	</c:if>
 	<div class="main">
 		<section class="signup" style="margin: 50px;">
 			<div class="container">
 				<div class="signup-content border">
 					<form method="POST" action="confirm" id="signin"
-						class="signup-form" action="forgotPass">
+						class="signup-form" >
 						<h2 class="form-title">
 							<fmt:message key="email_verification" />
 						</h2>
@@ -68,61 +77,16 @@
 		<jsp:include page="/webPage/trangChu/footer.jsp"></jsp:include>
 	</div>
 	<!-- JS -->
-	<script src="webPage/login/vendor/jquery/jquery.min.js"></script>
+		<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+			<script src="webPage/login/vendor/jquery/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<!-- Thêm toastr JS từ CDN -->
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+	<script src="webPage/login/js/toastr.js"></script>
+
 	<script src="webPage/login/js/main.js"></script>
 </body>
 <!-- This templates was made by Colorlib (https://colorlib.com) -->
-<script type="text/javascript">
-	async function getCode() {
-
-		var messages = {
-			wait : "<fmt:message key='waiting_message'/>",
-			systemError : "<fmt:message key='system_error'/>"
-		};
-		const email = document.getElementById("email").value;
-		const existingMessage = document.querySelector(".alert-css");
-		if (existingMessage) {
-			existingMessage.remove();
-		}
-
-		const container = document.body;
-		const mes = document.createElement("div");
-		mes.classList.add("alert", "text-center", "alert-css", 'alert-success');
-		mes.innerText = messages.wait;
-		container.appendChild(mes);
-		try {
-
-			const existingMessage1 = document.querySelector(".alert-css");
-			if (existingMessage) {
-				existingMessage1.remove();
-			}
-			const response = await
-			fetch("getCode?email=" + email, {
-				method : 'GET',
-				headers : {
-					Accept : 'application/json',
-					'Content-Type' : 'application/json',
-				},
-			});
-
-			const result = await
-			response.json(); // Wait for the response
-			const message = result.message;
-
-			if (result.status === "success") {
-				mes.classList.add('alert-success');
-			} else {
-				mes.classList.add('alert-danger');
-			}
-
-			mes.innerText = message;
-			container.appendChild(mes);
-		} catch (error) {
-			mes.classList.add('alert-danger');
-			mes.innerText = "Lỗi hệ thống";
-			container.appendChild(mes);
-		}
-	}
-</script>
-
 </html>
