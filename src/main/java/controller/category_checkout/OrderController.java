@@ -194,12 +194,12 @@ public class OrderController extends HttpServlet {
         session.setAttribute("cDetailsSize", cDetails.size());
         session.setAttribute("total", cartData.getTotal());
         session.setAttribute("shippingFee", shippingFee);
-        request.getRequestDispatcher("webPage/order/order.jsp").forward(request, response);
+        
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        doPost(request, response);
+    	request.getRequestDispatcher("webPage/order/order.jsp").forward(request, response);
     }
 }

@@ -29,10 +29,6 @@
         <div id="header-placeholder"><jsp:include page="/webPage/trangChu/header.jsp"></jsp:include></div>
     </c:if>
     
-    
-    
-    
-
      <div class="banner_div">
           <div class="slider" id="slider">
             <div class="slides" id="slideContainer">
@@ -254,7 +250,9 @@
     </div>
     
                 
-   
+   	<div id="footer-placeholder">
+		<jsp:include page="/webPage/trangChu/footer.jsp"></jsp:include>
+	</div>
     <script>
         let totalSeconds = 9000; // 1 giờ 24 phút 15 giây
 
@@ -317,5 +315,4 @@
     <script src="webPage/trangChu/js/footer.js"></script>
 
 </body>
-</html>
 </html>

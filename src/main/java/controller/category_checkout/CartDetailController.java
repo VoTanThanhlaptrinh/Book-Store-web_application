@@ -97,7 +97,7 @@ public class CartDetailController extends HttpServlet {
 					quantity);
 			session.setAttribute("message1", successMessage);
 
-			response.sendRedirect("search");
+			response.sendRedirect("home");
 		}
 	}
 }
