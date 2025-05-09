@@ -54,7 +54,7 @@ public class SearchServlet extends HttpServlet {
         String normalizedKeyword = normalize(rawKeyword);
         Set<Integer> matchedIds = new HashSet<>();
         List<Product> matchedProducts = new ArrayList<>();
-
+       
         // 1. So với cache
         for (Product p : ProductCache.getCachedProducts()) {
             if (isApproxMatch(normalizedKeyword, p.getUnsignedTitle(), 3)) {
@@ -88,8 +88,10 @@ public class SearchServlet extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+        request.setAttribute("query", rawKeyword);
         request.setAttribute("products", matchedProducts);
+        request.setAttribute("pr-total", matchedProducts.size());
+        
         request.getRequestDispatcher("webPage/categoryAndSingle/filter.jsp").forward(request, response);
 	}
 
