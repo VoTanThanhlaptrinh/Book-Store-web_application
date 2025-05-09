@@ -20,7 +20,6 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
-import java.util.logging.Logger;
 
 @WebServlet("/order")
 public class OrderController extends HttpServlet {
@@ -28,7 +27,6 @@ public class OrderController extends HttpServlet {
     private static final String GHN_API_URL = "https://online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/fee";
     private static final String TOKEN = "1cdb0f24-1830-11f0-bf01-723c4de9ff57";
     private static final String SHOP_ID = "5731351";
-    private static final Logger LOGGER = Logger.getLogger(OrderController.class.getName());
 
     public OrderController() {
         super();
@@ -46,18 +44,8 @@ public class OrderController extends HttpServlet {
 
         String updateShippingFeeOnly = request.getParameter("updateShippingFeeOnly");
         User user = (User) session.getAttribute("user");
-
-
         Address addressDefault = (Address) session.getAttribute("addressDefault");
-        if (addressDefault == null) {
-            addressDefault = addressDao.getAddressDefault(user.getUserId());
-            session.setAttribute("addressDefault", addressDefault);
-        }
-
-        if (addressDefault == null) {
-            out.println("{\"status\":\"error\",\"message\":\"Vui lòng thêm địa chỉ giao hàng.\"}");
-            return;
-        }
+   
 
         // Nếu chỉ cập nhật phí vận chuyển
         if ("true".equals(updateShippingFeeOnly)) {
@@ -75,10 +63,8 @@ public class OrderController extends HttpServlet {
             return;
         }
 
-        // Logic xử lý đơn hàng ban đầu
         String orderDataJson = request.getParameter("orderData");
         if (orderDataJson == null || orderDataJson.isEmpty()) {
-            LOGGER.info("Dữ liệu đơn hàng rỗng");
             request.getRequestDispatcher("webPage/giohang/cart.jsp").forward(request, response);
             return;
         }
@@ -89,7 +75,6 @@ public class OrderController extends HttpServlet {
         List<CartProductDetail> cDetails = cartData.getCartProductDetails();
 
         if (cDetails == null || cDetails.isEmpty()) {
-            LOGGER.info("Danh sách sản phẩm rỗng");
             request.getRequestDispatcher("webPage/giohang/cart.jsp").forward(request, response);
             return;
         }
@@ -98,7 +83,6 @@ public class OrderController extends HttpServlet {
         for (CartProductDetail c : cDetails) {
             Product product = productDao.getDimension(c.getProductId());
             if (product == null) {
-                LOGGER.severe("Không tìm thấy sản phẩm ID: " + c.getProductId());
                 request.setAttribute("error", "Sản phẩm không tồn tại.");
                 request.getRequestDispatcher("webPage/giohang/cart.jsp").forward(request, response);
                 return;
@@ -107,11 +91,27 @@ public class OrderController extends HttpServlet {
             int quantity = c.getQuantity();
             int pbQuantity = cartDao.getProductQuantityByProductId(c.getProductId());
             if (quantity > pbQuantity) {
-                LOGGER.info("Số lượng mua nhiều hơn tồn kho cho sản phẩm ID: " + c.getProductId());
                 request.setAttribute("error", "Số lượng mua vượt quá tồn kho.");
                 request.getRequestDispatcher("webPage/giohang/cart.jsp").forward(request, response);
                 return;
             }
+        }
+        
+        
+        
+        if (addressDefault == null) {
+            addressDefault = addressDao.getAddressDefault(user.getUserId());
+            session.setAttribute("addressDefault", addressDefault);
+        }
+
+        if (addressDefault == null) {
+        	   session.setAttribute("addressDefault", addressDefault);
+               session.setAttribute("cDetails", cDetails);
+               session.setAttribute("cDetailsSize", cDetails.size());
+               session.setAttribute("total", cartData.getTotal());
+               session.setAttribute("shippingFee", 0);
+               request.getRequestDispatcher("webPage/order/order.jsp").forward(request, response);
+               return;
         }
 
         // Tính phí vận chuyển
@@ -129,6 +129,9 @@ public class OrderController extends HttpServlet {
         session.setAttribute("shippingFee", shippingFee);
         request.getRequestDispatcher("webPage/order/order.jsp").forward(request, response);
     }
+    
+    
+    
 
     // Hàm tách biệt để tính phí vận chuyển
     private double calculateShippingFee(List<CartProductDetail> cDetails, Address addressDefault,
@@ -203,12 +206,10 @@ public class OrderController extends HttpServlet {
                         new InputStreamReader(conn.getInputStream()), JsonObject.class);
                 return responseJson.getAsJsonObject("data").get("total").getAsFloat();
             } else {
-                LOGGER.severe("GHN API trả về mã lỗi: " + conn.getResponseCode());
                 out.println("{\"status\":\"error\",\"message\":\"GHN API trả về mã lỗi: " + conn.getResponseCode() + "\"}");
                 return -1;
             }
         } catch (Exception e) {
-            LOGGER.severe("Lỗi khi gọi GHN API: " + e.getMessage());
             out.println("{\"status\":\"error\",\"message\":\"Không thể tính phí vận chuyển.\"}");
             return -1;
         }

@@ -334,7 +334,6 @@ function updateShippingFee() {
     });
 }
 
-
 function updateTotalPrice(shippingFee) {
     const totalElement = document.getElementById('totalPriceDisplay');
     const subtotalElement = document.getElementById('subtotal');
@@ -344,5 +343,4 @@ function updateTotalPrice(shippingFee) {
         totalElement.textContent = total.toLocaleString('vi-VN') + "đ";
     }
 }
-
 
