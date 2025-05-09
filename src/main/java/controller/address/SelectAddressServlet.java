@@ -54,6 +54,9 @@ public class SelectAddressServlet extends HttpServlet {
 	    AddressDaoImp addressDAO = new AddressDaoImp();
 	    Address address = addressDAO.selectAddressByIdAndUser(addressId, user.getUserId());
 	    
+	    
+	
+	    
 
 	    response.setContentType("application/json");
 	    PrintWriter out = response.getWriter();

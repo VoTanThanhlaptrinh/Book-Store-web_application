@@ -145,8 +145,12 @@ public class AddressDaoImp implements IAddressDao {
 	
 	public static void main(String[] args) {
 		AddressDaoImp add = new AddressDaoImp();
-		Address a = add.selectAddressByIdAndUser(36,18);
-		System.out.println(a);
+	
+		
+		List<Address> daa= add.getAddressesByUserId(8);
+		for (Address address : daa) {
+			System.out.println(address);
+		}
 
 	}
 }

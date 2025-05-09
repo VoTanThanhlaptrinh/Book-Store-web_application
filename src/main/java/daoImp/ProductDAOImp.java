@@ -653,8 +653,7 @@ public class ProductDAOImp implements IProductDao {
 
 	public static void main(String[] args) {
 		ProductDAOImp dao = new ProductDAOImp();
-		Product p = dao.getDimension(1);
-		System.out.println(p.getHeight());
+	
 	}
 
 }
