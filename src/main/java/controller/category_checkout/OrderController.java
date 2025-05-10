@@ -213,11 +213,12 @@ public class OrderController extends HttpServlet {
             out.println("{\"status\":\"error\",\"message\":\"Không thể tính phí vận chuyển.\"}");
             return -1;
         }
+
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        doPost(request, response);
+    	request.getRequestDispatcher("webPage/order/order.jsp").forward(request, response);
     }
 }
