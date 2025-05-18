@@ -32,18 +32,18 @@
      <div class="banner_div">
           <div class="slider" id="slider">
             <div class="slides" id="slideContainer">
-              <img src="https://cdn1.fahasa.com/media/magentothem/banner7/ThaiHa_Bac_Resize_840x320.png" alt="Slide 1">
-              <img src="https://cdn1.fahasa.com/media/wysiwyg/Thang-03-2025/LichSuVanHoa_Mainbanner_1920x600.png" alt="Slide 2">
-              <img src="https://cdn1.fahasa.com/media/magentothem/banner7/TrangThuBongT2g_840x320.jpg" alt="Slide 3">
+              <img src="https://cdn1.fahasa.com/media/magentothem/banner7/ThaiHa_Bac_Resize_840x320.png" alt="Slide 1" loading="lazy">
+              <img src="https://cdn1.fahasa.com/media/wysiwyg/Thang-03-2025/LichSuVanHoa_Mainbanner_1920x600.png" alt="Slide 2" loading="lazy">
+              <img src="https://cdn1.fahasa.com/media/magentothem/banner7/TrangThuBongT2g_840x320.jpg" alt="Slide 3" loading="lazy">
             </div>
           
             <button class="nav-button prev" onclick="prevSlide()">❮</button>
             <button class="nav-button next" onclick="nextSlide()">❯</button>
           </div>
             <div class="banner_list_1">
-                <img src="https://cdn1.fahasa.com/media/wysiwyg/Thang-03-2025/Subpark_Way.png" alt="">
-                <img src="https://cdn1.fahasa.com/media/wysiwyg/Thang-03-2025/Fahasa_OnineT3_392x156_1.jpg" alt="">
-                <img src="https://cdn1.fahasa.com/media/magentothem/banner7/TrangThuBongT2g_840x320.jpg" alt="">
+                <img src="https://cdn1.fahasa.com/media/wysiwyg/Thang-03-2025/Subpark_Way.png" alt="" loading="lazy">
+                <img src="https://cdn1.fahasa.com/media/wysiwyg/Thang-03-2025/Fahasa_OnineT3_392x156_1.jpg" alt="" loading="lazy">
+                <img src="https://cdn1.fahasa.com/media/magentothem/banner7/TrangThuBongT2g_840x320.jpg" alt="" loading="lazy">
             </div>
     </div>
 

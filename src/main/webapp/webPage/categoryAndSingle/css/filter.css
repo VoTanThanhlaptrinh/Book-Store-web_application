@@ -183,9 +183,7 @@ label {
     z-index: 1;
     pointer-events: none; /* Không cho phép tương tác với phần này */
 }
-.result-message {
-	margin-top: 20px;
-}
+
 .slider-container input[type="range"] {
 	width: 100%;
     position: absolute;
@@ -213,11 +211,66 @@ label {
 }
 
 .slider-container input[type="range"]#range-slider-min::-webkit-slider-thumb {
-    background: #007bff; /* Màu cho nút min */
+    background: #ff4500; /* Màu cho nút min */
 }
 
 .slider-container input[type="range"]#range-slider-max::-webkit-slider-thumb {
-    background: #28a745; /* Màu cho nút max */
+    background: #ff4500; /* Màu cho nút max */
+}
+.price-confirm-container {
+    margin-top: 15px;
+    text-align: center;
+}
+
+#confirm-price-btn {
+    padding: 8px 16px;
+    margin-right: 100px;
+    background-color: #ff4500;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.year-filter-container {
+    margin-left: 30px;
+    margin-top: 15px;
+}
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 5px;
+  }
+  
+.custom-checkbox {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+.custom-checkbox input[type="checkbox"] {
+    display: none;
+  }
+  
+.custom-checkbox .square {
+    width: 16px;
+    height: 16px;
+    border: 2px solid #333;
+    margin-right: 8px;
+    display: inline-block;
+    position: relative;
+}
+.custom-checkbox input[type="checkbox"]:checked + .square::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    background-color: #ff4500;
+    position: absolute;
+}
+  
+#confirm-price-btn:hover {
+    background-color: #ff8000;
 }
 .item-filter {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Hiệu ứng đổ bóng */
@@ -380,7 +433,8 @@ label {
   }
   
 .button-page:hover,  .page-number:hover:not(.active) {
-    background-color: #f0f0f0;
+    background-color: rgb(255, 0, 0);
+    color: white;
   }
   
 .button-page:disabled {
@@ -392,5 +446,17 @@ label {
 	text-decoration: none;
 	font-size: 20px;
 	font-weight: bold;
+}
+.filter-tag {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #eee;
+    border-radius: 12px;
+    margin: 4px;
+}
+.filter-tag .remove-filter {
+    cursor: pointer;
+    color: red;
+    margin-left: 6px;
 }
     

@@ -45,34 +45,46 @@ body {
     color: #000;
 }
 .search-bar {
-    flex: 0.6; /* giam do dai, chiem 60% thay vi flex:1 */
+    flex: 0.6;
     margin: 0 20px;
     display: flex;
     align-items: center;
-    height: 50px; /* tang chieu cao */
+    height: 50px;
     border: 1px solid #000000;
     border-radius: 8px;
     overflow: hidden;
-  }
-.search-bar select, .search-bar input {
-    border: none;
-    padding: 12px; /* tang padding cho cao */
-    outline: none;
-    height: 100%; /* de fill het chieu cao cua search bar */
 }
 
 .search-bar select {
+    border: none;
+    padding: 12px;
+    outline: none;
+    height: 100%;
     background: #f9f9f9;
 }
-.search-bar input {
+
+.search-form {
     flex: 1;
+    display: flex; /* quan trọng để input và button nằm ngang */
+    height: 100%;
 }
-.search-bar button {
+
+.search-form input {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    outline: none;
+    height: 100%;
+}
+
+.search-form button {
     background: none;
     border: none;
-    padding: 10px;
+    padding: 10px 16px;
     cursor: pointer;
+    height: 100%;
 }
+
 .top-right {
     margin-right: 50px;
     display: flex;
@@ -137,15 +149,15 @@ body {
     border-radius: 10px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     width: 250px;
-    margin-top: 10px;
+    margin-top: 2px;
     max-height: 0; /* Ban đầu ẩn dropdown */
     overflow: hidden; /* Ẩn nội dung khi max-height = 0 */
-    transition: max-height 0.3s ease, opacity 0.3s ease; /* Hiệu ứng mượt */
+    transition: max-height 1s ease, opacity 0.3s ease; /* Hiệu ứng mượt */
     opacity: 0; /* Ban đầu không hiển thị */
     z-index: 1000; /* Đảm bảo dropdown nằm trên cùng */
   }
   /* Style cho các mục trong dropdown */
-  .dropdown a {
+.dropdown a {
     display: flex;
     flex-direction: row;
     padding: 10px;
