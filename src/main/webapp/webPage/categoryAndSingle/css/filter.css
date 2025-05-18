@@ -433,7 +433,8 @@ label {
   }
   
 .button-page:hover,  .page-number:hover:not(.active) {
-    background-color: #f0f0f0;
+    background-color: rgb(255, 0, 0);
+    color: white;
   }
   
 .button-page:disabled {
@@ -445,5 +446,17 @@ label {
 	text-decoration: none;
 	font-size: 20px;
 	font-weight: bold;
+}
+.filter-tag {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #eee;
+    border-radius: 12px;
+    margin: 4px;
+}
+.filter-tag .remove-filter {
+    cursor: pointer;
+    color: red;
+    margin-left: 6px;
 }
     

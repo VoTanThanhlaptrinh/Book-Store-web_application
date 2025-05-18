@@ -28,6 +28,7 @@
 				</div>
 				<div class="san-pham">8 Sản Phẩm</div>
 			</div>
+			<div id="active-filters" style="margin-top: 10px;"></div>
 			<div class="line"></div>
 
 
@@ -50,7 +51,10 @@
 				</div>
 				<input type="hidden" id="yearFilters" value="${yearFilters}">
 				<input type="hidden" id="parent-category" value="${parentcategory}">
-				<input type="hidden" id="sub-category" value="${subcategory}">		
+				<input type="hidden" id="sub-category" value="${subcategory}">	
+				<input type="hidden" id="parent-category-name" value="${parentcategoryName}">
+				<input type="hidden" id="sub-category-name" value="${subcategoryName}">	
+				<input type="hidden" id="filter-tags-list" value="${filterTagsList}">	
 			</div>
 
 			<!-- Phân trang -->
