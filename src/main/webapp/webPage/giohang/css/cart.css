@@ -285,6 +285,8 @@ html {
 }
 .cart_order .order{
 	border: none;
+	   cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .cart_order .right {
@@ -334,5 +336,11 @@ html {
     padding: 15px 30px;
     display: inline-block;
     border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
 
+}
+
+.empty .buy:hover, .cart_order .order:hover{
+	filter: brightness(90%);
 }
