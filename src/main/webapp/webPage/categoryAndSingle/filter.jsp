@@ -617,9 +617,12 @@
         function removeFilterByText(text) {
             // Gửi request lọc lại mà không có filter này (tuỳ chỉnh theo logic bạn muốn)
             console.log("Xoa bo filter: " + text);
+<<<<<<< HEAD
             
             
             
+=======
+>>>>>>> e65bf660d41f163149fdb3760816d02a46b7da8f
         }
         </script>
 </body>

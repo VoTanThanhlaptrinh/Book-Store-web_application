@@ -16,6 +16,7 @@
 <body>
 	<header>
 
+<<<<<<< HEAD
 		<div class="top-header">
 			<a class="logo" href="home">Bookstore</a>
 
@@ -27,6 +28,60 @@
 					<input type="text" name="query" placeholder="Enter Search Products">
 					<button type="submit">🔍</button>
 				</form>
+=======
+        <div class="top-header">
+            <a class="logo" href="home">Bookstore</a>
+            
+            <div class="search-bar">
+              <select>
+                <option>All Categories</option>
+              </select>
+             <form action="search" method="get" >
+					  <input type="text" name="query" placeholder="Enter Search Products">
+					  <button type="submit">🔍</button>
+					</form>
+            </div>
+          
+            <div class="top-right">
+                <div class="top-right-icon">👤</div>
+              <div class="user-info-main">
+            
+                  <div class="user-info-main-login-regis" onclick="openLogin()">${user.getUsername()}</div>
+                 
+              </div>
+              
+            </div>
+          
+            <div class="mobile-menu-icon">☰</div>
+          </div>
+          
+          <!-- Yellow Menu Bar -->
+          <div class="yellow-bar">
+            <div class="logo-hidden">Bookstore</div>
+            <div class="left-menu">
+              <button class="left-menu-button"  onclick="window.location.href='FilterServlet'"> ☰ Products Category</button>
+           <div class="dropdown">
+			  <a class="dropdown-category" href="FilterServlet?page=1&categoryParentId=1">
+			    <img src="https://img.cand.com.vn/resize/800x800/NewFiles/Images/2023/03/09/image001-1678344452723.jpg" alt=""> 
+			    <p>Văn học</p>
+			  </a>
+			  <a class="dropdown-category" href="FilterServlet?page=1&categoryParentId=2">
+			    <img src="https://phenikaa-uni.edu.vn:3600/fidt/vi/posts/kinh-te-so-2331054.png" alt=""> 
+			    <p>Kinh tế</p>
+			  </a>
+			  <a class="dropdown-category" href="FilterServlet?page=1&categoryParentId=3">
+			    <img src="https://lcv.com.vn/wp-content/uploads/2023/06/phat-trien-ban-than-la-gi.jpg" alt=""> 
+			    <p>Phát triển bản thân</p>
+			  </a>
+			  <a class="dropdown-category" href="FilterServlet?page=1&categoryParentId=4">
+			    <img src="https://huongnghiep.hocmai.vn/wp-content/uploads/2021/12/150-1200x701.png" alt=""> 
+			    <p>Tâm lý kỹ năng</p>
+			  </a>
+			  <a class="dropdown-category" href="FilterServlet?page=1&categoryParentId=5">
+			    <img src="https://hockiquandoi.net/wp-content/uploads/2020/10/20200728_072002_716551_nuoi-day-con-dung-c.max-1800x1800.jpg" alt=""> 
+			    <p>Nuôi dạy con</p>
+			  </a>
+>>>>>>> e65bf660d41f163149fdb3760816d02a46b7da8f
 			</div>
 
 			<div class="top-right">
