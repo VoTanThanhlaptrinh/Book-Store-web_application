@@ -36,10 +36,16 @@ public class GrantResourceService implements IGrantResourceService {
 
 		Set<Resource> toRemove = new HashSet<>(oldResource);
 		toRemove.removeAll(newResources);
-
-		// Gọi DAO để cập nhật DB
-		resourceDao.grantPermissions(userId, toAdd);
-		resourceDao.revokePermissions(userId, toRemove);
+		int allow = 0;
+		if(oldResource.size() == 0 && newResources.size() > 0) {
+			allow = 1;
+		}
+		if(oldResource.size() > 0 && newResources.size() == 0 ) {
+			allow = -1;
+		}
+		// allow định nghĩa việc được phép thêm hay xoá hay giữa lại role admin.
+		// allow = 0 là giữ lại, allow bằng 1 thì thêm, allow = -1 thì xoá.
+		resourceDao.grantPermissionAndUpdateRole(userId,toAdd,toRemove,allow);
 	}
 
 	private Set<Resource> convert(Map<String, ArrayList<Integer>> permission) {
