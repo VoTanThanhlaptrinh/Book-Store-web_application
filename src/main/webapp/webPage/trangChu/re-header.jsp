@@ -19,8 +19,10 @@
               <select>
                 <option>All Categories</option>
               </select>
-              <input type="text" placeholder="Enter Search Products">
-              <button>🔍</button>
+             <form action="search" method="get" >
+					  <input type="text" name="query" placeholder="Enter Search Products">
+					  <button type="submit">🔍</button>
+					</form>
             </div>
           
             <div class="top-right">
@@ -40,7 +42,7 @@
           <div class="yellow-bar">
             <div class="logo-hidden">Bookstore</div>
             <div class="left-menu">
-              <button class="left-menu-button">☰ Products Category</button>
+              <button class="left-menu-button"  onclick="window.location.href='FilterServlet'"> ☰ Products Category</button>
            <div class="dropdown">
 			  <a class="dropdown-category" href="FilterServlet?page=1&categoryParentId=1">
 			    <img src="https://img.cand.com.vn/resize/800x800/NewFiles/Images/2023/03/09/image001-1678344452723.jpg" alt=""> 
@@ -86,8 +88,10 @@
                     </div>
                     <div class="search-bar-container">
                     <div class="search-bar">
-                        <input type="text" placeholder="Enter Search Products">
-                        <button>🔍</button>
+                        <form action="search" method="get" >
+					  <input type="text" name="query" placeholder="Enter Search Products">
+					  <button type="submit">🔍</button>
+					</form>
                       </div>
                     </div>
 
