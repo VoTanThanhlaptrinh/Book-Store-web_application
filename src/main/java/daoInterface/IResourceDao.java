@@ -8,7 +8,5 @@ import models.Resource;
 public interface IResourceDao {
 	public List<Resource> getListResources();
 
-	public void grantPermissions(int userId, Set<Resource> toAdd);
-
-	public void revokePermissions(int userId, Set<Resource> toRemove);
+	public void grantPermissionAndUpdateRole(int userId, Set<Resource> toAdd, Set<Resource> toRemove, int allow);
 }

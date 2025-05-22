@@ -5,7 +5,9 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 import jakarta.json.Json;
 import jakarta.json.JsonArray;
@@ -19,6 +21,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import service.GrantResourceService;
 import service.IGrantResourceService;
 
@@ -33,6 +36,13 @@ public class GrantPermissionsAPI extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		HttpSession session = req.getSession();
+		String lang = (String) session.getAttribute("lang");
+		if (lang == null) {
+			lang = "vi"; // nếu null thiết lập mặc định là 'vi'
+		}
+		Locale locale = Locale.forLanguageTag(lang);
+		ResourceBundle bundle = ResourceBundle.getBundle("messages", locale);
 		Map<String, String> response = new HashMap<String, String>();
 		StringBuilder sb = new StringBuilder();
 		String line;
@@ -45,7 +55,7 @@ public class GrantPermissionsAPI extends HttpServlet {
 		int userId = Integer.valueOf(jsonObject.getString("userId"));
 		if (userId < 1) {
 			response.put("status", "error");
-			response.put("message", "userId không được null");
+			response.put("message", "grant.user.id.null");
 			sendResponse(resp, response);
 			return;
 		}
@@ -69,17 +79,18 @@ public class GrantPermissionsAPI extends HttpServlet {
 		}
 		grantResourceService.grant(userId, permissionMap);
 		response.put("status", "success");
+		response.put("message", bundle.getString("grant.success"));
 		sendResponse(resp, response);
 
 	}
 
 	private void sendResponse(HttpServletResponse resp, Map<String, String> response) throws IOException {
-		JsonObjectBuilder errorResponse = Json.createObjectBuilder();
-		errorResponse.add("status", "error");
-		errorResponse.add("message", "userId không được null");
+		JsonObjectBuilder res = Json.createObjectBuilder();
+		res.add("status", response.get("status"));
+		res.add("message", response.get("message"));
 		resp.setContentType("application/json");
 		resp.setCharacterEncoding("UTF-8");
-		resp.getWriter().write(errorResponse.build().toString());
+		resp.getWriter().write(res.build().toString());
 	}
 	@Override
 	public void init() throws ServletException {
