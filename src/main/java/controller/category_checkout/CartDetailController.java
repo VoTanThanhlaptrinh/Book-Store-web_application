@@ -97,15 +97,10 @@ public class CartDetailController extends HttpServlet {
 					quantity);
 			session.setAttribute("message1", successMessage);
 
-<<<<<<< HEAD
+
 			response.sendRedirect("FilterServlet");
-			
 
-=======
 
-			response.sendRedirect("home");
-
->>>>>>> e65bf660d41f163149fdb3760816d02a46b7da8f
 		}
 	}
 }

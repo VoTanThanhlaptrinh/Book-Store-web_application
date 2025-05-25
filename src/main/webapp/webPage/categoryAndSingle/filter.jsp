@@ -134,7 +134,17 @@
 				</div>
 				<div class="san-pham">8 Sản Phẩm</div>
 			</div>
-			<div id="active-filters" style="margin-top: 10px;"></div>
+			<div id="active-filters" style="margin-top: 10px;">
+			    <c:if test="${not empty filterTagsList}">
+			        <c:forEach var="tag" items="${filterTagsList}">
+			            <div class="filter-tag">
+			                ${tag}
+			                <span class="remove-filter" onclick="removeFilterByText('${fn:escapeXml(tag)}')">✖</span>
+			            </div>
+			        </c:forEach>
+			    </c:if>
+			</div>
+
 			<div class="line"></div>
 
 
@@ -155,7 +165,6 @@
 						</a>
 					</c:forEach>
 				</div>
-			
 			</div>
 
 			<!-- Phân trang -->
@@ -191,9 +200,8 @@
     
 	    document.addEventListener("DOMContentLoaded", function () {
 	        loadParentCategory(); // Tự động gọi hàm khi trang tải xong
-	      
+	        loadFilterTags();
 	    });
-    
         function initializeDropdown() {
             const searchInput = document.getElementById('search-input');
             const dropdownList = document.getElementById('dropdown-list');
@@ -324,8 +332,8 @@
             + "&categoryId=" + sub
             + "&minPrice=" + minPrice
             + "&maxPrice=" + maxPrice
-            + "&categoryParentName=" + parentName
-            + "&categorySubName=" + subName;
+            + "&parentcategoryName=" + parentName
+            + "&subcategoryName=" + subName;
         if (yearParams.length > 0) {
             url += "&" + yearParams;
         }
@@ -467,11 +475,13 @@
 		
 		const url = "FilterServlet?page=" + 1
 		          + "&categoryParentId=" + categoryParentId	 
+		    	  +"&parentcategoryName="+ cateName 
+   			      + "&subcategoryName=" + subName
 		          + "&minPrice=" + minPrice
 		          + "&maxPrice=" + maxPrice;
 	   			 + "&yearFilter=" + years;
 		history.pushState(null, '', url);
-		xhr.open("GET", "FilterServlet?page=1&categoryParentId=" + categoryParentId + "&categoryParentName=" + cateName +  "&minPrice=" + minPrice + "&maxPrice=" + maxPrice     + "&yearFilter=" + years, true);
+		xhr.open("GET", "FilterServlet?page=1&categoryParentId=" + categoryParentId + "&parentcategoryName=" + cateName +  "&minPrice=" + minPrice + "&maxPrice=" + maxPrice     + "&yearFilter=" + years, true);
 		xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest"); 
 
 		xhr.onload = function () {
@@ -494,12 +504,15 @@
 		const url = "FilterServlet?page=" + 1
 				+ "&categoryId=" + categoryId
 		      + "&minPrice=" + minPrice 
+			  +"&parentcategoryName="+ cateParentName 
+			      + "&subcategoryName=" + cateName
 		      + "&maxPrice=" + maxPrice;
 			    + "&yearFilter=" + years;
+			    
 		history.pushState(null, '', url);
 		
 		const xhr = new XMLHttpRequest();
-		xhr.open("GET", "FilterServlet?page=1&categoryId=" + categoryId + "&categoryParentName=" + cateParentName + "&categorySubName=" + cateName  + "&minPrice=" + minPrice + "&maxPrice=" + maxPrice     + "&yearFilter=" + years, true);
+		xhr.open("GET", "FilterServlet?page=1&categoryId=" + categoryId + "&parentcategoryName=" + cateParentName + "&subcategoryName=" + cateName  + "&minPrice=" + minPrice + "&maxPrice=" + maxPrice     + "&yearFilter=" + years, true);
 		xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
 
 		xhr.onload = function () {
@@ -524,26 +537,27 @@
 		let url = "FilterServlet?page=" + currentPage 
 					+ "&categoryParentId=" + parent
 					+ "&categoryId=" + sub
+					  +"&parentcategoryName="+ cateName 
+				      + "&subcategoryName=" + subName
 			      + "&minPrice=" + minPrice 
 			      + "&maxPrice=" + maxPrice
-			
 			      + "&yearFilter=" + years;
 		history.pushState(null, '', url);
-	    // Tạo một đối tượng XMLHttpRequest để gọi AJAX
+	
 	    const xhr = new XMLHttpRequest();
 	    xhr.open("GET", "FilterServlet?page=" + currentPage 
 	    				+ "&categoryParentId=" + parent
 	    				+ "&categoryId=" + sub
-	    			  +"&categoryParentName="+ parentName 
-	   			      + "&categorySubName=" + subName
+	    			  +"&parentcategoryName="+ cateName 
+	   			      + "&subcategoryName=" + subName
 	                  + "&minPrice=" + minPrice 
 	                  + "&maxPrice=" + maxPrice
 	                  + "&yearFilter=" + years, true);
-	    xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest"); // Báo hiệu là AJAX
+	    xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest"); 
 
 	    xhr.onload = function () {
 	        if (xhr.status === 200) {
-	            // Cập nhật danh sách sản phẩm
+	         
 	            document.getElementById("product-list").innerHTML = xhr.responseText;
 	            loadFilterTags();
 	        }
@@ -553,7 +567,6 @@
 	}
 
 
-  // Hàm xử lý sự kiện "Xem Thêm"
   function toggleMore() {
       const hiddenItems = document.querySelectorAll(".hidden");
       const seeMoreButton = document.querySelector(".see-more .arrow");
@@ -563,7 +576,6 @@
           item.classList.toggle("hidden");
       });
 
-      // Đổi mũi tên
       if (seeMoreButton.textContent === "▼") {
           seeMoreButton.textContent = "▲";
       } else {
@@ -577,15 +589,15 @@
             const button = dropdown.querySelector(".item-filter-dropdown-button");
            const menu = dropdown.querySelector(".item-filter-dropdown-menu")
             button.addEventListener("click", function () {
-                button.style.borderBottom = "none"; // Xóa border
+                button.style.borderBottom = "none"; 
                 menu.style.borderTop = "none"
               dropdown.classList.toggle("open");
             });
           
-            // Close dropdown when clicking outside
+           
             document.addEventListener("click", function (e) {
               if (!dropdown.contains(e.target)) {
-                  button.style.borderBottom = "1px solid #cccccc"; // Xóa border
+                  button.style.borderBottom = "1px solid #cccccc"; 
                 menu.style.borderTop = "1px solid #CCCCCC"
                 dropdown.classList.remove("open");
                
@@ -596,9 +608,9 @@
         function loadFilterTags() {
             const filterTagsRaw = document.getElementById("filter-tags-list")?.value;
             if (filterTagsRaw) {
-                // Chuyển đổi mảng Java (hiển thị như [item1, item2]) thành JS array
-                let clean = filterTagsRaw.replace(/^\[|\]$/g, ""); // bỏ [ ]
-                let tagArray = clean.split(/\s*,\s*/); // tách theo dấu phẩy và xóa khoảng trắng
+               
+                let clean = filterTagsRaw.replace(/^\[|\]$/g, ""); 
+                let tagArray = clean.split(/\s*,\s*/); 
 
                 const container = document.getElementById("active-filters");
 					
@@ -607,7 +619,7 @@
                         const tag = document.createElement("div");
                         tag.className = "filter-tag";
                         console.log(tag)
-                        tag.innerHTML = text + ' <span class="remove-filter" onclick="removeFilterByText(\'' + text.replace(/'/g, "\\'") + '\')">✖</span>';
+                        tag.innerHTML = text + ' <span class="remove-filter" onclick="removeFilterByText(\'' + text.replace(/'/g, "\\'") + '\')">X</span>';
                         container.appendChild(tag);
                     }
                 });
@@ -615,14 +627,8 @@
         }
 
         function removeFilterByText(text) {
-            // Gửi request lọc lại mà không có filter này (tuỳ chỉnh theo logic bạn muốn)
+        
             console.log("Xoa bo filter: " + text);
-<<<<<<< HEAD
-            
-            
-            
-=======
->>>>>>> e65bf660d41f163149fdb3760816d02a46b7da8f
         }
         </script>
 </body>

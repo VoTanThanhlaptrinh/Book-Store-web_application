@@ -72,10 +72,32 @@ public class FilterController extends HttpServlet {
 					System.out.println(Arrays.toString(yearFilters));
 				    selectedYears = Arrays.asList(yearFilters);
 				}
+		
+				String categoryIdStr = request.getParameter("categoryId");
+				if (categoryIdStr != null && !categoryIdStr.isEmpty()) {
+				    try {
+				        categoryId = Integer.parseInt(categoryIdStr);
+				        System.out.println("category id:" + categoryIdStr);
+				    } catch (NumberFormatException e) {}
+				}
+				String categoryNameStr = request.getParameter("parentcategoryName");
+				if (categoryNameStr != null && !categoryNameStr.isEmpty()) {
+				    try {
+				    	parentName = categoryNameStr;
+				        System.out.println("category parent name:" + parentName);
+				    } catch (NumberFormatException e) {}
+				}
+				String categorySubNameStr = request.getParameter("subcategoryName");
+				if (categorySubNameStr != null && !categorySubNameStr.isEmpty()) {
+				    try {
+				    	subName = categorySubNameStr;
+				        System.out.println("category parent name:" + subName);
+				    } catch (NumberFormatException e) {}
+				}
 				try { categoryId = Integer.parseInt(request.getParameter("categoryId")); } catch (NumberFormatException e) {}
 				try { categoryParentId = Integer.parseInt(request.getParameter("categoryParentId")); } catch (NumberFormatException e) {}
-				try { parentName = request.getParameter("categoryParentName"); } catch (NumberFormatException e) {}
-				try { subName = request.getParameter("categorySubName"); } catch (NumberFormatException e) {}
+				try { parentName = request.getParameter("parentcategoryName"); } catch (NumberFormatException e) {}
+				try { subName = request.getParameter("subcategoryName"); } catch (NumberFormatException e) {}
 				try { minPrice = request.getParameter("minPrice") != null ? Double.parseDouble(request.getParameter("minPrice")) : null; } catch (NumberFormatException e) {}
 				try { maxPrice = request.getParameter("maxPrice") != null ? Double.parseDouble(request.getParameter("maxPrice")) : null; } catch (NumberFormatException e) {}
 		
@@ -123,14 +145,15 @@ public class FilterController extends HttpServlet {
 				request.setAttribute("minPrice", minPrice);
 				request.setAttribute("maxPrice", maxPrice);
 
-				// 🧠 Kiểm tra có phải AJAX không (dựa vào header hoặc tham số tùy ý)
+	
 				String isAjax = request.getHeader("X-Requested-With");
 				
 				if ("XMLHttpRequest".equals(isAjax)) {
-					// ✅ Trả về danh sách HTML sản phẩm
+				
+				
 					request.getRequestDispatcher("webPage/categoryAndSingle/ajaxProductList.jsp").forward(request, response);
 				} else {
-					// ✅ Trả về trang đầy đủ nếu là truy cập bình thường
+					System.out.println("this");
 					request.getRequestDispatcher("webPage/categoryAndSingle/filter.jsp").forward(request, response);
 				}
 	}
