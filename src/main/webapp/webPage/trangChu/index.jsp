@@ -248,11 +248,9 @@
 		    <button id="loadMoreBtn">Xem thêm</button>
 		</div>
     </div>
-    
+   	<div style="margin-top: 200px"></div>
                 
-   	<div id="footer-placeholder">
-		<jsp:include page="/webPage/trangChu/footer.jsp"></jsp:include>
-	</div>
+   	<div id="footer-placeholder"><jsp:include page="/webPage/trangChu/footer.jsp"></jsp:include></div>
     <script>
         let totalSeconds = 9000; // 1 giờ 24 phút 15 giây
 
@@ -311,8 +309,5 @@
 	        setInterval(nextSlide, 3000); // Tự động chuyển mỗi 3 giây
 	    
 	</script>
-
-    <script src="webPage/trangChu/js/footer.js"></script>
-
 </body>
 </html>

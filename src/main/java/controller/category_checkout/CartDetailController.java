@@ -98,7 +98,8 @@ public class CartDetailController extends HttpServlet {
 			session.setAttribute("message1", successMessage);
 
 
-			response.sendRedirect("home");
+			response.sendRedirect("FilterServlet");
+
 
 		}
 	}

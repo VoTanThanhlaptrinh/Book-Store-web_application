@@ -1,71 +1,93 @@
-@charset "UTF-8";
-body {
-    margin: 0;
+.custom-footer {
+  background: linear-gradient(
+    270deg,
+    #ffffffdf,
+    #fbffd1,
+    #ffff76,
+    #ffff16,
+    #fffcbe
+  );
+  background-size: 1000% 100%;
+  animation: gradientShift 10s ease infinite;
+
+  color: rgb(0, 0, 0);
+  padding: 40px 20px 20px;
+  font-family: Arial, sans-serif;
 }
 
-/* Footer Styles */
-.footer {
-    background-color: rgb(62, 106, 189); /* Thay thế bằng đường dẫn tới ảnh */
-    background-size: cover; /* Để ảnh phủ kín div */
-    background-position: center; /* Canh giữa ảnh trong div */
-    color: #ffffff;
-    padding: 2rem 0;
-    font-family: Arial, sans-serif;
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
-
 .footer-content {
-    display: flex;
-    justify-content: space-between;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: auto;
+  gap: 20px;
 }
 
-.footer-section {
-    flex: 1;
-    padding: 0 1rem;
+.footer-column {
+  flex: 1 1 200px;
+  min-width: 180px;
 }
 
-.footer-section h3 {
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
+.footer-logo {
+  width: 150px;
+  margin-bottom: 10px;
 }
 
-.footer-section ul {
-    list-style: none;
-    padding: 0;
+.footer-tagline {
+  font-size: 14px;
+  color: #000000;
 }
 
-.footer-section ul li {
-    margin-bottom: 0.5rem;
+.footer-column h4 {
+  margin-bottom: 10px;
+  font-size: 16px;
 }
 
-.footer-section ul li a {
-    color: #ffffff;
-    text-decoration: none;
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-.footer-section ul li a:hover {
-    color: #ff7f50; /* Màu cam nhẹ cho hiệu ứng hover */
+.footer-column ul li {
+  margin-bottom: 8px;
 }
 
-.footer-section p {
-    font-size: 0.9rem;
+.footer-column a {
+  color: #000000;
+  text-decoration: none;
 }
 
-.socials a {
-    margin-right: 10px;
+.footer-column a:hover {
+  color: #1e90ff;
 }
 
-.socials img {
-    width: 24px;
-    height: 24px;
+.btn-red {
+  margin-top: 10px;
+  background-color: #2100c9;
+  color: rgb(255, 255, 255);
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-red:hover {
+  background-color: #2200ac;
 }
 
 .footer-bottom {
-    text-align: center;
-    padding-top: 1rem;
-    font-size: 0.8rem;
-    border-top: 1px solid #ccc;
-    color: #ffffff;
+  text-align: center;
+  margin-top: 30px;
+  border-top: 1px solid #333;
+  padding-top: 15px;
+  font-size: 14px;
+  color: #aaa;
 }
