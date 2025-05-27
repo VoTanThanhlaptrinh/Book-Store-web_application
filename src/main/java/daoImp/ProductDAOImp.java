@@ -651,9 +651,62 @@ public class ProductDAOImp implements IProductDao {
 		return p;
 	}
 
+	// lấy số lượng tồn kho một product dựa vào id
+	public int getStockQuantity(int productId) {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		int quantity = 0;
+
+		try {
+			conn = DatabaseConnection.getConnection();
+			String sql = "SELECT p.pdQuantity " + "FROM Product_1 p JOIN Cart_item c ON p.product_id = c.product_id "
+					+ "WHERE c.product_id = ? AND c.status = 'pending'";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, productId);
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				quantity = rs.getInt("pdQuantity");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (ps != null)
+					ps.close();
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return quantity;
+	}
+
+	
+
+	@Override
+	public void updateQuantityProduct(int idProduct, int quantity) {
+		String sql = "update Product_1 set pdQuantity = pdQuantity -? where product_id = ?";
+		try {
+			Connection conn = DatabaseConnection.getConnection();
+			PreparedStatement stmp = conn.prepareStatement(sql);
+			stmp.setInt(1, quantity);
+			stmp.setInt(2, idProduct);
+			stmp.executeUpdate();
+			System.out.println("Cập nhật số lượng thành công");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
 	public static void main(String[] args) {
 		ProductDAOImp dao = new ProductDAOImp();
-	
+		dao.updateQuantityProduct(1, 2);
 	}
 
 }

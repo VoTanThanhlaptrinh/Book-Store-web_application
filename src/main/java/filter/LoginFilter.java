@@ -12,7 +12,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import models.User;
-@WebFilter(filterName = "loginFilter")
+
+@WebFilter(filterName = "loginFilter", urlPatterns = {
+	     "/cart/*", "/checkout/*", "/order/*" // Thêm URL cần yêu cầu đăng nhập
+	})
 
 public class LoginFilter extends HttpFilter {
 

@@ -1,6 +1,8 @@
 package controller.category_checkout;
 
 import jakarta.servlet.ServletException;
+
+
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -11,10 +13,12 @@ import models.CartData;
 import models.CartProductDetail;
 import models.Product;
 import models.User;
+import service.LoginService;
+
 import com.google.gson.*;
 import daoImp.AddressDaoImp;
-import daoImp.CartItemDAOImp;
 import daoImp.ProductDAOImp;
+import daoImp.SocialLoginDAOImpl;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -23,10 +27,9 @@ import java.util.List;
 
 @WebServlet("/order")
 public class OrderController extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-    private static final String GHN_API_URL = "https://online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/fee";
-    private static final String TOKEN = "1cdb0f24-1830-11f0-bf01-723c4de9ff57";
-    private static final String SHOP_ID = "5731351";
+	private static String GHN_TOKEN;
+	private static String GHN_API_URL;
+	private static String GHN_SHOP_ID;
 
     public OrderController() {
         super();
@@ -39,9 +42,8 @@ public class OrderController extends HttpServlet {
         PrintWriter out = response.getWriter();
         ProductDAOImp productDao = new ProductDAOImp();
         AddressDaoImp addressDao = new AddressDaoImp();
-        CartItemDAOImp cartDao = new CartItemDAOImp();
         HttpSession session = request.getSession();
-
+        
         String updateShippingFeeOnly = request.getParameter("updateShippingFeeOnly");
         User user = (User) session.getAttribute("user");
         Address addressDefault = (Address) session.getAttribute("addressDefault");
@@ -49,7 +51,8 @@ public class OrderController extends HttpServlet {
 
         // Nếu chỉ cập nhật phí vận chuyển
         if ("true".equals(updateShippingFeeOnly)) {
-            List<CartProductDetail> cDetails = (List<CartProductDetail>) session.getAttribute("cDetails");
+          
+			List<CartProductDetail> cDetails =  (List<CartProductDetail>) session.getAttribute("cDetails");
             if (cDetails == null || cDetails.isEmpty()) {
                 out.println("{\"status\":\"error\",\"message\":\"Giỏ hàng rỗng.\"}");
                 return;
@@ -62,6 +65,7 @@ public class OrderController extends HttpServlet {
             }
             return;
         }
+          
 
         String orderDataJson = request.getParameter("orderData");
         if (orderDataJson == null || orderDataJson.isEmpty()) {
@@ -74,31 +78,38 @@ public class OrderController extends HttpServlet {
         CartData cartData = gson.fromJson(orderDataJson, CartData.class);
         List<CartProductDetail> cDetails = cartData.getCartProductDetails();
 
+     
+        
+        
         if (cDetails == null || cDetails.isEmpty()) {
-            request.getRequestDispatcher("webPage/giohang/cart.jsp").forward(request, response);
+        	System.out.println("cDetails == null");
+        	  response.sendRedirect("cart");
             return;
         }
+        
+        
 
         // Kiểm tra số lượng tồn kho
         for (CartProductDetail c : cDetails) {
             Product product = productDao.getDimension(c.getProductId());
             if (product == null) {
+            	System.out.println("product == null");
                 request.setAttribute("error", "Sản phẩm không tồn tại.");
-                request.getRequestDispatcher("webPage/giohang/cart.jsp").forward(request, response);
+                response.sendRedirect("cart");
                 return;
             }
 
             int quantity = c.getQuantity();
-            int pbQuantity = cartDao.getProductQuantityByProductId(c.getProductId());
+            int pbQuantity = productDao.getStockQuantity(c.getProductId());
             if (quantity > pbQuantity) {
                 request.setAttribute("error", "Số lượng mua vượt quá tồn kho.");
-                request.getRequestDispatcher("webPage/giohang/cart.jsp").forward(request, response);
+                System.out.println("Số lượng mua vượt quá tồn kho");
+                response.sendRedirect("cart");
+				 
                 return;
             }
         }
-        
-        
-        
+   
         if (addressDefault == null) {
             addressDefault = addressDao.getAddressDefault(user.getUserId());
             session.setAttribute("addressDefault", addressDefault);
@@ -117,11 +128,13 @@ public class OrderController extends HttpServlet {
         // Tính phí vận chuyển
         double shippingFee = calculateShippingFee(cDetails, addressDefault, productDao, out);
         if (shippingFee < 0) {
-            request.getRequestDispatcher("webPage/giohang/cart.jsp").forward(request, response);
+        	  System.out.println("Lỗi ko tính phí vận chuyển"+ shippingFee);
+        	  response.sendRedirect("cart");
             return;
         }
 
         // Lưu thông tin vào session và chuyển tiếp
+        System.out.println("thành công");
         session.setAttribute("addressDefault", addressDefault);
         session.setAttribute("cDetails", cDetails);
         session.setAttribute("cDetailsSize", cDetails.size());
@@ -129,9 +142,6 @@ public class OrderController extends HttpServlet {
         session.setAttribute("shippingFee", shippingFee);
         request.getRequestDispatcher("webPage/order/order.jsp").forward(request, response);
     }
-    
-    
-    
 
     // Hàm tách biệt để tính phí vận chuyển
     private double calculateShippingFee(List<CartProductDetail> cDetails, Address addressDefault,
@@ -139,6 +149,10 @@ public class OrderController extends HttpServlet {
         int totalWeight = 0;
         int maxLength = 0, maxWidth = 0, maxHeight = 0;
         JsonArray itemsArray = new JsonArray();
+        System.out.println(GHN_SHOP_ID);
+     	System.out.println(GHN_TOKEN);
+    	System.out.println(GHN_API_URL);
+    	
 
         for (CartProductDetail c : cDetails) {
             Product product = productDao.getDimension(c.getProductId());
@@ -170,7 +184,7 @@ public class OrderController extends HttpServlet {
         maxHeight += 5;
 
         // Tạo payload cho API GHN
-        int service_type_id = 5;
+        int service_type_id = 2;
         int from_district_id = 3695;
         String from_ward_code = "90735";
         int to_district_id = addressDefault.getDistrictID();
@@ -193,8 +207,8 @@ public class OrderController extends HttpServlet {
             HttpURLConnection conn = (HttpURLConnection) new URL(GHN_API_URL).openConnection();
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type", "application/json");
-            conn.setRequestProperty("Token", TOKEN);
-            conn.setRequestProperty("ShopId", SHOP_ID);
+            conn.setRequestProperty("Token", GHN_TOKEN);
+            conn.setRequestProperty("ShopId", GHN_SHOP_ID);
             conn.setDoOutput(true);
 
             try (OutputStream os = conn.getOutputStream()) {
@@ -220,4 +234,11 @@ public class OrderController extends HttpServlet {
             throws ServletException, IOException {
         doPost(request, response);
     }
+    @Override
+	public void init() throws ServletException {
+		// TODO Auto-generated method stub
+    	GHN_TOKEN = getServletContext().getInitParameter("GHN_TOKEN");
+    	GHN_API_URL = getServletContext().getInitParameter("GHN_API_URL");
+    	GHN_SHOP_ID= getServletContext().getInitParameter("GHN_SHOP_ID");
+	}
 }
