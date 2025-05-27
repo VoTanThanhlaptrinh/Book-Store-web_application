@@ -27,21 +27,40 @@ document.addEventListener("DOMContentLoaded", function() {
 	// Xử lý thay đổi số lượng qua input
 	quantityInputs.forEach((input) => {
 		input.addEventListener('input', function() {
+			const input = this.parentElement.querySelector('.input-quantity');
+			let quantity = parseInt(input.value) || 1;
+			const inputId = input.id;
+			const productId = inputId.split('-')[1];
 			if (this.value < 1 || isNaN(this.value)) {
-				this.value = 1; // Đảm bảo số lượng tối thiểu là 1
+				showWarning('số lượng phải lớn hơn 0')
+				this.value = 1;
 			}
-			updateTotalPrice();
+			checkStock(productId, quantity).then(result => {
+						if (!result.isValid) {
+							quantity = result.available;
+						}
+						input.value = quantity;
 
-			// Cập nhật số tiền của sản phẩm
-			const productRow = this.closest('.cart_product');
-			const price = parseFloat(
-				productRow.querySelector('.right .item:nth-child(1)').textContent
-			);
-			const totalProductPrice = price * this.value;
-			productRow.querySelector('.right .item:nth-child(3)').textContent =
-				`₫${totalProductPrice.toLocaleString()}`;
+						// Cập nhật số tiền của sản phẩm
+						const productRow = this.closest('.cart_product');
+						const price = parseFloat(
+							productRow.querySelector('.right .item:nth-child(1)').textContent
+						);
+						const totalProductPrice = price * quantity;
+						productRow.querySelector('.right .item:nth-child(3)').textContent =
+							`₫${totalProductPrice.toLocaleString()}`;
+
+						// Cập nhật tổng tiền
+						updateTotalPrice();
+
+					}).catch(error => {
+						console.error("Lỗi khi kiểm tra tồn kho", error);
+					});
 		});
 	});
+
+
+
 
 	// Xử lý checkbox "Chọn tất cả"
 	if (selectAllCheckbox) {
@@ -69,28 +88,48 @@ document.addEventListener("DOMContentLoaded", function() {
 		button.addEventListener('click', function() {
 			const input = this.parentElement.querySelector('.input-quantity');
 			let quantity = parseInt(input.value) || 1;
-
+			const inputId = input.id;
+			const productId = inputId.split('-')[1];
 			if (this.classList.contains('plus')) {
 				quantity++;
-			} else if (this.classList.contains('minus') && quantity > 1) {
+			} else if (this.classList.contains('minus')) {
 				quantity--;
+				if (quantity < 1) {
+					showWarning('số lượng phải lớn hơn 0')
+					quantity = 1;
+				}
 			}
 
-			input.value = quantity;
+			checkStock(productId, quantity).then(result => {
+				if (!result.isValid) {
+					quantity = result.available;
+				}
+				input.value = quantity;
 
-			// Cập nhật số tiền của sản phẩm
-			const productRow = this.closest('.cart_product');
-			const price = parseFloat(
-				productRow.querySelector('.right .item:nth-child(1)').textContent
-			);
-			const totalProductPrice = price * quantity;
-			productRow.querySelector('.right .item:nth-child(3)').textContent =
-				`₫${totalProductPrice.toLocaleString()}`;
+				// Cập nhật số tiền của sản phẩm
+				const productRow = this.closest('.cart_product');
+				const price = parseFloat(
+					productRow.querySelector('.right .item:nth-child(1)').textContent
+				);
+				const totalProductPrice = price * quantity;
+				productRow.querySelector('.right .item:nth-child(3)').textContent =
+					`₫${totalProductPrice.toLocaleString()}`;
 
-			// Cập nhật tổng tiền
-			updateTotalPrice();
+				// Cập nhật tổng tiền
+				updateTotalPrice();
+
+			}).catch(error => {
+				console.error("Lỗi khi kiểm tra tồn kho", error);
+			});
+
+
+
+
+
 		});
 	});
+
+
 
 	// Xử lý form submit để gửi thông tin đầy đủ
 	const orderForm = document.getElementById('orderForm');
@@ -107,7 +146,7 @@ document.addEventListener("DOMContentLoaded", function() {
 					const price = parseFloat(priceText.replace(/,/g, '').replace('₫', ''));
 
 					const data = {
-						cartId: checkbox.getAttribute('data-cart-id'),
+						cartItemId: checkbox.getAttribute('data-cart-id'),
 						productId: checkbox.getAttribute('data-product-id'),
 						quantity: quantity,
 						name: productRow.querySelector('.productname').textContent,
@@ -116,15 +155,12 @@ document.addEventListener("DOMContentLoaded", function() {
 					};
 					orderData.push(data);
 					totalOrderPrice += (price * quantity);
-					
-				
-					
 				}
 			});
 
 			if (orderData.length === 0) {
 				event.preventDefault();
-				alert('Vui lòng chọn ít nhất một sản phẩm để mua hàng!');
+				showWarning('Vui lòng chọn ít nhất một sản phẩm để mua hàng!');
 				return;
 			}
 			document.getElementById('orderData').value = JSON.stringify({ items: orderData, totalOrderPrice: totalOrderPrice });
@@ -133,3 +169,45 @@ document.addEventListener("DOMContentLoaded", function() {
 	}
 	updateTotalPrice();
 });
+
+
+// 1. Hàm kiểm tra tồn kho
+function checkStock(productId, quantity) {
+	return new Promise((resolve, reject) => {
+		// Tạo form data để gửi đi
+		const formData = new URLSearchParams();
+		formData.append('productId', productId);
+		formData.append('quantity', quantity);
+
+		fetch('/BOOK_STORE/APIcart', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded',
+				'Accept': 'application/json'
+			},
+			body: formData
+		})
+			.then(response => {
+				console.log(response.status)
+				if (!response.ok) {
+					throw new Error('Network response was not ok');
+				}
+				return response.json();
+			})
+			.then(data => {
+				if (!data.isValid) {
+					toastr.warning(`Sản phẩm chỉ còn ${data.available} sản phẩm`);
+					document.querySelector(`#quantity-${productId}`).value = data.available;
+				}
+				resolve(data);
+			})
+			.catch(error => {
+				toastr.error('Lỗi kiểm tra tồn kho');
+				reject(error);
+			});
+	});
+
+}
+
+
+

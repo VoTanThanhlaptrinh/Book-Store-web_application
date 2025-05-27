@@ -1,6 +1,7 @@
 package models;
 
 import java.sql.Date;
+import java.util.Objects;
 
 public class CartProductDetail {
 	int cartItemId;
@@ -125,6 +126,26 @@ public class CartProductDetail {
 		return "CartProductDetail [cartItemId=" + cartItemId + ", productId=" + productId + ", name=" + name
 				+ ", quantity=" + quantity + ", createDate=" + createDate + ", price=" + price + ", imgId=" + imgId
 				+ "]"; 
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(cartItemId, createDate, imgId, name, pd_Quantity, price, productId, quantity);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CartProductDetail other = (CartProductDetail) obj;
+		return cartItemId == other.cartItemId && Objects.equals(createDate, other.createDate) && imgId == other.imgId
+				&& Objects.equals(name, other.name) && pd_Quantity == other.pd_Quantity
+				&& Double.doubleToLongBits(price) == Double.doubleToLongBits(other.price)
+				&& productId == other.productId && quantity == other.quantity;
 	}
 	
 	
