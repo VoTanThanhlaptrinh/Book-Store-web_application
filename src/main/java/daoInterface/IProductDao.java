@@ -28,4 +28,6 @@ public interface IProductDao {
 	List<Product> getListOfTitleByCategory(String category, String titleKeyword, int pageNum, int quantity);
 
 	int getTotalProducts();
+	
+	void updateQuantityProduct(int idProduct, int newQuantity);
 }

@@ -200,37 +200,6 @@ public class CartItemDAOImp implements ICartItemDao {
 		return index > 0;
 	}
 
-	public int getProductQuantityByProductId(int productId) {
-        Connection conn = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        int quantity = 0;
-
-        try {
-            conn = DatabaseConnection.getConnection();
-            String sql = "SELECT p.pdQuantity " +
-                        "FROM Product_1 p JOIN Cart_item c ON p.product_id = c.product_id " +
-                        "WHERE c.product_id = ? AND c.status = 'pending'";
-            ps = conn.prepareStatement(sql);
-            ps.setInt(1, productId);
-            rs = ps.executeQuery();
-
-            if (rs.next()) {
-                quantity = rs.getInt("pdQuantity");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace(); 
-        } finally {
-            try {
-                if (rs != null) rs.close();
-                if (ps != null) ps.close();
-                if (conn != null) conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return quantity;
-    }
 
 
 
@@ -238,7 +207,10 @@ public class CartItemDAOImp implements ICartItemDao {
 		CartItemDAOImp dao = new CartItemDAOImp();
 //		Date currentDate = new Date(System.currentTimeMillis()); 
 	//	System.out.println(dao.updateQuantityProduct(55, 33)); 
-		int stock = dao.getProductQuantityByProductId(1);
-		System.out.println(stock);
+		
+		
+		
+		boolean check =dao.updateStatusCartItem(10, "checked");
+		System.out.println(check);
 	}
 }

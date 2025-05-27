@@ -3,36 +3,6 @@
   <display-name>BOOK_STORE</display-name>
   <servlet>
     <description></description>
-    <display-name>FishingController</display-name>
-    <servlet-name>FishingController</servlet-name>
-    <servlet-class>controller.category_checkout.FishingController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>FishingController</servlet-name>
-    <url-pattern>/FishingController</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>ShippingRatesController</display-name>
-    <servlet-name>ShippingRatesController</servlet-name>
-    <servlet-class>controller.category_checkout.ShippingRatesController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ShippingRatesController</servlet-name>
-    <url-pattern>/ShippingRatesController</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>SaveAddressServlet</display-name>
-    <servlet-name>SaveAddressServlet</servlet-name>
-    <servlet-class>controller.address.SaveAddressServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>SaveAddressServlet</servlet-name>
-    <url-pattern>/SaveAddressServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
     <display-name>CategoryController</display-name>
     <servlet-name>CategoryController</servlet-name>
     <servlet-class>controller.CategoryController</servlet-class>
@@ -116,6 +86,10 @@
     <param-name>FACEBOOK_APP_SECRET</param-name>
     <param-value>776df64d498b035596d3269f58f68942</param-value>
   </context-param>
+  <context-param>
+    <param-name>GHN_TOKEN</param-name>
+    <param-value>1cdb0f24-1830-11f0-bf01-723c4de9ff57</param-value>
+  </context-param>
   <servlet>
     <description></description>
     <display-name>ProductCache</display-name>
@@ -126,4 +100,12 @@
     <servlet-name>ProductCache</servlet-name>
     <url-pattern>/ProductCache</url-pattern>
   </servlet-mapping>
+<context-param>
+    <param-name>GHN_SHOP_ID</param-name>
+    <param-value>5731351</param-value>
+</context-param>
+<context-param>
+    <param-name>GHN_API_URL</param-name>
+    <param-value>https://online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/fee</param-value>
+</context-param>
 </web-app>

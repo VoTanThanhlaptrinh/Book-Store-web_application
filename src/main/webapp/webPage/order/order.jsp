@@ -1,4 +1,3 @@
-<%@page import="models.Address"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/webPage/lib/tag.jsp"%>
@@ -19,6 +18,9 @@
 	crossorigin="anonymous" referrerpolicy="no-referrer" />
 <title>Thanh toán</title>
 <link rel="stylesheet" href="webPage\order\css\order.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+		<link rel="stylesheet" href="webPage\login\css\toastr.css">
 <link
 	href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
 	rel="stylesheet" />
@@ -32,8 +34,8 @@
 
 
 
-      
-    
+
+
 
 		<!-- Phần chính: Thông tin địa chỉ và thanh toán -->
 		<section class="section-one">
@@ -41,52 +43,62 @@
 				<div class="row">
 					<!-- Phần địa chỉ giao hàng -->
 					<div class="col-8 mx-auto pr-2 address">
-					
-					
-							<!-- Khung hiển thị địa chỉ -->
-					
-					
-					<div id="addressContainer">
-					
-					
-					
-					
-					
-					
-					
-					
-			
-					
-  <c:choose>
-        <c:when test="${not empty sessionScope.addressDefault}">
-            <div class="border rounded bg-white p-4 mb-4 shadow-sm">
-                <div class="d-flex justify-content-between align-items-center mb-4">
-                    <span class="fw-semibold">Địa chỉ giao hàng</span>
-                    <a href="#" onclick="openPanel();return false;" class="text-primary fw-medium">Chỉnh sửa</a>
-                </div>
-                <div class="d-flex flex-wrap align-items-center mb-3">
-                    <span class="customer"><strong>Người nhận:</strong> <span id="addressFullName">${sessionScope.addressDefault.full_name}</span></span>
-                    <span><strong>Số điện thoại: </strong> <span id="addressPhone">${sessionScope.addressDefault.phone}</span></span>
-                </div>
-                <div class="d-flex align-items-center flex-wrap mb-3">
-                    <span class="badge rounded-pill bg-warning text-dark mr-3 px-3 py-2" id="addressType">${sessionScope.addressDefault.address_type}</span>
-                    <span id="addressDetail">${sessionScope.addressDefault.address_detail}, ${sessionScope.addressDefault.provinceName}, ${sessionScope.addressDefault.districtName}, ${sessionScope.addressDefault.wardName}</span>
-                </div>
-            </div>
-        </c:when>
-        <c:otherwise>
-            <div class="border rounded bg-white p-4 mb-4 shadow-sm text-center">
-                <p class="text-muted">Bạn chưa có địa chỉ giao hàng. Vui lòng thêm địa chỉ mới.</p>
-                <button onclick="openNewAddressForm()" class="btn btn-info text-white">Thêm địa chỉ</button>
-            </div>
-        </c:otherwise>
-    </c:choose>
-   
-				</div>	
-		
-			
-						
-					
+
+
+						<!-- Khung hiển thị địa chỉ -->
+
+
+						<div id="addressContainer">
+
+
+
+
+
+
+
+
+
+
+							<c:choose>
+								<c:when test="${not empty sessionScope.addressDefault}">
+									<div class="border rounded bg-white p-4 mb-4 shadow-sm">
+										<div
+											class="d-flex justify-content-between align-items-center mb-4">
+											<span class="fw-semibold">Địa chỉ giao hàng</span> <a
+												href="#" onclick="openPanel();return false;"
+												class="text-primary fw-medium">Chỉnh sửa</a>
+										</div>
+										<div class="d-flex flex-wrap align-items-center mb-3">
+											<span class="customer"><strong>Người nhận:</strong> <span
+												id="addressFullName">${sessionScope.addressDefault.full_name}</span></span>
+											<span><strong>Số điện thoại: </strong> <span
+												id="addressPhone">${sessionScope.addressDefault.phone}</span></span>
+										</div>
+										<div class="d-flex align-items-center flex-wrap mb-3">
+											<span
+												class="badge rounded-pill bg-warning text-dark mr-3 px-3 py-2"
+												id="addressType">${sessionScope.addressDefault.address_type}</span>
+											<span id="addressDetail">${sessionScope.addressDefault.address_detail},
+												${sessionScope.addressDefault.provinceName},
+												${sessionScope.addressDefault.districtName},
+												${sessionScope.addressDefault.wardName}</span>
+										</div>
+									</div>
+								</c:when>
+								<c:otherwise>
+									<div
+										class="border rounded bg-white p-4 mb-4 shadow-sm text-center">
+										<p class="text-muted">Bạn chưa có địa chỉ giao hàng. Vui
+											lòng thêm địa chỉ mới.</p>
+										<button onclick="openNewAddressForm()"
+											class="btn btn-info text-white">Thêm địa chỉ</button>
+									</div>
+								</c:otherwise>
+							</c:choose>
+
+						</div>
+
+
 
 						<!-- Kiện hàng theo giao diện trong ảnh -->
 						<div class="border rounded p-3 mb-4 bg-white product-detail">
@@ -186,19 +198,30 @@
 								<h5 class="fw-semibold">Thông tin đơn hàng</h5>
 								<div class="d-flex justify-content-between">
 									<span class="text-muted">Tạm tính
-										(${sessionScope.cDetailsSize} sản phẩm)</span><span id="subtotal"  data-subtotal="${sessionScope.total}"><fmt:formatNumber value="${sessionScope.total}" type="number" groupingUsed="true" />đ</span>
+										(${sessionScope.cDetailsSize} sản phẩm)</span><span id="subtotal"
+										data-subtotal="${sessionScope.total}"><fmt:formatNumber
+											value="${sessionScope.total}" type="number"
+											groupingUsed="true" />đ</span>
 								</div>
 								<div class="d-flex justify-content-between mb-2">
-									<span class="text-muted">Phí vận chuyển</span> <span id="shippingFeeDisplay"><fmt:formatNumber value="${sessionScope.shippingFee}" type="number" groupingUsed="true"/>₫</span>
+									<span class="text-muted">Phí vận chuyển</span> <span
+										id="shippingFeeDisplay"><fmt:formatNumber
+											value="${sessionScope.shippingFee}" type="number"
+											groupingUsed="true" />₫</span>
 								</div>
 								<div
 									class="d-flex justify-content-between fw-bold text-danger mt-2 mb-2"
 									style="font-size: 20px;">
-									<span>Tổng cộng:</span> <span id="totalPriceDisplay"><fmt:formatNumber value="${sessionScope.total + sessionScope.shippingFee}" type="number" groupingUsed="true" />đ</span>
+									<span>Tổng cộng:</span> <span id="totalPriceDisplay"><fmt:formatNumber
+											value="${sessionScope.total + sessionScope.shippingFee}"
+											type="number" groupingUsed="true" />đ</span>
 								</div>
 								<!-- Nút đặt hàng -->
-								<button class="btn btn-orange text-white w-100">ĐẶT
+								<button onclick="sendOrder()" class="btn btn-orange text-white w-100">ĐẶT
 									HÀNG</button>
+
+								<!-- <a href="checkout" class="btn btn-orange text-white w-100">ĐẶT
+									HÀNG</a> -->
 							</div>
 						</div>
 					</div>
@@ -247,7 +270,8 @@
 
 				<div class="text-center mt-4">
 					<button class="btn btn-secondary mr-2" onclick="closePanel()">Hủy</button>
-					<button class="btn btn-info text-white" onclick="saveSelectedAddress()">Lưu</button>
+					<button class="btn btn-info text-white"
+						onclick="saveSelectedAddress()">Lưu</button>
 				</div>
 			</div>
 
@@ -382,7 +406,7 @@
 				</div>
 			</div>
 
-	
+
 
 
 		</div>
@@ -393,6 +417,10 @@
 			integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
 			crossorigin="anonymous"></script>
 		<script src="webPage/order/js/order.js"></script>
+		<!-- Thêm toastr JS từ CDN -->
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+		<script src="webPage/login/js/toastr.js"></script>
 		<script
 			src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 </body>

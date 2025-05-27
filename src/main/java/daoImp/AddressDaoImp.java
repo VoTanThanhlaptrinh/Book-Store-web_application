@@ -15,6 +15,8 @@ import service.DatabaseConnection;
 
 public class AddressDaoImp implements IAddressDao {
 
+	
+	//lưu địa chỉ và lấy id địa chỉ được lưu
 	@Override
 	public int saveAddressAndGetID(Address address) {
 		Connection conn = null;
@@ -57,6 +59,7 @@ public class AddressDaoImp implements IAddressDao {
 		return id;
 	}
 
+	//cập nhật địa chỉ mặc định và chuyển các địa chỉ khác thành false
 	@Override
 	public void updateDefaultStatus(int userID, int addressID) {
 		Connection conn = null;
@@ -74,6 +77,7 @@ public class AddressDaoImp implements IAddressDao {
 
 	}
 
+	//lấy danh sách địa chỉ dựa vào id user
 	public List<Address> getAddressesByUserId(int userId) {
 		List<Address> addresses = new ArrayList<>();
 		String sql = "SELECT * FROM addresses WHERE user_id = ?";
@@ -93,7 +97,7 @@ public class AddressDaoImp implements IAddressDao {
 		}
 		return addresses;
 	}
-
+//lấy địa chỉ mặc định
 	public Address getAddressDefault(int userID) {
 		Address address = null;
 		String sql = "select * from addresses where is_default = 'True' and user_id =?";
@@ -115,7 +119,7 @@ public class AddressDaoImp implements IAddressDao {
 	}
 
 
-
+// lấy địa chỉ dựa vào id address và id user
 	public Address selectAddressByIdAndUser(int addressId, int userId) {
 		Address address = null;
 		String sql = "select * from addresses where id =? and user_id = ?";
