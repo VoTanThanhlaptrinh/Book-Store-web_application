@@ -86,6 +86,7 @@ body {
 }
 
 .top-right {
+	position: relative;
     margin-right: 50px;
     display: flex;
     align-items: center;
@@ -325,4 +326,53 @@ body {
 }
 .user-des-item:hover {
     cursor: pointer;
+}
+/* Style cho dropdown */
+.dropdown-user {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    width: 200px;
+    margin-top: 10px;
+    max-height: 0; /* Ban đầu ẩn dropdown */
+    overflow: hidden; /* Ẩn nội dung khi max-height = 0 */
+    transition: max-height 0.3s ease, opacity 0.3s ease; /* Hiệu ứng mượt */
+    opacity: 0; /* Ban đầu không hiển thị */
+    z-index: 999; /* Đảm bảo dropdown nằm trên cùng */
+  }
+  /* Style cho các mục trong dropdown */
+.dropdown-user a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: black;
+    transition: background-color 0.2s ease;
+  }
+  /* Hiển thị dropdown khi hover vào left-menu */
+
+.dropdown-user a:hover {
+    background-color: #f0f0f0;
+  }
+
+.dropdown-user-category {
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+    gap: 15px;
+    cursor: pointer;
+}
+.dropdown-user-category:hover {
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+    background-color: crimson;
+
+}
+.dropdown-user-category p {
+    font-size: 15px;
+    margin-top: 8px;
+    color: black;
+    font-weight:  bold;
+    line-height:  inherit;
 }

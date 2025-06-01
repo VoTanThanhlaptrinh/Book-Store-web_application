@@ -35,8 +35,8 @@ public class SearchServlet extends HttpServlet {
     }
     private String normalize(String input) {
         String temp = Normalizer.normalize(input, Normalizer.Form.NFD);
-        temp = temp.replaceAll("\\p{M}", "");
-        return temp.toLowerCase().replaceAll("\\s+", "");
+        temp = temp.replaceAll("\\p{M}", ""); //xoa dau tieng viet
+        return temp.toLowerCase().replaceAll("\\s+", ""); //loai bo khoang trang
     }
 
     private boolean isApproxMatch(String input, String dbValue, int threshold) {
@@ -50,49 +50,31 @@ public class SearchServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 
-        String rawKeyword = request.getParameter("query");
-        String normalizedKeyword = normalize(rawKeyword);
-        Set<Integer> matchedIds = new HashSet<>();
-        List<Product> matchedProducts = new ArrayList<>();
-       
-        // 1. So với cache
-        for (Product p : ProductCache.getCachedProducts()) {
-            if (isApproxMatch(normalizedKeyword, p.getUnsignedTitle(), 3)) {
-                if (matchedIds.add(p.getProductId())) {
-                    matchedProducts.add(p);
-                }
-            }
-        }
+		String rawKeyword = request.getParameter("query");
+		Set<Integer> matchedIds = new HashSet<>();
+		List<Product> matchedProducts = searchProductsByKeyword(rawKeyword, matchedIds);
 
-        // 2. So với DB
-        try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement("SELECT product_id, img_id, title, price, product_name_unsigned FROM PRODUCT_1");
-             ResultSet rs = stmt.executeQuery()) {
+		// Phan trang
+		int totalProducts = matchedProducts.size();
+		int currentPage = 1;
+		try {
+		    currentPage = Integer.parseInt(request.getParameter("page"));
+		} catch (NumberFormatException e) {}
 
-            while (rs.next()) {
-                String dbNormalized = rs.getString("product_name_unsigned");
+		int productsPerPage = 8;
+		int offset = (currentPage - 1) * productsPerPage;
+		int totalPages = (int) Math.ceil((double) totalProducts / productsPerPage);
 
-                if (isApproxMatch(normalizedKeyword, dbNormalized, 3)) {
-                    int productId = rs.getInt("product_id");
-                    if (matchedIds.add(productId)) {
-                        Product product = new Product();
-                        product.setProductId(productId);
-                        product.setImgId(Integer.parseInt(rs.getString("img_id")));
-                        product.setTitle(rs.getString("title"));
-                        product.setPrice(rs.getDouble("price"));
-                        matchedProducts.add(product);
-                    }
-                }
-            }
+		List<Product> paginatedProducts = matchedProducts.stream().skip(offset).limit(productsPerPage).toList();
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        request.setAttribute("query", rawKeyword);
-        request.setAttribute("products", matchedProducts);
-        request.setAttribute("pr-total", matchedProducts.size());
-        
-        request.getRequestDispatcher("webPage/categoryAndSingle/filter.jsp").forward(request, response);
+		request.setAttribute("currentPage", currentPage);
+		request.setAttribute("totalPages", totalPages);
+		request.setAttribute("query", rawKeyword);
+		request.setAttribute("products", paginatedProducts);
+		request.setAttribute("prtotal", totalProducts);
+
+		request.getRequestDispatcher("webPage/categoryAndSingle/search.jsp").forward(request, response);
+     
 	}
 
 	/**
@@ -102,5 +84,51 @@ public class SearchServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+	private List<Product> searchProductsByKeyword(String rawKeyword, Set<Integer> matchedIds) {
+	    String normalizedKeyword = normalize(rawKeyword);
+	    List<Product> matchedProducts = new ArrayList<>();
+
+	    // 1. Tu cache
+	    for (Product p : ProductCache.getCachedProducts()) {
+	        if (isApproxMatch(normalizedKeyword, p.getUnsignedTitle(), 3)) {
+	            if (matchedIds.add(p.getProductId())) {
+	                matchedProducts.add(p);
+	            }
+	        }
+	    }
+
+	    // 2. Tu DB
+	    try (Connection conn = DatabaseConnection.getConnection();
+	    	     PreparedStatement stmt = conn.prepareStatement(
+	    	         "SELECT product_id, img_id, title, price, product_name_unsigned FROM PRODUCT_1 " +
+	    	         "WHERE product_name_unsigned LIKE ?"
+	    	     )) {
+
+	    	    stmt.setString(1, normalizedKeyword + "%"); // gan gia tri vao parameter
+	    	    try (ResultSet rs = stmt.executeQuery()) {
+
+
+	        while (rs.next()) {
+	            String dbNormalized = rs.getString("product_name_unsigned");
+	            if (isApproxMatch(normalizedKeyword, dbNormalized, 3)) {
+	                int productId = rs.getInt("product_id");
+	                if (matchedIds.add(productId)) {
+	                    Product product = new Product();
+	                    product.setProductId(productId);
+	                    product.setImgId(Integer.parseInt(rs.getString("img_id")));
+	                    product.setTitle(rs.getString("title"));
+	                    product.setPrice(rs.getDouble("price"));
+	                    matchedProducts.add(product);
+	                }
+	            }
+	        }
+	    	    }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    return matchedProducts;
+	}
+
 
 }
