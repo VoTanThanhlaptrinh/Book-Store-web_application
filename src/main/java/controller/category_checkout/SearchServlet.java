@@ -35,8 +35,8 @@ public class SearchServlet extends HttpServlet {
     }
     private String normalize(String input) {
         String temp = Normalizer.normalize(input, Normalizer.Form.NFD);
-        temp = temp.replaceAll("\\p{M}", "");
-        return temp.toLowerCase().replaceAll("\\s+", "");
+        temp = temp.replaceAll("\\p{M}", ""); //xoa dau tieng viet
+        return temp.toLowerCase().replaceAll("\\s+", ""); //loai bo khoang trang
     }
 
     private boolean isApproxMatch(String input, String dbValue, int threshold) {
@@ -99,8 +99,14 @@ public class SearchServlet extends HttpServlet {
 
 	    // 2. Tu DB
 	    try (Connection conn = DatabaseConnection.getConnection();
-	         PreparedStatement stmt = conn.prepareStatement("SELECT product_id, img_id, title, price, product_name_unsigned FROM PRODUCT_1");
-	         ResultSet rs = stmt.executeQuery()) {
+	    	     PreparedStatement stmt = conn.prepareStatement(
+	    	         "SELECT product_id, img_id, title, price, product_name_unsigned FROM PRODUCT_1 " +
+	    	         "WHERE product_name_unsigned LIKE ?"
+	    	     )) {
+
+	    	    stmt.setString(1, normalizedKeyword + "%"); // gan gia tri vao parameter
+	    	    try (ResultSet rs = stmt.executeQuery()) {
+
 
 	        while (rs.next()) {
 	            String dbNormalized = rs.getString("product_name_unsigned");
@@ -116,6 +122,7 @@ public class SearchServlet extends HttpServlet {
 	                }
 	            }
 	        }
+	    	    }
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    }

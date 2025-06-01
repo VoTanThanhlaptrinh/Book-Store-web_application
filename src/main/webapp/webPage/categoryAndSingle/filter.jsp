@@ -537,7 +537,7 @@
 		let url = "FilterServlet?page=" + currentPage 
 					+ "&categoryParentId=" + parent
 					+ "&categoryId=" + sub
-					  +"&parentcategoryName="+ cateName 
+					  +"&parentcategoryName="+ parentName 
 				      + "&subcategoryName=" + subName
 			      + "&minPrice=" + minPrice 
 			      + "&maxPrice=" + maxPrice
@@ -548,7 +548,7 @@
 	    xhr.open("GET", "FilterServlet?page=" + currentPage 
 	    				+ "&categoryParentId=" + parent
 	    				+ "&categoryId=" + sub
-	    			  +"&parentcategoryName="+ cateName 
+	    			  +"&parentcategoryName="+ parentName 
 	   			      + "&subcategoryName=" + subName
 	                  + "&minPrice=" + minPrice 
 	                  + "&maxPrice=" + maxPrice
@@ -606,34 +606,283 @@
           }); 
 
         function loadFilterTags() {
-            const filterTagsRaw = document.getElementById("filter-tags-list")?.value;
-            if (filterTagsRaw) {
-               
-                let clean = filterTagsRaw.replace(/^\[|\]$/g, ""); 
-                let tagArray = clean.split(/\s*,\s*/); 
+        	 const filterTagsRaw = document.getElementById("filter-tags-list")?.value;
+        	    if (filterTagsRaw) {
+        	        // Clear container trước khi load
+        	        const container = document.getElementById("active-filters");
+        	        container.innerHTML = '';
+        	        
+        	        let clean = filterTagsRaw.replace(/^\[|\]$/g, ""); 
+        	        let tagArray = clean.split(/\s*,\s*/); 
 
-                const container = document.getElementById("active-filters");
-					
-                tagArray.forEach(text => {
-                    if (text && text.trim() !== "") {
-                        const tag = document.createElement("div");
-                        tag.className = "filter-tag";
-                        console.log(tag)
-                        tag.innerHTML = text + ' <span class="remove-filter" onclick="removeFilterByText(\'' + text.replace(/'/g, "\\'") + '\')">X</span>';
-                        container.appendChild(tag);
-                    }
-                });
-           }
+        	        tagArray.forEach(text => {
+        	            if (text && text.trim() !== "") {
+        	                const tag = document.createElement("div");
+        	                tag.className = "filter-tag";
+        	                tag.setAttribute('data-filter-text', text.trim());
+        	                
+        	                const span = document.createElement("span");
+        	                span.className = "remove-filter";
+        	                span.innerHTML = "X";
+        	                span.onclick = function() {
+        	                    removeFilterByText(text.trim());
+        	                };
+        	                
+        	                tag.textContent = text.trim() + " ";
+        	                tag.appendChild(span);
+        	                container.appendChild(tag);
+        	            }
+        	        });
+        	   }
         }
-
         function removeFilterByText(text) {
+            // 1. Xóa filter tag khỏi giao diện
             const tags = document.querySelectorAll('#active-filters .filter-tag');
             tags.forEach(tag => {
                 if (tag.textContent.trim().startsWith(text)) {
                     tag.remove();
                 }
             });
+            
+            // 2. Xác định loại filter và thực hiện hành động tương ứng
+            
+            // Xử lý filter năm sản xuất
+            if (text.includes('2010') || text.includes('2000') || text.includes('2020') || text.includes('after')) {
+                removeYearFilterByText(text);
+                return;
+            }
+            
+            // Xử lý filter giá (nếu có format đặc biệt cho price range)
+            if (text.includes(' to ')) {
+            	
+                removePriceFilter();
+                return;
+            }
+            
+            // Xử lý filter danh mục
+            if (isCategotyFilter(text)) {
+                removeCategoryFilter(text);
+                return;
+            }
+            
+            // Mặc định: reload lại tất cả sản phẩm
+            reloadAllProducts();
         }
+
+        // Hàm hỗ trợ xóa filter năm
+        function removeYearFilterByText(text) {
+            let value = '';
+            
+            // Xác định value tương ứng với text
+            if (text.includes('after2020')) {
+                value = 'after2020';
+            } else if (text.includes('2010') && text.includes('2020')) {
+                value = '2010to2020';
+            } else if (text.includes('2000') && text.includes('2010')) {
+                value = '2000to2010';
+            } else if (text.includes('before2000')) {
+                value = 'before2000';
+            }
+            
+            // Bỏ check checkbox tương ứng
+            const checkbox = document.querySelector('.year-checkbox[value="' + value + '"]');
+            if (checkbox) {
+                checkbox.checked = false;
+            }
+            
+            // Gọi lại hàm loadYear để cập nhật
+            loadYear();
+        }
+
+        // Hàm hỗ trợ xóa filter giá
+        function removePriceFilter() {
+            // Reset giá về mặc định
+            document.getElementById('min-price').value = 0;
+            document.getElementById('max-price').value = 1000000;
+            document.getElementById('range-slider-min').value = 0;
+            document.getElementById('range-slider-max').value = 1000000;
+            
+            // Gọi lại hàm lọc với giá mặc định - sử dụng hàm riêng
+            reloadProductsAfterPriceRemoval();
+        }
+
+        // Hàm kiểm tra xem có phải filter danh mục không
+        function isCategotyFilter(text) {
+            return !text.includes('to') && 
+                   !text.includes('2020') && !text.includes('2010') && !text.includes('2000');
+        }
+
+        // Hàm xóa filter danh mục
+        function removeCategoryFilter(text) {
+            // Reset các hidden input về trạng thái mặc định
+            const parentCategoryInput = document.getElementById('parent-category');
+            const subCategoryInput = document.getElementById('sub-category');
+            const parentCategoryNameInput = document.getElementById('parent-category-name');
+            const subCategoryNameInput = document.getElementById('sub-category-name');
+            
+            // Kiểm tra xem text này là parent category hay sub category
+            // và reset tương ứng
+            if (parentCategoryNameInput && parentCategoryNameInput.value === text) {
+                if (parentCategoryInput) parentCategoryInput.value = '';
+                if (parentCategoryNameInput) parentCategoryNameInput.value = '';
+            }
+            
+            if (subCategoryNameInput && subCategoryNameInput.value === text) {
+                if (subCategoryInput) subCategoryInput.value = '';
+                if (subCategoryNameInput) subCategoryNameInput.value = '';
+            }
+            
+            // Xóa active class khỏi các button category
+            document.querySelectorAll('#category-parent-list li').forEach((li) => {
+                li.classList.remove('active');
+            });
+            
+            // Reload sản phẩm với hàm riêng không có lỗi cateName
+            reloadProductsAfterCategoryRemoval();
+        }
+
+        // Hàm reload tất cả sản phẩm về trạng thái ban đầu
+        function reloadAllProducts() {
+            // Reset tất cả filters về mặc định
+            
+            // Reset giá
+            document.getElementById('min-price').value = 0;
+            document.getElementById('max-price').value = 1000000;
+            document.getElementById('range-slider-min').value = 0;
+            document.getElementById('range-slider-max').value = 1000000;
+            
+            // Reset năm
+            document.querySelectorAll('.year-checkbox').forEach(checkbox => {
+                checkbox.checked = false;
+            });
+            
+            // Reset danh mục
+            const parentCategoryInput = document.getElementById('parent-category');
+            const subCategoryInput = document.getElementById('sub-category');
+            const parentCategoryNameInput = document.getElementById('parent-category-name');
+            const subCategoryNameInput = document.getElementById('sub-category-name');
+            
+            if (parentCategoryInput) parentCategoryInput.value = '';
+            if (subCategoryInput) subCategoryInput.value = '';
+            if (parentCategoryNameInput) parentCategoryNameInput.value = '';
+            if (subCategoryNameInput) subCategoryNameInput.value = '';
+            
+            // Xóa active class
+            document.querySelectorAll('#category-parent-list li').forEach((li) => {
+                li.classList.remove('active');
+            });
+            
+            // Gọi FilterServlet với tất cả tham số rỗng
+            const xhr = new XMLHttpRequest();
+            const url = "FilterServlet?page=1";
+            
+            history.pushState(null, '', url);
+            xhr.open("GET", url, true);
+            xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+            
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    document.getElementById("product-list").innerHTML = xhr.responseText;
+                    // Clear tất cả filter tags
+                    document.getElementById("active-filters").innerHTML = '';
+                }
+            };
+            
+            xhr.send();
+        }
+
+        // Hàm reload sản phẩm sau khi xóa category filter
+        function reloadProductsAfterCategoryRemoval() {
+            const minPrice = document.getElementById('min-price').value || 0;
+            const maxPrice = document.getElementById('max-price').value || 1000000;
+            const parent = document.getElementById('parent-category')?.value || '';
+            const sub = document.getElementById('sub-category')?.value || '';
+            const parentName = document.getElementById('parent-category-name')?.value || '';
+            const subName = document.getElementById('sub-category-name')?.value || '';
+            
+            // Lấy năm đã chọn
+            const checkboxes = document.querySelectorAll('.year-checkbox');
+            let selectedYears = [];
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    selectedYears.push(checkbox.value);
+                }
+            });
+            const yearParams = selectedYears.map(y => "yearFilter=" + encodeURIComponent(y)).join("&");
+            
+            const xhr = new XMLHttpRequest();
+            let url = "FilterServlet?page=1"
+                + "&categoryParentId=" + parent
+                + "&categoryId=" + sub
+                + "&minPrice=" + minPrice
+                + "&maxPrice=" + maxPrice
+                + "&parentcategoryName=" + encodeURIComponent(parentName)
+                + "&subcategoryName=" + encodeURIComponent(subName);
+            
+            if (yearParams.length > 0) {
+                url += "&" + yearParams;
+            }
+            
+            history.pushState(null, '', url);
+            xhr.open("GET", url, true);
+            xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+            
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    document.getElementById("product-list").innerHTML = xhr.responseText;
+                    loadFilterTags();
+                }
+            };
+            
+            xhr.send();
+        }
+
+        // Hàm reload sản phẩm sau khi xóa price filter
+        function reloadProductsAfterPriceRemoval() {
+            const minPrice = document.getElementById('min-price').value || 0;
+            const maxPrice = document.getElementById('max-price').value || 1000000;
+            const parent = document.getElementById('parent-category')?.value || '';
+            const sub = document.getElementById('sub-category')?.value || '';
+            const parentName = document.getElementById('parent-category-name')?.value || '';
+            const subName = document.getElementById('sub-category-name')?.value || '';
+            
+            // Lấy năm đã chọn
+            const checkboxes = document.querySelectorAll('.year-checkbox');
+            let selectedYears = [];
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    selectedYears.push(checkbox.value);
+                }
+            });
+            const yearParams = selectedYears.map(y => "yearFilter=" + encodeURIComponent(y)).join("&");
+            
+            const xhr = new XMLHttpRequest();
+            let url = "FilterServlet?page=1"
+                + "&categoryParentId=" + parent
+                + "&categoryId=" + sub
+                + "&minPrice=" + minPrice
+                + "&maxPrice=" + maxPrice
+                + "&parentcategoryName=" + encodeURIComponent(parentName)
+                + "&subcategoryName=" + encodeURIComponent(subName);
+            
+            if (yearParams.length > 0) {
+                url += "&" + yearParams;
+            }
+            
+            history.pushState(null, '', url);
+            xhr.open("GET", url, true);
+            xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+            
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    document.getElementById("product-list").innerHTML = xhr.responseText;
+                    loadFilterTags();
+                }
+            };
+            
+            xhr.send();
+        }
+
         </script>
 </body>
 </html>
