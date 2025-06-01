@@ -627,8 +627,12 @@
         }
 
         function removeFilterByText(text) {
-        
-            console.log("Xoa bo filter: " + text);
+            const tags = document.querySelectorAll('#active-filters .filter-tag');
+            tags.forEach(tag => {
+                if (tag.textContent.trim().startsWith(text)) {
+                    tag.remove();
+                }
+            });
         }
         </script>
 </body>
