@@ -1,0 +1,22 @@
+@charset "UTF-8";
+/* Toàn bộ nội dung toast */
+.toast {
+    font-size: 16px !important;
+}
+
+/* Tiêu đề */
+.toast-title {
+    font-size: 18px !important;
+    font-weight: bold;
+}
+
+/* Nội dung chính */
+.toast-message {
+    font-size: 14px !important;
+    padding: 6px 0 !important;
+}
+
+/* Nút đóng */
+.toast-close-button {
+    font-size: 22px !important;
+}

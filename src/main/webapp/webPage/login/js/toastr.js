@@ -15,3 +15,15 @@ toastr.options = {
     "showMethod": "fadeIn",        // Hiệu ứng khi xuất hiện
     "hideMethod": "fadeOut"        // Hiệu ứng khi ẩn đi
 };
+
+
+function showSuccess(message) {
+    toastr.success(message);
+}
+function showError(message){
+	toastr.error(message);
+}
+
+function showWarning(message){
+	toastr.warning(message)
+}

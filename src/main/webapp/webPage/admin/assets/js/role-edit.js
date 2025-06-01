@@ -11,12 +11,15 @@ document.getElementById("form").addEventListener("submit", function(e) {
 			checkedValues.push(cb.value);
 		}
 	});
-	
+
 	const id = document.getElementById("userId").value;
-	axios.post("/BOOK_STORE/root/grant", { permissions: checkedValues, userId: id },{
+	axios.post("/BOOK_STORE/root/grant", { permissions: checkedValues, userId: id }, {
 		headers: { "Content-Type": "application/json" },
 	}).then(response => {
-		console.log(response.data.status);
-		console.log(response.data.message);
-	}).catch(error => console.error(error));
+		if (response.data.status === 'success') {
+			toastr.success(response.data.message);
+		} else {
+			toastr.warning(response.data.message);
+		}
+	}).catch(error => toastr.error(error));
 });

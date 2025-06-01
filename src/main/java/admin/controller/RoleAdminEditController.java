@@ -23,12 +23,20 @@ public class RoleAdminEditController extends HttpServlet {
 	private ILoginService loginService;
 	private User user;
 	private IResourceDao resourceDao;
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int userId = Integer.valueOf(req.getParameter("user_id"));
+		String param = req.getParameter("user_id");
+		if (param == null) {
+			resp.sendRedirect("../admin/role-list");
+			return;
+		}
+		int userId = Integer.valueOf(param);
+
 		user = loginService.getUserByUserId(userId);
 		req.setAttribute("user", user);
+		req.setAttribute("userResource", user.getResources());
 		req.setAttribute("resources", resourceDao.getListResources());
 		req.getRequestDispatcher("/webPage/admin/role-edit.jsp").forward(req, resp);
 	}

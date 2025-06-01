@@ -27,8 +27,13 @@ public class ProductEditAdminController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String param = req.getParameter("productId");
+		if (param == null) {
+			resp.sendRedirect("../admin/product-list");
+			return;
+		}
 		// lấy id của product
-		int productId = Integer.valueOf((req.getParameter("productId") == null) ? "1" : req.getParameter("productId"));
+		int productId = Integer.valueOf(param);
 		// lấy thông tin product từ db
 		Product p = categoriesService.getProductByProductId(productId);
 		// lấy danh sách các category

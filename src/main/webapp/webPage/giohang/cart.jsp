@@ -29,6 +29,9 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
 	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+	<link rel="stylesheet" href="webPage\login\css\toastr.css">
 </head>
 
 <body>
@@ -66,6 +69,8 @@
 									<li class="item quantity">
 										<button class="btn-quantity minus quantity_item">-</button> <input
 										type="text" class="input-quantity quantity_item"
+										
+										id="quantity-${item.getProductId()}"
 										value="${item.getQuantity()}" min="1">
 										<button class="btn-quantity plus quantity_item">+</button>
 									</li>
@@ -98,12 +103,12 @@
 					</ul>
 					<ul class="right">
 						<li>Tổng tiền:</li>
-						<li>
+						<li>											
 							<form id="orderForm" action="order" method="post">
 								<input type="hidden" name="orderData" id="orderData">
 								<button type="submit" class="order">Mua hàng</button>
-							</form>
-
+							</form>	
+								
 						</li>
 					</ul>
 				</div>
@@ -124,10 +129,12 @@
 		</c:if>
 		<footer class="footer"> </footer>
 	</div>
-
 	<!--script -->
+	<script src="webPage/login/vendor/jquery/jquery.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+	<script src="webPage/login/js/toastr.js"></script>
 	<script src="webPage/giohang/js/cart.js"></script>
-
 </body>
 
 </html>
