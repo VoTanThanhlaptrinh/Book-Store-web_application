@@ -5,8 +5,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import models.Log;
 import models.Product;
+import models.User;
 import service.DatabaseConnection;
+import service.ILogService;
+import service.LogServiceImpl;
+import service.LoginService;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -24,6 +30,7 @@ import org.apache.commons.text.similarity.LevenshteinDistance;
 import controller.product.ProductCache;
 @WebServlet("/search")
 public class SearchServlet extends HttpServlet {
+	ILogService logService = new LogServiceImpl();
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -43,17 +50,28 @@ public class SearchServlet extends HttpServlet {
         if (dbValue.contains(input)) {
             return true;
         }
+        //do phuc tap O(m*n) voi m va n là do dai 2 chuoi
         LevenshteinDistance distance = new LevenshteinDistance();
         return distance.apply(input, dbValue) <= threshold;
     }
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
+		HttpSession session = request.getSession();
+		
+		User user = (User) session.getAttribute("user");
+		
+		int userId = 0;
+		if (user != null) {
+			userId = user.getUserId();  
+		}
+		
+		
 
 		String rawKeyword = request.getParameter("query");
 		Set<Integer> matchedIds = new HashSet<>();
 		List<Product> matchedProducts = searchProductsByKeyword(rawKeyword, matchedIds);
-
+		logService.info(new Log(userId, "info", "User", "/search", "Thuc hien tim kiem voi keyword: " + rawKeyword));
 		// Phan trang
 		int totalProducts = matchedProducts.size();
 		int currentPage = 1;
