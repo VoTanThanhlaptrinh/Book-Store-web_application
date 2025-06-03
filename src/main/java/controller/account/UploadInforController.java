@@ -16,8 +16,10 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
 import models.Image;
 import models.Information;
+import models.Log;
 import models.User;
 import net.coobird.thumbnailator.Thumbnails;
+import service.ILogService;
 import service.LoginService;
 
 @WebServlet("/upload")
@@ -30,7 +32,7 @@ public class UploadInforController extends HttpServlet {
 	 *
 	 */
 	private static final long serialVersionUID = 1L;
-
+	private ILogService logService;
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -110,6 +112,7 @@ public class UploadInforController extends HttpServlet {
 		} else
 			infor.setImgId(37);
 		loginService.saveInfor(infor, user);
+		logService.info(new Log(user.getUserId(), "info", "User", "/upload", "Cập nhật thông tin cá nhân thành công"));
 		sendResponse(resp, "Cập nhật thành công", "success");
 	}
 
@@ -154,5 +157,10 @@ public class UploadInforController extends HttpServlet {
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		response.getWriter().write(errorResponse.build().toString());
+	}
+	@Override
+	public void init() throws ServletException {
+		// TODO Auto-generated method stub
+		super.init();
 	}
 }

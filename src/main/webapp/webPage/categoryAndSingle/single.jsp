@@ -134,7 +134,7 @@
 		</div>
 	</section> --%>
 	<!-- Chi tiết sách mới   -->
-	<section class="container-fluid product-background pt-2 ">
+	<section class="container-fluid product-background pt-5 pb-5">
 		<div class="row justify-content-center gap-5 ms-6">
 			<div class="col-12 col-lg-3">
 				<img src="getImage?img_id=${product.getImgId()}"
@@ -143,7 +143,7 @@
 			</div>
 			<div class="col-12 col-lg-4">
 				<h1 class="bold">${product.getTitle()}</h1>
-				<h4>Tác giả: Thành</h4>
+				<h4>Tác giả: ${product.getAuthor()}</h4>
 				<div class="d-flex gap-3">
 					<div class="rating-box">
 						<div class="stars">
@@ -152,9 +152,8 @@
 							<i class="fa-solid fa-star"></i>
 						</div>
 					</div>
-					<span class="rating-text">4.6(2999 đánh giá trên hệ thống)</span>
+					<span class="rating-text">0 đánh giá trên hệ thống</span>
 				</div>
-				<h5>Paperback | English</h5>
 				<div class="d-flex icon gap-3 py-4 align-items-center">
 					<img src="webPage/categoryAndSingle/img/2168281.png"
 						class="img-fluid"> <img
@@ -163,33 +162,44 @@
 						class="img-fluid"> <img
 						src="webPage/categoryAndSingle/img/download.png" class="img-fluid">
 				</div>
-				<h3 class="fst-italic">The sun day time No.1 Bestseller</h3>
-				<h6>
-					Out of the secret world i once knew, i have tried to make a theatre
-					for the lager worlds we inhabit. First comes the imaginning, then
-					the search for reality. Then go back to the imagining... <span
-						class="text-orange">Read mode</span>
-				</h6>
+				<h6>${product.getDescription()}</h6>
 				<hr>
 				<div class="row">
-					<div class="col-sm-3 col-12 mt-2 bold">
-						<h6>Language</h6>
-						<h6>Quantity</h6>
-						<h6>Size/Pages</h6>
+					<div class="col-12 col-sm-6">
+						<div class="row align-items-center mb-2">
+							<div class="col-6 bold">
+								<h6>Quantity</h6>
+							</div>
+							<div class="col-6">
+								<p class="fst-italic mb-0">${product.getQuantity()}</p>
+							</div>
+						</div>
+						<div class="row align-items-center mb-2">
+							<div class="col-6 bold">
+								<h6>Size/Pages</h6>
+							</div>
+							<div class="col-6">
+								<p class="fst-italic mb-0">${product.getPage()}</p>
+							</div>
+						</div>
 					</div>
-					<div class="col-sm-3 col-12 mt-2">
-						<span class="fst-italic">English</span> <span class="fst-italic">Papperback</span>
-						<span class="fst-italic">352p</span>
-					</div>
-					<div class="col-sm-3 col-12 mt-2 bold">
-						<h6>Publisher</h6>
-						<h6>Publish date</h6>
-						<h6>ISBN</h6>
-					</div>
-					<div class="col-sm-3 col-12 mt-2">
-						<p class="fst-italic">Ông A</p>
-						<p class="fst-italic">2017 / 05</p>
-						<p class="fst-italic">23746039524</p>
+					<div class="col-12 col-sm-6">
+						<div class="row align-items-center mb-2">
+							<div class="col-6 bold">
+								<h6>Language</h6>
+							</div>
+							<div class="col-6">
+								<p class="fst-italic mb-0">${product.getLanguage()}</p>
+							</div>
+						</div>
+						<div class="row align-items-center mb-2">
+							<div class="col-6 bold">
+								<h6>Publish Year</h6>
+							</div>
+							<div class="col-6">
+								<p class="fst-italic mb-0">${product.getPublishYear()}</p>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>

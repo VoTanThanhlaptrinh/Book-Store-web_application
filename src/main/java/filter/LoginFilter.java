@@ -13,9 +13,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import models.User;
 
-@WebFilter(filterName = "loginFilter", urlPatterns = {
-	     "/cart/*", "/checkout/*", "/order/*" // Thêm URL cần yêu cầu đăng nhập
-	})
+@WebFilter(filterName = "loginFilter", urlPatterns = { "/cart/*", "/checkout/*", "/order/*" // Thêm URL cần yêu cầu đăng
+																							// nhập
+})
 
 public class LoginFilter extends HttpFilter {
 
@@ -23,6 +23,7 @@ public class LoginFilter extends HttpFilter {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
 	@Override
 	protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain)
 			throws IOException, ServletException {
@@ -34,7 +35,10 @@ public class LoginFilter extends HttpFilter {
 		}
 		Locale locale = Locale.forLanguageTag(lang);
 		ResourceBundle bundle = ResourceBundle.getBundle("messages", locale);
-
+		if (session.getAttribute("userConfirm") != null && req.getRequestURI().contains("/confirm")) {
+			chain.doFilter(req, res);
+			return;
+		}
 		if (user == null) {
 			String loginMessage = bundle.getString("error.notLoggedIn");
 			session.setAttribute("loginMessage", loginMessage);

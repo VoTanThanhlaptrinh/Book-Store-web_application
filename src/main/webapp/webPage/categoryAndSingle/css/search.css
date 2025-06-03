@@ -1,0 +1,380 @@
+
+
+.return-to-index {
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+    gap: 5px;
+    margin-left: 140px;
+}
+.returun-to-index-a {
+    display: flex;
+    flex-direction: row;
+}
+.returun-to-index-a a{
+    text-decoration: none;
+    font-size: 13px;
+    color: rgb(56, 56, 56);
+    font-weight:  normal;
+    line-height:  inherit;
+}
+.return-to-index p {
+    font-size: 13px;
+    color: rgb(95, 95, 95);
+    font-weight:  normal;
+    line-height:  inherit;
+}
+.returun-to-index-a :hover {
+    text-decoration: underline;
+    color: chartreuse;
+}
+.container {
+    display: flex;
+    flex-direction: row;
+    height: max-content;
+}
+.item-filter {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Hiệu ứng đổ bóng */
+    margin: 20px auto 0 auto; /* top: 20px, auto trái/phải để canh giữa */
+    width: 1000px;
+    height: max-content;
+    border: 1px solid black;
+    background-color: white;
+}
+.item-filter-img {
+    padding: 20px;
+    width: 840px;
+    height: 320px;
+   
+}
+
+.item-filter-img img {
+    border: 1px solid black;
+}
+.item-filter-sort-type {
+    display: flex;
+    padding-right: 30px;
+    padding-bottom: 10px;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 20px;
+}
+.item-filter-sort-type h4 {
+    margin-top: 10px;
+    font-size: 15px;
+    color: black;
+    font-weight:  bold;
+    line-height:  inherit;
+}
+
+.item-filter-dropdown {
+    position: relative;
+    display: inline-block;
+    border: 1px solid black;
+}
+.item-filter-dropdown-button {
+    height: 40px;
+    width: 140px;
+    background-color: white;
+    cursor: pointer; /* Con trỏ chuột */
+    box-shadow: none; /* Loại bỏ bóng */
+    transition: none; /* Không hiệu ứng khi chuyển trạng thái */
+   
+}
+.item-filter-dropdown-menu {
+    display: none;
+    position: absolute;
+    width: 142px;
+    height: 80px;
+    background-color: white;
+    border: 1px solid black;
+
+}
+.item-filter-dropdown-menu li {
+    display: block;
+
+    margin-left: 15px;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #000000;
+}
+.item-filter-dropdown.open .item-filter-dropdown-menu {
+    display: block;
+
+  }
+.san-pham {
+    margin-top: 10px;
+}  
+.xu_huong_mua_sam {
+    height: max-content;
+    margin-top: 40px;
+}
+
+.display-list-grid {
+    display: grid;
+    margin-top: 30px;
+    grid-template-columns: repeat(4, 1fr); 
+    max-width: 100%;
+    row-gap: 20px; /* Khoảng cách giữa các dòng */
+
+}
+.display-list-grid a {
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    display: grid;
+    place-items: center; /* Căn giữa cả ngang và dọc */
+    width: 200px;
+    height: 270px;
+}
+.sale-books-element img {
+    width: 190px;
+    height: 190px;
+}
+.sale-books-element h4 {
+    color: red;
+}
+.sale-books-element h5 {
+    display: inline-block; /* Giúp khung chỉ bao quanh nội dung */
+    background-color: red;
+    color: white;
+    border: 2px solid red/* Độ dày và màu của khung */
+}
+.sale-books-element h6 {
+    text-decoration: line-through;
+    color: rgb(104, 104, 104);
+}
+.sale-books-element:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4); /* Hiệu ứng đổ bóng */
+}
+.gia-tien-giam {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+.text-limited {
+    width: 130px; /* Độ rộng tối đa của đoạn text */
+    font-size: 12px;
+    color: black;
+    font-weight:  normal;
+    line-height:  inherit;
+    white-space: nowrap; /* Không cho xuống dòng */
+    overflow: hidden; /* Ẩn phần nội dung tràn */
+    text-overflow: ellipsis; /* Thay phần bị ẩn bằng "..." */
+  }
+.gia-tien-giam {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+.text-limited {
+    width: 130px; /* Độ rộng tối đa của đoạn text */
+    font-size: 12px;
+    color: black;
+    font-weight:  normal;
+    line-height:  inherit;
+    white-space: nowrap; /* Không cho xuống dòng */
+    overflow: hidden; /* Ẩn phần nội dung tràn */
+    text-overflow: ellipsis; /* Thay phần bị ẩn bằng "..." */
+  }
+.pagination {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-family: Arial, sans-serif;
+    margin-top: 50px;
+}
+  
+.page-number, button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    background: none;
+    color: #333;
+}
+  
+.page-number.active {
+    background-color: #d32f2f; /* Màu đỏ */
+    color: #fff;
+}
+  
+.button-page {
+    background: none;
+    color: #f57c00; /* Màu cam */
+  }
+  
+.button-page:hover,  .page-number:hover:not(.active) {
+    background-color: #f0f0f0;
+  }
+  
+.button-page:disabled {
+    color: #ccc;
+    cursor: not-allowed;
+  }
+.search-result-log {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin: 30px;
+  }
+.price-range-container {
+    width: 328px;
+    margin-left: 50px;
+    margin-top: 30px;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.input-group input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100px;
+    text-align: center;
+}
+
+
+.slider-container {
+    position: relative;
+    margin-top: 10px;
+}
+
+.slider-track {
+	width: 70%;
+    position: relative;
+    height: 4px;
+    background: #ddd;
+    border-radius: 2px;
+}
+
+.slider-fill {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    background: #007bff;
+    z-index: 1;
+    pointer-events: none; /* Không cho phép tương tác với phần này */
+}
+
+.slider-container input[type="range"] {
+	width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 4px;
+    background: transparent;
+    outline: none;
+    pointer-events: none; /* Vô hiệu hóa tương tác trực tiếp với thanh trượt chính */
+    z-index: 2;
+}
+
+.slider-container input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background: #ff4500;
+    cursor: pointer;
+    border-radius: 50%;
+    pointer-events: auto; /* Cho phép tương tác với nút điều khiển */
+    z-index: 3;
+}
+
+.slider-container input[type="range"]#range-slider-min::-webkit-slider-thumb {
+    background: #ff4500; /* Màu cho nút min */
+}
+
+.slider-container input[type="range"]#range-slider-max::-webkit-slider-thumb {
+    background: #ff4500; /* Màu cho nút max */
+}
+.price-confirm-container {
+    margin-top: 15px;
+    text-align: center;
+}
+
+#confirm-price-btn {
+    padding: 8px 16px;
+    margin-right: 100px;
+    background-color: #ff4500;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#confirm-price-btn:hover {
+    background-color: #0056b3;
+}
+.year-filter-container {
+    margin-left: 30px;
+    margin-top: 30px;
+}
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 5px;
+  }
+  
+.custom-checkbox {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+.custom-checkbox input[type="checkbox"] {
+    display: none;
+  }
+  
+.custom-checkbox .square {
+    width: 16px;
+    height: 16px;
+    border: 2px solid #333;
+    margin-right: 8px;
+    display: inline-block;
+    position: relative;
+}
+.custom-checkbox input[type="checkbox"]:checked + .square::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    background-color: #ff4500;
+    position: absolute;
+}
+#active-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.filter-tag {
+  background: #f05c2a;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 14px;
+}
+
+.remove-filter {
+  margin-left: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}

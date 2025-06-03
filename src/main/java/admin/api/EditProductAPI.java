@@ -18,10 +18,14 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
 import models.Image;
+import models.Log;
 import models.Product;
+import models.User;
 import service.CategoriesServiceImp;
 import service.ICategoriesService;
+import service.ILogService;
 import service.ILoginService;
+import service.LogServiceImpl;
 import service.LoginService;
 
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
@@ -36,7 +40,7 @@ public class EditProductAPI extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ICategoriesService categoriesService;
 	private ILoginService loginService;
-
+	private ILogService logService;
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException, NumberFormatException {
@@ -50,6 +54,7 @@ public class EditProductAPI extends HttpServlet {
 		}
 		Locale locale = Locale.forLanguageTag(lang);
 		ResourceBundle bundle = ResourceBundle.getBundle("messages", locale);
+		User user = (User) session.getAttribute("user");
 		try {
 			String title = req.getParameter("name");
 			int category = Integer.valueOf(req.getParameter("category"));
@@ -156,14 +161,19 @@ public class EditProductAPI extends HttpServlet {
 			JsonObjectBuilder successResponse = Json.createObjectBuilder();
 			successResponse.add("status", "success");
 			successResponse.add("message", "Cập nhật thành công!");
+			logService.info(new Log(user.getUserId(), "infor", "Product", "/admin/api/edit", "Sửa sách thành công"));
 
 			resp.setContentType("application/json");
 			resp.setCharacterEncoding("UTF-8");
 			resp.getWriter().write(successResponse.build().toString());
 		} catch (NumberFormatException e) {
 			sendErrorResponse(resp, bundle.getString("wrong.information"));
+			logService.error(new Log(user.getUserId(), "error", "Product", "/admin/api/edit", bundle.getString("wrong.information")));
+
 		} catch (Exception e) { // lỗi thì gửi thông báo
 			sendErrorResponse(resp, bundle.getString("system_error"));
+			logService.error(new Log(user.getUserId(), "error", "Product", "/admin/api/edit", bundle.getString("system_error")));
+
 		}
 	}
 
@@ -184,6 +194,7 @@ public class EditProductAPI extends HttpServlet {
 		// TODO Auto-generated method stub
 		categoriesService = new CategoriesServiceImp();
 		loginService = new LoginService();
+		logService = new LogServiceImpl();
 	}
 
 	private boolean isValidString(String value) {
