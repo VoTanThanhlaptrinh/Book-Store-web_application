@@ -1,3 +1,4 @@
+
 package controller.category_checkout;
 
 import java.io.BufferedReader;
@@ -56,8 +57,7 @@ public class CheckOutController extends HttpServlet {
 		CartItemDAOImp cartItemImp = new CartItemDAOImp();
 		ProductDAOImp productDAOImp = new ProductDAOImp();
 		User user = (User) session.getAttribute("user");
-	
-		
+
 		@SuppressWarnings("unchecked")
 		List<CartProductDetail> cDetail = (List<CartProductDetail>) session.getAttribute("cDetails");
 
@@ -68,9 +68,9 @@ public class CheckOutController extends HttpServlet {
 		for (CartProductDetail cartProductDetail : cDetail) {
 			orItemDaoImp.createOrderItem(orderID, cartProductDetail.getProductId(), cartProductDetail.getQuantity(),
 					cartProductDetail.getPrice());
-			
+
 			System.out.println(cartProductDetail);
-			
+
 			cartItemImp.updateStatusCartItem(cartProductDetail.getCartItemId(), "checked");
 			productDAOImp.updateQuantityProduct(cartProductDetail.getProductId(), cartProductDetail.getQuantity());
 		}

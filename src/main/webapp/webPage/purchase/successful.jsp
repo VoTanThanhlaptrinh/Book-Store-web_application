@@ -30,35 +30,31 @@
 
 
 <body>
+<div>
+
+<%-- 		<div id="header-placeholder"><jsp:include
+				page="/webPage/trangChu/re-header.jsp"></jsp:include></div> --%>
 	<div class="shopee-container">
+
 		<i class="fas fa-check-circle success-icon mb-3"></i>
 		<h2 class="shopee-title">Đặt hàng thành công!</h2>
 		<p class="shopee-text">Cảm ơn bạn đã mua sắm! Đơn hàng của bạn đã
-			được ghi nhận. Bạn sẽ nhận được email xác nhận chi tiết đơn hàng.</p>
+			được ghi nhận.</p>
 
-<!-- 		<div class="order-info">
-			<p>
-				<strong>Mã đơn hàng:</strong> #SP123456789
-			</p>
-			<p>
-				<strong>Ngày đặt hàng:</strong> 13/05/2025
-			</p>
-			<p>
-				<strong>Phương thức thanh toán:</strong> Thanh toán khi nhận hàng
-				(COD)
-			</p>
-			<p>
-				<strong>Địa chỉ giao hàng:</strong> 123 Đường Láng, Đống Đa, Hà Nội
-			</p>
-		</div> -->
 
 		<div class="d-flex justify-content-center gap-3">
-			<a href="#" class="btn btn-shopee">Lịch sử mua hàng</a> 
+			<a href="history" class="btn btn-shopee">Lịch sử mua hàng</a> 
 			<a href="home"
 				class="btn btn-outline-shopee">Tiếp tục mua sắm</a>
 		</div>
+		
+		
 	</div>
-
+	
+	<%-- 	<div id="footer-placeholder">
+		<jsp:include page="/webPage/trangChu/footer.jsp"></jsp:include>
+	</div> --%>
+</div>
 	<!-- Bootstrap JS và Popper.js -->
 	<script
 		src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"

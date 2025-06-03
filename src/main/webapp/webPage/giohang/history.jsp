@@ -2,10 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/webPage/lib/tag.jsp"%>
 <!-- Lấy tham số lang từ URL và thiết lập Locale -->
-<fmt:setLocale value="${param.lang != null ? param.lang : (sessionScope.lang != null ? sessionScope.lang : 'vi')}"  />
+<fmt:setLocale
+	value="${param.lang != null ? param.lang : (sessionScope.lang != null ? sessionScope.lang : 'vi')}" />
 <fmt:setBundle basename="messages" />
 <c:if test="${param.lang != null}">
-    <c:set var="lang" value="${param.lang}" scope="session" />
+	<c:set var="lang" value="${param.lang}" scope="session" />
 </c:if>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,7 +23,7 @@
 <link href="webPage/categoryAndSingle/css/star.css" rel="stylesheet">
 </head>
 <body>
-	<body>
+<body>
 	<c:choose>
 		<c:when test="${not empty user}">
 			<div id="header-placeholder"><jsp:include
@@ -34,11 +35,15 @@
 		</c:otherwise>
 	</c:choose>
 	<div class="container mt-5">
-		<h2 class="text-center"><fmt:message key="orderHistory.title" /></h2>
+		<h2 class="text-center">
+			<fmt:message key="orderHistory.title" />
+		</h2>
 		<hr>
 		<c:choose>
 			<c:when test="${empty history}">
-				<div class="alert alert-info text-center"><fmt:message key="orderHistory.noHistory" /></div>
+				<div class="alert alert-info text-center">
+					<fmt:message key="orderHistory.noHistory" />
+				</div>
 			</c:when>
 			<c:otherwise>
 				<input type="hidden" id="user" value="${user.getUserId()}">
@@ -89,49 +94,62 @@
 											<div class="modal-content">
 												<div class="modal-header">
 													<h5 class="modal-title"
-														id="exampleModalLabel${item.getProductId()}"><fmt:message key="orderHistory.commentModalTitle" /></h5>
+														id="exampleModalLabel${item.getProductId()}">
+														<fmt:message key="orderHistory.commentModalTitle" />
+													</h5>
 													<button type="button" class="btn-close"
 														data-bs-dismiss="modal" aria-label="Close"></button>
 												</div>
 												<div class="modal-body">
 													<div style="display: flex;">
-														<label class="rating-label" title="text"><fmt:message key="orderHistory.rating" />:</label>
+														<label class="rating-label" title="text"><fmt:message
+																key="orderHistory.rating" />:</label>
 														<div class="rate">
 															<input type="radio" id="star5_${item.getProductId()}"
 																name="rate_${item.getProductId()}" value="5" /> <label
-																for="star5_${item.getProductId()}" title="text">5 stars</label> <input
-																type="radio" id="star4_${item.getProductId()}"
+																for="star5_${item.getProductId()}" title="text">5
+																stars</label> <input type="radio"
+																id="star4_${item.getProductId()}"
 																name="rate_${item.getProductId()}" value="4" /> <label
 																for="star4_${item.getProductId()}" title="text">4
-																stars</label> <input type="radio" id="star3_${item.getProductId()}"
+																stars</label> <input type="radio"
+																id="star3_${item.getProductId()}"
 																name="rate_${item.getProductId()}" value="3" /> <label
-																for="star3_${item.getProductId()}" title="text">3 stars</label> <input
-																type="radio" id="star2_${item.getProductId()}"
+																for="star3_${item.getProductId()}" title="text">3
+																stars</label> <input type="radio"
+																id="star2_${item.getProductId()}"
 																name="rate_${item.getProductId()}" value="2" /> <label
-																for="star2_${item.getProductId()}" title="text">2 stars</label> <input
-																type="radio" id="star1_${item.getProductId()}"
+																for="star2_${item.getProductId()}" title="text">2
+																stars</label> <input type="radio"
+																id="star1_${item.getProductId()}"
 																name="rate_${item.getProductId()}" value="1" /> <label
-																for="star1_${item.getProductId()}" title="text">1 star</label>
+																for="star1_${item.getProductId()}" title="text">1
+																star</label>
 														</div>
 													</div>
 
 													<div data-mdb-input-init
 														class="form-outline mb-4 input-group">
 														<input type="text" id="addNote${item.getProductId()}"
-															class="form-control" placeholder="<fmt:message key='orderHistory.contentPlaceholder' />"
+															class="form-control"
+															placeholder="<fmt:message key='orderHistory.contentPlaceholder' />"
 															name="content" required maxlength="255" />
 													</div>
 												</div>
 												<div class="modal-footer">
 													<button type="button" class="btn btn-primary"
-														onclick="addComment('${item.getProductId()}');"><fmt:message key="orderHistory.save" /></button>
+														onclick="addComment('${item.getProductId()}');">
+														<fmt:message key="orderHistory.save" />
+													</button>
 												</div>
 											</div>
 										</div>
 									</div>
 								</td>
 								<td><a href="chi-tiet-sach?id=${item.getProductId()} ">
-										<button type="button" class="btn btn-primary"><fmt:message key="orderHistory.reorder" /></button>
+										<button type="button" class="btn btn-primary">
+											<fmt:message key="orderHistory.reorder" />
+										</button>
 								</a></td>
 							</tr>
 						</c:forEach>
@@ -141,7 +159,8 @@
 		</c:choose>
 
 		<div class="text-center mt-4">
-			<a href="home" class="btn btn-primary"><fmt:message key="orderHistory.backToHome" /></a>
+			<a href="home" class="btn btn-primary"><fmt:message
+					key="orderHistory.backToHome" /></a>
 		</div>
 
 	</div>

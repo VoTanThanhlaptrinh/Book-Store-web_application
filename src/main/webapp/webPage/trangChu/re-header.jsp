@@ -65,7 +65,7 @@
 			</div>
             </div>
             <div class="main-menu-link">
-              <a href="#">Home</a>
+              <a href="home">Home</a>
               <a href="#">Shop</a>
               <a href="#">Blog</a>
               <a href="#">Pages</a>
@@ -74,7 +74,7 @@
             <div class="main-menu-cart">
               <a href="#"><i class="fa-solid fa-heart fa-xl" style="color: #000000;"></i></a>
               <a href="#"> </a>
-              <a href="#"><i class="fa-solid fa-cart-shopping fa-xl" style="color: #000000;"></i></a>
+              <a href="cart"><i class="fa-solid fa-cart-shopping fa-xl" style="color: #000000;"></i></a>
             </div>
             <!-- Khi mobile -->
             <div class="yellow-right">

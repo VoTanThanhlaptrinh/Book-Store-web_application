@@ -20,7 +20,7 @@
 <link rel="stylesheet" href="webPage\order\css\order.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-		<link rel="stylesheet" href="webPage\login\css\toastr.css">
+<link rel="stylesheet" href="webPage\login\css\toastr.css">
 <link
 	href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
 	rel="stylesheet" />
@@ -34,12 +34,13 @@
 
 
 
-
+		<div id="header-placeholder"><jsp:include
+				page="/webPage/trangChu/re-header.jsp"></jsp:include></div>
 
 
 		<!-- Phần chính: Thông tin địa chỉ và thanh toán -->
-		<section class="section-one">
-			<div class="container">
+		<section class="section-one ">
+			<div class="container pt-3">
 				<div class="row">
 					<!-- Phần địa chỉ giao hàng -->
 					<div class="col-8 mx-auto pr-2 address">
@@ -217,8 +218,8 @@
 											type="number" groupingUsed="true" />đ</span>
 								</div>
 								<!-- Nút đặt hàng -->
-								<button onclick="sendOrder()" class="btn btn-orange text-white w-100">ĐẶT
-									HÀNG</button>
+								<button onclick="sendOrder()"
+									class="btn btn-orange text-white w-100">ĐẶT HÀNG</button>
 
 								<!-- <a href="checkout" class="btn btn-orange text-white w-100">ĐẶT
 									HÀNG</a> -->
@@ -229,7 +230,9 @@
 			</div>
 		</section>
 
-
+		<div id="footer-placeholder">
+			<jsp:include page="/webPage/trangChu/footer.jsp"></jsp:include>
+		</div>
 
 
 
@@ -405,9 +408,6 @@
 					</div>
 				</div>
 			</div>
-
-
-
 
 		</div>
 		<!-- Script: Thư viện và logic JavaScript -->
