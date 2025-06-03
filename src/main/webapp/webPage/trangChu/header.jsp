@@ -68,11 +68,11 @@
 			</div>
             </div>
             <div class="main-menu-link">
-              <a href="#">Home</a>
-              <a href="#">Shop</a>
-              <a href="#">Blog</a>
-              <a href="#">Pages</a>
-              <a href="#">Contact</a>
+              <a onclick="window.location.href='home'">Home</a>
+              <a onclick="window.location.href='home'">Shop</a>
+              <a href="/BOOK_STORE/webPage/trangChu/aboutus.jsp">About Us</a>
+            
+              <a href="/BOOK_STORE/webPage/trangChu/contact.jsp">Contact</a>
             </div>
             <div class="main-menu-cart">
               <a href="#"><i class="fa-solid fa-heart fa-xl" style="color: #000000;"></i></a>

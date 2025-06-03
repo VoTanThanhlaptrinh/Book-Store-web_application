@@ -1,0 +1,88 @@
+/* Reset CSS */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+  line-height: 1.6;
+}
+
+.contact-container {
+  max-width: 1200px;
+  margin: 50px auto;
+  display: flex;
+  gap: 50px;
+}
+
+.contact-info {
+  width: 40%;
+}
+
+.contact-info h2 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+.info-item {
+  margin-bottom: 20px;
+}
+
+.info-item i {
+  color: #e07a5f;
+  font-size: 1.5rem;
+  margin-right: 10px;
+}
+
+.contact-form {
+  width: 60%;
+}
+
+.contact-form h2 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+.contact-form p {
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+#contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+#contact-form input,
+#contact-form textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  width: 100%;
+}
+
+#contact-form textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+#contact-form button {
+  padding: 10px 20px;
+  background-color: #e07a5f;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#contact-form button:hover {
+  background-color: #c86b53;
+}

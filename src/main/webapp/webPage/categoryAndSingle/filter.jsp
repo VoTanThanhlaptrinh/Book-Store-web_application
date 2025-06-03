@@ -165,6 +165,12 @@
 						</a>
 					</c:forEach>
 				</div>
+					<input type="hidden" id="yearFilters" value="${yearFilters}">
+				<input type="hidden" id="parent-category" value="${parentcategory}">
+				<input type="hidden" id="sub-category" value="${subcategory}">	
+				<input type="hidden" id="parent-category-name" value="${parentcategoryName}">
+				<input type="hidden" id="sub-category-name" value="${subcategoryName}">	
+				<input type="hidden" id="filter-tags-list" value="${filterTagsList}">	
 			</div>
 
 			<!-- Phân trang -->
