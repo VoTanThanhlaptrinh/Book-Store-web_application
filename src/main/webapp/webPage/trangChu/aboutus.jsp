@@ -13,9 +13,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About Us</title>
-<link rel="stylesheet" href="webPage/trangChu/CSS/aboutus.css">
-<link rel="stylesheet" href="webPage/trangChu/CSS/header.css">
-<link rel="stylesheet" href="webPage/trangChu/CSS/footer.css">
+<link rel="stylesheet" href="/BOOK_STORE/webPage/trangChu/CSS/aboutus.css">
+<link rel="stylesheet" href="/BOOK_STORE/webPage/trangChu/CSS/header.css">
+<link rel="stylesheet" href="/BOOK_STORE/webPage/trangChu/CSS/footer.css">
 </head>
 <body>
 	<c:if test="${user != null}">
@@ -27,34 +27,48 @@
 				page="/webPage/trangChu/header.jsp"></jsp:include></div>
 	</c:if>
 
-	<section class="about-section">
-		<div class="content">
-			<h2>Our Mission</h2>
-			<p>Our mission is to provide exceptional services and products to
-				customers, while fostering innovation, sustainability, and a sense
-				of community.</p>
-		</div>
-		<div class="content">
-			<h2>Our Team</h2>
-			<p>We are a diverse and passionate team, driven to achieve
-				excellence in all that we do. Collaboration and creativity are at
-				the heart of our success.</p>
-		</div>
-		<div class="content">
-			<h2>Our Values</h2>
-			<ul>
-				<li>Integrity</li>
-				<li>Customer Focus</li>
-				<li>Innovation</li>
-				<li>Teamwork</li>
-				<li>Sustainability</li>
-			</ul>
-		</div>
-	</section>
-	<div id="footer-placeholder">
-		<jsp:include page="/webPage/trangChu/footer.jsp"></jsp:include>
-	</div>
-	<script src="webPage/trangChu/js/footer.js"></script>
-	<script src="webPage/trangChu/js/header.js"></script>
+  <div class="about-us-container">
+    <!-- Phần văn bản -->
+    <div class="text-section">
+      <h1>About Us</h1>
+      <p>
+       Về Chúng Tôi
+
+        Chào mừng bạn đến với BOOKSTORE – không gian dành cho những người yêu sách!
+
+        Chúng tôi tin rằng mỗi cuốn sách đều mở ra một thế giới mới. 
+        Với mong muốn lan tỏa tri thức và nuôi dưỡng đam mê đọc sách trong cộng đồng, BOOKSTORE được thành lập như một điểm đến tin cậy cho độc giả ở mọi lứa tuổi.
+
+        Tại đây, bạn sẽ tìm thấy hàng ngàn đầu sách đa dạng từ văn học, kinh tế, 
+        kỹ năng sống cho đến sách thiếu nhi và sách học thuật. Chúng tôi luôn cập nhật những tựa sách mới nhất và chọn lọc kỹ lưỡng để đảm bảo chất lượng cho từng cuốn sách đến tay bạn.
+      </p>
+      <button  id="learn-more-btn">LEARN MORE</button>
+    </div>
+
+    <!-- Phần hình ảnh -->
+    <div class="image-section">
+      <img src="https://basmo.app/wp-content/uploads/2021/12/different-types-of-readers.webp" alt="Woman on phone", loading="lazy">
+    </div>
+
+    <!-- Phần nền màu cam -->
+    <div class="background-pink"></div>
+  </div>
+  	<div style="margin-top: 200px"></div>
+                
+   	<div id="footer-placeholder"><jsp:include page="/webPage/trangChu/footer.jsp"></jsp:include></div>
+  <script >
+
+    document.addEventListener('DOMContentLoaded', () => {
+  const textElement = document.querySelector('.text-section p');
+  const learnMoreBtn = document.getElementById('learn-more-btn');
+
+  // Khi nhấn nút "Learn More"
+  learnMoreBtn.addEventListener('click', () => {
+    alert('You clicked "Learn More"!');
+    // Bạn có thể thêm logic chuyển hướng hoặc hiển thị nội dung khác ở đây
+  });
+});
+  </script>
+
 </body>
 </html>

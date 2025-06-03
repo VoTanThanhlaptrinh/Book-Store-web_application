@@ -30,12 +30,12 @@ public class FilterController extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    processRequest(request, response);
+	  //  processRequest(request, response); //su dung khi click vao checkbox, gui lenh AJAX
 	}
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    processRequest(request, response);
+	    processRequest(request, response); //tap trung logic : khi nguoi dung click vao link
 	}
 	
 	private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
