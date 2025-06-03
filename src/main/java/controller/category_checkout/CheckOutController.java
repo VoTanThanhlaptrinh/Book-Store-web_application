@@ -64,14 +64,14 @@ public class CheckOutController extends HttpServlet {
 		double shippingFee = (double) session.getAttribute("shippingFee");
 		double total = (double) session.getAttribute("total");
 
-		int orderID = orDaoImp.createOrder(user.getUserId(), (shippingFee + total), "pending");
+		int orderID = orDaoImp.createOrder(user.getUserId(), (shippingFee + total), "checked");
 		for (CartProductDetail cartProductDetail : cDetail) {
 			orItemDaoImp.createOrderItem(orderID, cartProductDetail.getProductId(), cartProductDetail.getQuantity(),
 					cartProductDetail.getPrice());
 
 			System.out.println(cartProductDetail);
 
-			cartItemImp.updateStatusCartItem(cartProductDetail.getCartItemId(), "checked");
+			cartItemImp.updateStatusCartItem(cartProductDetail.getCartItemId(), "deleted");
 			productDAOImp.updateQuantityProduct(cartProductDetail.getProductId(), cartProductDetail.getQuantity());
 		}
 

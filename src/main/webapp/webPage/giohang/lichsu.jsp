@@ -115,6 +115,8 @@ body {
   color: white;
     background-color: #e65c00; /* Màu đậm hơn khi hover */
 }
+.sidebar ul li{
+cursor: pointer;}
 </style>
 </head>
 <body>
@@ -130,15 +132,15 @@ body {
     <div class="container mt-3">
         <div class="row">
             <div class="col-md-3 sidebar">
-                <div class="profile-info">
-                    <h4>Huy Trinh</h4>
+                <div class="profile-info">             
+                    <h4>${user.getUsername()}</h4>
                     <p>Thành viên Bạc</p>
                     <p>F-Point tích lũy: 0</p>
                     <p>Thêm 30.000 đ để nâng hạng Vàng</p>
                 </div>
                 <ul>
                     <li>Thông tin tài khoản</li>
-                    <li>🛒 Đơn hàng của tôi</li>
+                    <li><strong>🛒 Đơn hàng của tôi</strong></li>
                     <li>🎟️ Ví voucher</li>
                     <li>💰 Tài Khoản F-Point / Freeship</li>
                     <li>🔔 Thông Báo</li>
@@ -148,7 +150,8 @@ body {
             </div>
             <div class="col-md-9 content">
                 <div class="order-status">
-                    <span>Lịch sử mua hàng</span>
+                    <span style="font-size: 20px; font-weight: bold;">Lịch sử mua hàng</span>
+
                 </div>
                 
                 <c:forEach var="item" items="${history}" varStatus="status">

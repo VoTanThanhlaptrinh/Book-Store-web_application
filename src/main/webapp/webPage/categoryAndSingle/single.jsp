@@ -337,7 +337,7 @@
 		    // Tạo đối tượng dữ liệu cho một sản phẩm
 		    const orderData = {
 		        items: [{
-		            cartItemId: null, // Vì đây không phải từ giỏ hàng, cartItemId có thể để null hoặc một giá trị mặc định
+		            cartItemId: null, 
 		            productId: productId,
 		            quantity: quantity,
 		            name: name,
