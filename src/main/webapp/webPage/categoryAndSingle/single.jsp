@@ -235,7 +235,7 @@
 						<strong><fmt:message key="atk" /> </strong>
 					</button>
 				</form>
-				<%-- 		<form action="checkout" method="post"
+						<form action="check-cart" method="post"
 					onsubmit="CheckOutUpdateHiddenAmount(event)">
 					<input type="hidden" name="id" value="${product.getProductId()}">
 					<input type="hidden" id="hiddenAmount2" name="amount" value="1">
@@ -246,19 +246,9 @@
 						<strong> <fmt:message key="checkout" /></strong>
 					</button>
 				</form>
-				 --%>
+				
 
-				<form action="order" method="post"
-					onsubmit="prepareOrderData(event)">
-					<input type="hidden" name="id" value="${product.getProductId()}">
-					<input type="hidden" name="title" value="${product.getTitle()}">
-					<input type="hidden" name="price" value="${product.price}">
-					<input type="hidden" name="imgId" value="${product.getImgId()}">
-					<input type="hidden" name="orderData" id="orderData">
-					<button class="buy-btn mt-2" type="submit" id="buy-btn">
-						<strong><fmt:message key="checkout" /></strong>
-					</button>
-				</form>
+				
 
 
 			</div>

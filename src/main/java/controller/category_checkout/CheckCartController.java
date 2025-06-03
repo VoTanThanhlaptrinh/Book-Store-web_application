@@ -1,10 +1,5 @@
 package controller.category_checkout;
 
-import java.io.IOException;
-import java.sql.Date;
-import java.util.Locale;
-import java.util.ResourceBundle;
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -16,14 +11,22 @@ import models.CartItem;
 import models.User;
 import serviceImplement.HienThiDonTrongGioHangImplement;
 
-@WebServlet("/add-to-cart")
-public class CartDetailController extends HttpServlet {
+import java.io.IOException;
+import java.sql.Date;
+import java.util.Locale;
+import java.util.ResourceBundle;
+
+/**
+ * Servlet implementation class CheckCartController
+ */
+@WebServlet("/check-cart")
+public class CheckCartController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public CartDetailController() {
+	public CheckCartController() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -32,6 +35,10 @@ public class CartDetailController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doPost(request, response);
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -97,13 +104,10 @@ public class CartDetailController extends HttpServlet {
 					quantity);
 			session.setAttribute("message1", successMessage);
 
+			// response.sendRedirect("FilterServlet");
 
-		//	response.sendRedirect("FilterServlet");
-			
-
-
-			response.sendRedirect("home");
-
+			response.sendRedirect("cart");
 		}
 	}
+
 }
