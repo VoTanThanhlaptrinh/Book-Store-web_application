@@ -29,7 +29,7 @@
                 <div class="top-right-icon">👤</div>
               <div class="user-info-main">
             
-                  <div class="user-info-main-login-regis" onclick="openLogin()">Đăng nhập | </div>
+                  <div class="user-info-main-login-regis" onclick="window.location.href='login'">Đăng nhập | </div>
                   
                   <div class="user-info-main-login-regis" onclick="openLogin()"> Đăng ký</div>
               </div>
