@@ -1220,17 +1220,7 @@ keyframes resizeanim { 0%,to { opacity:0
 										<div class="col-lg-4">
 
 											<div class="mb-3">
-												<label for="product-id" class="form-label">Tag
-													Number</label> <input type="number" class="form-control"
-													placeholder="#******" value="">
-											</div>
-
-
-										</div>
-										<div class="col-lg-4">
-
-											<div class="mb-3">
-												<label for="product-stock" class="form-label">Stock</label>
+												<label for="product-stock" class="form-label">Quantity</label>
 												<input type="number" id="product-stock" class="form-control"
 													placeholder="Quantity" value="" required>
 											</div>
@@ -1238,20 +1228,20 @@ keyframes resizeanim { 0%,to { opacity:0
 
 										</div>
 										<div class="col-lg-4">
-											<!-- <label for="product-stock" class="form-label">Tag</label> <select
-											class="form-control" id="choices-multiple-remove-button"
-											data-choices data-choices-removeItem
-											name="choices-multiple-remove-button" multiple>
-											<option value="Fashion" selected>Fashion</option>
-											<option value="Electronics">Electronics</option>
-											<option value="Watches">Watches</option>
-											<option value="Headphones">Headphones</option>
-										</select> -->
+
+											<label for="product-price" class="form-label">Price</label>
+											<div class="input-group mb-3">
+												<span class="input-group-text fs-20"><i
+													class='bx bx-dollar'></i></span> <input type="number"
+													id="product-price" class="form-control" placeholder="000"
+													value="" required>
+											</div>
+
 										</div>
 									</div>
 								</div>
 							</div>
-							<div class="card">
+<!-- 							<div class="card">
 								<div class="card-header">
 									<h4 class="card-title">Pricing Details</h4>
 								</div>
@@ -1292,7 +1282,7 @@ keyframes resizeanim { 0%,to { opacity:0
 										</div>
 									</div>
 								</div>
-							</div>
+							</div> -->
 							<div class="p-3 bg-light mb-3 rounded">
 								<div class="row justify-content-end g-2">
 									<div class="col-lg-2">

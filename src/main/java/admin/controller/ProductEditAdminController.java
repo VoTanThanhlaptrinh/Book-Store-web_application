@@ -9,8 +9,10 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import models.Category;
 import models.Product;
+import models.User;
 import service.CategoriesServiceImp;
 import service.ICategoriesService;
 
@@ -27,6 +29,13 @@ public class ProductEditAdminController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		HttpSession session = req.getSession();
+		User user = (User) session.getAttribute("user");
+		if (!user.getResources().stream()
+				.anyMatch(t -> t.getUrl().contains("/api/edit") && t.getPermission() >= 1)) {
+			resp.sendRedirect("home");
+			return;
+		}
 		String param = req.getParameter("productId");
 		if (param == null) {
 			resp.sendRedirect("../admin/product-list");
@@ -64,6 +73,7 @@ public class ProductEditAdminController extends HttpServlet {
 		categoriesService = new CategoriesServiceImp();
 		filterDAO = new FilterDAO();
 	}
+
 	private Category findCategory(int id, List<Category> categories) {
 		for (Category category : categories) {
 			if (category.getId() == id)

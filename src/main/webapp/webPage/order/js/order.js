@@ -180,7 +180,7 @@ function loadAddresses() {
             });
         })
         .catch(error => {
-            alert('Không thể tải danh sách địa chỉ: ' + error.message);
+            showError('Không thể tải danh sách địa chỉ: ' + error.message);
         });
 }
 
@@ -208,26 +208,22 @@ document.getElementById("newAddressForm").addEventListener("submit",function(e){
 	})
 	.then(response => response.json())
 	.then(data => {
-		
-	    alert("Lưu địa chỉ thành công!");
+	    showSuccess("Lưu địa chỉ thành công!");
 		cancelNewAddress();
 		openPanel();
 		loadAddresses();
 	})
 	.catch(error => {             
-	    alert("Có lỗi xảy ra khi lưu địa chỉ." + error);
+	    showError("Có lỗi xảy ra khi lưu địa chỉ." + error);
 	});
 });
-
-
-
 
 
 // Hàm lưu địa chỉ được chọn
 function saveSelectedAddress() {
     const selectedAddress = document.querySelector('input[name="address"]:checked');
     if (!selectedAddress) {
-        showAlert('Vui lòng chọn một địa chỉ!');
+        showWarning('Vui lòng chọn một địa chỉ!');
         return null;
     }
 
@@ -248,7 +244,7 @@ function saveSelectedAddress() {
     })
     .then(data => {
         if (data.status === 'success') {
-            showAlert('Đã lưu địa chỉ với ID: ' + addressId);
+            showSuccess('Thay đổi địa chỉ thành công');
             if (data.selectedAddress)
 				
 				updateAddressDisplay(data.selectedAddress);
@@ -256,12 +252,12 @@ function saveSelectedAddress() {
             closePanel();
             return addressId;
         } else {
-            showAlert('Lưu địa chỉ thất bại: ' + data.message);
+            showError('Lưu địa chỉ thất bại: ' + data.message);
             return null;
         }
     })
     .catch(error => {
-        showAlert('Có lỗi xảy ra khi lưu địa chỉ : ' + error.message);
+        showError('Có lỗi xảy ra khi lưu địa chỉ : ' + error.message);
         return null;
     });
 }
@@ -297,9 +293,8 @@ function updateAddressDisplay(address) {
     addressContainer.innerHTML = addressHtml;
 }
 
-function showAlert(message) {
-    alert(message);
-}
+
+
 
 
 function updateShippingFee() {
@@ -326,11 +321,11 @@ function updateShippingFee() {
             // Cập nhật tổng tiền
             updateTotalPrice(data.shippingFee);
         } else {
-            showAlert('Không thể cập nhật phí vận chuyển: ' + data.message);
+            showWarning('Không thể cập nhật phí vận chuyển: ' + data.message);
         }
     })
     .catch(error => {
-        showAlert('Lỗi khi cập nhật phí vận chuyển: ' + error.message);
+        showError('Lỗi khi cập nhật phí vận chuyển: ' + error.message);
     });
 }
 
@@ -344,3 +339,35 @@ function updateTotalPrice(shippingFee) {
     }
 }
 
+
+function sendOrder() {
+    // Kiểm tra xem có địa chỉ giao hàng không
+    let hasAddress = document.getElementById('addressFullName');
+    
+    if (!hasAddress) {
+        toastr.error("Vui lòng chọn địa chỉ giao hàng trước khi đặt hàng!");
+        return; // Dừng hàm nếu không có địa chỉ
+    }
+
+    // Nếu có địa chỉ, tiếp tục gửi request
+    fetch('/BOOK_STORE/checkout', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            window.location.href = "/BOOK_STORE/success"; // Chuyển trang sau khi thành công
+        } else {
+            toastr.error(data.message || "Đặt hàng thất bại!");
+        }
+    })
+    .catch(error => {
+        toastr.error("Lỗi kết nối: " + error.message);
+		console.log(error.message)
+    });
+}

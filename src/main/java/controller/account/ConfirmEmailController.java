@@ -12,9 +12,12 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import models.Log;
 import models.User;
 import service.EmailSpamService;
+import service.ILogService;
 import service.ILoginService;
+import service.LogServiceImpl;
 import service.LoginService;
 
 @WebServlet("/confirm")
@@ -24,9 +27,15 @@ public class ConfirmEmailController extends HttpServlet {
 	 */
 	private static final long serialVersionUID = 1L;
 	private ILoginService loginService;
-
+	private ILogService logService;
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		HttpSession session = req.getSession();
+		String mess = (String) session.getAttribute("loginMessage");
+		if(mess != null) {
+			session.removeAttribute("loginMessage");
+			req.setAttribute("loginMessage", mess);
+		}
 		req.getRequestDispatcher("webPage/login/confirm.jsp").forward(req, resp);
 	}
 
@@ -34,7 +43,7 @@ public class ConfirmEmailController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
 
-		User user = (User) session.getAttribute("user"); // Lấy ra thông tin user đã đăng nhập
+		User user = (User) session.getAttribute("userConfirm"); // Lấy ra thông tin user đã đăng ký
 		String code = req.getParameter("conCode"); // lấy code từ input của người dùng
 
 		// lấy code được gửi từ mail đặt trong session
@@ -67,20 +76,28 @@ public class ConfirmEmailController extends HttpServlet {
 		}
 		user.setActivate(true);
 		loginService.activateUser(user);
+		// ghi log
+		logService.info(new Log(user.getUserId(), "info", "User", "/confirm", "Xác thực tài khoản thành công"));
+		// xoá mã khỏi spam
 		EmailSpamService.removeCode(confirmCode);
+		
 		session.setAttribute("user", user);
+		session.removeAttribute("userConfirm");
 		String previousURL = (String) session.getAttribute("previousURL");
 
 		if (previousURL != null) {
 			resp.sendRedirect(previousURL);
 			session.removeAttribute("previousURL");
+			return;
 		}
+		resp.sendRedirect("home");
 	}
 
 	@Override
 	public void init() throws ServletException {
 		// TODO Auto-generated method stub
 		loginService = new LoginService();
+		logService = new LogServiceImpl();
 	}
 
 	private void sendResponse(HttpServletResponse response, String message, String status) throws IOException {

@@ -45,8 +45,16 @@ public class GoogleLoginCallBack extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		String lang = (String) session.getAttribute("lang");
+		if (lang == null) {
+			lang = "vi";
+		}
+		Locale locale = Locale.forLanguageTag(lang);
+		ResourceBundle bundle = ResourceBundle.getBundle("messages", locale);
 		String code = request.getParameter("code");
 		if (code == null || code.isEmpty()) {
+			session.setAttribute("loginMessage", bundle.getObject("login.social.fail"));
 			response.sendRedirect("login");
 			return;
 		}
@@ -54,23 +62,15 @@ public class GoogleLoginCallBack extends HttpServlet {
 		try {
 			String accessToken = getAccessToken(code);
 			if (accessToken == null) {
-				response.getWriter().println("Không lấy được Access Token!");
+				session.setAttribute("loginMessage", bundle.getObject("login.social.fail"));
+				response.sendRedirect("login");
 				return;
 			}
-			HttpSession session = request.getSession();
-			String lang = (String) session.getAttribute("lang");
-			if (lang == null) {
-				lang = "vi";
-			}
-			Locale locale = Locale.forLanguageTag(lang);
-			ResourceBundle bundle = ResourceBundle.getBundle("messages", locale);
-
 			// Lấy thông tin người dùng từ Google
 			User user = getUserInfo(accessToken);
 			if (user == null) {
-				String mess = bundle.getString("email.exist");
-				request.setAttribute("mess", mess);
-				request.getRequestDispatcher("webPage/login/login.jsp").forward(request, response);
+				session.setAttribute("loginMessage", bundle.getObject("login.social.fail"));
+				response.sendRedirect("login");
 				return;
 			}
 			// Lưu vào session để đăng nhập thay người dùng
@@ -108,6 +108,7 @@ public class GoogleLoginCallBack extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new IOException("Lỗi hệ thống");
+			
 		}
 	}
 
@@ -122,14 +123,16 @@ public class GoogleLoginCallBack extends HttpServlet {
 			JsonObject jsonObject = Json.createReader(br).readObject();
 			// đọc email từ request
 			String email = jsonObject.getString("email");
+			String id = jsonObject.getString("id");
 			User user;
 			// nếu user đã tồn tại thì người dùng được phép đăng nhập
 			if (loginService.checkEmail(email)) {
 				user = loginService.getUserByMail(email);
-				return user;
+			}else {
+				// nếu chưa đăng nhập thì tạo mới và đăng ký
+				user = createUser(email);
 			}
-			String id = jsonObject.getString("id");
-			user = createUser(email);
+			// nếu chưa có thông tin user đã đăng nhập bằnh google thì tạo mới và lưu
 			if (!socialLoginDAO.checkIdSocialLogin(id)) {
 				SocialLogin socialLogin = new SocialLogin(id, user.getUserId(), "Google",
 						new Date(System.currentTimeMillis()));

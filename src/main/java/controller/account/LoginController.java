@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import org.apache.commons.lang3.RandomStringUtils;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -11,10 +13,14 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import models.Cart;
+import models.Log;
 import models.User;
+import service.ILogService;
 import service.ILoginService;
+import service.LogServiceImpl;
 import service.LoginService;
 import service.LoginSpamService;
+import service.SendMailQueueService;
 import serviceImplement.HienThiDanhSachImp;
 import serviceImplement.HienThiDonTrongGioHangImplement;
 
@@ -23,18 +29,18 @@ public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private ILoginService loginService;
-
+	private ILogService logService;
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
 		if (session.getAttribute("user") != null) {
 			resp.sendRedirect("home");
-		} else {
-			String mess = (String) session.getAttribute("loginMessage");
-			session.removeAttribute("loginMessage");
-			req.setAttribute("loginMessage", mess);
-			req.getRequestDispatcher("webPage/login/login.jsp").forward(req, resp);
+			return;
 		}
+		String mess = (String) session.getAttribute("loginMessage");
+		session.removeAttribute("loginMessage");
+		req.setAttribute("loginMessage", mess);
+		req.getRequestDispatcher("webPage/login/login.jsp").forward(req, resp);
 	}
 
 	@Override
@@ -48,39 +54,43 @@ public class LoginController extends HttpServlet {
 		}
 		Locale locale = Locale.forLanguageTag(lang);
 		ResourceBundle bundle = ResourceBundle.getBundle("messages", locale);
-		
+
 		String username = req.getParameter("username");
 		String password = req.getParameter("password");
 		String productId = req.getParameter("productId");
-		
+
 		// kiểm tra username có rỗng không
-		if(username == null || username.trim().isEmpty()) {
-			String mess = bundle.getString("email.null");
-			req.setAttribute("mess", mess);
+		if (username == null || username.trim().isEmpty()) {
+			session.setAttribute("loginMessage", bundle.getString("email.null"));
 			doGet(req, resp);
 			return;
 		}
 		// kiểm tra password có rỗng không
-		if(password == null || password.trim().isEmpty()) {
-			String mess = bundle.getString("password.null");
-			req.setAttribute("mess", mess);
+		if (password == null || password.trim().isEmpty()) {
+			session.setAttribute("loginMessage", bundle.getString("password.null"));
 			doGet(req, resp);
 			return;
 		}
 		// kiểm tra spam đăng nhập
-		if(LoginSpamService.checkSpam(username)) {
-			String mess = bundle.getString("login.spam");
-			req.setAttribute("mess", mess);
+		if (LoginSpamService.checkSpam(username)) {
+			logService.warning(new Log(0, "warning", "/admin/login", "User",
+					String.format("Có ai đó cố gắng truy cập vào tài khoản có email: %s", username)));
+			session.setAttribute("loginMessage", bundle.getString("login.spam"));
 			doGet(req, resp);
 			return;
 		}
 		User user = loginService.checkUser(username, password);
-		
+
 		// kiểm tra username và password có khớp hay không
 		if (user == null) {
-			String mess = bundle.getString("incorrect.password");
-			req.setAttribute("mess", mess);
+			session.setAttribute("loginMessage", bundle.getString("incorrect.password"));
 			doGet(req, resp);
+			return;
+		}
+		if (!user.isActivate()) {
+			session.setAttribute("loginMessage", bundle.getString("inactivated"));
+			sendCodeConfirm(session,bundle,user);
+			resp.sendRedirect("confirm"); // di chuyển sang trang confirm
 			return;
 		}
 		LoginSpamService.removeUser(username);
@@ -109,8 +119,15 @@ public class LoginController extends HttpServlet {
 
 	@Override
 	public void init() throws ServletException {
-		// TODO Auto-generated method stub
 		loginService = new LoginService();
+		logService = new LogServiceImpl();
 	}
 
+	private void sendCodeConfirm(HttpSession session, ResourceBundle bundle, User user) {
+		String code = RandomStringUtils.randomAlphanumeric(6); // tạo random mã để gửi email xác thực
+		session.setAttribute("checkEmail", user.getEmail());
+		String content = bundle.getString("verification.code") + code;
+		SendMailQueueService.getInstance().sendMail(user.getEmail(), content,
+				bundle.getString("account.registration.verification"), code);
+	}
 }

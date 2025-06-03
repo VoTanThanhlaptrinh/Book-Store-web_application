@@ -37,6 +37,7 @@ public class LoginService implements ILoginService {
 		}
 		String storedHash = user.getPassword();
 		if (BCrypt.checkpw(password, storedHash)) {
+			logService.info(new Log(user.getUserId(), "info", "User", "/login", "Đăng nhập thành công"));
 			return user;
 		}
 		logService.info(new Log(user.getUserId(), "info", "User", "/login", "Đăng nhập thất bại. Lý do: sai mật khẩu"));

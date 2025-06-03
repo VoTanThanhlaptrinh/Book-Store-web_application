@@ -17,8 +17,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import models.Log;
 import models.User;
+import service.ILogService;
 import service.ILoginService;
+import service.LogServiceImpl;
 import service.LoginService;
 
 @WebServlet("/changePass")
@@ -28,6 +31,7 @@ public class ChangePassController extends HttpServlet {
 	 */
 	private static final long serialVersionUID = 1L;
 	private ILoginService loginService;
+	private ILogService logService;
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -56,8 +60,12 @@ public class ChangePassController extends HttpServlet {
 			String rePass = jsonObject.getString("confirmPassword");
 			// Xác thực dữ liệu
 			validation(oldPass, pass, rePass, user, resp, bundle);
+			logService.info(new Log(user.getUserId(), "info", "User", "/changePass", "Thay đổi mật khẩu thành công"));
+			resp.sendRedirect("home");
 		} catch (Exception e) {
 			e.printStackTrace();
+			logService.error(new Log(user.getUserId(), "error",  "User", "/changePass", "Thay đổi mật khẩu không thành công"));
+
 		}
 	}
 
@@ -65,6 +73,7 @@ public class ChangePassController extends HttpServlet {
 	public void init() throws ServletException {
 		// TODO Auto-generated method stub
 		loginService = new LoginService();
+		logService = new LogServiceImpl();
 	}
 
 	private void sendResponse(HttpServletResponse response,String message, String status) throws IOException {

@@ -191,7 +191,7 @@ span, svg {
 
 								<li class="menu-title mt-2">Users</li>
 
-								<li class="nav-item"><a class="nav-link"
+<!-- 								<li class="nav-item"><a class="nav-link"
 									href="pages-profile"> <span class="nav-icon"> <iconify-icon
 												icon="solar:chat-square-like-bold-duotone">
 											<template shadowrootmode="open">
@@ -219,7 +219,7 @@ span, svg {
 											</template>
 											</iconify-icon>
 									</span> <span class="nav-text"> Profile </span>
-								</a></li>
+								</a></li> -->
 
 								<li class="nav-item"><a class="nav-link menu-arrow"
 									href="index#sidebarRoles" data-bs-toggle="collapse"

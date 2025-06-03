@@ -190,14 +190,12 @@ public class UserDAOImp implements IUserDao {
 	}
 
 	public int saveUser(User user) {
-
-		// TODO Auto-generated method stub
 		int userId = 0;
 		Connection con = null;
 		try {
 			con = DatabaseConnection.getConnection();
 			PreparedStatement preparedStatement = con.prepareStatement(
-					"insert into User_1 (username,password,create_date,email,update_date,is_social_login,status,is_activate) values(?,?,?,?,?,?,?,?,?) ",
+					"insert into User_1 (username,password,create_date,email,update_date,is_social_login,status,is_activate) values(?,?,?,?,?,?,?,?) ",
 					Statement.RETURN_GENERATED_KEYS);
 			con.setAutoCommit(false);
 			preparedStatement.setString(1, user.getUsername());

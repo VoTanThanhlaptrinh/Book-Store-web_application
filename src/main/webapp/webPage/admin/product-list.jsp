@@ -958,21 +958,13 @@
                                                             <th>Tên sản phẩm</th>
                                                             <th>Giá</th>
                                                             <th>Tồn kho</th>
-                                                            <th>Loại</th>
                                                             <th>Đánh giá</th>
                                                             <th>Hành động</th>
                                                        </tr>
                                                   </thead>
                                                   <tbody>
                                                   <c:forEach var="product" items="${products}">
-                                                   
                                                        <tr>
-                                                            <!-- <td>
-                                                                 <div class="form-check ms-1">
-                                                                      <input type="checkbox" class="form-check-input" id="customCheck2">
-                                                                      <label class="form-check-label" for="customCheck2">&nbsp;</label>
-                                                                 </div>
-                                                            </td> -->
                                                             <td>
                                                                  <div class="d-flex align-items-center gap-2">
                                                                       <div class="rounded bg-light avatar-md d-flex align-items-center justify-content-center">
@@ -980,7 +972,6 @@
                                                                       </div>
                                                                       <div>
                                                                            <a href="#!" class="text-dark fw-medium fs-15">${product.title}</a>
-                                                                           <!-- <p class="text-muted mb-0 mt-1 fs-13"><span>Size : </span>S , M , L , Xl </p> -->
                                                                       </div>
                                                                  </div>
 
@@ -990,8 +981,7 @@
                                                                  <p class="mb-1 text-muted"><span class="text-dark fw-medium">${product.quantity} sản phẩm</span> sẵn sàng</p>
                                                                  <p class="mb-0 text-muted">0 đã bán</p>
                                                             </td>
-                                                            <td> Fashion</td>
-                                                            <td> <span class="badge p-1 bg-light text-dark fs-12 me-1"><i class="bx bxs-star align-text-top fs-14 text-warning me-1"></i> 4.5</span> 55 Review</td>
+                                                            <td> <span class="badge p-1 bg-light text-dark fs-12 me-1"><i class="bx bxs-star align-text-top fs-14 text-warning me-1"></i></span>0 Review</td>
                                                             <td>
                                                                  <div class="d-flex gap-2">
                                                                          <%--  <a href="product-details?productId=${product.productId}"

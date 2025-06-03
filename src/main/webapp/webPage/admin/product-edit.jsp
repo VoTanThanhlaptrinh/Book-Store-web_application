@@ -1060,43 +1060,9 @@ keyframes resizeanim { 0%,to { opacity:0
 									<h5 class="text-dark fw-medium mt-3">Price :</h5>
 									<h4
 										class="fw-semibold text-dark mt-2 d-flex align-items-center gap-2">
-										<%-- <span class="text-muted text-decoration-line-through">${product.price} VND</span> --%>${product.price}
-										VND <small class="text-muted"> (30% Off)</small>
+										${product.price}
+										VND
 									</h4>
-									<!-- <div class="mt-3">
-                                                  <h5 class="text-dark fw-medium">Size :</h5>
-                                                  <div class="d-flex flex-wrap gap-2" role="group" aria-label="Basic checkbox toggle button group">
-                                                       <input type="checkbox" class="btn-check" id="size-s">
-                                                       <label class="btn btn-light avatar-sm rounded d-flex justify-content-center align-items-center" for="size-s">S</label>
-
-                                                       <input type="checkbox" class="btn-check" id="size-m" checked>
-                                                       <label class="btn btn-light avatar-sm rounded d-flex justify-content-center align-items-center" for="size-m">M</label>
-
-                                                       <input type="checkbox" class="btn-check" id="size-xl">
-                                                       <label class="btn btn-light avatar-sm rounded d-flex justify-content-center align-items-center" for="size-xl">Xl</label>
-
-                                                       <input type="checkbox" class="btn-check" id="size-xxl">
-                                                       <label class="btn btn-light avatar-sm rounded d-flex justify-content-center align-items-center" for="size-xxl">XXL</label>
-
-                                                  </div>
-                                             </div> -->
-									<!-- <div class="mt-3">
-                                                  <h5 class="text-dark fw-medium">Colors :</h5>
-                                                  <div class="d-flex flex-wrap gap-2" role="group" aria-label="Basic checkbox toggle button group">
-                                                       <input type="checkbox" class="btn-check" id="color-dark">
-                                                       <label class="btn btn-light avatar-sm rounded d-flex justify-content-center align-items-center" for="color-dark"> <i class="bx bxs-circle fs-18 text-dark"></i></label>
-
-                                                       <input type="checkbox" class="btn-check" id="color-yellow">
-                                                       <label class="btn btn-light avatar-sm rounded d-flex justify-content-center align-items-center" for="color-yellow"> <i class="bx bxs-circle fs-18 text-warning"></i></label>
-
-                                                       <input type="checkbox" class="btn-check" id="color-white">
-                                                       <label class="btn btn-light avatar-sm rounded d-flex justify-content-center align-items-center" for="color-white"> <i class="bx bxs-circle fs-18 text-white"></i></label>
-
-                                                       <input type="checkbox" class="btn-check" id="color-red">
-                                                       <label class="btn btn-light avatar-sm rounded d-flex justify-content-center align-items-center" for="color-red"> <i class="bx bxs-circle fs-18 text-danger"></i></label>
-
-                                                  </div>
-                                             </div> -->
 								</div>
 							</div>
 						</div>
@@ -1215,16 +1181,7 @@ keyframes resizeanim { 0%,to { opacity:0
 										</div>
 									</div>
 									<div class="row">
-										<div class="col-lg-4">
-
-											<div class="mb-3">
-												<label for="product-id" class="form-label">Tag
-													Number</label> <input type="number" class="form-control"
-													placeholder="#******" value="1235634">
-											</div>
-
-
-										</div>
+										
 										<div class="col-lg-4">
 
 											<div class="mb-3">
@@ -1236,20 +1193,23 @@ keyframes resizeanim { 0%,to { opacity:0
 
 										</div>
 										<div class="col-lg-4">
-											<!-- <label for="product-stock" class="form-label">Tag</label> <select
-											class="form-control" id="choices-multiple-remove-button"
-											data-choices data-choices-removeItem
-											name="choices-multiple-remove-button" multiple>
-											<option value="Fashion" selected>Fashion</option>
-											<option value="Electronics">Electronics</option>
-											<option value="Watches">Watches</option>
-											<option value="Headphones">Headphones</option>
-										</select> -->
+
+											<label for="product-price" class="form-label">Price</label>
+											<div class="input-group mb-3">
+												<span class="input-group-text fs-20"><i
+													class='bx bx-dollar'></i></span> <input type="number"
+													id="product-price" class="form-control" placeholder="000"
+													value="${product.price}" required>
+											</div>
+
+										</div>
+										<div class="col-lg-4">
+											
 										</div>
 									</div>
 								</div>
 							</div>
-							<div class="card">
+<%-- 							<div class="card">
 								<div class="card-header">
 									<h4 class="card-title">Pricing Details</h4>
 								</div>
@@ -1266,7 +1226,7 @@ keyframes resizeanim { 0%,to { opacity:0
 											</div>
 
 										</div>
-										<div class="col-lg-4">
+<!-- 										<div class="col-lg-4">
 
 											<label for="product-discount" class="form-label">Discount</label>
 											<div class="input-group mb-3">
@@ -1276,8 +1236,8 @@ keyframes resizeanim { 0%,to { opacity:0
 													placeholder="000" value="0">
 											</div>
 
-										</div>
-										<div class="col-lg-4">
+										</div> -->
+										<!-- <div class="col-lg-4">
 
 											<label for="product-tex" class="form-label">Tex</label>
 											<div class="input-group mb-3">
@@ -1287,10 +1247,10 @@ keyframes resizeanim { 0%,to { opacity:0
 													value="0">
 											</div>
 
-										</div>
+										</div> -->
 									</div>
 								</div>
-							</div>
+							</div> --%>
 							<input type="hidden" value="${product.productId}" id="product-id">
 							<div class="p-3 bg-light mb-3 rounded">
 								<div class="row justify-content-end g-2">
