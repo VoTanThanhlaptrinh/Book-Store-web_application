@@ -52,6 +52,7 @@ public class SearchServlet extends HttpServlet {
         }
         //do phuc tap O(m*n) voi m va n là do dai 2 chuoi
         LevenshteinDistance distance = new LevenshteinDistance();
+        System.out.println("khoand cach:" + distance.apply(input, dbValue));
         return distance.apply(input, dbValue) <= threshold;
     }
 	
@@ -71,7 +72,7 @@ public class SearchServlet extends HttpServlet {
 		String rawKeyword = request.getParameter("query");
 		Set<Integer> matchedIds = new HashSet<>();
 		List<Product> matchedProducts = searchProductsByKeyword(rawKeyword, matchedIds);
-		logService.info(new Log(userId, "info", "User", "/search", "Thuc hien tim kiem voi keyword: " + rawKeyword));
+		//logService.info(new Log(userId, "info", "User", "/search", "Thuc hien tim kiem voi keyword: " + rawKeyword));
 		// Phan trang
 		int totalProducts = matchedProducts.size();
 		int currentPage = 1;
@@ -108,11 +109,34 @@ public class SearchServlet extends HttpServlet {
 
 	    // 1. Tu cache
 	    for (Product p : ProductCache.getCachedProducts()) {
-	        if (isApproxMatch(normalizedKeyword, p.getUnsignedTitle(), 3)) {
-	            if (matchedIds.add(p.getProductId())) {
-	                matchedProducts.add(p);
-	            }
-	        }
+	    
+	    	
+	    	
+	    	if (normalizedKeyword.length() > 10) {
+	    		if (isApproxMatch(normalizedKeyword, p.getUnsignedTitle(), 5)) {
+		            if (matchedIds.add(p.getProductId())) {
+		                matchedProducts.add(p);
+		                continue;
+		            }
+		        }
+	    	}
+	    	if (normalizedKeyword.length() > 5) {
+	    		if (isApproxMatch(normalizedKeyword, p.getUnsignedTitle(), 3)) {
+		            if (matchedIds.add(p.getProductId())) {
+		                matchedProducts.add(p);
+		                continue;
+		            }
+		        }
+	    	}
+	    	if (normalizedKeyword.length() > 1) {
+	    		if (isApproxMatch(normalizedKeyword, p.getUnsignedTitle(), 1)) {
+		            if (matchedIds.add(p.getProductId())) {
+		                matchedProducts.add(p);
+		                continue;
+		            }
+		        }
+	    	}
+	       
 	    }
 
 	    // 2. Tu DB
@@ -147,6 +171,5 @@ public class SearchServlet extends HttpServlet {
 
 	    return matchedProducts;
 	}
-
 
 }
