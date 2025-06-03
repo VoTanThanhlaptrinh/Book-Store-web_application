@@ -22,8 +22,12 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import models.Log;
+import models.User;
 import service.GrantResourceService;
 import service.IGrantResourceService;
+import service.ILogService;
+import service.LogServiceImpl;
 
 @WebServlet("/root/grant")
 public class GrantPermissionsAPI extends HttpServlet {
@@ -33,6 +37,7 @@ public class GrantPermissionsAPI extends HttpServlet {
 	 */
 	private static final long serialVersionUID = 1L;
 	private IGrantResourceService grantResourceService;
+	private ILogService logService;
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -43,6 +48,7 @@ public class GrantPermissionsAPI extends HttpServlet {
 		}
 		Locale locale = Locale.forLanguageTag(lang);
 		ResourceBundle bundle = ResourceBundle.getBundle("messages", locale);
+		User user = (User) session.getAttribute("user");
 		Map<String, String> response = new HashMap<String, String>();
 		StringBuilder sb = new StringBuilder();
 		String line;
@@ -77,11 +83,11 @@ public class GrantPermissionsAPI extends HttpServlet {
 		        }
 			}
 		}
-		grantResourceService.grant(userId, permissionMap);
+		grantResourceService.grant(userId, permissionMap,bundle);
 		response.put("status", "success");
 		response.put("message", bundle.getString("grant.success"));
+		logService.info(new Log(user.getUserId(), "infor", "User", "/root/grant", "Cấp quyền user thành công"));
 		sendResponse(resp, response);
-
 	}
 
 	private void sendResponse(HttpServletResponse resp, Map<String, String> response) throws IOException {
@@ -96,5 +102,6 @@ public class GrantPermissionsAPI extends HttpServlet {
 	public void init() throws ServletException {
 		// TODO Auto-generated method stub
 		grantResourceService = new GrantResourceService();
+		logService = new LogServiceImpl();
 	}
 }

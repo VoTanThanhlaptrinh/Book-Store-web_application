@@ -114,6 +114,9 @@
 	        .then(response => {
 	            if (response.data.status === 'success') {
 	                toastr.success(response.data.message, "Thông báo");
+	                setTimeout(function() {
+	                    window.location.href = "home";
+	                  }, 1000);
 	            } else {
 	                toastr.warning(response.data.message, "Thông báo");
 	            }

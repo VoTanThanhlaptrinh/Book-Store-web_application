@@ -14,8 +14,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import models.Log;
 import service.EmailSpamService;
+import service.ILogService;
 import service.ILoginService;
+import service.LogServiceImpl;
 import service.LoginService;
 import service.SendMailQueueService;
 
@@ -26,7 +29,7 @@ public class GetCodeController extends HttpServlet {
 	 */
 	private static final long serialVersionUID = 1L;
 	private ILoginService loginService;
-
+	private ILogService logService;
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -58,6 +61,7 @@ public class GetCodeController extends HttpServlet {
 		}
 		if(EmailSpamService.checkSpam(email)) {
 			mess = bundle.getString("email.spam");
+			logService.warning(new Log(0, "info", "User", "/getCode", String.format("%s bị đưa vào danh sách spam tạm thời", email)));
 			sendResponse(resp, mess, "error");
 			return;
 		}
@@ -75,6 +79,7 @@ public class GetCodeController extends HttpServlet {
 	public void init() throws ServletException {
 		// TODO Auto-generated method stub
 		loginService = new LoginService();
+		logService = new LogServiceImpl();
 	}
 	private void sendResponse(HttpServletResponse response, String message, String status) throws IOException {
 		JsonObjectBuilder errorResponse = Json.createObjectBuilder();

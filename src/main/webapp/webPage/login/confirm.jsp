@@ -22,6 +22,13 @@
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
 	rel="stylesheet">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 <!-- Main css -->
 <link rel="stylesheet" href="webPage/trangChu/CSS/header.css">
 <link rel="stylesheet" href="webPage/trangChu/CSS/footer.css">
@@ -77,10 +84,12 @@
 		<jsp:include page="/webPage/trangChu/footer.jsp"></jsp:include>
 	</div>
 	<!-- JS -->
-		<script
+	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-			<script src="webPage/login/vendor/jquery/jquery.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<!-- JQuery -->
+	<script src="webPage/login/vendor/jquery/jquery.min.js"></script>
+
 	<!-- Thêm toastr JS từ CDN -->
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>

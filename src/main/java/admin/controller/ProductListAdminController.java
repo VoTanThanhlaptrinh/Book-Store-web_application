@@ -8,7 +8,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import models.Product;
+import models.User;
 import service.CategoriesServiceImp;
 import service.ICategoriesService;
 @WebServlet("/admin/product-list")
@@ -22,6 +24,13 @@ public class ProductListAdminController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		HttpSession session = req.getSession();
+		User user = (User) session.getAttribute("user");
+		if (!user.getResources().stream()
+				.anyMatch(t -> t.getUrl().contains("/api/edit") && t.getPermission() >= 1)) {
+			resp.sendRedirect("home");
+			return;
+		}
 		String pageNum = req.getParameter("pageNum");
         int page = 1;
         int pageSize = 12; // Số sản phẩm mỗi trang

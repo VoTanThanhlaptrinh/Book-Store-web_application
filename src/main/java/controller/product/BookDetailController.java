@@ -31,7 +31,6 @@ public class BookDetailController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		HienThiDanhSachImp hienThi = new HienThiDanhSachImp();
 		String id = request.getParameter("id");
 		if (id == null) {
@@ -41,13 +40,11 @@ public class BookDetailController extends HttpServlet {
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
 		Product sach = hienThi.hienThiSachTheoId(Integer.parseInt(id));
-
 		if (user == null) {
 			request.setAttribute("anouce", user);
 		}
 
-		// System.out.println("id cua nguoi dung" + user.getUsername());
-		session.setAttribute("product", sach);
+		request.setAttribute("product", sach);
 
 		List<Evaluate> evaluates = evaluateService.getEvaluatesByProductId(sach.getProductId());
 

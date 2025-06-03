@@ -70,11 +70,12 @@ public class ResetPassController extends HttpServlet {
 			mess = bundle.getString("reset.pass.success");
 			sendResponse(resp, mess, "success");
 			session.removeAttribute("acceptChangePass");
-			logService.info(new Log(user.getUserId(), "info", "User", "/reset", "Thay đổi mật khẩu thành công"));
+			logService.info(new Log(user.getUserId(), "info", "User", "/reset", "cài đặt lại mật khẩu thành công"));
 		} catch (Exception e) {
 			e.printStackTrace();
-			logService.error(new Log(user.getUserId(), "error", "User", "/reset", e.getMessage()));
+			logService.error(new Log(user.getUserId(), "error", "User", "/reset", "lỗi không cài lại mật khẩu được"));
 		}
+		
 	}
 
 	@Override

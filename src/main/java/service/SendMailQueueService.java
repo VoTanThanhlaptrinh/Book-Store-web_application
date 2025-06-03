@@ -29,6 +29,11 @@ public class SendMailQueueService {
 			mailService.sendMail(email, content, subject);
 		});
 	}
+	public void sendMailGrantPermission(String email, String content, String subject) {
+		this.executor.submit(() -> {
+			mailService.sendMail(email, content, subject);
+		});
+	}
 
 	public void shutdown() {
 		executor.shutdown();

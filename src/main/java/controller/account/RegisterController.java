@@ -17,8 +17,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import models.Log;
 import models.User;
+import service.ILogService;
 import service.ILoginService;
+import service.LogServiceImpl;
 import service.LoginService;
 import service.SendMailQueueService;
 
@@ -29,9 +32,15 @@ public class RegisterController extends HttpServlet {
 	 *
 	 */
 	private static final long serialVersionUID = 1L;
-
+	private ILogService logService;
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		HttpSession session = req.getSession();
+		String mess = (String) session.getAttribute("loginMessage");
+		if(mess != null) {
+			session.removeAttribute("loginMessage");
+			req.setAttribute("loginMessage", mess);
+		}
 		req.getRequestDispatcher("/webPage/login/register.jsp").forward(req, resp);
 	}
 
@@ -57,58 +66,58 @@ public class RegisterController extends HttpServlet {
 		// kiểm tra xem mật khẩu có rỗng không
 		if (pass == null || pass.isBlank()) {
 			mess = bundle.getString("password.null"); // thông báo cho người dùng
-			req.setAttribute("mess", mess);
+			req.setAttribute("loginMessage", mess);
 			doGet(req, resp);
 			return;
 		}
 		// kiểm tra xem xác nhận mật khẩu có rỗng không
 		if (rePassword == null || rePassword.isBlank()) {
 			mess = bundle.getString("rePassword.null"); // thông báo cho người dùng
-			req.setAttribute("mess", mess);
+			req.setAttribute("loginMessage", mess);
 			doGet(req, resp);
 			return;
 		}
 		// kiểm tra xem tên người dùng có rỗng không
 		if (username == null || username.isBlank()) {
 			mess = bundle.getString("username.null"); // thông báo cho người dùng
-			req.setAttribute("mess", mess);
+			req.setAttribute("loginMessage", mess);
 			doGet(req, resp);
 			return;
 		}
 		// kiểm tra xem email có rỗng không
 		if (email == null || email.isBlank()) {
 			mess = bundle.getString("email.null"); // thông báo cho người dùng
-			req.setAttribute("mess", mess);
+			req.setAttribute("loginMessage", mess);
 			doGet(req, resp);
 			return;
 		}
 		// kiểm tra xem mật khẩu có ít hơn 8 kĩ tự không
 		if (pass.trim().length() < 8) {
 			mess = bundle.getString("password.length.required"); // thông báo cho người dùng
-			req.setAttribute("mess", mess);
+			req.setAttribute("loginMessage", mess);
 			doGet(req, resp);
 			return;
 		}
-		// kiểm tra xem mật khẩu có ít hơn 8 kĩ tự không
+		// kiểm tra xem mật khẩu có khớp không
 		if (!rePassword.equals(pass)) {
 			mess = bundle.getString("password.confirmation.mismatch"); // thông báo cho người dùng
-			req.setAttribute("mess", mess);
+			req.setAttribute("loginMessage", mess);
 			doGet(req, resp);
 			return;
 		}
 		// kiểm tra xem email đã tồn tại trong hệ thống hay chưa
 		if (loginService.checkEmail(email)) {
 			mess = bundle.getString("email.exist");
-			req.setAttribute("mess", mess); // thông báo cho người dùng
+			req.setAttribute("loginMessage", mess); // thông báo cho người dùng
 			doGet(req, resp);
 			return;
 		}
 		User user = createUser(username, rePassword, email); // tạo đối tượng user sau khi validate dữ liệu
 
-		session.setAttribute("user", user); // bỏ user vào session để chuyển đi nơi khác
+		session.setAttribute("userConfirm", user); // bỏ user vào session để chuyển đi nơi khác
 
-		loginService.register(user); // lưu user xuống db
-
+		int userId = loginService.register(user); // lưu user xuống db
+		logService.info(new Log(userId, "infor", "User", "/register", "Đăng ký tài khoản thành công"));
 		String code = RandomStringUtils.randomAlphanumeric(6); // tạo random mã để gửi email xác thực
 		
 		// gửi mail
@@ -127,6 +136,7 @@ public class RegisterController extends HttpServlet {
 	public void init() throws ServletException {
 		// TODO Auto-generated method stub
 		loginService = new LoginService();
+		logService = new LogServiceImpl();
 	}
 
 	private void sendResponse(HttpServletResponse response, String message, String status) throws IOException {

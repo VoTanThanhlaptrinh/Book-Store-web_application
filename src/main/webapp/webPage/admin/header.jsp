@@ -335,17 +335,17 @@ span, svg {
 						aria-haspopup="true" aria-expanded="false"> <span
 						class="d-flex align-items-center"> <img
 							class="rounded-circle" width="32"
-							src="../webPage/admin/assets/images/users/avatar-1.jpg"
+							src="${accountImg}"
 							alt="avatar-3">
 					</span>
 					</a>
 					<div class="dropdown-menu dropdown-menu-end">
 						<!-- item-->
 						<h6 class="dropdown-header">Welcome Gaston!</h6>
-						<a class="dropdown-item" href="pages-profile"> <i
+						<a class="dropdown-item" href="#"> <i
 							class="bx bx-user-circle text-muted fs-18 align-middle me-1"></i><span
 							class="align-middle">Profile</span>
-						</a> <a class="dropdown-item" href="apps-chat"> <i
+						</a> <a class="dropdown-item" href="#"> <i
 							class="bx bx-message-dots text-muted fs-18 align-middle me-1"></i><span
 							class="align-middle">Messages</span>
 						</a> <a class="dropdown-item" href="pages-pricing"> <i
@@ -354,7 +354,7 @@ span, svg {
 						</a> <a class="dropdown-item" href="pages-faqs"> <i
 							class="bx bx-help-circle text-muted fs-18 align-middle me-1"></i><span
 							class="align-middle">Help</span>
-						</a> <a class="dropdown-item" href="auth-lock-screen"> <i
+						</a> <a class="dropdown-item" href="#"> <i
 							class="bx bx-lock text-muted fs-18 align-middle me-1"></i><span
 							class="align-middle">Lock screen</span>
 						</a>

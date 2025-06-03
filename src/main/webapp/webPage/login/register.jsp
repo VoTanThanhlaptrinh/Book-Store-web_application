@@ -22,6 +22,13 @@
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
 	rel="stylesheet">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 <!-- Main css -->
 <link rel="stylesheet" href="webPage/trangChu/CSS/header.css">
 <link rel="stylesheet" href="webPage/trangChu/CSS/footer.css">
@@ -40,6 +47,10 @@
 		<div class="alert alert-warning text-center alert-css" role="alert">
 			<fmt:message key="${mess}" />
 		</div>
+	</c:if>
+	<c:if test="${loginMessage != null}">
+		<input type="hidden" id="server-message"
+			value="<fmt:message key='${loginMessage}' />" data-type="error" />
 	</c:if>
 	<div class="main" style="margin: 50px;">
 		<section class="signup">
@@ -71,23 +82,23 @@
 								class="zmdi zmdi-eye-off field-icon toggle-password"></span>
 						</div>
 						<div class="form-group">
-							<input type="checkbox" name="agreeTerm" id="agree-term"
-								class="agree-term" required /> <label for="agree-term"
-								class="label-agree-term"><span><span></span></span>
-							<fmt:message key="agree_all" /><a href="#" class="term-service"><fmt:message
-										key="dieukhoan" /></a></label>
-						</div>
-						<div class="form-group">
 							<input type="submit" name="submit" id="submit"
 								class="form-submit" value="<fmt:message key="regis" /> " />
 						</div>
 						<p class="loginhere">
 							<fmt:message key="already_have_account" />
-							? <a href="login" class="loginhere-link"> <fmt:message
+							<a href="login" class="loginhere-link"> <fmt:message
 									key="login_here" /></a>
 						</p>
 					</form>
-
+					<div class="d-flex gap-3 mt-5">
+						<a class="btn-google m-b-20" href="googleLoginRedirect"> <img
+							src="webPage/login/images/icon-google.png" alt="GOOGLE">
+							Google
+						</a> <a class="btn-face m-b-20" href="facebookRedirect"> <i
+							class="fa fa-facebook-official"></i> Facebook
+						</a>
+					</div>
 				</div>
 			</div>
 		</section>
@@ -97,14 +108,17 @@
 		<jsp:include page="/webPage/trangChu/footer.jsp"></jsp:include>
 	</div>
 	<!-- JS -->
-		<script
+	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<!-- JQuery -->
+	<script src="webPage/login/vendor/jquery/jquery.min.js"></script>
+
 	<!-- Thêm toastr JS từ CDN -->
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 	<script src="webPage/login/js/toastr.js"></script>
-	<script src="webPage/login/vendor/jquery/jquery.min.js"></script>
+
 	<script src="webPage/login/js/main.js"></script>
 </body>
 <!-- This templates was made by Colorlib (https://colorlib.com) -->

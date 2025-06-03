@@ -123,7 +123,7 @@ public class ProductDAOImp implements IProductDao {
 			preparedStatement.setInt(9, product.getCategory_parent());
 			preparedStatement.setInt(10, product.getCategory_id());
 			preparedStatement.setNString(11, product.getAuthor());
-			preparedStatement.setNString(12, product.getAuthor());
+			preparedStatement.setNString(12, product.getLanguage());
 			preparedStatement.setInt(13, product.getPage());
 			preparedStatement.setInt(14, product.getPublishYear());
 			preparedStatement.executeUpdate();
