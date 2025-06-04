@@ -92,6 +92,8 @@ public class CheckCartController extends HttpServlet {
 				} else {
 					htDon.themVaoGioHang(item);
 				}
+				session.setAttribute("selectedProductId", id);
+				
 			} catch (NumberFormatException e) {
 				String failedMessage = bundle.getString("error.invalidInput");
 				request.setAttribute("failedMess", failedMessage);

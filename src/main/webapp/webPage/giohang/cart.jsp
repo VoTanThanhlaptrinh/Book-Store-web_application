@@ -55,50 +55,46 @@
 						<li>Thao tác</li>
 					</ul>
 				</div>
-				<c:forEach var="item" items="${cartProduct}">
-
-					<!-- khung hien thi san pham -->
-					<div class="cart_product">
-						<div class="cart_product_info">
-							<div class="list">
-								<ul>
-									<li><input type="checkbox" class="cart_list-checkbox"
-										data-product-id="${item.getProductId()}"
-										data-cart-id="${item.getCartItemId()}"></li>
-									<li><img src="getImage?img_id=${item.getImgId()}" alt=""
-										class="img" data-img-id="${item.getImgId()}"></li>
-									<li class="productname">${item.getName()}</li>
-								</ul>
-								<ul class="right">
-									<li class="item">${item.getPrice()}</li>
-									<li class="item quantity">
-										<button class="btn-quantity minus quantity_item">-</button> <input
-										type="text" class="input-quantity quantity_item"
-										
-										id="quantity-${item.getProductId()}"
-										value="${item.getQuantity()}" min="1">
-										<button class="btn-quantity plus quantity_item">+</button>
-									</li>
-
-									<li class="item total">${item.getQuantity() * item.getPrice()}</li>
-									<a class="del item" href="delete?id=${item.getCartItemId()}">Xóa</a>
-								</ul>
-							</div>
-						</div>
-						<div class="cart_product_ship">
-							<div class="left list">
-								<i class="fa-solid fa-truck-fast item icon "></i> <span
-									class="item">Giảm ₫500.000 phí vận chuyển đơn tối thiểu
-									₫0 </span>
-							</div>
-							<div class="right list">
-								<i class="fa-solid fa-ticket item icon " style="color: #ee4d2d;"></i>
-								<span class="item">Nhận voucher giảm giá lên đến đ100.000
-								</span>
-							</div>
-						</div>
-					</div>
-				</c:forEach>
+			<c:forEach var="item" items="${cartProduct}">
+    <!-- khung hien thi san pham -->
+    <div class="cart_product">
+        <div class="cart_product_info">
+            <div class="list">
+                <ul>
+                    <li><input type="checkbox" class="cart_list-checkbox"
+                        data-product-id="${item.getProductId()}"
+                        data-cart-id="${item.getCartItemId()}"
+                        <c:if test="${item.getProductId() == sessionScope.selectedProductId}">checked</c:if>></li>
+                    <li><img src="getImage?img_id=${item.getImgId()}" alt=""
+                        class="img" data-img-id="${item.getImgId()}"></li>
+                    <li class="productname">${item.getName()}</li>
+                </ul>
+                <ul class="right">
+                    <li class="item">${item.getPrice()}</li>
+                    <li class="item quantity">
+                        <button class="btn-quantity minus quantity_item">-</button>
+                        <input type="text" class="input-quantity quantity_item"
+                            id="quantity-${item.getProductId()}"
+                            value="${item.getQuantity()}" min="1">
+                        <button class="btn-quantity plus quantity_item">+</button>
+                    </li>
+                    <li class="item total">${item.getQuantity() * item.getPrice()}</li>
+                    <a class="del item" href="delete?id=${item.getCartItemId()}">Xóa</a>
+                </ul>
+            </div>
+        </div>
+        <div class="cart_product_ship">
+            <div class="left list">
+                <i class="fa-solid fa-truck-fast item icon"></i>
+                <span class="item">Giảm ₫500.000 phí vận chuyển đơn tối thiểu ₫0</span>
+            </div>
+            <div class="right list">
+                <i class="fa-solid fa-ticket item icon" style="color: #ee4d2d;"></i>
+                <span class="item">Nhận voucher giảm giá lên đến đ100.000</span>
+            </div>
+        </div>
+    </div>
+</c:forEach>
 
 				<!-- dat hang -->
 				<div class="cart_table cart_order">
@@ -132,6 +128,7 @@
 				</div>
 			</div>
 		</c:if>
+		<% session.removeAttribute("selectedProductId"); %>
 		<div id="footer-placeholder">
 		<jsp:include page="/webPage/trangChu/footer.jsp"></jsp:include>
 	</div>
