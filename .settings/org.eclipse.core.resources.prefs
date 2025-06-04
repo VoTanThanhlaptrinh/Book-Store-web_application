@@ -2,5 +2,6 @@ eclipse.preferences.version=1
 encoding//src/main/webapp/WEB-INF/classes/messages_en.properties=UTF-8
 encoding//src/main/webapp/WEB-INF/classes/messages_vi.properties=UTF-8
 encoding//src/main/webapp/webPage/categoryAndSingle/categories.jsp=UTF-8
+encoding//src/main/webapp/webPage/giohang/lichsu.jsp=UTF-8
 encoding//src/main/webapp/webPage/trangChu/header.jsp=UTF-8
 encoding/<project>=UTF-8

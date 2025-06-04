@@ -43,6 +43,10 @@
 <link href="https://fonts.cdnfonts.com/css/cofo-sans" rel="stylesheet">
 <link rel="stylesheet" href="webPage/trangChu/CSS/header.css">
 <link rel="stylesheet" href="webPage/trangChu/CSS/footer.css">
+
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+<link rel="stylesheet" href="webPage/login/css/toastr.css">
 <title>Chi tiết sách</title>
 </head>
 
@@ -241,7 +245,7 @@
 						<strong><fmt:message key="atk" /> </strong>
 					</button>
 				</form>
-				<form action="checkout" method="post"
+						<form action="check-cart" method="post"
 					onsubmit="CheckOutUpdateHiddenAmount(event)">
 					<input type="hidden" name="id" value="${product.getProductId()}">
 					<input type="hidden" id="hiddenAmount2" name="amount" value="1">
@@ -252,6 +256,11 @@
 						<strong> <fmt:message key="checkout" /></strong>
 					</button>
 				</form>
+				
+
+				
+
+
 			</div>
 		</div>
 	</section>
@@ -312,7 +321,57 @@
 			// Cập nhật giá trị cho thẻ hidden
 			document.getElementById('hiddenAmount2').value = amount;
 		}
+		
+		
+		
+		function prepareOrderData(event) {
+		    event.preventDefault();
+
+		    // Lấy giá trị từ các input
+		    const productId = document.querySelector('input[name="id"]').value;
+		    const quantity =  1;
+		    const name = document.querySelector('input[name="title"]').value;
+		    const price = parseFloat(document.querySelector('input[name="price"]').value);
+		    const imgId = document.querySelector('input[name="imgId"]').value;
+
+		    // Tạo đối tượng dữ liệu cho một sản phẩm
+		    const orderData = {
+		        items: [{
+		            cartItemId: null, 
+		            productId: productId,
+		            quantity: quantity,
+		            name: name,
+		            price: price,
+		            imgId: imgId
+		        }],
+		        totalOrderPrice: price * quantity
+		    };
+
+		    // Gán JSON vào input ẩn
+		    document.getElementById('orderData').value = JSON.stringify(orderData);
+
+		    // Kiểm tra số lượng tồn kho trước khi gửi
+		    checkStock(productId, quantity).then(result => {
+		        if (!result.isValid) {
+		            toastr.warning(`Sản phẩm chỉ còn ${result.available} sản phẩm`);
+		            document.getElementById('amount').value = result.available;
+		            orderData.items[0].quantity = result.available;
+		            orderData.totalOrderPrice = price * result.available;
+		            document.getElementById('orderData').value = JSON.stringify(orderData);
+		        }
+		        // Gửi form
+		        event.target.submit();
+		    }).catch(error => {
+		        toastr.error('Lỗi kiểm tra tồn kho');
+
+		    });
+		}
+
 	</script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+	<script src="webPage/login/js/toastr.js"></script>
+	<script src="webPage/giohang/js/cart.js"></script>
 </body>
 
 </html>

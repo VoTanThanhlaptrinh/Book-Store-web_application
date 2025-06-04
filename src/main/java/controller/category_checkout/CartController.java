@@ -34,7 +34,7 @@ public class CartController extends HttpServlet {
 		List<CartProductDetail> ls = htDon.hienThiGioHang(cart.getCartId(), "pending");
 		
 		session.setAttribute("cartProduct", ls);
-		request.setAttribute("sumCart", ls.size());
+		session.setAttribute("sumCart", ls.size());
 		
 
 		request.getRequestDispatcher("webPage/giohang/cart.jsp").forward(request, response);

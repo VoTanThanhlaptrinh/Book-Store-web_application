@@ -35,6 +35,11 @@
 </head>
 
 <body>
+
+	<div id="header-placeholder"><jsp:include
+				page="/webPage/trangChu/re-header.jsp"></jsp:include></div>
+	
+
 	<div class="app">
 		<div class="container">
 			<c:if test="${not empty cartProduct}">
@@ -127,7 +132,9 @@
 				</div>
 			</div>
 		</c:if>
-		<footer class="footer"> </footer>
+		<div id="footer-placeholder">
+		<jsp:include page="/webPage/trangChu/footer.jsp"></jsp:include>
+	</div>
 	</div>
 	<!--script -->
 	<script src="webPage/login/vendor/jquery/jquery.min.js"></script>

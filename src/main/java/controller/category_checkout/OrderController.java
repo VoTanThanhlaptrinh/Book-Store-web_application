@@ -69,8 +69,8 @@ public class OrderController extends HttpServlet {
 
         String orderDataJson = request.getParameter("orderData");
         if (orderDataJson == null || orderDataJson.isEmpty()) {
-            request.getRequestDispatcher("webPage/giohang/cart.jsp").forward(request, response);
-            return;
+        	  response.sendRedirect("cart");
+              return;
         }
 
         // Phân tích dữ liệu đơn hàng

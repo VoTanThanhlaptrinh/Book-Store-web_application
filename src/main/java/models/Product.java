@@ -306,6 +306,6 @@ public class Product {
 		this.unsignedTitle = unsignedTitle;
 	}
 
-	
+
 	
 }
