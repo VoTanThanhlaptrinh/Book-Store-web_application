@@ -26,10 +26,12 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import models.Cart;
 import models.SocialLogin;
 import models.User;
 import service.ILoginService;
 import service.LoginService;
+import serviceImplement.HienThiDonTrongGioHangImplement;
 
 @WebServlet("/callback")
 public class GoogleLoginCallBack extends HttpServlet {
@@ -73,6 +75,12 @@ public class GoogleLoginCallBack extends HttpServlet {
 				response.sendRedirect("login");
 				return;
 			}
+			HienThiDonTrongGioHangImplement htGioHang = new HienThiDonTrongGioHangImplement(user);
+			htGioHang.taoGioHang(user.getUserId());
+			Cart cart = htGioHang.layGioHang(user.getUserId());
+			session.setAttribute("loginService", loginService);
+			session.setAttribute("cart", cart);
+			session.setAttribute("user", user);
 			// Lưu vào session để đăng nhập thay người dùng
 			session.setAttribute("user", user);
 
