@@ -18,12 +18,16 @@ import java.util.regex.Pattern;
 
 import models.Image;
 import models.Product;
+import service.CategoriesServiceImp;
+import service.ICategoriesService;
+import service.ILoginService;
+import service.LoginService;
 
 public class ReadBookInfo {
 
 	public static void readBookFile(String filename) throws IOException {
 		List<Product> products = new ArrayList<>();
-		File folder = new File("C:\\Users\\VO TAN THANH\\Downloads\\img");
+		File folder = new File("C:\\Users\\VO TAN THANH\\Downloads\\book-img");
 		File[] imgs = folder.listFiles();
 		Arrays.sort(imgs, Comparator.comparingInt(f -> {
 			String fileName = f.getName();
@@ -68,7 +72,7 @@ public class ReadBookInfo {
 				try {
 					image = new Image(cleanTitle + ".png", "png", "ảnh product", new Date(System.currentTimeMillis()),
 							new Date(System.currentTimeMillis()), getData(imgs[index]));
-					
+
 					System.out.println(cleanTitle);
 					imageId = loginService.saveImage(image);
 				} catch (IOException e) {
@@ -89,8 +93,8 @@ public class ReadBookInfo {
 					product.setPublishYear(Integer.valueOf(yearStr.trim()));
 					product.setQuantity(1000);
 					product.setPrice(Integer.valueOf(priceStr.trim()));
-					product.setCategory_id(15);
-					product.setCategory_parent(2);
+					product.setCategory_id(25);
+					product.setCategory_parent(5);
 					product.setUpdateDate(new Date(System.currentTimeMillis()));
 					product.setImgId(imageId);
 					System.out.println(title);
@@ -109,8 +113,8 @@ public class ReadBookInfo {
 					product.setPublishYear(Integer.valueOf(yearStr.trim()));
 					product.setQuantity(1000);
 					product.setPrice(Integer.valueOf(priceStr.trim()));
-					product.setCategory_id(16);
-					product.setCategory_parent(2);
+					product.setCategory_id(26);
+					product.setCategory_parent(5);
 					product.setUpdateDate(new Date(System.currentTimeMillis()));
 					product.setImgId(imageId);
 					System.out.println(title);
@@ -128,8 +132,8 @@ public class ReadBookInfo {
 					product.setPublishYear(Integer.valueOf(yearStr.trim()));
 					product.setQuantity(1000);
 					product.setPrice(Integer.valueOf(priceStr.trim()));
-					product.setCategory_id(14);
-					product.setCategory_parent(2);
+					product.setCategory_id(27);
+					product.setCategory_parent(5);
 					product.setUpdateDate(new Date(System.currentTimeMillis()));
 					product.setImgId(imageId);
 					System.out.println(title);
@@ -147,16 +151,255 @@ public class ReadBookInfo {
 					product.setPublishYear(Integer.valueOf(yearStr.trim()));
 					product.setQuantity(1000);
 					product.setPrice(Integer.valueOf(priceStr.trim()));
-					product.setCategory_id(13);
-					product.setCategory_parent(2);
+					product.setCategory_id(28);
+					product.setCategory_parent(5);
 					product.setUpdateDate(new Date(System.currentTimeMillis()));
 					product.setImgId(imageId);
 					System.out.println(title);
 
 					categoriesService.saveProduct(product);
-					
+
+				}
+				if (index >= 40 && index <= 49) {
+					Product product = new Product();
+					product.setCreateDate(new Date(System.currentTimeMillis()));
+					product.setAddedByUser(8);
+					product.setTitle(title != null ? title.trim() : "");
+					product.setAuthor(author != null ? author.trim() : "");
+					product.setLanguage("Tiếng việt");
+					product.setDescription(descriptionBuilder.toString());
+					product.setPage(Integer.valueOf(pageStr.trim()));
+					product.setPublishYear(Integer.valueOf(yearStr.trim()));
+					product.setQuantity(1000);
+					product.setPrice(Integer.valueOf(priceStr.trim()));
+					product.setCategory_id(29);
+					product.setCategory_parent(6);
+					product.setUpdateDate(new Date(System.currentTimeMillis()));
+					product.setImgId(imageId);
+					System.out.println(title);
+					categoriesService.saveProduct(product);
+				}
+
+				if (index >= 50 && index <= 59) {
+					Product product = new Product();
+					product.setCreateDate(new Date(System.currentTimeMillis()));
+					product.setAddedByUser(8);
+					product.setTitle(title != null ? title.trim() : "");
+					product.setAuthor(author != null ? author.trim() : "");
+					product.setLanguage("Tiếng việt");
+					product.setDescription(descriptionBuilder.toString());
+					product.setPage(Integer.valueOf(pageStr.trim()));
+					product.setPublishYear(Integer.valueOf(yearStr.trim()));
+					product.setQuantity(1000);
+					product.setPrice(Integer.valueOf(priceStr.trim()));
+					product.setCategory_id(30);
+					product.setCategory_parent(6);
+					product.setUpdateDate(new Date(System.currentTimeMillis()));
+					product.setImgId(imageId);
+					System.out.println(title);
+					categoriesService.saveProduct(product);
+				}
+				if (index >= 60 && index <= 69) {
+					Product product = new Product();
+					product.setCreateDate(new Date(System.currentTimeMillis()));
+					product.setAddedByUser(8);
+					product.setTitle(title != null ? title.trim() : "");
+					product.setAuthor(author != null ? author.trim() : "");
+					product.setLanguage("Tiếng việt");
+					product.setDescription(descriptionBuilder.toString());
+					product.setPage(Integer.valueOf(pageStr.trim()));
+					product.setPublishYear(Integer.valueOf(yearStr.trim()));
+					product.setQuantity(1000);
+					product.setPrice(Integer.valueOf(priceStr.trim()));
+					product.setCategory_id(31);
+					product.setCategory_parent(6);
+					product.setUpdateDate(new Date(System.currentTimeMillis()));
+					product.setImgId(imageId);
+					System.out.println(title);
+					categoriesService.saveProduct(product);
+				}
+				if (index >= 70 && index <= 79) {
+					Product product = new Product();
+					product.setCreateDate(new Date(System.currentTimeMillis()));
+					product.setAddedByUser(8);
+					product.setTitle(title != null ? title.trim() : "");
+					product.setAuthor(author != null ? author.trim() : "");
+					product.setLanguage("Tiếng việt");
+					product.setDescription(descriptionBuilder.toString());
+					product.setPage(Integer.valueOf(pageStr.trim()));
+					product.setPublishYear(Integer.valueOf(yearStr.trim()));
+					product.setQuantity(1000);
+					product.setPrice(Integer.valueOf(priceStr.trim()));
+					product.setCategory_id(32);
+					product.setCategory_parent(6);
+					product.setUpdateDate(new Date(System.currentTimeMillis()));
+					product.setImgId(imageId);
+					System.out.println(title);
+
+					categoriesService.saveProduct(product);
+
+				}
+				if (index >= 80 && index <= 89) {
+					Product product = new Product();
+					product.setCreateDate(new Date(System.currentTimeMillis()));
+					product.setAddedByUser(8);
+					product.setTitle(title != null ? title.trim() : "");
+					product.setAuthor(author != null ? author.trim() : "");
+					product.setLanguage("Tiếng việt");
+					product.setDescription(descriptionBuilder.toString());
+					product.setPage(Integer.valueOf(pageStr.trim()));
+					product.setPublishYear(Integer.valueOf(yearStr.trim()));
+					product.setQuantity(1000);
+					product.setPrice(Integer.valueOf(priceStr.trim()));
+					product.setCategory_id(33);
+					product.setCategory_parent(7);
+					product.setUpdateDate(new Date(System.currentTimeMillis()));
+					product.setImgId(imageId);
+					System.out.println(title);
+					categoriesService.saveProduct(product);
+				}
+
+				if (index >= 90 && index <= 99) {
+					Product product = new Product();
+					product.setCreateDate(new Date(System.currentTimeMillis()));
+					product.setAddedByUser(8);
+					product.setTitle(title != null ? title.trim() : "");
+					product.setAuthor(author != null ? author.trim() : "");
+					product.setLanguage("Tiếng việt");
+					product.setDescription(descriptionBuilder.toString());
+					product.setPage(Integer.valueOf(pageStr.trim()));
+					product.setPublishYear(Integer.valueOf(yearStr.trim()));
+					product.setQuantity(1000);
+					product.setPrice(Integer.valueOf(priceStr.trim()));
+					product.setCategory_id(34);
+					product.setCategory_parent(7);
+					product.setUpdateDate(new Date(System.currentTimeMillis()));
+					product.setImgId(imageId);
+					System.out.println(title);
+					categoriesService.saveProduct(product);
+				}
+				if (index >= 100 && index <= 109) {
+					Product product = new Product();
+					product.setCreateDate(new Date(System.currentTimeMillis()));
+					product.setAddedByUser(8);
+					product.setTitle(title != null ? title.trim() : "");
+					product.setAuthor(author != null ? author.trim() : "");
+					product.setLanguage("Tiếng việt");
+					product.setDescription(descriptionBuilder.toString());
+					product.setPage(Integer.valueOf(pageStr.trim()));
+					product.setPublishYear(Integer.valueOf(yearStr.trim()));
+					product.setQuantity(1000);
+					product.setPrice(Integer.valueOf(priceStr.trim()));
+					product.setCategory_id(35);
+					product.setCategory_parent(7);
+					product.setUpdateDate(new Date(System.currentTimeMillis()));
+					product.setImgId(imageId);
+					System.out.println(title);
+					categoriesService.saveProduct(product);
+				}
+				if (index >= 110 && index <= 119) {
+					Product product = new Product();
+					product.setCreateDate(new Date(System.currentTimeMillis()));
+					product.setAddedByUser(8);
+					product.setTitle(title != null ? title.trim() : "");
+					product.setAuthor(author != null ? author.trim() : "");
+					product.setLanguage("Tiếng việt");
+					product.setDescription(descriptionBuilder.toString());
+					product.setPage(Integer.valueOf(pageStr.trim()));
+					product.setPublishYear(Integer.valueOf(yearStr.trim()));
+					product.setQuantity(1000);
+					product.setPrice(Integer.valueOf(priceStr.trim()));
+					product.setCategory_id(36);
+					product.setCategory_parent(7);
+					product.setUpdateDate(new Date(System.currentTimeMillis()));
+					product.setImgId(imageId);
+					System.out.println(title);
+
+					categoriesService.saveProduct(product);
+
+				}
+				if (index >= 120 && index <= 129) {
+					Product product = new Product();
+					product.setCreateDate(new Date(System.currentTimeMillis()));
+					product.setAddedByUser(8);
+					product.setTitle(title != null ? title.trim() : "");
+					product.setAuthor(author != null ? author.trim() : "");
+					product.setLanguage("Tiếng việt");
+					product.setDescription(descriptionBuilder.toString());
+					product.setPage(Integer.valueOf(pageStr.trim()));
+					product.setPublishYear(Integer.valueOf(yearStr.trim()));
+					product.setQuantity(1000);
+					product.setPrice(Integer.valueOf(priceStr.trim()));
+					product.setCategory_id(37);
+					product.setCategory_parent(8);
+					product.setUpdateDate(new Date(System.currentTimeMillis()));
+					product.setImgId(imageId);
+					System.out.println(title);
+					categoriesService.saveProduct(product);
+				}
+
+				if (index >= 130 && index <= 139) {
+					Product product = new Product();
+					product.setCreateDate(new Date(System.currentTimeMillis()));
+					product.setAddedByUser(8);
+					product.setTitle(title != null ? title.trim() : "");
+					product.setAuthor(author != null ? author.trim() : "");
+					product.setLanguage("Tiếng việt");
+					product.setDescription(descriptionBuilder.toString());
+					product.setPage(Integer.valueOf(pageStr.trim()));
+					product.setPublishYear(Integer.valueOf(yearStr.trim()));
+					product.setQuantity(1000);
+					product.setPrice(Integer.valueOf(priceStr.trim()));
+					product.setCategory_id(38);
+					product.setCategory_parent(8);
+					product.setUpdateDate(new Date(System.currentTimeMillis()));
+					product.setImgId(imageId);
+					System.out.println(title);
+					categoriesService.saveProduct(product);
+				}
+				if (index >= 140 && index <= 149) {
+					Product product = new Product();
+					product.setCreateDate(new Date(System.currentTimeMillis()));
+					product.setAddedByUser(8);
+					product.setTitle(title != null ? title.trim() : "");
+					product.setAuthor(author != null ? author.trim() : "");
+					product.setLanguage("Tiếng việt");
+					product.setDescription(descriptionBuilder.toString());
+					product.setPage(Integer.valueOf(pageStr.trim()));
+					product.setPublishYear(Integer.valueOf(yearStr.trim()));
+					product.setQuantity(1000);
+					product.setPrice(Integer.valueOf(priceStr.trim()));
+					product.setCategory_id(39);
+					product.setCategory_parent(8);
+					product.setUpdateDate(new Date(System.currentTimeMillis()));
+					product.setImgId(imageId);
+					System.out.println(title);
+					categoriesService.saveProduct(product);
+				}
+				if (index >= 150 && index <= 159) {
+					Product product = new Product();
+					product.setCreateDate(new Date(System.currentTimeMillis()));
+					product.setAddedByUser(8);
+					product.setTitle(title != null ? title.trim() : "");
+					product.setAuthor(author != null ? author.trim() : "");
+					product.setLanguage("Tiếng việt");
+					product.setDescription(descriptionBuilder.toString());
+					product.setPage(Integer.valueOf(pageStr.trim()));
+					product.setPublishYear(Integer.valueOf(yearStr.trim()));
+					product.setQuantity(1000);
+					product.setPrice(Integer.valueOf(priceStr.trim()));
+					product.setCategory_id(40);
+					product.setCategory_parent(8);
+					product.setUpdateDate(new Date(System.currentTimeMillis()));
+					product.setImgId(imageId);
+					System.out.println(title);
+
+					categoriesService.saveProduct(product);
+
 				}
 				index++;
+				if(index == 160)
+					return;
 				System.out.println(index);
 			}
 		}
@@ -192,6 +435,6 @@ public class ReadBookInfo {
 	}
 
 	public static void main(String[] args) throws IOException {
-		readBookFile("C:\\Users\\VO TAN THANH\\Downloads\\data.txt");
+		readBookFile("C:\\Users\\VO TAN THANH\\Downloads\\bs-product.txt");
 	}
 }
