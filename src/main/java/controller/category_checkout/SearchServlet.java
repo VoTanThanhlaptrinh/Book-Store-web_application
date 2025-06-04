@@ -21,6 +21,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.Normalizer;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -52,10 +53,13 @@ public class SearchServlet extends HttpServlet {
         }
         //do phuc tap O(m*n) voi m va n là do dai 2 chuoi
         LevenshteinDistance distance = new LevenshteinDistance();
-        System.out.println("khoand cach:" + distance.apply(input, dbValue));
+     //   System.out.println("khoand cach:" + distance.apply(input, dbValue));
         return distance.apply(input, dbValue) <= threshold;
     }
-	
+	private int getDistance(String inString, String value) {
+		LevenshteinDistance distance = new LevenshteinDistance();
+		return distance.apply(inString, value);
+	}
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
@@ -105,71 +109,67 @@ public class SearchServlet extends HttpServlet {
 	}
 	private List<Product> searchProductsByKeyword(String rawKeyword, Set<Integer> matchedIds) {
 	    String normalizedKeyword = normalize(rawKeyword);
-	    List<Product> matchedProducts = new ArrayList<>();
+	    List<ScoredProduct> scoredProducts = new ArrayList<>();
+
+	    int tolerance = 0;
+	    int length = normalizedKeyword.length();
+	    
+	    if (length > 15) {
+	    	tolerance = 15;
+	    }
+	    else if (length > 10) {
+	        tolerance = 10;
+	    }
+	    else {
+	    	tolerance = 3;
+	    }
 
 	    // 1. Tu cache
 	    for (Product p : ProductCache.getCachedProducts()) {
-	    
-	    	
-	    	
-	    	if (normalizedKeyword.length() > 10) {
-	    		if (isApproxMatch(normalizedKeyword, p.getUnsignedTitle(), 5)) {
-		            if (matchedIds.add(p.getProductId())) {
-		                matchedProducts.add(p);
-		                continue;
-		            }
-		        }
-	    	}
-	    	if (normalizedKeyword.length() > 5) {
-	    		if (isApproxMatch(normalizedKeyword, p.getUnsignedTitle(), 3)) {
-		            if (matchedIds.add(p.getProductId())) {
-		                matchedProducts.add(p);
-		                continue;
-		            }
-		        }
-	    	}
-	    	if (normalizedKeyword.length() > 1) {
-	    		if (isApproxMatch(normalizedKeyword, p.getUnsignedTitle(), 1)) {
-		            if (matchedIds.add(p.getProductId())) {
-		                matchedProducts.add(p);
-		                continue;
-		            }
-		        }
-	    	}
-	       
-	    }
-
-	    // 2. Tu DB
-	    try (Connection conn = DatabaseConnection.getConnection();
-	    	     PreparedStatement stmt = conn.prepareStatement(
-	    	         "SELECT product_id, img_id, title, price, product_name_unsigned FROM PRODUCT_1 " +
-	    	         "WHERE product_name_unsigned LIKE ?"
-	    	     )) {
-
-	    	    stmt.setString(1, normalizedKeyword + "%"); // gan gia tri vao parameter
-	    	    try (ResultSet rs = stmt.executeQuery()) {
-
-
-	        while (rs.next()) {
-	            String dbNormalized = rs.getString("product_name_unsigned");
-	            if (isApproxMatch(normalizedKeyword, dbNormalized, 3)) {
-	                int productId = rs.getInt("product_id");
-	                if (matchedIds.add(productId)) {
-	                    Product product = new Product();
-	                    product.setProductId(productId);
-	                    product.setImgId(Integer.parseInt(rs.getString("img_id")));
-	                    product.setTitle(rs.getString("title"));
-	                    product.setPrice(rs.getDouble("price"));
-	                    matchedProducts.add(product);
-	                }
+	        if (tolerance > 0 && isApproxMatch(normalizedKeyword, p.getUnsignedTitle(), tolerance)) {
+	            if (matchedIds.add(p.getProductId())) {
+	            	scoredProducts.add(new ScoredProduct(p, getDistance(rawKeyword,p.getUnsignedTitle() )));
 	            }
 	        }
-	    	    }
-	    } catch (SQLException e) {
-	        e.printStackTrace();
 	    }
+	    // 2. Sap xep theo khoang cach tang dan
+	    scoredProducts.sort(Comparator.comparingInt(sp -> sp.distance));
 
+	    // 3. Chuyen ve List<Product>
+	    List<Product> matchedProducts = new ArrayList<>();
+	    for (ScoredProduct sp : scoredProducts) {
+	        matchedProducts.add(sp.product);
+	    }
 	    return matchedProducts;
+		/*
+		 * // 2. Tu DB try (Connection conn = DatabaseConnection.getConnection();
+		 * PreparedStatement stmt = conn.prepareStatement(
+		 * "SELECT product_id, img_id, title, price, product_name_unsigned FROM PRODUCT_1 "
+		 * + "WHERE product_name_unsigned LIKE ?")) {
+		 * 
+		 * stmt.setString(1, normalizedKeyword + "%"); try (ResultSet rs =
+		 * stmt.executeQuery()) { while (rs.next()) { String dbNormalized =
+		 * rs.getString("product_name_unsigned"); if (isApproxMatch(normalizedKeyword,
+		 * dbNormalized, 3)) { int productId = rs.getInt("product_id"); if
+		 * (matchedIds.add(productId)) { Product product = new Product();
+		 * product.setProductId(productId);
+		 * product.setImgId(Integer.parseInt(rs.getString("img_id")));
+		 * product.setTitle(rs.getString("title"));
+		 * product.setPrice(rs.getDouble("price")); matchedProducts.add(product); } } }
+		 * } } catch (SQLException e) { e.printStackTrace(); }
+		 */
+
+	    
 	}
 
+
+}
+class ScoredProduct {
+    Product product;
+    int distance;
+
+    ScoredProduct(Product product, int distance) {
+        this.product = product;
+        this.distance = distance;
+    }
 }
