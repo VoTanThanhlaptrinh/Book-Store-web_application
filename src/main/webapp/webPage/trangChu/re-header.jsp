@@ -39,19 +39,19 @@
 				<div class="dropdown-user">
 					<div class="dropdown-user-category">
 
-						<p>Thông tin</p>
+						<p><a href="infor">Thông tin</a></p>
 					</div>
 					<div class="dropdown-user-category">
 
-						<p>Giỏ hàng</p>
+						<p><a href="cart">Giỏ hàng</a></p>
 					</div>
 					<div class="dropdown-user-category">
 
-						<p>Thanh toán</p>
+						<p><a href="history">Lịch sử thanh toán</a></p>
 					</div>
 					<div class="dropdown-user-category">
 
-						<p>Đăng xuất</p>
+						<p><a href="logout">Đăng xuất</a></p>
 					</div>
 
 				</div>
@@ -107,7 +107,7 @@
 			</div>
 			<div class="main-menu-cart">
 				<a href="#"><i class="fa-solid fa-heart fa-xl"
-					style="color: #000000;"></i></a> <a href="#"> </a> <a href="#"><i
+					style="color: #000000;"></i></a> <a href="cart"><i
 					class="fa-solid fa-cart-shopping fa-xl" style="color: #000000;"></i></a>
 			</div>
 			<!-- Khi mobile -->

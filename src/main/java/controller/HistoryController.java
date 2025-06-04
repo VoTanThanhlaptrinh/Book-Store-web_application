@@ -40,30 +40,36 @@ public class HistoryController extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-		
-		  HttpSession session = request.getSession(); User user = (User)
-		  session.getAttribute("user"); String lang = (String)
-		  session.getAttribute("lang"); if (lang == null) { lang = "vi"; } Locale
-		  locale = Locale.forLanguageTag(lang); ResourceBundle bundle =
-		  ResourceBundle.getBundle("messages", locale); if (user == null) { String
-		  loginMessage = bundle.getString("error.notLoggedIn");
-		  session.setAttribute("loginMessage", loginMessage);
-		  response.sendRedirect("login"); return; } else { Cart cart = (Cart)
-		  session.getAttribute("cart"); HienThiDonTrongGioHangImplement htGioHang = new
-		  HienThiDonTrongGioHangImplement(user); System.out.println("id gio hang: " +
-		  cart.getCartId()); List<CartProductDetail> ls =
-		  htGioHang.hienThiGioHang(cart.getCartId(), "checked");
-		  System.out.println("so luong hang da mua: " + ls.size());
-		  request.setAttribute("evaluate", evaluateService);
-		  request.setAttribute("history", ls);
-			
-	/*		  request.getRequestDispatcher("webPage/giohang/history.jsp").forward(request,
-			  response); }*/
-			 
-			
-			  request.getRequestDispatcher("webPage/giohang/lichsu.jsp").forward(request,
-			  response); }
-			 
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
+		String lang = (String) session.getAttribute("lang");
+		if (lang == null) {
+			lang = "vi";
+		}
+		Locale locale = Locale.forLanguageTag(lang);
+		ResourceBundle bundle = ResourceBundle.getBundle("messages", locale);
+		if (user == null) {
+			String loginMessage = bundle.getString("error.notLoggedIn");
+			session.setAttribute("loginMessage", loginMessage);
+			response.sendRedirect("login");
+			return;
+		} else {
+			Cart cart = (Cart) session.getAttribute("cart");
+			HienThiDonTrongGioHangImplement htGioHang = new HienThiDonTrongGioHangImplement(user);
+			System.out.println("id gio hang: " + cart.getCartId());
+			List<CartProductDetail> ls = htGioHang.hienThiGioHang(cart.getCartId(), "checked");
+			System.out.println("so luong hang da mua: " + ls.size());
+			request.setAttribute("evaluate", evaluateService);
+			request.setAttribute("history", ls);
+
+			/*
+			 * request.getRequestDispatcher("webPage/giohang/history.jsp").forward(request,
+			 * response); }
+			 */
+
+			request.getRequestDispatcher("webPage/giohang/lichsu.jsp").forward(request, response);
+		}
+
 	}
 
 	/**
