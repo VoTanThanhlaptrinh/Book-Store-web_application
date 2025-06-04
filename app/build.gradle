@@ -175,4 +175,11 @@ chạy putty
 	docker network create bookNetwork
 	docker network connect bookNetwork sqlserver
 	docker network connect bookNetwork tomcat_container
+	
+	docker cp /root/BOOK_STORE.war tomcat_container:/usr/local/tomcat/webapps/BOOK_STORE.war
+	pscp "C:\Users\VO TAN THANH\eclipse-workspace\BOOK_STORE2\app\build\libs\BOOK_STORE.war" root@103.90.227.75:/root/BOOK_STORE.war
+	pscp "C:\Users\VO TAN THANH\eclipse-workspace\BOOK_STORE2\src\resources\data.bak" root@103.90.227.75:/root/backup.bak
+	docker cp /root/backup.bak sqlserver:/var/opt/mssql/data/backup.bak
+	/opt/mssql-tools/bin/sqlcmd -S localhost,1433 -U sa -P 'Sql@Server1' -Q "CREATE DATABASE bookstore;"
+	
 */

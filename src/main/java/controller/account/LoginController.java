@@ -73,7 +73,7 @@ public class LoginController extends HttpServlet {
 		}
 		// kiểm tra spam đăng nhập
 		if (LoginSpamService.checkSpam(username)) {
-			logService.warning(new Log(0, "warning", "/admin/login", "User",
+			logService.warning(new Log(13, "warning", "/admin/login", "User",
 					String.format("Có ai đó cố gắng truy cập vào tài khoản có email: %s", username)));
 			session.setAttribute("loginMessage", bundle.getString("login.spam"));
 			doGet(req, resp);

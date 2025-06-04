@@ -61,7 +61,7 @@ public class GetCodeController extends HttpServlet {
 		}
 		if(EmailSpamService.checkSpam(email)) {
 			mess = bundle.getString("email.spam");
-			logService.warning(new Log(0, "info", "User", "/getCode", String.format("%s bị đưa vào danh sách spam tạm thời", email)));
+			logService.warning(new Log(13, "info", "User", "/getCode", String.format("%s bị đưa vào danh sách spam tạm thời", email)));
 			sendResponse(resp, mess, "error");
 			return;
 		}
