@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="/BOOK_STORE/webPage/trangChu/CSS/contact.css">
 <link rel="stylesheet" href="/BOOK_STORE/webPage/trangChu/CSS/header.css">
 <link rel="stylesheet" href="/BOOK_STORE/webPage/trangChu/CSS/footer.css">
-<title>Insert title here</title>
+<title>Contact</title>
 </head>
 <body>
 	<c:if test="${user != null}">

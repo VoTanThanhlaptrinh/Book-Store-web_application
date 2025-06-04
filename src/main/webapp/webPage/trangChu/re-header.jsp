@@ -16,50 +16,50 @@
 <body>
 	<header>
 
-        <div class="top-header">
-            <a class="logo" href="home">Bookstore</a>
-            
-           <div class="search-bar">
-              <select>
-                <option>All Categories</option>
-              </select>
-                  <form class="search-form" action="search" method="get" >
-					  <input type="text" name="query" placeholder="Enter Search Products">
-					  <button type="submit">🔍</button>
-					</form>
-            </div>
-          
-            <div class="top-right">
-                <div class="top-right-icon">👤</div>
-              <div class="user-info-main">
-            
-                  <div class="user-info-main-login-regis" onclick="openLogin()">${user.getUsername()}</div>
-                 
-              </div>
-                <div class="dropdown-user">
-                <div class="dropdown-user-category">
-                 
-                  <p>Thông tin</p>
-                </div>
-                <div class="dropdown-user-category">
-                 
-                  <p>Giỏ hàng</p>
-                </div>
-                <div class="dropdown-user-category">
-                  
-                  <p>Thanh toán</p>
-                </div>
-                <div class="dropdown-user-category">
-                 
-                  <p>Đăng xuất</p>
-                </div>
+		<div class="top-header">
+			<a class="logo" href="home">Bookstore</a>
 
-              </div>
-            </div>
-          
-            <div class="mobile-menu-icon">☰</div>
-          </div>
-          
+			<div class="search-bar">
+				<select>
+					<option>All Categories</option>
+				</select>
+				<form class="search-form" action="search" method="get">
+					<input type="text" name="query" placeholder="Enter Search Products">
+					<button type="submit">🔍</button>
+				</form>
+			</div>
+
+			<div class="top-right">
+				<div class="top-right-icon">👤</div>
+				<div class="user-info-main">
+
+					<div class="user-info-main-login-regis" onclick="openLogin()">${user.getUsername()}</div>
+
+				</div>
+				<div class="dropdown-user">
+					<div class="dropdown-user-category">
+
+						<p>Thông tin</p>
+					</div>
+					<div class="dropdown-user-category">
+
+						<p>Giỏ hàng</p>
+					</div>
+					<div class="dropdown-user-category">
+
+						<p>Thanh toán</p>
+					</div>
+					<div class="dropdown-user-category">
+
+						<p>Đăng xuất</p>
+					</div>
+
+				</div>
+			</div>
+
+			<div class="mobile-menu-icon">☰</div>
+		</div>
+
 		<!-- Yellow Menu Bar -->
 		<div class="yellow-bar">
 			<div class="logo-hidden">Bookstore</div>
@@ -98,25 +98,12 @@
 			</div>
 
 			<div class="main-menu-link">
-				    <a onclick="window.location.href='home'">Home</a>
-              <a onclick="window.location.href='home'">Shop</a>
-              <a href="/BOOK_STORE/webPage/trangChu/aboutus.jsp">About Us</a>
+				<a onclick="window.location.href='home'">Home</a> <a
+					onclick="window.location.href='home'">Shop</a> <a href="aboutUs">About
+					Us</a> <a href="contact">Contact</a>
 
-          
-             
-            
-            </div>
-            <div class="main-menu-cart">
-              <a href="#"><i class="fa-solid fa-heart fa-xl" style="color: #000000;"></i></a>
-              <a href="#"> </a>
-              <a href="cart"><i class="fa-solid fa-cart-shopping fa-xl" style="color: #000000;"></i></a>
-            </div>
-            <!-- Khi mobile -->
-            <div class="yellow-right">
-                <div class="menu-after">
-                    <div class="user-info" >
-            
-              <a href="/BOOK_STORE/webPage/trangChu/contact.jsp">Contact</a>
+
+
 			</div>
 			<div class="main-menu-cart">
 				<a href="#"><i class="fa-solid fa-heart fa-xl"

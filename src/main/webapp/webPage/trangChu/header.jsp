@@ -71,9 +71,9 @@
 
               <a onclick="window.location.href='home'">Home</a>
               <a onclick="window.location.href='home'">Shop</a>
-              <a href="/BOOK_STORE/webPage/trangChu/aboutus.jsp">About Us</a>
+              <a href="aboutUs">About Us</a>
             
-              <a href="/BOOK_STORE/webPage/trangChu/contact.jsp">Contact</a>
+              <a href="contact">Contact</a>
 
             </div>
             <div class="main-menu-cart">

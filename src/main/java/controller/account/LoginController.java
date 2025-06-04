@@ -102,12 +102,14 @@ public class LoginController extends HttpServlet {
 		session.setAttribute("cart", cart);
 		session.setAttribute("user", user);
 
-		String previousURL = (String) session.getAttribute("previousURL");
-		if (previousURL != null) {
-			resp.sendRedirect(previousURL);
-			session.removeAttribute("previousURL");
-			return;
-		}
+//		String previousURL = (String) session.getAttribute("previousURL");
+//		if (previousURL != null) {
+//			resp.sendRedirect(previousURL);
+//			session.removeAttribute("previousURL");
+//			return;
+//		}
+		logService.info(new Log(user.getUserId(), "info", "User", "/login", "đăng nhập thành công"));
+
 		if (user != null && !productId.equals("")) {
 			HienThiDanhSachImp ds = new HienThiDanhSachImp();
 			req.setAttribute("product", ds.hienThiSachTheoId(Integer.parseInt(productId)));
