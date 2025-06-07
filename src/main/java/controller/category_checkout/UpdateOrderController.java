@@ -31,6 +31,7 @@ public class UpdateOrderController extends HttpServlet {
 		
 	   String orderIdStr = request.getParameter("orderID");
 	   String signature = request.getParameter("signature");
+	   String publicKey = request.getParameter("publicKey");
 	   
 	   
 	   if (orderIdStr == null || orderIdStr.isEmpty()) {
@@ -48,6 +49,7 @@ public class UpdateOrderController extends HttpServlet {
 
 	    oImp.updateOrderSignature(orderID, signature);//cập nhật chữ kí
 	    oImp.updateOrderStatus(orderID, "checked");//chuyển order từ pending thành checked
+	    oImp.updateOrderPublicKey(orderID, publicKey);//lưu public key xuống database
 	    response.setStatus(HttpServletResponse.SC_OK);
 	}
 
