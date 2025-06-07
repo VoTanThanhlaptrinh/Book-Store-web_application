@@ -51,7 +51,6 @@ public class OrderController extends HttpServlet {
         User user = (User) session.getAttribute("user");
         Address addressDefault = (Address) session.getAttribute("addressDefault");
    
-
         // Nếu chỉ cập nhật phí vận chuyển
         if ("true".equals(updateShippingFeeOnly)) {
           
