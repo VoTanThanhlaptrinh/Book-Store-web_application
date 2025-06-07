@@ -3,13 +3,16 @@ package models;
 import java.util.Date;
 
 public class Order {
-	private int orderId;
-	private int userId;
-	private double totalAmount;
-	private String status;
-	private Date createDate;
-	private Date updateDate;
-
+	int orderId;
+	int userId;
+	double totalAmount;
+	String status;
+	Date createDate;
+	Date updateDate;
+	String signature;
+	String SignatureStatus;
+	double totalPrice;
+	String totalFormatted;
 	public Order(int orderId, int userId, double totalAmount, String status, Date createDate, Date updateDate) {
 		super();
 		this.orderId = orderId;
@@ -31,11 +34,31 @@ public class Order {
 
 
 
+	public String getTotalFormatted() {
+		return totalFormatted;
+	}
+
+
+
 	public Order() {
 		super();
 	}
 
 
+
+	public double getTotalPrice() {
+		return totalPrice;
+	}
+
+
+
+	public void setTotalPrice(double totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+
+	public void setTotalFormatted(String totalFormatted) {
+	    this.totalFormatted = totalFormatted;
+	}
 
 	public int getOrderId() {
 		return orderId;
@@ -43,8 +66,32 @@ public class Order {
 
 
 
+	public String getSignatureStatus() {
+		return SignatureStatus;
+	}
+
+
+
+	public void setSignatureStatus(String signatureStatus) {
+		SignatureStatus = signatureStatus;
+	}
+
+
+
 	public int getUserId() {
 		return userId;
+	}
+
+
+
+	public String getSignature() {
+		return signature;
+	}
+
+
+
+	public void setSignature(String signature) {
+		this.signature = signature;
 	}
 
 

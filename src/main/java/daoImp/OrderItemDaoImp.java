@@ -3,9 +3,13 @@ package daoImp;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import daoInterface.IOrderitemDao;
+import models.OrderItem;
 import service.DatabaseConnection;
 
 public class OrderItemDaoImp implements IOrderitemDao{
@@ -32,6 +36,38 @@ public class OrderItemDaoImp implements IOrderitemDao{
 		}
 		
 	}
+	public List<OrderItem> getOrderItemsByOrderId(int orderId) {
+	    List<OrderItem> orderItems = new ArrayList<>();
+
+	    try {
+	        Connection con = DatabaseConnection.getConnection();
+	        PreparedStatement stmp = con.prepareStatement(
+	            "SELECT * FROM Order_item WHERE order_id = ?"
+	        );
+	        stmp.setInt(1, orderId);
+	        ResultSet rs = stmp.executeQuery();
+
+	        while (rs.next()) {
+	            OrderItem item = new OrderItem();
+	        //    item.setOrderId(rs.getInt("order_id"));
+	        //    item.setProductId(rs.getInt("product_id"));
+	         //   item.setQuantity(rs.getInt("quantity"));
+	         //   item.setPrice(rs.getDouble("price"));
+	       //     item.setCreateDate(rs.getDate("create_date"));
+	          //  item.setUpdateDate(rs.getDate("update_date"));
+
+	            orderItems.add(item);
+	        }
+
+	        rs.close();
+	        stmp.close();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    return orderItems;
+	}
+
 	public static void main(String[] args) {
 		OrderItemDaoImp oi = new OrderItemDaoImp();
 		oi.createOrderItem(1, 1, 3, 2000);	

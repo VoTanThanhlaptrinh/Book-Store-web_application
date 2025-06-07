@@ -640,8 +640,8 @@ public class ProductDAOImp implements IProductDao {
 			stmt.setInt(1, productID);
 			ResultSet resultSet = stmt.executeQuery();
 			while (resultSet.next()) {
-				p = new Product(resultSet.getString(2), resultSet.getInt(19), resultSet.getInt(17),
-						resultSet.getInt(18), resultSet.getInt(16));
+				p = new Product(resultSet.getString(2), resultSet.getInt(20), resultSet.getInt(18),
+						resultSet.getInt(19), resultSet.getInt(17));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

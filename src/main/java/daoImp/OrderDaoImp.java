@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 import daoInterface.IOrderDao;
 import models.Order;
@@ -73,6 +75,7 @@ public class OrderDaoImp implements IOrderDao {
 	            order.setStatus(rs.getString("status"));
 	            order.setCreateDate(rs.getDate("create_date"));
 	            order.setUpdateDate(rs.getDate("update_date"));
+	            order.setSignature(rs.getString("signature"));
 	        }
 
 	        rs.close();
@@ -83,7 +86,64 @@ public class OrderDaoImp implements IOrderDao {
 
 	    return order;
 	}
+	public List<Order> getOrdersByUserId(int userId) {
+	    List<Order> orders = new ArrayList<>();
 
+	    try {
+	        Connection con = DatabaseConnection.getConnection();
+	        PreparedStatement stmp = con.prepareStatement(
+	            "SELECT * FROM Order_1 WHERE user_id = ?"
+	        );
+
+	        stmp.setInt(1, userId);
+	        ResultSet rs = stmp.executeQuery();
+
+	        while (rs.next()) {
+	            Order order = new Order();
+	            order.setOrderId(rs.getInt("order_id"));
+	            order.setUserId(rs.getInt("user_id"));
+	            order.setTotalAmount(rs.getDouble("total_amount"));
+	            order.setStatus(rs.getString("status"));
+	            order.setCreateDate(rs.getDate("create_date"));
+	            order.setUpdateDate(rs.getDate("update_date"));
+	            order.setSignature(rs.getString("signature"));
+	            orders.add(order);
+	        }
+
+	        rs.close();
+	        stmp.close();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    return orders;
+	}
+	
+	public Order getOrderById(int orderId) {
+	    Order order = null;
+	    String sql = "SELECT order_id, user_id, create_date, status, signature FROM Order_1 WHERE order_id = ?";
+	    
+	    try (Connection conn = DatabaseConnection.getConnection();
+	         PreparedStatement ps = conn.prepareStatement(sql)) {
+	        
+	        ps.setInt(1, orderId);
+	        ResultSet rs = ps.executeQuery();
+	        
+	        if (rs.next()) {
+	            order = new Order();
+	            order.setOrderId(rs.getInt("order_id"));
+	            order.setUserId(rs.getInt("user_id"));
+	            order.setCreateDate(rs.getTimestamp("create_date")); // Hoặc getDate nếu bạn dùng java.sql.Date
+	            order.setStatus(rs.getString("status"));
+	            order.setSignature(rs.getString("signature"));
+	        }
+	        
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    
+	    return order;
+	}
 	public String getProductListByOrderId(int orderId) {
 	    String productList = "";
 

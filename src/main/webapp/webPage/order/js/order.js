@@ -341,6 +341,9 @@ function updateTotalPrice(shippingFee) {
 
 
 function sendOrder() {
+	
+	
+	
     // Kiểm tra xem có địa chỉ giao hàng không
     let hasAddress = document.getElementById('addressFullName');
     
@@ -371,3 +374,5 @@ function sendOrder() {
 		console.log(error.message)
     });
 }
+
+
