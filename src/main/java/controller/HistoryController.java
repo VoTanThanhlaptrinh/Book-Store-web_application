@@ -1,10 +1,15 @@
 package controller;
 
 import java.io.IOException;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import daoImp.OrderDaoImp;
+import daoImp.PurchaseHistoryDaoImp;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,6 +18,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import models.Cart;
 import models.CartProductDetail;
+import models.PurchaseHistory;
 import models.User;
 import service.EvaluateService;
 import service.IEvaluateService;
@@ -39,6 +45,8 @@ public class HistoryController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		PurchaseHistoryDaoImp pImp = new PurchaseHistoryDaoImp();
+		OrderDaoImp oImp = new OrderDaoImp();
 
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
@@ -54,22 +62,30 @@ public class HistoryController extends HttpServlet {
 			response.sendRedirect("login");
 			return;
 		} else {
-			Cart cart = (Cart) session.getAttribute("cart");
-			HienThiDonTrongGioHangImplement htGioHang = new HienThiDonTrongGioHangImplement(user);
-			System.out.println("id gio hang: " + cart.getCartId());
-			List<CartProductDetail> ls = htGioHang.hienThiGioHang(cart.getCartId(), "checked");
-			System.out.println("so luong hang da mua: " + ls.size());
-			request.setAttribute("evaluate", evaluateService);
-			request.setAttribute("history", ls);
 
-			/*
-			 * request.getRequestDispatcher("webPage/giohang/history.jsp").forward(request,
-			 * response); }
-			 */
+			List<PurchaseHistory> ls = pImp.getPurchasedProductsByUser(user.getUserId());
+
+			for (PurchaseHistory item : ls) {
+				int hours = oImp.getHoursSinceOrder(item.getOrderId());
+				
+				// Chỉ cho phép hủy nếu trạng thái là "Đang xử lý" và thời gian dưới 2 giờ
+				if (hours < 2 && !"deleted".equals(item.getStatus())) {
+					item.setCanCancel(true);
+				} else {
+					item.setCanCancel(false);
+				}
+			}
+
+			session.setAttribute("evaluate", evaluateService);
+			session.setAttribute("history", ls);
+
+//			  request.getRequestDispatcher("webPage/giohang/history.jsp").forward(request,
+//			  response); 
+//			 
 
 			request.getRequestDispatcher("webPage/giohang/lichsu.jsp").forward(request, response);
-		}
 
+		}
 	}
 
 	/**

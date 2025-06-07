@@ -1,0 +1,106 @@
+@charset "UTF-8";
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+}
+
+.sidebar {
+    background-color: #fff;
+    border-right: 1px solid #dee2e6;
+    padding: 20px;
+    height: 100vh;
+}
+
+.sidebar .profile-info {
+    text-align: center; /* Căn giữa nội dung */
+}
+
+.sidebar h4 {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.sidebar p {
+    margin: 5px 0;
+    color: #6c757d;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px; /* Tạo khoảng cách với phần thông tin */
+}
+
+.sidebar ul li {
+    padding: 10px 0;
+    color: #495057;
+}
+
+.sidebar ul li::before {
+    margin-right: 5px;
+}
+
+.alert {
+    background-color: #fff3cd;
+    color: #856404;
+    border: none;
+}
+
+.order-status {
+    display: flex;
+    justify-content: space-between;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 0 0 10px 0;
+}
+
+.order-status span {
+    flex: 1;
+    text-align: center;
+    border-right: 1px solid #dee2e6;
+    color: #495057;
+}
+
+.order-status span:last-child {
+    border-right: none;
+}
+
+.order-details {
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.order-details img {
+    max-width: 80px;
+    margin-right: 10px;
+}
+
+.total {
+    text-align: right;
+}
+
+.btn-cancel {
+    background-color: #dc3545;
+    border: none;
+}
+
+.btn-rebuy {
+    background-color: #F57224;
+    color: white;
+    border: none;
+    transition: background-color 0.3s ease; /* Thêm hiệu ứng chuyển đổi mượt mà */
+}
+
+.btn-rebuy:hover {
+  color: white;
+    background-color: #e65c00; /* Màu đậm hơn khi hover */
+}
+.sidebar ul li{
+cursor: pointer;}

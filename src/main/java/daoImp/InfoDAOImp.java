@@ -10,6 +10,7 @@ import java.sql.Statement;
 import daoInterface.IInfoDao;
 import models.Information;
 import service.DatabaseConnection;
+import service.LoginService;
 
 public class InfoDAOImp implements IInfoDao {
 	@Override

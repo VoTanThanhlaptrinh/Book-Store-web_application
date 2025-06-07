@@ -26,6 +26,7 @@ import models.Address;
 import models.Cart;
 import models.CartItem;
 import models.CartProductDetail;
+import models.Order;
 import models.User;
 import service.ILoginService;
 import service.LoginService;
@@ -64,16 +65,25 @@ public class CheckOutController extends HttpServlet {
 		double shippingFee = (double) session.getAttribute("shippingFee");
 		double total = (double) session.getAttribute("total");
 
-		int orderID = orDaoImp.createOrder(user.getUserId(), (shippingFee + total), "checked");
+		int orderID = orDaoImp.createOrder(user.getUserId(), (shippingFee + total), "pending");
+		
+
+		
+		
 		for (CartProductDetail cartProductDetail : cDetail) {
 			orItemDaoImp.createOrderItem(orderID, cartProductDetail.getProductId(), cartProductDetail.getQuantity(),
 					cartProductDetail.getPrice());
 
-			System.out.println(cartProductDetail);
-
 			cartItemImp.updateStatusCartItem(cartProductDetail.getCartItemId(), "deleted");
 			productDAOImp.updateQuantityProduct(cartProductDetail.getProductId(), cartProductDetail.getQuantity());
 		}
+		
+		
+		Order order = orDaoImp.getOrderByIdAndUserId(orderID, user.getUserId());
+		String title = orDaoImp.getProductListByOrderId(orderID);
+		
+		session.setAttribute("order", order);
+		session.setAttribute("title", title);
 
 		out.write("{\"success\": true, \"message\": \"Đã đặt hàng thành công\"}");
 	}
