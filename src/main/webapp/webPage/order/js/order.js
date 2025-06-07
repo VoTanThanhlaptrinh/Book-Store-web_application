@@ -361,7 +361,7 @@ function sendOrder() {
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            window.location.href = "/BOOK_STORE/success"; // Chuyển trang sau khi thành công
+            window.location.href = "/BOOK_STORE/signature"; // Chuyển trang sau khi thành công
         } else {
             toastr.error(data.message || "Đặt hàng thất bại!");
         }
