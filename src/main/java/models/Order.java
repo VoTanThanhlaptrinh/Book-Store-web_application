@@ -13,6 +13,7 @@ public class Order {
 	String SignatureStatus;
 	double totalPrice;
 	String totalFormatted;
+	String publicKey;
 	public Order(int orderId, int userId, double totalAmount, String status, Date createDate, Date updateDate) {
 		super();
 		this.orderId = orderId;
@@ -42,6 +43,18 @@ public class Order {
 
 	public Order() {
 		super();
+	}
+
+	
+
+	public String getPublicKey() {
+		return publicKey;
+	}
+
+
+
+	public void setPublicKey(String publicKey) {
+		this.publicKey = publicKey;
 	}
 
 

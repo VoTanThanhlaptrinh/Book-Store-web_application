@@ -76,6 +76,7 @@ public class OrderDaoImp implements IOrderDao {
 	            order.setCreateDate(rs.getDate("create_date"));
 	            order.setUpdateDate(rs.getDate("update_date"));
 	            order.setSignature(rs.getString("signature"));
+	            order.setPublicKey(rs.getString("publicKey"));
 	        }
 
 	        rs.close();
@@ -92,7 +93,7 @@ public class OrderDaoImp implements IOrderDao {
 	    try {
 	        Connection con = DatabaseConnection.getConnection();
 	        PreparedStatement stmp = con.prepareStatement(
-	            "SELECT * FROM Order_1 WHERE user_id = ?"
+	            "SELECT * FROM Order_1 WHERE user_id = ? AND status != 'deleted'"
 	        );
 
 	        stmp.setInt(1, userId);
@@ -107,6 +108,7 @@ public class OrderDaoImp implements IOrderDao {
 	            order.setCreateDate(rs.getDate("create_date"));
 	            order.setUpdateDate(rs.getDate("update_date"));
 	            order.setSignature(rs.getString("signature"));
+	            order.setPublicKey(rs.getString("publicKey"));
 	            orders.add(order);
 	        }
 
@@ -121,7 +123,7 @@ public class OrderDaoImp implements IOrderDao {
 	
 	public Order getOrderById(int orderId) {
 	    Order order = null;
-	    String sql = "SELECT order_id, user_id, create_date, status, signature FROM Order_1 WHERE order_id = ?";
+	    String sql = "SELECT order_id, user_id, total_amount,create_date, status, signature,publicKey FROM Order_1 WHERE order_id = ?";
 	    
 	    try (Connection conn = DatabaseConnection.getConnection();
 	         PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -136,6 +138,8 @@ public class OrderDaoImp implements IOrderDao {
 	            order.setCreateDate(rs.getTimestamp("create_date")); // Hoặc getDate nếu bạn dùng java.sql.Date
 	            order.setStatus(rs.getString("status"));
 	            order.setSignature(rs.getString("signature"));
+	            order.setPublicKey(rs.getString("publicKey"));
+	            order.setTotalPrice(rs.getDouble("total_amount"));
 	        }
 	        
 	    } catch (Exception e) {
@@ -144,6 +148,105 @@ public class OrderDaoImp implements IOrderDao {
 	    
 	    return order;
 	}
+	
+	public void savePublicKey(int userId, String publicKey) {
+	    // 1. Cap nhat tat ca cac khoa hien tai ve 'inactive'
+	    String deactivateSql = "UPDATE public_key SET status = 'inactive' WHERE user_id = ?";
+	    
+	    // 2. Chen khoa moi vao bang voi trang thai 'active'
+	    String insertSql = "INSERT INTO public_key(user_id, public_key, status) VALUES (?, ?, 'active')";
+	    
+	    try (Connection conn = DatabaseConnection.getConnection()) {
+	        // Tat autocommit de dam bao ca 2 buoc duoc xu ly cung nhau
+	        conn.setAutoCommit(false);
+	        
+	        try (
+	            PreparedStatement deactivateStmt = conn.prepareStatement(deactivateSql);
+	            PreparedStatement insertStmt = conn.prepareStatement(insertSql);
+	        ) {
+	            // Buoc 1
+	            deactivateStmt.setInt(1, userId);
+	            deactivateStmt.executeUpdate();
+	            
+	            // Buoc 2
+	            insertStmt.setInt(1, userId);
+	            insertStmt.setString(2, publicKey);
+	            insertStmt.executeUpdate();
+	            
+	            // Commit neu khong loi
+	            conn.commit();
+	        } catch (Exception ex) {
+	            conn.rollback();
+	            ex.printStackTrace();
+	        } finally {
+	            conn.setAutoCommit(true);
+	        }
+	        
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	}
+	public void updatePublicKeyStatus(int userId, String status) {
+	    String sql = "UPDATE public_key SET status = ? WHERE user_id = ?";
+	    
+	    try (Connection conn = DatabaseConnection.getConnection();
+	         PreparedStatement ps = conn.prepareStatement(sql)) {
+	        
+	        ps.setString(1, status);
+	        ps.setInt(2, userId);
+	        
+	        ps.executeUpdate();
+	        
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	}
+	
+	public boolean hasActivePublicKey(int userId, String publicKey) {
+	    String sql = "SELECT 1 FROM public_key WHERE user_id = ? AND status = 'active' AND public_key = ?";
+	    
+	    try (Connection conn = DatabaseConnection.getConnection();
+	         PreparedStatement ps = conn.prepareStatement(sql)) {
+	        
+	        ps.setInt(1, userId);
+	        ps.setString(2, publicKey);
+	        ResultSet rs = ps.executeQuery();
+	        
+	        return rs.next(); // Nếu có kết quả => đã có public key active
+	        
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    
+	    return false;
+	}
+
+	public String loadPublicKey(int userId) {
+		String publicKey = "";
+		
+		String sql = "SELECT public_key FROM public_key WHERE user_id = ? AND status = 'active' ";
+		
+		
+		 try (Connection conn = DatabaseConnection.getConnection();
+		         PreparedStatement ps = conn.prepareStatement(sql)) {
+		        
+		        ps.setInt(1, userId);
+		        ResultSet rs = ps.executeQuery();
+		        
+		        if (rs.next()) {
+		            publicKey = rs.getString("public_key");
+		        }
+		        
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		  
+		    return publicKey;
+		
+	}
+	
+	
+	
 	public String getProductListByOrderId(int orderId) {
 	    String productList = "";
 

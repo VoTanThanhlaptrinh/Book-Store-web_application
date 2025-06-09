@@ -50,20 +50,27 @@
       </div>
       <p class="text-xs text-gray-500 mt-1">Sao chép mã hash để sử dụng trong chữ ký điện tử.</p>
     </div>
-    
-    <!-- Public Key -->
+ 
+<!-- Public Key -->
 <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
   <h2 class="text-base font-semibold text-gray-700 mb-2 flex items-center">
     <svg class="h-4 w-4 mr-1 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M12 20c4.418 0 8-1.79 8-4V8c0-2.21-3.582-4-8-4S4 5.79 4 8v8c0 2.21 3.582 4 8 4z" />
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M13 16h-1v-4h-1m1-4h.01M12 20c4.418 0 8-1.79 8-4V8c0-2.21-3.582-4-8-4S4 5.79 4 8v8c0 2.21 3.582 4 8 4z" />
     </svg>
     Nhập Public Key
   </h2>
-  <textarea id="publicKeyInput" rows="2" placeholder="Nhập public key tại đây..." class="w-full p-2 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none"></textarea>
- <p class="text-xs text-gray-500 mt-1">Public key dùng để xác thực đơn hàng.</p>
-</div>
-    
 
+  <div class="mb-2 flex items-center space-x-2">
+    <input type="checkbox" id="useSavedKey" class="w-4 h-4 text-blue-600">
+    <label for="useSavedKey" class="text-sm text-gray-700">Sử dụng public key đã lưu</label>
+  </div>
+
+  <textarea id="publicKeyInput" rows="2"
+            placeholder="Nhập public key tại đây..."
+            class="w-full p-2 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none"></textarea>
+  <p class="text-xs text-gray-500 mt-1">Public key dùng để xác thực đơn hàng.</p>
+</div>
     <!-- Signature -->
     <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
       <h2 class="text-base font-semibold text-gray-700 mb-2 flex items-center">
@@ -152,7 +159,17 @@
 	  
 	  
 	});
+    const savedPublicKey = `<%= session.getAttribute("publickey") != null ? session.getAttribute("publickey").toString().replaceAll("\n", "\\n").replaceAll("\"", "\\\"") : "" %>`;
 
+    document.getElementById("useSavedKey").addEventListener("change", function () {
+      const publicKeyInput = document.getElementById("publicKeyInput");
+
+      if (this.checked) {
+        publicKeyInput.value = savedPublicKey;
+      } else {
+        publicKeyInput.value = "";
+      }
+    });
   </script>
 </body>
 </html>

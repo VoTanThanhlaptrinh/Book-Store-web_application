@@ -51,6 +51,23 @@
 					<li>❤️ Sản phẩm yêu thích</li>
 					<li>★ Nhận xét của tôi</li>
 				</ul>
+				
+			<div class="container mt-4">
+			    <form action="reportLostKey" method="post" id="lostKeyForm" onsubmit="return handleLostKeyReport(event)">
+			        <input type="hidden" name="userId" value="${sessionScope.user.userId}" />
+			        <button type="submit" class="btn btn-danger" id="lostKeyBtn">
+			            Báo mất khóa
+			        </button>
+			    </form>
+			
+			    <!-- Div thông báo -->
+			    <div id="notification" class="alert alert-success mt-3 d-none" role="alert">
+			        <h5 class="alert-heading">Đã gửi email xác thực thành công!</h5>
+			        <p>Vui lòng kiểm tra hộp thư của bạn và làm theo hướng dẫn để tạo khóa mới.</p>
+			    </div>
+			</div>
+
+    
 			</div>
 			<div class="col-md-9 content">
 				<div class="order-status">
@@ -202,6 +219,47 @@
            details.style.display = 'none';
        }
    }
+   function handleLostKeyReport(event) {
+	    event.preventDefault();
+	    const form = document.getElementById("lostKeyForm");
+	    const notification = document.getElementById("notification");
+
+	    // Hiển thị ngay thông báo (dự đoán thành công)
+	    notification.classList.remove("d-none");
+	    notification.classList.remove("alert-danger");
+	    notification.classList.add("alert-success");
+	    notification.innerHTML = `
+	        <h5 class="alert-heading">Đang xử lý yêu cầu...</h5>
+	        <p>Vui lòng đợi trong giây lát.</p>
+	    `;
+
+	    fetch(form.action, {
+	        method: "POST",
+	        body: new FormData(form)
+	    })
+	    .then(res => {
+	        if (res.ok) {
+	            notification.innerHTML = `
+	                <h5 class="alert-heading">Đã gửi email xác thực thành công!</h5>
+	                <p>Vui lòng kiểm tra hộp thư của bạn và làm theo hướng dẫn để tạo khóa mới.</p>
+	            `;
+	        } else {
+	            throw new Error("Phản hồi không hợp lệ");
+	        }
+	    })
+	    .catch(err => {
+	        notification.classList.remove("alert-success");
+	        notification.classList.add("alert-danger");
+	        notification.innerHTML = `
+	            <h5 class="alert-heading">Có lỗi xảy ra!</h5>
+	            <p>Vui lòng thử lại hoặc kiểm tra kết nối mạng.</p>
+	        `;
+	        console.error(err);
+	    });
+
+	    return false;
+	}
+
     </script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
