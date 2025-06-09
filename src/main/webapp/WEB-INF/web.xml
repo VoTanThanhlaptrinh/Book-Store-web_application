@@ -100,12 +100,52 @@
     <servlet-name>ProductCache</servlet-name>
     <url-pattern>/ProductCache</url-pattern>
   </servlet-mapping>
-<context-param>
+  <context-param>
     <param-name>GHN_SHOP_ID</param-name>
     <param-value>5731351</param-value>
-</context-param>
-<context-param>
+  </context-param>
+  <context-param>
     <param-name>GHN_API_URL</param-name>
     <param-value>https://online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/fee</param-value>
-</context-param>
+  </context-param>
+  <servlet>
+    <description></description>
+    <display-name>ReorderController</display-name>
+    <servlet-name>ReorderController</servlet-name>
+    <servlet-class>controller.category_checkout.ReorderController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ReorderController</servlet-name>
+    <url-pattern>/ReorderController</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ReportLostKey</display-name>
+    <servlet-name>ReportLostKey</servlet-name>
+    <servlet-class>controller.category_checkout.ReportLostKey</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ReportLostKey</servlet-name>
+    <url-pattern>/ReportLostKey</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>VerifyKeyResetController</display-name>
+    <servlet-name>VerifyKeyResetController</servlet-name>
+    <servlet-class>controller.category_checkout.VerifyKeyResetController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>VerifyKeyResetController</servlet-name>
+    <url-pattern>/VerifyKeyResetController</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SubmitNewKeyController</display-name>
+    <servlet-name>SubmitNewKeyController</servlet-name>
+    <servlet-class>controller.category_checkout.SubmitNewKeyController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SubmitNewKeyController</servlet-name>
+    <url-pattern>/SubmitNewKeyController</url-pattern>
+  </servlet-mapping>
 </web-app>

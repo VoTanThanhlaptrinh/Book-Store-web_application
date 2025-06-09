@@ -3,16 +3,16 @@ package models;
 import java.sql.Date;
 
 public class PurchaseHistory {
-	private int orderId;
-	 private int productId;
-	    private String productName;
-	    private int imgId;    
-	    private int quantity;
-	    private double price;
-	    private double totalPricePerProduct;
-	    private Date createDate;//ngày tạo đơn hàng
-	    private String status; 
-	    private boolean canCancel;//biến hủy đơn hàng nếu trong thời gian hợp lệ
+	 int orderId;
+	  int productId;
+	    String productName;
+	   int imgId;    
+	    int quantity;
+	    double price;
+	    double totalPricePerProduct;
+	     Date createDate;//ngày tạo đơn hàng
+	     String status; 
+	     boolean canCancel;//biến hủy đơn hàng nếu trong thời gian hợp lệ
 	    public PurchaseHistory() {
 			// TODO Auto-generated constructor stub
 		}

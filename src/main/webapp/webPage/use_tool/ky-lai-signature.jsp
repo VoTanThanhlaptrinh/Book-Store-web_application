@@ -26,13 +26,12 @@
         Thông Tin Đơn Hàng
       </h2>
       <ul class="text-sm pl-4 space-y-1">
-        <li><strong>Mã đơn hàng:</strong> <span id="orderId">${sessionScope.order.orderId}</span></li>
-        <li><strong>Khách hàng:</strong> <span id="customerName">${sessionScope.addressDefault.full_name}</span></li>
-        <li><strong>Ngày đặt:</strong> <span id="orderDate">${sessionScope.order.createDate}</span></li>
-        <li><strong>Sản phẩm:</strong> <span id="products">${sessionScope.title}</span></li>
-        <li><strong>Tổng tiền:</strong> <span id="totalAmount"><fmt:formatNumber
-											value="${sessionScope.order.totalAmount}"
-											type="number" groupingUsed="true" /></span>đ</li>
+        <li><strong>Ma don hang:</strong> <span id="orderId">${sessionScope.reorder_orderId}</span></li>
+		<li><strong>Khach hang:</strong> <span id="customerName">${sessionScope.reorder_customerName}</span></li>
+		<li><strong>Ngay dat:</strong> <span id="orderDate">${sessionScope.reorder_orderDate}</span></li>
+		<li><strong>Sản phẩm:</strong> <span id="products">${sessionScope.reorder_products}</span></li>
+		<li><strong>Tong tien:</strong> <span id="totalAmount" >${sessionScope.reorder_total}</span></li>
+       
       </ul>
     </div>
 
@@ -50,8 +49,7 @@
       </div>
       <p class="text-xs text-gray-500 mt-1">Sao chép mã hash để sử dụng trong chữ ký điện tử.</p>
     </div>
- 
-<!-- Public Key -->
+    <!-- Public Key -->
 <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
   <h2 class="text-base font-semibold text-gray-700 mb-2 flex items-center">
     <svg class="h-4 w-4 mr-1 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -170,6 +168,7 @@
         publicKeyInput.value = "";
       }
     });
+
   </script>
 </body>
 </html>

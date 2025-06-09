@@ -66,7 +66,7 @@ public class SearchServlet extends HttpServlet {
 		
 		User user = (User) session.getAttribute("user");
 		
-		int userId = 0;
+		int userId = 13;
 		if (user != null) {
 			userId = user.getUserId();  
 		}
@@ -76,7 +76,7 @@ public class SearchServlet extends HttpServlet {
 		String rawKeyword = request.getParameter("query");
 		Set<Integer> matchedIds = new HashSet<>();
 		List<Product> matchedProducts = searchProductsByKeyword(rawKeyword, matchedIds);
-		//logService.info(new Log(userId, "info", "User", "/search", "Thuc hien tim kiem voi keyword: " + rawKeyword));
+		logService.info(new Log(userId, "info", "User", "/search", "Thuc hien tim kiem voi keyword: " + rawKeyword));
 		// Phan trang
 		int totalProducts = matchedProducts.size();
 		int currentPage = 1;

@@ -51,6 +51,23 @@
 					<li>❤️ Sản phẩm yêu thích</li>
 					<li>★ Nhận xét của tôi</li>
 				</ul>
+				
+			<div class="container mt-4">
+			    <form action="reportLostKey" method="post" id="lostKeyForm" onsubmit="return handleLostKeyReport(event)">
+			        <input type="hidden" name="userId" value="${sessionScope.user.userId}" />
+			        <button type="submit" class="btn btn-danger" id="lostKeyBtn">
+			            Báo mất khóa
+			        </button>
+			    </form>
+			
+			    <!-- Div thông báo -->
+			    <div id="notification" class="alert alert-success mt-3 d-none" role="alert">
+			        <h5 class="alert-heading">Đã gửi email xác thực thành công!</h5>
+			        <p>Vui lòng kiểm tra hộp thư của bạn và làm theo hướng dẫn để tạo khóa mới.</p>
+			    </div>
+			</div>
+
+    
 			</div>
 			<div class="col-md-9 content">
 				<div class="order-status">
@@ -59,123 +76,55 @@
 
 				</div>
 
-				<c:forEach var="item" items="${history}" varStatus="status">
-					<div class="order-details">
-						<div class="order-info"
-							style="display: flex; justify-content: space-between; align-items: center;">
-
-							<span>#${item.orderId}</span>
-
-							<div>
-								<span>${item.getCreateDate()}</span> <span
-								id= "badge"	class="badge
-            <c:choose>
-                <c:when test="${item.getStatus() == 'pending'}">bg-warning</c:when>
-                <c:when test="${item.getStatus() == 'checked'}">bg-success</c:when>
-                <c:when test="${item.getStatus() == 'deleted'}">bg-danger</c:when>
-                <c:otherwise>bg-secondary</c:otherwise>
-            </c:choose>">
-									${item.getStatus()} </span>
-							</div>
-						</div>
-
-						<div class="d-flex align-items-center">
-							<img src="getImage?img_id=${item.getImgId()}" alt=""
-								class="img-thumbnail" style="width: 100px; height: 100px;">
-							<div>
-								<p class="mb-1">${item.getProductName()}</p>
-								<p class="mb-0">Số lượng: ${item.getQuantity()}</p>
-								<p class="mb-0">Giá: ${item.getPrice()}</p>
-							</div>
-						</div>
-						<div class="total">
-							<p>Tổng tiền: ${item.getTotalPricePerProduct()} đ</p>
-
-
-
-
-							<button type="button" class="btn btn-primary"
-								data-bs-toggle="modal"
-								data-bs-target="#exampleModal${item.getProductId()}">
-								<c:if
-									test="${!evaluate.checkProductHasBeenEvaluated(item.getProductId(),user.getUserId())}">
-                                đánh giá
-                            </c:if>
-								<c:if
-									test="${evaluate.checkProductHasBeenEvaluated(item.getProductId(),user.getUserId())}">
-                                đánh giá lại
-                            </c:if>
-							</button>
-							<c:if test="${item.canCancel}">
-								<button class="btn btn-danger" id="remove"
-									onclick="cancelOrder('${item.orderId}');">Hủy đơn</button>
-							</c:if>
-
-							<div class="modal fade" id="exampleModal${item.getProductId()}"
-								tabindex="-1" role="dialog"
-								aria-labelledby="exampleModalLabel${item.getProductId()}"
-								aria-hidden="true">
-								<div class="modal-dialog" role="document">
-									<div class="modal-content">
-										<div class="modal-header">
-											<h5 class="modal-title"
-												id="exampleModalLabel${item.getProductId()}">
-												<fmt:message key="orderHistory.commentModalTitle" />
-											</h5>
-											<button type="button" class="btn-close"
-												data-bs-dismiss="modal" aria-label="Close"></button>
-										</div>
-										<div class="modal-body">
-											<div style="display: flex;">
-												<label class="rating-label" title="text"><fmt:message
-														key="orderHistory.rating" />:</label>
-												<div class="rate">
-													<input type="radio" id="star5_${item.getProductId()}"
-														name="rate_${item.getProductId()}" value="5" /> <label
-														for="star5_${item.getProductId()}" title="text">5
-														stars</label> <input type="radio"
-														id="star4_${item.getProductId()}"
-														name="rate_${item.getProductId()}" value="4" /> <label
-														for="star4_${item.getProductId()}" title="text">4
-														stars</label> <input type="radio"
-														id="star3_${item.getProductId()}"
-														name="rate_${item.getProductId()}" value="3" /> <label
-														for="star3_${item.getProductId()}" title="text">3
-														stars</label> <input type="radio"
-														id="star2_${item.getProductId()}"
-														name="rate_${item.getProductId()}" value="2" /> <label
-														for="star2_${item.getProductId()}" title="text">2
-														stars</label> <input type="radio"
-														id="star1_${item.getProductId()}"
-														name="rate_${item.getProductId()}" value="1" /> <label
-														for="star1_${item.getProductId()}" title="text">1
-														star</label>
-												</div>
-											</div>
-
-											<div data-mdb-input-init
-												class="form-outline mb-4 input-group">
-												<input type="text" id="addNote${item.getProductId()}"
-													class="form-control"
-													placeholder="<fmt:message key='orderHistory.contentPlaceholder' />"
-													name="content" required maxlength="255" />
-											</div>
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-primary"
-												onclick="addComment('${item.getProductId()}');">
-												<fmt:message key="orderHistory.save" />
-											</button>
-										</div>
-									</div>
-								</div>
-							</div>
-							<a href="chi-tiet-sach?id=${item.getProductId()}">
-								<button class="btn btn-rebuy">Mua lại</button>
-							</a>
-						</div>
-					</div>
-				</c:forEach>
+				<c:forEach var="order" items="${orders}">
+    <div class="order-summary card mb-3">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <div>
+                <strong>Hoa don #${order.orderId}</strong> - 
+                <span>Ngay dat: ${order.createDate}</span>
+            </div>
+            <div>
+                <span class="badge 
+                    <c:choose>
+                        <c:when test="${order.signatureStatus == 'Chua ky'}">bg-warning</c:when>
+                        <c:when test="${order.signatureStatus == 'Da ky - Toan ven'}">bg-success</c:when>
+                        <c:otherwise>bg-danger</c:otherwise>
+                    </c:choose>">
+                    ${order.signatureStatus}
+                </span>
+                <button class="btn btn-sm btn-outline-primary ms-2" onclick="toggleOrderDetails('${order.orderId}')">
+                    Chi tiet
+                </button>
+                <c:if test="${order.signatureStatus == 'Chua ky'}">
+                   <a href="/BOOK_STORE/reorder?orderId=${order.orderId}" class="btn btn-sm btn-secondary">Ký lại</a>
+                </c:if>
+            </div>
+        </div>
+        <div class="card-body">
+            <p>Tong tien: <strong>${order.totalFormatted}</strong></p>
+            <p>So luong san pham: <strong>${fn:length(history[order.orderId])}</strong></p>
+        </div>
+        
+        <div class="order-items px-3 pb-3" id="details-${order.orderId}" style="display: none;">
+            <c:forEach var="item" items="${history[order.orderId]}">
+                <div class="d-flex align-items-center border-top pt-2 mt-2">
+                    <img src="getImage?img_id=${item.imgId}" class="img-thumbnail me-3" style="width: 80px; height: 80px;" />
+                    <div>
+                        <p class="mb-1">${item.productName}</p>
+                        <p class="mb-0">So luong: ${item.quantity}</p>
+                        <p class="mb-0">Gia: ${item.price} đ</p>
+                    </div>
+                    <div class="ms-auto">
+                        <a href="chi-tiet-sach?id=${item.productId}" class="btn btn-sm btn-secondary">Mua lai</a>
+                        <c:if test="${item.canCancel}">
+                            <button class="btn btn-sm btn-danger ms-1" onclick="cancelOrder('${item.orderId}')">Huy don</button>
+                        </c:if>
+                    </div>
+                </div>
+            </c:forEach>
+        </div>
+    </div>
+</c:forEach>
 			</div>
 		</div>
 	</div>
@@ -262,6 +211,54 @@
 	    }
 	}
     
+   function toggleOrderDetails(orderId) {
+       const details = document.getElementById('details-' + orderId);
+       if (details.style.display === 'none') {
+           details.style.display = 'block';
+       } else {
+           details.style.display = 'none';
+       }
+   }
+   function handleLostKeyReport(event) {
+	    event.preventDefault();
+	    const form = document.getElementById("lostKeyForm");
+	    const notification = document.getElementById("notification");
+
+	    // Hiển thị ngay thông báo (dự đoán thành công)
+	    notification.classList.remove("d-none");
+	    notification.classList.remove("alert-danger");
+	    notification.classList.add("alert-success");
+	    notification.innerHTML = `
+	        <h5 class="alert-heading">Đang xử lý yêu cầu...</h5>
+	        <p>Vui lòng đợi trong giây lát.</p>
+	    `;
+
+	    fetch(form.action, {
+	        method: "POST",
+	        body: new FormData(form)
+	    })
+	    .then(res => {
+	        if (res.ok) {
+	            notification.innerHTML = `
+	                <h5 class="alert-heading">Đã gửi email xác thực thành công!</h5>
+	                <p>Vui lòng kiểm tra hộp thư của bạn và làm theo hướng dẫn để tạo khóa mới.</p>
+	            `;
+	        } else {
+	            throw new Error("Phản hồi không hợp lệ");
+	        }
+	    })
+	    .catch(err => {
+	        notification.classList.remove("alert-success");
+	        notification.classList.add("alert-danger");
+	        notification.innerHTML = `
+	            <h5 class="alert-heading">Có lỗi xảy ra!</h5>
+	            <p>Vui lòng thử lại hoặc kiểm tra kết nối mạng.</p>
+	        `;
+	        console.error(err);
+	    });
+
+	    return false;
+	}
 
     </script>
 	<script

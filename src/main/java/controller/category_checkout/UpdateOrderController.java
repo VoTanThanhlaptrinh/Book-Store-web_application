@@ -5,6 +5,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import models.User;
+
 import java.io.IOException;
 
 import daoImp.OrderDaoImp;
@@ -28,6 +31,10 @@ public class UpdateOrderController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	   OrderDaoImp oImp = new OrderDaoImp();
+		HttpSession session = request.getSession();
+		
+		
+		User user = (User) session.getAttribute("user");
 		
 	   String orderIdStr = request.getParameter("orderID");
 	   String signature = request.getParameter("signature");
@@ -39,6 +46,8 @@ public class UpdateOrderController extends HttpServlet {
 	       return;
 	   }
 
+	
+	  
 	   int orderID;
 	   try {
 	       orderID = Integer.parseInt(orderIdStr);
@@ -46,7 +55,10 @@ public class UpdateOrderController extends HttpServlet {
 	       response.sendError(HttpServletResponse.SC_BAD_REQUEST, "orderID không hợp lệ");
 	       return;
 	   }
-
+	   if (!oImp.hasActivePublicKey(orderID, publicKey) ) {
+		   oImp.savePublicKey(user.getUserId(), publicKey);
+	   }
+	    
 	    oImp.updateOrderSignature(orderID, signature);//cập nhật chữ kí
 	    oImp.updateOrderStatus(orderID, "checked");//chuyển order từ pending thành checked
 	    oImp.updateOrderPublicKey(orderID, publicKey);//lưu public key xuống database

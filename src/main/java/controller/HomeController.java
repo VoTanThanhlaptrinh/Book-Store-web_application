@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import controller.product.ProductCache;
+import daoImp.OrderDaoImp;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -28,7 +29,7 @@ public class HomeController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
 		User user = (User) session.getAttribute("user");
-		
+		OrderDaoImp ordao = new OrderDaoImp();
 		try {
 			Connection conn = DatabaseConnection.getConnection();
 			ProductCache.loadAllProducts(conn);
@@ -38,6 +39,13 @@ public class HomeController extends HttpServlet {
 		}
 		HienThiDanhSachImp imp = new HienThiDanhSachImp();
 		List<Product> homepageBooks = (List<Product>) getServletContext().getAttribute("homepageBooks");
+		String publicKey = "";
+		if (user != null) {
+			 publicKey = ordao.loadPublicKey(user.getUserId());
+			
+		}
+		session.setAttribute("publickey", publicKey);
+		
 		if (homepageBooks == null) {
 		    homepageBooks = imp.hienThiNgauNhienSoSanPham(20);
 		    getServletContext().setAttribute("homepageBooks", homepageBooks);

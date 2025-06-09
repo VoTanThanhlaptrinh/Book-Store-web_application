@@ -248,23 +248,6 @@
 			</div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 			<!-- Danh sách địa chỉ mặc định -->
 			<div class="p-3 default-address">
 				<div id="addressList"></div>

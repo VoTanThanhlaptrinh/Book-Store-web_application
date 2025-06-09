@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpSession;
 import models.Address;
 import models.CartData;
 import models.CartProductDetail;
+import models.Order;
 import models.Product;
 import models.User;
 import service.LoginService;
@@ -23,6 +24,8 @@ import daoImp.SocialLoginDAOImpl;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
 import java.util.List;
 
 @WebServlet("/order")
@@ -228,7 +231,7 @@ public class OrderController extends HttpServlet {
         }
 
     }
-
+   
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
