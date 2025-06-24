@@ -75,7 +75,7 @@ public class PurchaseHistoryDaoImp {
 
 	public static void main(String[] args) {
 		PurchaseHistoryDaoImp pImp = new PurchaseHistoryDaoImp();
-		List<PurchaseHistory> ls= pImp.getPurchasedProductsByUser(18);
+		List<PurchaseHistory> ls= pImp.getPurchaseHistoryByOrderId(104);
 		
 		
 		for (PurchaseHistory purchaseHistory : ls) {

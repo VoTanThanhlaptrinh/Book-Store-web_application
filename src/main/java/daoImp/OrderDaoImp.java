@@ -354,6 +354,26 @@ public class OrderDaoImp implements IOrderDao {
 
 	}
 
+	
+	public void updateHashValue(int orderId, String hashValue) {
+	    String sql = "UPDATE Order_1 SET hash_value = ?, update_date = ? WHERE order_id = ?";
+
+	    try (Connection conn = DatabaseConnection.getConnection();
+	         PreparedStatement ps = conn.prepareStatement(sql)) {
+
+	        ps.setString(1, hashValue);
+	        ps.setTimestamp(2, new Timestamp(System.currentTimeMillis())); 
+	        ps.setInt(3, orderId);
+
+	        int rowsAffected = ps.executeUpdate();
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	}
+	
+	
 	public static void main(String[] args) {
 		OrderDaoImp o = new OrderDaoImp();
 
