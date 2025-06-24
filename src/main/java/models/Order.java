@@ -14,6 +14,7 @@ public class Order {
 	double totalPrice;
 	String totalFormatted;
 	String publicKey;
+	String hashData;//hash lưu dưới database
 	public Order(int orderId, int userId, double totalAmount, String status, Date createDate, Date updateDate) {
 		super();
 		this.orderId = orderId;
@@ -37,6 +38,18 @@ public class Order {
 
 	public String getTotalFormatted() {
 		return totalFormatted;
+	}
+
+
+
+	public String getHashData() {
+		return hashData;
+	}
+
+
+
+	public void setHashData(String hashData) {
+		this.hashData = hashData;
 	}
 
 

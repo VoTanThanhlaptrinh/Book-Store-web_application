@@ -107,7 +107,6 @@ public class HistoryController extends HttpServlet {
 			}
 			
 			
-			
 			Map<Integer, List<PurchaseHistory>> orderHistoryMap = new HashMap<>();
 			for (Order o : orders) {
 				
@@ -159,16 +158,27 @@ public class HistoryController extends HttpServlet {
 			    } else {
 			        try {
 			            PublicKey pubKey = getPublicKeyFromString(publicKey);
-			            boolean valid = verifySignature(generatedHash, o.getSignature(), pubKey);
-			            
-			            System.out.println("chu ky db: " + o.getSignature());
-			            System.out.println("hash: " + generatedHash);
-			            
-			            if (valid) {
-			                o.setSignatureStatus("Da ky - Toan ven");
-			            } else {
-			                o.setSignatureStatus("Da ky - Thong tin da thay doi");
+			            String hashData = o.getHashData();
+			            if(hashData==null) {
+			            	System.out.println("Đơn hàng chưa lưu hash data");
+			            }else {
+			            	
+			            	//
+			                boolean valid = verifySignature(hashData,generatedHash);
+				            
+				            System.out.println("chu ky db: " + o.getSignature());
+				            System.out.println("hash: " + generatedHash);
+				            
+				            if (valid) {
+				                o.setSignatureStatus("Da ky - Toan ven");
+				            } else {
+				                o.setSignatureStatus("Da ky - Thong tin da thay doi");
+				            }
+				            
+				            
+				            //
 			            }
+			        
 			        } catch (Exception e) {
 			            o.setSignatureStatus("Loi xac thuc chu ky");
 			            e.printStackTrace();
@@ -202,19 +212,27 @@ public class HistoryController extends HttpServlet {
 	    KeyFactory keyFactory = KeyFactory.getInstance("RSA");
 	    return keyFactory.generatePublic(keySpec);
 	}
-	public boolean verifySignature(String hashData, String signature, PublicKey publicKey) {
-	    try {
-	        Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
-	        cipher.init(Cipher.DECRYPT_MODE, publicKey);
-	        byte[] decryptedBytes = cipher.doFinal(Base64.getDecoder().decode(signature));
-	        String decryptedHash = new String(decryptedBytes, StandardCharsets.UTF_8);
-	        System.out.println("sign: " + decryptedHash);
-	        return hashData.equals(decryptedHash);
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	        return false;
-	    }
+	
+	
+	
+	
+	public boolean verifySignature(String hashData, String hashGenerated) {    
+	        return hashData.equals(hashGenerated);   
 	}
+	
+
+	
+	/*
+	 * // public boolean verifySignature(String hashData, String signature,
+	 * PublicKey publicKey) { // try { // Cipher cipher =
+	 * Cipher.getInstance("RSA/ECB/PKCS1Padding"); //
+	 * cipher.init(Cipher.DECRYPT_MODE, publicKey); // byte[] decryptedBytes =
+	 * cipher.doFinal(Base64.getDecoder().decode(signature)); // String
+	 * decryptedHash = new String(decryptedBytes, StandardCharsets.UTF_8); //
+	 * System.out.println("sign: " + decryptedHash); // return
+	 * hashData.equals(decryptedHash); // } catch (Exception e) { //
+	 * e.printStackTrace(); // return false; // } // }
+	 */	
 	public static String generateOrderHash(String orderId, String customerName, String orderDate, String products, String totalAmount) {
 	    // Dùng LinkedHashMap để giữ đúng thứ tự key giống client
 	    Map<String, String> data = new LinkedHashMap<>();
