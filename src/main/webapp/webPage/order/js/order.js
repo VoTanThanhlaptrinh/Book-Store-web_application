@@ -341,9 +341,6 @@ function updateTotalPrice(shippingFee) {
 
 
 function sendOrder() {
-	
-	
-	
     // Kiểm tra xem có địa chỉ giao hàng không
     let hasAddress = document.getElementById('addressFullName');
     
@@ -351,6 +348,7 @@ function sendOrder() {
         toastr.error("Vui lòng chọn địa chỉ giao hàng trước khi đặt hàng!");
         return; // Dừng hàm nếu không có địa chỉ
     }
+	
 
     // Nếu có địa chỉ, tiếp tục gửi request
     fetch('/BOOK_STORE/checkout', {

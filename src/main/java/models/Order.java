@@ -15,6 +15,7 @@ public class Order {
 	String totalFormatted;
 	String publicKey;
 	String hashData;//hash lưu dưới database
+	int addressId;
 	public Order(int orderId, int userId, double totalAmount, String status, Date createDate, Date updateDate) {
 		super();
 		this.orderId = orderId;
@@ -25,7 +26,13 @@ public class Order {
 		this.updateDate = updateDate;
 	}
 
-	
+	public Order(int orderId, double totalAmount, Date createDate,int addressId) {
+		super();
+		this.orderId = orderId;
+		this.totalAmount = totalAmount;
+		this.createDate = createDate;
+		this.addressId= addressId;
+	}
 	
 	public Order(int orderId, double totalAmount, Date createDate) {
 		super();
@@ -181,6 +188,14 @@ public class Order {
 	}
 
 
+
+	public int getAddressId() {
+		return addressId;
+	}
+
+	public void setAddressId(int addressId) {
+		this.addressId = addressId;
+	}
 
 	@Override
 	public String toString() {

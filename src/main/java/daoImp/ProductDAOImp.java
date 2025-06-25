@@ -625,7 +625,7 @@ public class ProductDAOImp implements IProductDao {
 				updateStmt.executeUpdate();
 				updateStmt.close();
 			}
-			System.out.println("Cập nhật thành công tất cả sản phẩm!");
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -697,7 +697,7 @@ public class ProductDAOImp implements IProductDao {
 			stmp.setInt(1, quantity);
 			stmp.setInt(2, idProduct);
 			stmp.executeUpdate();
-			System.out.println("Cập nhật số lượng thành công");
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

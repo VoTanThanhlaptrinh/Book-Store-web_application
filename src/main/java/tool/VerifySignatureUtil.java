@@ -2,23 +2,27 @@ package tool;
 
 import java.security.*;
 import java.security.spec.*;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.Base64;
+import java.util.Locale;
 
 import javax.crypto.Cipher;
 
 public class VerifySignatureUtil {
 	public static void main(String[] args) {
-		String hashHex = "74c6855b79e288b47a4409eca5dff4e009845940ddb731a19b2ab1c18614fb78";
-		String signatureBase64 = "2xin8WOgGEBXcIlzGdTUTddx0uOUWSpNHTc/rYH8H+TFRoM3wDJlkRUjMWhEpCpagKt9aSDoUjQYWugkArcHToaOU3lwHKKtF31GrT/UdZTYoZcut/z2Gjl5BRz8YM3/eWW5omFAQLSI5bjV8Ga+6MXZTtsc6BtsvhV3C88=";
-		String publicKeyBase64 = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDtprX51k3MNBBaEv4HeEpkfrcBzjNHM3EbD6EpRq368fmlYEBPJSmkRh7aymFeQa4r+o1qjiVnMC7oTm4DpJ7jsz98zRk7hWcGMUHREbc0iLc1HITPFAPSnjsjomvuHarCn3Rpqn22eQoUJoZPlSNXRazsw41Yxv//wf0Kjgm+FwIDAQAB";
-		VerifySignatureUtil ver = new VerifySignatureUtil();
-		boolean result = ver.verifySignature(hashHex, signatureBase64, publicKeyBase64);
+//		String hashHex = "74c6855b79e288b47a4409eca5dff4e009845940ddb731a19b2ab1c18614fb78";
+//		String signatureBase64 = "2xin8WOgGEBXcIlzGdTUTddx0uOUWSpNHTc/rYH8H+TFRoM3wDJlkRUjMWhEpCpagKt9aSDoUjQYWugkArcHToaOU3lwHKKtF31GrT/UdZTYoZcut/z2Gjl5BRz8YM3/eWW5omFAQLSI5bjV8Ga+6MXZTtsc6BtsvhV3C88=";
+//		String publicKeyBase64 = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDtprX51k3MNBBaEv4HeEpkfrcBzjNHM3EbD6EpRq368fmlYEBPJSmkRh7aymFeQa4r+o1qjiVnMC7oTm4DpJ7jsz98zRk7hWcGMUHREbc0iLc1HITPFAPSnjsjomvuHarCn3Rpqn22eQoUJoZPlSNXRazsw41Yxv//wf0Kjgm+FwIDAQAB";
+//		VerifySignatureUtil ver = new VerifySignatureUtil();
+//		boolean result = ver.verifySignature(hashHex, signatureBase64, publicKeyBase64);
+//
+//		if (result) {
+//			System.out.println("Chữ ký hợp lệ!");
+//		} else {
+//			System.out.println("chữ kí không hợp lệ hoặc bị chỉnh sửa");
+//		}
 
-		if (result) {
-			System.out.println("Chữ ký hợp lệ!");
-		} else {
-			System.out.println("chữ kí không hợp lệ hoặc bị chỉnh sửa");
-		}
 	}
 
 	public boolean verifySignature(String hashHex, String signatureBase64, String publicKeyBase64) {
@@ -51,4 +55,6 @@ public class VerifySignatureUtil {
 		}
 		return data;
 	}
+	
+
 }

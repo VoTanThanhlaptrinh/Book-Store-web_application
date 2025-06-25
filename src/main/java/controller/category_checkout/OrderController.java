@@ -18,6 +18,8 @@ import service.LoginService;
 
 import com.google.gson.*;
 import daoImp.AddressDaoImp;
+import daoImp.OrderDaoImp;
+import daoImp.OrderItemDaoImp;
 import daoImp.ProductDAOImp;
 import daoImp.SocialLoginDAOImpl;
 
@@ -46,6 +48,8 @@ public class OrderController extends HttpServlet {
         ProductDAOImp productDao = new ProductDAOImp();
         AddressDaoImp addressDao = new AddressDaoImp();
         HttpSession session = request.getSession();
+        OrderItemDaoImp orItemDaoImp = new OrderItemDaoImp();
+		ProductDAOImp productDAOImp = new ProductDAOImp();
         
         String updateShippingFeeOnly = request.getParameter("updateShippingFeeOnly");
         User user = (User) session.getAttribute("user");
@@ -84,7 +88,6 @@ public class OrderController extends HttpServlet {
         
         
         if (cDetails == null || cDetails.isEmpty()) {
-        	System.out.println("cDetails == null");
         	  response.sendRedirect("cart");
             return;
         }
@@ -95,7 +98,6 @@ public class OrderController extends HttpServlet {
         for (CartProductDetail c : cDetails) {
             Product product = productDao.getDimension(c.getProductId());
             if (product == null) {
-            	System.out.println("product == null");
                 request.setAttribute("error", "Sản phẩm không tồn tại.");
                 response.sendRedirect("cart");
                 return;
@@ -105,7 +107,6 @@ public class OrderController extends HttpServlet {
             int pbQuantity = productDao.getStockQuantity(c.getProductId());
             if (quantity > pbQuantity) {
                 request.setAttribute("error", "Số lượng mua vượt quá tồn kho.");
-                System.out.println("Số lượng mua vượt quá tồn kho");
                 response.sendRedirect("cart");
 				 
                 return;
@@ -130,13 +131,22 @@ public class OrderController extends HttpServlet {
         // Tính phí vận chuyển
         double shippingFee = calculateShippingFee(cDetails, addressDefault, productDao, out);
         if (shippingFee < 0) {
-        	  System.out.println("Lỗi ko tính phí vận chuyển"+ shippingFee);
         	  response.sendRedirect("cart");
             return;
         }
 
         // Lưu thông tin vào session và chuyển tiếp
-        System.out.println("thành công");
+      
+        OrderDaoImp order = new OrderDaoImp();
+      int orderID=  order.createOrder(user.getUserId(),(cartData.getTotal()+shippingFee) , "pending",addressDefault.getAddressID());
+        
+        
+  	for (CartProductDetail cartProductDetail : cDetails) {
+		orItemDaoImp.createOrderItem(orderID, cartProductDetail.getProductId(), cartProductDetail.getQuantity(),
+				cartProductDetail.getPrice());
+		productDAOImp .updateQuantityProduct(cartProductDetail.getProductId(), cartProductDetail.getQuantity());
+	}
+        session.setAttribute("orderID", orderID);
         session.setAttribute("addressDefault", addressDefault);
         session.setAttribute("cDetails", cDetails);
         session.setAttribute("cDetailsSize", cDetails.size());
@@ -151,9 +161,6 @@ public class OrderController extends HttpServlet {
         int totalWeight = 0;
         int maxLength = 0, maxWidth = 0, maxHeight = 0;
         JsonArray itemsArray = new JsonArray();
-        System.out.println(GHN_SHOP_ID);
-     	System.out.println(GHN_TOKEN);
-    	System.out.println(GHN_API_URL);
     	
 
         for (CartProductDetail c : cDetails) {
