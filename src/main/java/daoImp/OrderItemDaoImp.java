@@ -30,7 +30,6 @@ public class OrderItemDaoImp implements IOrderitemDao{
 
 			stmp.executeUpdate();
 			stmp.close();
-			System.out.println("Luu order_item thanh cong");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

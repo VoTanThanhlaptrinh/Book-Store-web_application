@@ -70,7 +70,7 @@ public class UpdateOrderController extends HttpServlet {
 		
 		
 		oImp.updateOrderSignature(orderID, signature);// cập nhật chữ kí
-		oImp.updateHashValue(orderID, hashValue);
+		oImp.updateHashValue(orderID, hashValue);//cập nhật hash code
 		oImp.updateOrderStatus(orderID, "checked");// chuyển order từ pending thành checked
 		oImp.updateOrderPublicKey(orderID, publicKey);// lưu public key xuống database
 	

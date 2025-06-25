@@ -17,13 +17,13 @@ import service.DatabaseConnection;
 public class OrderDaoImp implements IOrderDao {
 
 	@Override
-	public int createOrder(int userID, double total, String status) {
+	public int createOrder(int userID, double total, String status, int addressID) {
 	    int generatedOrderId = -1;
 
 	    try {
 	        Connection con = DatabaseConnection.getConnection();
 	        PreparedStatement stmp = con.prepareStatement(
-	            "INSERT INTO Order_1(user_id, total_amount, status, create_date, update_date) VALUES (?, ?, ?, ?, ?)",
+	            "INSERT INTO Order_1(user_id, total_amount, status, create_date, update_date, address_id) VALUES (?, ?, ?, ?, ?, ?)",
 	            Statement.RETURN_GENERATED_KEYS);
 
 	        Timestamp currentDateTime = new Timestamp(System.currentTimeMillis());
@@ -33,14 +33,14 @@ public class OrderDaoImp implements IOrderDao {
 	        stmp.setString(3, status);
 	        stmp.setTimestamp(4, currentDateTime);
 	        stmp.setTimestamp(5, currentDateTime);
+	        stmp.setInt(6, addressID);
 
 	        int affectedRows = stmp.executeUpdate();
 
 	        if (affectedRows > 0) {
 	            ResultSet rs = stmp.getGeneratedKeys();
 	            if (rs.next()) {
-	                generatedOrderId = rs.getInt(1); // Lấy id vừa được tạo
-	                System.out.println("Lưu order thành công, ID: " + generatedOrderId);
+	                generatedOrderId = rs.getInt(1); // Lấy id vừa được tạo	  
 	            }
 	            rs.close();
 	        }
@@ -373,11 +373,61 @@ public class OrderDaoImp implements IOrderDao {
 
 	}
 	
+	public String getFullNameByOrder(int orderId) {
+		String result = null;
+		String sql = "SELECT a.full_name\r\n"
+				+ "FROM addresses a\r\n"
+				+ "JOIN Order_1 o ON a.id = o.address_id\r\n"
+				+ "WHERE o.order_id = ?";
+		try {
+			Connection con = DatabaseConnection.getConnection();
+			PreparedStatement stmp = con.prepareStatement(sql);
+			stmp.setInt(1, orderId);
+			stmp.executeQuery();
+			
+			   ResultSet rs = stmp.executeQuery();
+		        
+		        if (rs.next()) {
+		            result = rs.getString("full_name");
+		        }
+		        return result;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	
+	public String getHashData(int orderId) {
+		String result = null;
+		String sql = "select hash_value from Order_1 where order_id = ?";
+		try {
+			Connection con = DatabaseConnection.getConnection();
+			PreparedStatement stmp = con.prepareStatement(sql);
+			stmp.setInt(1, orderId);
+			stmp.executeQuery();
+			
+			   ResultSet rs = stmp.executeQuery();
+		        
+		        if (rs.next()) {
+		            result = rs.getString("hash_value");
+		        }
+		        return result;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 	
 	public static void main(String[] args) {
 		OrderDaoImp o = new OrderDaoImp();
-
-		System.out.println(o.getProductListByOrderId(69));
+System.out.println(o.getHashData(144));
 
 	}
 

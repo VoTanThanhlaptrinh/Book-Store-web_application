@@ -62,20 +62,10 @@ public class CheckOutController extends HttpServlet {
 		@SuppressWarnings("unchecked")
 		List<CartProductDetail> cDetail = (List<CartProductDetail>) session.getAttribute("cDetails");
 
-		double shippingFee = (double) session.getAttribute("shippingFee");
-		double total = (double) session.getAttribute("total");
-
-		int orderID = orDaoImp.createOrder(user.getUserId(), (shippingFee + total), "pending");
-		
-
-		
-		
-		for (CartProductDetail cartProductDetail : cDetail) {
-			orItemDaoImp.createOrderItem(orderID, cartProductDetail.getProductId(), cartProductDetail.getQuantity(),
-					cartProductDetail.getPrice());
-
+		int orderID =(int) session.getAttribute("orderID");
+		for (CartProductDetail cartProductDetail : cDetail) {	
 			cartItemImp.updateStatusCartItem(cartProductDetail.getCartItemId(), "deleted");
-			productDAOImp.updateQuantityProduct(cartProductDetail.getProductId(), cartProductDetail.getQuantity());
+		
 		}
 		
 		

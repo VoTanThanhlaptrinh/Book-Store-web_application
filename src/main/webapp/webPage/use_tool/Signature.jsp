@@ -107,11 +107,25 @@
 			<div class="flex justify-between items-center mt-3">
 				<a href="guide" target="_blank"
 					class="text-sm text-blue-600 hover:underline">Hướng dẫn sử dụng</a>
-				<button id="verifySignature"
-					class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition font-medium">Xác
-					Nhận</button>
+
+
+
+				<div class="flex space-x-2">
+					<button id="cancelSignature"
+						class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition font-medium">Huỷ</button>
+
+
+					<button id="verifySignature"
+						class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition font-medium">Xác
+						Nhận</button>
+				</div>
+
+
 			</div>
 		</div>
+		
+
+
 
 		<!-- Footer -->
 		<div class="text-center">
@@ -121,6 +135,18 @@
 		</div>
 	</div>
 
+
+		<!-- Overlay và Popup xác nhận -->
+	<div id="cancelOverlay" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+  <div class="bg-white rounded-xl shadow-lg p-6 w-full max-w-sm text-center">
+    <h2 class="text-xl font-semibold mb-4">Xác nhận huỷ đơn hàng</h2>
+    <p class="mb-6 text-gray-600">Bạn có chắc chắn muốn huỷ đơn hàng này không?</p>
+    <div class="flex justify-center space-x-4">
+      <button id="confirmCancelBtn" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">Huỷ đơn</button>
+      <button id="closeCancelPopup" class="bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400">Đóng</button>
+    </div>
+  </div>
+</div>
 	<script>
 	
 
@@ -133,6 +159,8 @@
       totalAmount:document.getElementById("totalAmount").textContent
     };
 
+    console.log(orderData)
+  
 //tạo mã hash và gán lại
     const hash = CryptoJS.SHA256(JSON.stringify(orderData)).toString();
     document.getElementById("hashValue").value = hash;
@@ -213,7 +241,81 @@
         publicKeyInput.value = "";
       }
     });
+    
     });
+    
+    
+    
+/*     document.getElementById("cancelSignature").addEventListener("click", () => {
+//console.log("bạn đã click hủy")
+        if (confirm("Bạn có chắc chắn muốn huỷ đơn hàng này không?")) {
+          const orderID = document.getElementById("orderId").textContent;
+
+          // Gửi dữ liệu bằng fetch tới servlet 
+          fetch('/BOOK_STORE/cancelSignature', {
+            method: 'POST',
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: new URLSearchParams({ "orderID":orderID })
+          })
+          .then(response => {
+            if (response.ok) {
+              alert("Đơn hàng đã được huỷ thành công!");
+              window.location.href = "/BOOK_STORE/home"; // chuyển trang
+            } else {
+              return response.text().then(txt => {
+                alert("Lỗi huỷ đơn: " + txt);
+              });
+            }
+          })
+          .catch(error => {
+            console.error("Lỗi:", error);
+            alert("Có lỗi xảy ra.");
+          });
+        }
+      }); */
+    
+    
+    document.getElementById("cancelSignature").addEventListener("click", () => {
+        document.getElementById("cancelOverlay").classList.remove("hidden");
+      });
+
+      // Khi bấm "Đóng" trong popup
+      document.getElementById("closeCancelPopup").addEventListener("click", () => {
+        document.getElementById("cancelOverlay").classList.add("hidden");
+      });
+
+      // Khi bấm "Huỷ đơn" trong popup
+      document.getElementById("confirmCancelBtn").addEventListener("click", () => {
+        const order_id = document.getElementById("orderId").textContent;
+
+        fetch('/BOOK_STORE/cancelSignature', {
+          method: 'POST',
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          body: new URLSearchParams({ orderID: order_id })
+        })
+        .then(response => {
+          if (response.ok) {
+            alert("Đơn hàng đã được huỷ thành công!");
+            window.location.href = "/BOOK_STORE/home";
+          } else {
+            return response.text().then(txt => {
+              alert("Lỗi huỷ đơn: " + txt);
+            });
+          }
+        })
+        .catch(error => {
+          console.error("Lỗi:", error);
+          alert("Có lỗi xảy ra.");
+        });
+
+        // Ẩn popup sau khi gửi
+        document.getElementById("cancelOverlay").classList.add("hidden");
+      });
+    
   </script>
 </body>
 </html>
